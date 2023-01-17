@@ -1,16 +1,21 @@
+# This is a Shiny web application named "youlldie" that runs a model for statistically predicting 
+# one's cause and age of death based on one's inherited risk factors and lifestyle choices.
 
-# This is a Shiny web application named "youlldie"
+# The steps followed to build this model are the following:
+# 1.    Take the 16 most common worldwide cause of death.  
+# 2.       Assign an 'anchor' value for the RISK of dying from any of those causes (n/100,000).
+# 3.       Assign an 'anchor' value for the average AGE of death associated with any of those causes.
+# 4.       Assign an 'anchor' value for the POPulation that dies from any of those causes each year.  
+# 5.          Find factors that will impact one's RISK, AGE and POP. Build those as reactive inputs.
+# 6.            Find the weights of individual Risk Factors on the impact to one's RISK, AGE and POP
+#               (this is the hardest part which requires reading lots of scientific peer-reviewed papers
+#               and interpreting their findings) 
+# 7.              Graph an output table as a bubble plot with: 
+#                 -AGE as the x-axis
+#                 -RISK as the y-axis
+#                 -POP as the bubble size.
 
-#Install required packages:
-#install.packages("shiny")
-#install.packages("hrbrthemes")
-#install.packages("viridis")
-#install.packages("gridExtra")
-#install.packages("ggrepel)
-#install.packages("plotly")
-#install.packages("ggplot2")
-#install.packages("dplyr")
-
+#-------------------------------------------------------------------------------
 #load required packages:
 library(shiny)
 library(hrbrthemes)
@@ -20,28 +25,23 @@ library(ggrepel)
 library(plotly)
 library(ggplot2)
 library(dplyr)
-#library(stats)
-#library(Rfast)
-#library(doBy)
 
-#////////////////////////////////////////////////////////////////////////////////
+#///////////////////////////////////////////////////////////////////////////////
 # the following section is to build a ui object that lays out a webpage (html) for the app (it converts R -> html)
-#////////////////////////////////////////////////////////////////////////////////
+#///////////////////////////////////////////////////////////////////////////////
 
 ui<-fluidPage(
   
-  
   #  headerPanel("You'll die"),
-  
-  
-  
-  ################################################################################
-  # The following section is to add input function corresponding to Risk Factor ordered by Domains
-  ################################################################################
+
+################################################################################
+# The following section is to add input functions corresponding to Risk Factors (e.g.: Sex, Race, # of drinks/week, etc.) 
+# Individual Risk Factors are grouped by Domain (e.g.: DEMOGRAPHICS, SOCIAL STATUS, etc.)
+################################################################################
   
   sidebarPanel(
     style = "overflow-y:scroll;position:relative;max-height:100vh",
-    #DEMOGRAPHICS-------------------------------------------------------------------
+    #DEMOGRAPHICS---------------------------------------------------------------
     fluidRow(
       tags$h4("DEMOGRAPHICS")),
     
@@ -50,7 +50,6 @@ ui<-fluidPage(
       sliderInput(inputId="cage",
                   label="Age",
                   value=0, min=0, max=100)
-      #,plotOutput("bubble")
     ),
     
     #Risk Factor: Sex (SEX)
@@ -58,7 +57,6 @@ ui<-fluidPage(
       radioButtons(inputId="sex", label="Sex", choices=list("Male",
                                                             "Female"), 
                    selected=character(0))
-      
     ),
     
     #Risk Factor: Race (RACE)
@@ -72,7 +70,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #SOCIAL STATUS------------------------------------------------------------------
+    #SOCIAL STATUS--------------------------------------------------------------
     fluidRow(
       tags$h4("SOCIAL STATUS")),
     
@@ -97,10 +95,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #SS1  #Marital Status (x)
-    #SS2  #Number of Kids (x)
-    
-    #LIFESTYLE----------------------------------------------------------------------
+    #LIFESTYLE------------------------------------------------------------------
     
     fluidRow(
       tags$h4("LIFESTYLE")),
@@ -110,49 +105,33 @@ ui<-fluidPage(
       sliderInput(inputId="drk",
                   label="Number of drinks per week",
                   value=0, min=0, max=20)
-      #,plotOutput("bubble")
     ),
-    
     
     #Risk Factor: Weekly Smokes (SMK)
     fluidRow(
       sliderInput(inputId="smk",
                   label="Number of smokes per week",
                   value=0, min=0, max=140)
-      #,plotOutput("bubble")
     ),
-    
     
     #Risk Factor: Number of moderate intensity physical activity minutes per week (MPA)
     fluidRow(
       sliderInput(inputId="mpa",
                   label="Number of minutes of moderate intensity physical activity per week",
                   value=0, min=0, max=300)
-      #,plotOutput("bubble")
     ),
-    
     
     #Risk Factor: Number of high intensity physical activity minutes per week (HPA)
     fluidRow(
       sliderInput(inputId="hpa",
                   label="Number of minutes of vigorous intensity physical activity per week",
                   value=0, min=0, max=100)
-      #,plotOutput("bubble")
     ),
     
-    #VITALS-------------------------------------------------------------------------
+    #VITALS---------------------------------------------------------------------
     
     fluidRow(
       tags$h4("VITALS")),
-    
-    #Risk Factor: Systolic Blood Pressure mm/Hg (SYS)
-    #              fluidRow(
-    #                 sliderInput(inputId="sys",
-    #                             label="Systolic Blood Pressure (mm/HG)",
-    #                             value=0, min=0, max=200)
-    #                 #,plotOutput("bubble")
-    #               ),
-    
     
     #Risk Factor: Systolic Blood Pressure mm/Hg (SYS)
     fluidRow(
@@ -163,10 +142,6 @@ ui<-fluidPage(
                    selected=character(0))
     ),            
     
-    
-    
-    
-    
     #Risk Factor: Body Mass Index (BMI)
     fluidRow(
       radioButtons(inputId="bmi", label="Body Mass Index", choices=list("Underweight (<18.5)",
@@ -176,37 +151,6 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    
-    #Risk Factor: weight (WGH)
-    
-    #               fluidRow(
-    #                 numericInput(inputId="wgh",
-    #                              label="Weight",
-    #                              value=0, min=0, max=500, step=5)
-    #               ),
-    #               
-    #               fluidRow(  
-    #                 selectInput(inputId="wghu",
-    #                             label="Weight Unit",
-    #                             choices=list("kg","lbs"),
-    #                             multiple=FALSE)
-    #               ),
-    #               
-    #               #Risk Factor: height (HGH)
-    #               
-    #               fluidRow(
-    #                 numericInput(inputId="hgh",
-    #                              label="Height",
-    #                              value=0, min=0, max=500, step=5)
-    #               ),
-    #               
-    #               fluidRow(  
-    #                 selectInput(inputId="hghu",
-    #                             label="Height Unit",
-    #                             choices=list("cm","lbs"),
-    #                             multiple=FALSE)
-    #               ),
-    
     #MEDICAL HISTORY----------------------------------------------------------------
     
     fluidRow(
@@ -214,18 +158,7 @@ ui<-fluidPage(
     fluidRow(
       tags$p("Are you currently living with the following conditions?")),
     
-    
-    #HBP  #High Blood Pressure (Y/N)
-    
-    #               fluidRow(
-    #                 radioButtons(inputId="hbp",
-    #                              label="High Blood Pressure", 
-    #                              choices=list("Yes",
-    #                                           "No"),
-    #                              selected=character(0))
-    #               ),
-    
-    #HBC  #High Blood Cholesterol (Y/N)
+    #HBC #High Blood Cholesterol
     
     fluidRow(
       radioButtons(inputId="hbc",
@@ -235,7 +168,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CVD  #CVD
+    #CVD #CVD
     fluidRow(
       radioButtons(inputId="cvd",
                    label="Cardiovascular Disease", 
@@ -244,7 +177,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #COP  #COPD
+    #COP #COPD
     
     fluidRow(
       radioButtons(inputId="copd",
@@ -254,7 +187,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #DIA  #Diabetes (Y/N)
+    #DIA #Diabetes (Y/N)
     
     fluidRow(
       radioButtons(inputId="dia",
@@ -264,7 +197,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #DEP  #Depression (Y/N)
+    #DEP #Depression (Y/N)
     
     fluidRow(
       radioButtons(inputId="dep",
@@ -274,7 +207,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CAN  #Cancer
+    #CAN #Cancer
     fluidRow(
       radioButtons(inputId="can",
                    label="Cancer", 
@@ -283,7 +216,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CAN  #Alzheimer
+    #CAN #Alzheimer
     fluidRow(
       radioButtons(inputId="alz",
                    label="Alzheimer", 
@@ -298,7 +231,6 @@ ui<-fluidPage(
       tags$h4("FAMILY HISTORY")),
     fluidRow(
       tags$p("Has someone in your family (Father, Mother, Brother, Sister experienced the following conditions?")),
-    
     
     #HBP  #High Blood Pressure (Y/N)
     fluidRow(
@@ -372,7 +304,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CONCOMITAN MEDICATIONS---------------------------------------------------------
+    #CONCOMITAN MEDICATIONS-----------------------------------------------------
     
     fluidRow(
       tags$h4("CONCOMITANT MEDICATIONS")),
@@ -387,43 +319,15 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CMA  #Infectious Agents ?????
-    
-    
   ),
   
-  
-  
+################################################################################
+# The following section is to indicate what to display on the mainPanel
+################################################################################
+
   mainPanel(
-    #    fluidRow(
-    #      tags$h1("You'll die")),
-    
-    #    fluidRow(
-    
-    
-    
-    #    tags$div(tags$h3("You actually have", tags$strong(textOutput("textprob1", inline = TRUE),"%"),
-    #                     "chances of dying from", tags$strong(textOutput("textcause1", inline = TRUE)),
-    #                     "at the age of", tags$strong(textOutput("textage1", inline = TRUE))
-    #    )
-    #    ),
-    
-#    tags$div(tags$h2("You'll die")),
-#    tags$div(tags$h5("From something. At some point. For sure.")),
-    
-#    tags$div(tags$h5("Your cause and age of death depends on your inherited risk factors and your lifestyle choices.",
-                     
-#                     tags$strong("Enter your profile in the grey area and see how your chances of dying from different causes stack up."), 
-#                     "Then, if
-#              you want, make some lifestyle changes to improve your life and you know...live longer. And don't get scared.
-#              This app is not a death sentence generator. It just illustrates what the numbers
-#              look like. And you're not a number right? No you're not. You are a complex unique being with a 
-#              willpower that transcends the boundaries of funky-looking bubbles. 
-#              Yes you are. But you'll die. For sure.")),
-    
-    
+
     tags$div(tags$h5("Based on the information you provided, you have, statistically speaking...")),
-    
     
     tags$div(
       tags$strong(textOutput("textprob1", inline = TRUE),"%"),
@@ -491,42 +395,24 @@ ui<-fluidPage(
       "at the age of",tags$strong(textOutput("textage16", inline = TRUE)),
       br(),
       
-      
     ),
-    #     ),
+
+################################################################################
+# Here are parameters related to the bubble-plot's window fitting
+################################################################################
     
-    #     textOutput("text2"),
-    
-    #    fluidRow(
-    plotlyOutput("bubble2", height="auto", width="auto"),
-    #  ),
-    
-    #    fluidRow(
-    
-    #tags$div(tags$h4("Enter your profile in the grey area and watch the graph above change.")),
-    #  ),
-    
-    
-    
-    
-    
-    
-    
+    plotlyOutput("bubble", height="auto", width="auto"),
     
   ),
   
-  
-  
-  #  position = "left" # this code is to move the SidePanel vs MainPanel
-  
 )
 
-#////////////////////////////////////////////////////////////////////////////////
-# the following section is to build the dataframe used to build the plot
-#////////////////////////////////////////////////////////////////////////////////
+#///////////////////////////////////////////////////////////////////////////////
+# The following section is to build the dataframe that the plot is based on
+#///////////////////////////////////////////////////////////////////////////////
 
-#Provide the list of leading causes of death here:
-cod55 <- data.frame(cause =  c("Cardiovascular Diseases",
+# Provide the list of leading causes of death here:
+cod <- data.frame(cause =  c("Cardiovascular Diseases",
                                "Coronary Heart Diseases",
                                "Stroke",
                                "Cancer",
@@ -543,7 +429,7 @@ cod55 <- data.frame(cause =  c("Cardiovascular Diseases",
                                "Liver Diseases",
                                "Septicemia"),
                     
-                    #enter the average age of death from each conditions here:                 
+# Enter the average age of death from each conditions here:                 
                     age =  c(67.3,  #Cardiovascular Diseases
                              76.0,  #Coronary Heart Diseases
                              70.5,  #Stroke
@@ -561,7 +447,7 @@ cod55 <- data.frame(cause =  c("Cardiovascular Diseases",
                              52.0,  #Liver Diseases
                              65.0), #Septicemia
                     
-                    #enter the baseline risk of dying from each condition (n/100,000) here:                  
+# Enter the baseline risk of dying from each condition (n/100,000) here:                  
                     risk =  c(224.4, #Cardiovascular Diseases
                               91.8, #Coronary Heart Diseases
                               38.8,  #Stroke
@@ -579,7 +465,7 @@ cod55 <- data.frame(cause =  c("Cardiovascular Diseases",
                               13.3,  #Liver Diseases
                               9.7), #Septicemia
                     
-                    #enter the population (n/100,000) dying form each condition per year here:                
+# Enter the population (n/100,000) dying form each condition per year here:                
                     pop =  c(813804, #Cardiovascular Diseases
                              406351, #Coronary Heart Diseases
                              160264, #Stroke
@@ -598,27 +484,27 @@ cod55 <- data.frame(cause =  c("Cardiovascular Diseases",
                              40050) #Septicemia
 )
 
-#################################################################################
+#///////////////////////////////////////////////////////////////////////////////
 # The Section below serve to define the "server" function for the server to create/use the R components for the app.
-#################################################################################
+#///////////////////////////////////////////////////////////////////////////////
 
 server <- function(input, output){
   
   #converting the cause of death dataframe (cod) into a reactive function / dataframe that changes according to inputs.  
   
-  cod77<-reactive({cod55 %>%
+  cod_react<-reactive({cod %>%
       
-      #################################################################################
-    #################################################################################
-    # Setting impact of Risk Factors on AGE OF DEATH   
-    #################################################################################
-    #################################################################################
+################################################################################
+################################################################################
+# Setting impact of Risk Factors on AGE OF DEATH for different causes of death  
+################################################################################
+################################################################################
     
     mutate(age=c(
       
-      cod55[cod55$cause=="Cardiovascular Diseases","age"]
+      cod[cod$cause=="Cardiovascular Diseases","age"]
       
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
@@ -634,7 +520,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -655,8 +541,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00157))
@@ -670,15 +555,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000438))
       
-      # VITALS =======================================================================
-      
-      #Risk Factor: Systolic Blood Pressure: sys
-      #      -(if(input$sys < 130){0}
-      #        else if(input$sys >= 130 & input$sys < 140){1}
-      #        else if(input$sys >= 140 & input$sys < 150){3}
-      #        else if(input$sys >= 150 & input$sys < 160){5}
-      #        else if(input$sys >= 160 & input$sys < 170){7} 
-      #        else if(input$sys >= 170){10})
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -694,7 +571,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.975}
         else if(input$bmi=="Obese (>30)"){0.949})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -731,14 +608,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -780,32 +655,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-      
       ,                 
       
-      
-      ################################################################################
+      ##########################################################################
       # Coronary Heart Diseases
-      ################################################################################
-      cod55[cod55$cause=="Coronary Heart Diseases","age"]
+      ##########################################################################
+      cod[cod$cause=="Coronary Heart Diseases","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.974}
         else if(input$sex=="Female"){1.026})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -816,7 +685,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -837,8 +706,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00157))    
@@ -852,7 +720,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000438))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -911,8 +779,7 @@ server <- function(input, output){
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -955,32 +822,26 @@ server <- function(input, output){
         else if(input$falz=="No"){1})
       
       
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Stroke
-      ################################################################################
-      cod55[cod55$cause=="Stroke","age"]
+      ##########################################################################
+      cod[cod$cause=="Stroke","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.965}
         else if(input$sex=="Female"){1.035})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -991,7 +852,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -1012,8 +873,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00157))      
@@ -1027,7 +887,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000336))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -1043,7 +903,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.978}
         else if(input$bmi=="Obese (>30)"){0.931})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -1086,8 +946,7 @@ server <- function(input, output){
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -1129,33 +988,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
-      
+
       ,
       
-      
-      ################################################################################
+      ##########################################################################
       # Cancer                       
-      ################################################################################
-      cod55[cod55$cause=="Cancer","age"]
+      ##########################################################################
+      cod[cod$cause=="Cancer","age"]
       
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.923}
         else if(input$sex=="Female"){1.077})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -1166,7 +1018,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -1187,8 +1039,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00437))      
@@ -1202,7 +1053,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000328))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -1211,7 +1062,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.944})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.937}
@@ -1219,7 +1069,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.978}
         else if(input$bmi=="Obese (>30)"){0.960})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -1262,8 +1112,7 @@ server <- function(input, output){
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -1305,34 +1154,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
-      
+
       ,
-      
-      
-      
-      ################################################################################
+
+      ##########################################################################
       # COVID-19                      
-      ################################################################################
-      cod55[cod55$cause=="COVID-19","age"]
+      ##########################################################################
+      cod[cod$cause=="COVID-19","age"]
       
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.997}
         else if(input$sex=="Female"){1.038})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -1343,7 +1184,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -1362,10 +1203,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00875))      
@@ -1379,7 +1217,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000640))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -1388,7 +1226,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.926}
@@ -1396,8 +1233,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.977}
         else if(input$bmi=="Obese (>30)"){0.953})
       
-      # MEDICAL HISTORY ==============================================================
-      
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -1440,8 +1276,7 @@ server <- function(input, output){
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -1483,32 +1318,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
+
       ,
-      
-      
-      #################################################################################
+
+      ##########################################################################
       #Alzeihmer's Disease
-      #################################################################################
-      cod55[cod55$cause=="Alzheimer’s Disease","age"]
-      
-      
-      
-      # DEMOGRAPHICS =================================================================
+      ##########################################################################
+      cod[cod$cause=="Alzheimer’s Disease","age"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.974}
         else if(input$sex=="Female"){1.026})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -1519,7 +1348,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -1540,8 +1369,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0))      
@@ -1555,7 +1383,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000210))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -1564,7 +1392,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -1572,8 +1399,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
-      
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -1610,14 +1436,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -1659,8 +1483,7 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -1669,20 +1492,17 @@ server <- function(input, output){
       
       ,
       
-      #################################################################################
+      ##########################################################################
       # Chronic Lower Respiratory Diseases
-      #################################################################################
-      cod55[cod55$cause=="Chronic Lower Respiratory Diseases","age"]
+      ##########################################################################
+      cod[cod$cause=="Chronic Lower Respiratory Diseases","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -1693,7 +1513,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -1714,8 +1534,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00109))      
@@ -1729,7 +1548,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000446))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -1738,7 +1557,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.931}
@@ -1746,8 +1564,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.014}
         else if(input$bmi=="Obese (>30)"){1.020})
       
-      # MEDICAL HISTORY ==============================================================
-      
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -1784,14 +1601,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -1833,8 +1648,7 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -1843,21 +1657,17 @@ server <- function(input, output){
       
       ,
       
-      
-      #################################################################################
+      ##########################################################################
       # Diabetes
-      #################################################################################
-      cod55[cod55$cause=="Diabetes","age"]
+      ##########################################################################
+      cod[cod$cause=="Diabetes","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -1868,7 +1678,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -1887,10 +1697,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0))      
@@ -1904,7 +1711,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000522))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -1913,7 +1720,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.961}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.923})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.926}
@@ -1921,7 +1727,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -1958,14 +1764,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -2007,33 +1811,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
+
       ,
       
-      
-      
-      #################################################################################
+      ##########################################################################
       # Drug Overdose
-      #################################################################################
-      cod55[cod55$cause=="Drug Overdose","age"]
+      ##########################################################################
+      cod[cod$cause=="Drug Overdose","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.950}
         else if(input$sex=="Female"){1.025})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -2044,7 +1841,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -2063,10 +1860,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00175))      
@@ -2080,7 +1874,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000422))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -2096,7 +1890,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.979}
         else if(input$bmi=="Obese (>30)"){0.949})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -2133,14 +1927,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -2182,34 +1974,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
-      
+
       ,
       
-      
-      #################################################################################
+      ##########################################################################
       # Motor Vehicle Accident
-      #################################################################################
-      cod55[cod55$cause=="Motor Vehicle Accident","age"]
+      ##########################################################################
+      cod[cod$cause=="Motor Vehicle Accident","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -2220,7 +2004,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -2239,10 +2023,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.01137))      
@@ -2256,7 +2037,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -2265,7 +2046,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -2273,7 +2053,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -2310,14 +2090,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -2359,8 +2137,7 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -2369,21 +2146,17 @@ server <- function(input, output){
       
       ,
       
-      
-      #################################################################################
+      ##########################################################################
       # Fall
-      #################################################################################
-      cod55[cod55$cause=="Fall","age"]
+      ##########################################################################
+      cod[cod$cause=="Fall","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -2394,7 +2167,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -2413,10 +2186,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00122))      
@@ -2430,7 +2200,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000354))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -2439,7 +2209,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.951}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.894})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.912}
@@ -2447,7 +2216,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.980}
         else if(input$bmi=="Obese (>30)"){0.967})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -2483,15 +2252,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -2533,31 +2300,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
+    
       ,
       
-      
-      #################################################################################
+      ##########################################################################
       # Influenza and Pneumonia
-      #################################################################################
-      cod55[cod55$cause=="Influenza and Pneumonia","age"]
-      
-      
-      
-      # DEMOGRAPHICS =================================================================
+      ##########################################################################
+      cod[cod$cause=="Influenza and Pneumonia","age"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -2568,7 +2330,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -2587,10 +2349,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00875))      
@@ -2604,7 +2363,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000218))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -2613,7 +2372,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.902}
@@ -2621,7 +2379,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.974}
         else if(input$bmi=="Obese (>30)"){0.949})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -2658,14 +2416,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -2707,8 +2463,7 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -2716,22 +2471,18 @@ server <- function(input, output){
         else if(input$cmi=="No"){1})
       
       ,
-      
-      
-      #################################################################################
+
+      ##########################################################################
       # Kidney Diseases
-      #################################################################################
-      cod55[cod55$cause=="Kidney Diseases","age"]
+      ##########################################################################
+      cod[cod$cause=="Kidney Diseases","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -2742,7 +2493,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -2761,10 +2512,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0))      
@@ -2778,7 +2526,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000168))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -2787,7 +2535,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.936}
@@ -2795,7 +2542,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.977}
         else if(input$bmi=="Obese (>30)"){0.951})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -2832,14 +2579,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -2881,32 +2626,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
+
       ,
       
-      
-      #################################################################################
+      ##########################################################################
       # Suicide
-      #################################################################################
-      cod55[cod55$cause=="Suicide","age"]
+      ##########################################################################
+      cod[cod$cause=="Suicide","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -2917,7 +2656,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -2936,10 +2675,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.0175))      
@@ -2953,7 +2689,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000606))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -2961,8 +2697,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -2970,7 +2705,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -3013,8 +2748,7 @@ server <- function(input, output){
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -3056,33 +2790,27 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-      
       ,
       
-      
-      #################################################################################
+      ##########################################################################
       # Liver Diseases
-      #################################################################################
-      cod55[cod55$cause=="Liver Diseases","age"]
+      ##########################################################################
+      cod[cod$cause=="Liver Diseases","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
@@ -3092,7 +2820,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -3111,10 +2839,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.0175))      
@@ -3128,7 +2853,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000506))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -3136,8 +2861,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.978}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.948}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.886})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -3145,8 +2869,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.980}
         else if(input$bmi=="Obese (>30)"){0.957})
       
-      # MEDICAL HISTORY ==============================================================
-      
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -3183,14 +2906,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -3232,32 +2953,26 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-      
       ,
       
-      
-      #################################################################################
+      ##########################################################################
       # Septicemia
-      #################################################################################
-      cod55[cod55$cause=="Septicemia","age"]
+      ##########################################################################
+      cod[cod$cause=="Septicemia","age"]
       
-      
-      
-      # DEMOGRAPHICS =================================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -3268,7 +2983,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -3287,10 +3002,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00131))      
@@ -3304,7 +3016,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1+(input$hpa*0.000446))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -3313,7 +3025,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.948}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.886})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.923}
@@ -3321,7 +3032,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -3358,14 +3069,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -3407,8 +3116,7 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -3417,53 +3125,34 @@ server <- function(input, output){
       
     )
     
-    #///////////////////////////////////////////////////////////////////////////////
+    #///////////////////////////////////////////////////////////////////////////
     # This piece of code is used so that all conditions Age of Death are anchored by the Current Age input
     # This is important for how plot reacts to the input Current Age
-    #///////////////////////////////////////////////////////////////////////////////
+    #///////////////////////////////////////////////////////////////////////////
     ,age = (ifelse(age-5<=input$cage,input$cage+5,age))
     
     ) %>%
       
-      
-      #################################################################################
-    #################################################################################
-    # Setting impact of Risk Factors on RISK OF DEATH from different cause of death  
-    #################################################################################
-    #################################################################################
+################################################################################
+################################################################################
+# Setting impact of Risk Factors on RISK OF DEATH from different causes of death  
+################################################################################
+################################################################################
     
     mutate(risk=c( 
       
-      
-      ################################################################################
+      ##########################################################################
       # Cardiovascular Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Cardiovascular Diseases","risk"]
+      cod[cod$cause=="Cardiovascular Diseases","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #      *(if(input$cage==0){1}
-      #        else if(input$cage>0&input$cage<5){0.00832} 
-      #        else if(input$cage>=5&input$cage<15){0.00476}
-      #        else if(input$cage>=15&input$cage<25){0.01843}
-      #        else if(input$cage>=25&input$cage<35){0.06124}
-      #        else if(input$cage>=35&input$cage<45){0.20987}
-      #        else if(input$cage>=45&input$cage<55){0.62782}
-      #        else if(input$cage>=55&input$cage<65){1.50000}
-      #        else if(input$cage>=65&input$cage<75){3.50416}
-      #        else if(input$cage>=75&input$cage<85){10.2652}
-      #        else if(input$cage>=85){35.9744}
-      #        )
-      
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.219}
         else if(input$sex=="Female"){0.816})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -3474,7 +3163,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.672}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -3493,10 +3182,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.04))      
@@ -3510,7 +3196,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0032))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -3519,7 +3205,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
@@ -3527,7 +3212,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -3563,15 +3248,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+ 
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -3613,8 +3296,7 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -3623,24 +3305,20 @@ server <- function(input, output){
       
       ,
       
-      ################################################################################
+      ##########################################################################
       # Coronary Heart Diseases
-      ################################################################################
+      ##########################################################################
       
+      cod[cod$cause=="Coronary Heart Diseases","risk"]
       
-      cod55[cod55$cause=="Coronary Heart Diseases","risk"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
-      
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.375}
         else if(input$sex=="Female"){0.698})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -3651,7 +3329,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.941}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -3672,8 +3350,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.04))      
@@ -3687,7 +3364,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0032))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -3696,7 +3373,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
@@ -3704,7 +3380,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -3741,14 +3417,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -3790,8 +3464,7 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -3800,15 +3473,13 @@ server <- function(input, output){
       
       ,
       
-      ################################################################################
+      ##########################################################################
       # Stroke
-      ################################################################################
+      ##########################################################################
       
+      cod[cod$cause=="Stroke","risk"]
       
-      cod55[cod55$cause=="Stroke","risk"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -3817,7 +3488,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.026}
         else if(input$sex=="Female"){0.964})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -3828,7 +3498,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.670}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -3847,10 +3517,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.04))      
@@ -3864,7 +3531,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00266))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -3873,7 +3540,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.7}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.21})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
@@ -3881,7 +3547,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -3918,14 +3584,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1.83}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -3967,36 +3631,28 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Cancer
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Cancer","risk"]
+      cod[cod$cause=="Cancer","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.184}
         else if(input$sex=="Female"){0.863})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.016}
@@ -4006,7 +3662,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.636}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -4025,10 +3681,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.2))      
@@ -4042,7 +3695,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0012))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -4051,7 +3704,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.21}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.33})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.29}
@@ -4059,7 +3711,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.285}
         else if(input$bmi=="Obese (>30)"){1.57})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -4096,14 +3748,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){4.38}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -4145,27 +3795,22 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-      
-      
       ,
       
-      
-      ################################################################################
+      ##########################################################################
       # COVID-19
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="COVID-19","risk"]
+      cod[cod$cause=="COVID-19","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -4174,7 +3819,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.267}
         else if(input$sex=="Female"){0.784})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -4185,7 +3829,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.518}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -4204,10 +3848,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.045))      
@@ -4221,7 +3862,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00507))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -4229,8 +3870,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
@@ -4238,7 +3878,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.85})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -4274,15 +3914,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -4323,28 +3961,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-      
-      
       ,
       
-      
-      ################################################################################
+      ##########################################################################
       # Alzheimer’s Disease
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Alzheimer’s Disease","risk"]
+      cod[cod$cause=="Alzheimer’s Disease","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -4353,7 +3986,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.781}
         else if(input$sex=="Female"){1.142})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -4364,7 +3996,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.485}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -4382,11 +4014,8 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
-      
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0))      
@@ -4400,7 +4029,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00166))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -4408,8 +4037,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -4417,7 +4045,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -4453,15 +4081,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -4503,26 +4129,22 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1.7}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Chronic Lower Respiratory Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Chronic Lower Respiratory Diseases","risk"]
+      cod[cod$cause=="Chronic Lower Respiratory Diseases","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -4531,8 +4153,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.104}
         else if(input$sex=="Female"){0.923})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.069}
@@ -4542,7 +4163,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.657}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -4561,10 +4182,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.0125))      
@@ -4578,7 +4196,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00313))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -4586,8 +4204,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.4})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.4}
@@ -4595,7 +4212,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.8}
         else if(input$bmi=="Obese (>30)"){0.77})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -4632,14 +4249,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){2.59}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -4680,26 +4295,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Diabetes
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Diabetes","risk"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="Diabetes","risk"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -4708,7 +4320,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.258}
         else if(input$sex=="Female"){0.786})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -4719,7 +4330,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.512}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -4738,10 +4349,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0))      
@@ -4755,7 +4363,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00253))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -4763,8 +4371,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.24}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.58}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.82})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
@@ -4772,7 +4379,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -4809,14 +4416,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){1.77}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -4857,28 +4462,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      
-      ################################################################################
+      ##########################################################################
       # Drug Overdose
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Drug Overdose","risk"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="Drug Overdose","risk"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -4887,8 +4487,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.426}
         else if(input$sex=="Female"){0.578})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.058}
@@ -4898,7 +4497,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.946}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -4917,10 +4516,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.9}
         else if(input$edu=="Doctoral degree"){0.8})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.05))      
@@ -4934,7 +4530,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00333))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -4943,7 +4539,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -4951,7 +4546,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.24}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -4987,15 +4582,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-      
-      
+    
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -5036,27 +4629,22 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
       ,
       
-      ################################################################################
+      ##########################################################################
       # Motor Vehicle Accident
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Motor Vehicle Accident","risk"]
+      cod[cod$cause=="Motor Vehicle Accident","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -5065,7 +4653,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.481}
         else if(input$sex=="Female"){0.534})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -5076,7 +4663,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.344}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -5095,10 +4682,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.6))      
@@ -5112,7 +4696,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -5120,8 +4704,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
@@ -5129,7 +4712,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -5165,15 +4748,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -5214,26 +4795,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-      
       ,
       
-      ################################################################################
+      ##########################################################################
       # Fall
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Fall","risk"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="Fall","risk"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -5242,8 +4820,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.214}
         else if(input$sex=="Female"){0.816})
-      
-      
+    
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.087}
@@ -5253,7 +4830,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.796}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -5271,11 +4848,8 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
-      
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.02))      
@@ -5289,7 +4863,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0028))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -5297,8 +4871,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.5}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.0}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.5})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.8}
@@ -5306,7 +4879,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.15}
         else if(input$bmi=="Obese (>30)"){1.31})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -5342,15 +4915,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -5392,35 +4963,27 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Influenza and Pneumonia
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Influenza and Pneumonia","risk"]
+      cod[cod$cause=="Influenza and Pneumonia","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.215}
         else if(input$sex=="Female"){0.846})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -5431,7 +4994,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.077}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -5450,10 +5013,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.45))      
@@ -5467,7 +5027,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00493))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -5476,7 +5036,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
@@ -5484,7 +5043,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -5520,15 +5079,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){2.15}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -5570,36 +5127,27 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
       ,
       
-      ################################################################################
+      ##########################################################################
       # Kidney Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Kidney Diseases","risk"]
+      cod[cod$cause=="Kidney Diseases","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
+      # DEMOGRAPHICS ===========================================================
+
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.213}
         else if(input$sex=="Female"){0.843})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.898}
@@ -5609,7 +5157,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.882}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -5628,10 +5176,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0))      
@@ -5645,7 +5190,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00133))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -5654,7 +5199,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.3}
@@ -5662,7 +5206,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.94})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -5699,14 +5243,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){2.29}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -5747,27 +5289,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Suicide
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Suicide","risk"]
+      cod[cod$cause=="Suicide","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -5776,7 +5314,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.630}
         else if(input$sex=="Female"){0.407})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -5787,7 +5324,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.244}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -5806,10 +5343,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*1.0))      
@@ -5823,7 +5357,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0048))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -5832,7 +5366,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -5840,7 +5373,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -5876,15 +5409,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.85}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -5925,37 +5456,29 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Liver Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Liver Diseases","risk"]
+      cod[cod$cause=="Liver Diseases","risk"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.316}
         else if(input$sex=="Female"){0.707})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.083}
@@ -5965,7 +5488,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){2.850}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -5984,10 +5507,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*1.0))      
@@ -6001,7 +5521,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00266))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -6009,8 +5529,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.56}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.13}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.69})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -6018,7 +5537,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.16}
         else if(input$bmi=="Obese (>30)"){1.69})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -6055,14 +5574,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){4.7}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -6103,27 +5620,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Septicemia
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Septicemia","risk"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="Septicemia","risk"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -6132,7 +5645,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.113}
         else if(input$sex=="Female"){0.918})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -6143,7 +5655,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.948}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -6162,10 +5674,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.025))      
@@ -6179,7 +5688,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00313))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -6187,8 +5696,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.56}
@@ -6196,7 +5704,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -6232,15 +5740,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.5}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1.5}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -6282,40 +5788,32 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-      
-      
-      
-      
     )
-    
     
     ) %>%
       
-      #################################################################################
-    #################################################################################
-    # Setting impact of Risk Factors on POPULATION associated with different cods   
-    #################################################################################
-    #################################################################################   
-    
-    
-    
+################################################################################
+################################################################################
+# Setting impact of Risk Factors on POPULATION associated with different cods   
+################################################################################
+################################################################################   
+
     mutate(pop=c( 
       
-      ################################################################################
+      ##########################################################################
       # Cardiovascular Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Cardiovascular Diseases","pop"]
+      cod[cod$cause=="Cardiovascular Diseases","pop"]
       
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -6324,8 +5822,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.219}
         else if(input$sex=="Female"){0.816})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.980}
@@ -6335,7 +5832,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.672}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -6356,8 +5853,7 @@ server <- function(input, output){
       
       #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.04))      
@@ -6371,7 +5867,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0032))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -6380,7 +5876,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
@@ -6388,7 +5883,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -6425,14 +5920,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -6473,9 +5966,8 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -6484,24 +5976,18 @@ server <- function(input, output){
       
       ,
       
-      ################################################################################
+      ##########################################################################
       # Coronary Heart Diseases
-      ################################################################################
-      
-      
-      cod55[cod55$cause=="Coronary Heart Diseases","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      
+      ##########################################################################
+
+      cod[cod$cause=="Coronary Heart Diseases","pop"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.375}
         else if(input$sex=="Female"){0.698})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -6512,7 +5998,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.941}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -6531,10 +6017,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.04))      
@@ -6548,7 +6031,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0032))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -6556,8 +6039,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
@@ -6565,7 +6047,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -6602,14 +6084,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -6650,9 +6130,8 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -6661,24 +6140,18 @@ server <- function(input, output){
       
       ,
       
-      ################################################################################
+      ##########################################################################
       # Stroke
-      ################################################################################
-      
-      
-      cod55[cod55$cause=="Stroke","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      ##########################################################################
+
+      cod[cod$cause=="Stroke","pop"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.026}
         else if(input$sex=="Female"){0.964})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -6689,7 +6162,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.670}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -6708,10 +6181,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.04))      
@@ -6725,7 +6195,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00266))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -6734,7 +6204,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.7}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.21})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
@@ -6742,7 +6211,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -6778,15 +6247,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.83}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -6827,27 +6294,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Cancer
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Cancer","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="Cancer","pop"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -6856,7 +6319,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.184}
         else if(input$sex=="Female"){0.863})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -6867,7 +6329,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.636}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -6885,11 +6347,8 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
-      
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.2))      
@@ -6903,7 +6362,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.000666))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -6911,8 +6370,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.21}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.33})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.29}
@@ -6920,7 +6378,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.285}
         else if(input$bmi=="Obese (>30)"){1.57})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -6956,15 +6414,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){4.38}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -7005,28 +6461,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      
-      ################################################################################
+      ##########################################################################
       # COVID-19
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="COVID-19","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="COVID-19","pop"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -7035,7 +6486,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.267}
         else if(input$sex=="Female"){0.784})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -7046,7 +6496,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.518}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -7065,10 +6515,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.045))      
@@ -7082,7 +6529,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00507))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -7090,8 +6537,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
@@ -7099,7 +6545,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.85})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -7136,14 +6582,12 @@ server <- function(input, output){
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
       
-      
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -7184,28 +6628,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
-      
-      
-      ################################################################################
+
+      ##########################################################################
       # Alzheimer’s Disease
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Alzheimer’s Disease","pop"]
+      cod[cod$cause=="Alzheimer’s Disease","pop"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -7214,8 +6653,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.781}
         else if(input$sex=="Female"){1.142})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.043}
@@ -7225,7 +6663,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.485}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -7244,10 +6682,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0))      
@@ -7261,7 +6696,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00166))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -7270,7 +6705,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -7278,7 +6712,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -7314,15 +6748,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -7363,27 +6795,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1.7}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Chronic Lower Respiratory Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Chronic Lower Respiratory Diseases","pop"]
+      cod[cod$cause=="Chronic Lower Respiratory Diseases","pop"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -7392,8 +6820,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.104}
         else if(input$sex=="Female"){0.923})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.069}
@@ -7403,7 +6830,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.657}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -7422,10 +6849,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.0125))      
@@ -7439,7 +6863,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00313))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -7447,8 +6871,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.4})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.4}
@@ -7456,7 +6879,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){0.8}
         else if(input$bmi=="Obese (>30)"){0.77})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -7492,15 +6915,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.59}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -7541,26 +6962,22 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
       ,
       
-      ################################################################################
+      ##########################################################################
       # Diabetes
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Diabetes","pop"]
+      cod[cod$cause=="Diabetes","pop"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -7569,8 +6986,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.258}
         else if(input$sex=="Female"){0.786})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.903}
@@ -7580,7 +6996,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.512}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -7599,10 +7015,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0))      
@@ -7616,7 +7029,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00253))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -7624,8 +7037,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.24}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.58}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.82})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
@@ -7633,7 +7045,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -7669,15 +7081,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.77}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -7718,28 +7128,23 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      
-      ################################################################################
+      ##########################################################################
       # Drug Overdose
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Drug Overdose","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="Drug Overdose","pop"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -7748,7 +7153,6 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.426}
         else if(input$sex=="Female"){0.578})
-      
       
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
@@ -7759,7 +7163,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.946}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -7778,10 +7182,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.9}
         else if(input$edu=="Doctoral degree"){0.8})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -7789,8 +7190,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -7798,7 +7198,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.24}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       -(if(is.null(input$sys)){0}
@@ -7806,8 +7206,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){5}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){10})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       +(if(is.null(input$bmi)){0}
         else if(input$bmi=="Underweight (<18.5)"){5}
@@ -7815,7 +7214,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){10}
         else if(input$bmi=="Obese (>30)"){30})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -7851,15 +7250,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -7901,36 +7298,28 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Motor Vehicle Accident
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Motor Vehicle Accident","pop"]
+      cod[cod$cause=="Motor Vehicle Accident","pop"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.481}
         else if(input$sex=="Female"){0.534})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.992}
@@ -7940,7 +7329,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.344}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -7959,10 +7348,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.6))      
@@ -7976,7 +7362,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -7984,8 +7370,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
@@ -7993,7 +7378,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -8029,15 +7414,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -8079,25 +7462,22 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Fall
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Fall","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
+      cod[cod$cause=="Fall","pop"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -8106,8 +7486,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.214}
         else if(input$sex=="Female"){0.816})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.087}
@@ -8117,7 +7496,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.796}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -8136,10 +7515,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.02))      
@@ -8153,7 +7529,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0028))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -8161,8 +7537,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.5}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.0}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.5})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.8}
@@ -8170,7 +7545,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.15}
         else if(input$bmi=="Obese (>30)"){1.31})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -8206,15 +7581,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -8255,37 +7628,29 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Influenza and Pneumonia
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Influenza and Pneumonia","pop"]
+      cod[cod$cause=="Influenza and Pneumonia","pop"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.215}
         else if(input$sex=="Female"){0.846})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.985}
@@ -8295,7 +7660,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.077}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -8314,10 +7679,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.45))      
@@ -8331,7 +7693,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00493))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -8339,8 +7701,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
@@ -8348,7 +7709,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -8384,15 +7745,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){2.15}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -8434,26 +7793,22 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Kidney Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Kidney Diseases","pop"]
+      cod[cod$cause=="Kidney Diseases","pop"]
       
-      
-      # DEMOGRAPHICS ===============================================================
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
@@ -8462,8 +7817,7 @@ server <- function(input, output){
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.213}
         else if(input$sex=="Female"){0.843})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.898}
@@ -8473,7 +7827,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.882}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -8491,11 +7845,8 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
-      
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0))      
@@ -8509,7 +7860,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00133))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -8517,8 +7868,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.3}
@@ -8526,7 +7876,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.94})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -8568,9 +7918,8 @@ server <- function(input, output){
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -8611,37 +7960,29 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+
       ,
       
-      ################################################################################
+      ##########################################################################
       # Suicide
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Suicide","pop"]
+      cod[cod$cause=="Suicide","pop"]
       
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.630}
         else if(input$sex=="Female"){0.407})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.126}
@@ -8651,7 +7992,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.244}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -8670,10 +8011,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*1.0))      
@@ -8687,7 +8025,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.0048))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -8695,8 +8033,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -8704,7 +8041,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -8740,15 +8077,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.85}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-      
-      
-      # FAMILY HISTORY ===============================================================
+
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -8789,37 +8124,29 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
+  
       ,
       
-      ################################################################################
+      ##########################################################################
       # Liver Diseases
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Liver Diseases","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      cod[cod$cause=="Liver Diseases","pop"]
+
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.316}
         else if(input$sex=="Female"){0.707})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.083}
@@ -8829,7 +8156,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){2.850}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -8848,10 +8175,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*1.0))      
@@ -8865,7 +8189,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00266))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -8873,8 +8197,7 @@ server <- function(input, output){
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.56}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.13}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.69})
-      
-      
+
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
@@ -8882,7 +8205,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1.16}
         else if(input$bmi=="Obese (>30)"){1.69})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -8918,15 +8241,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){4.7}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -8967,37 +8288,28 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-      
-      
-      
       ,
       
-      ################################################################################
+      ##########################################################################
       # Septicemia
-      ################################################################################
+      ##########################################################################
       
-      cod55[cod55$cause=="Septicemia","pop"]
-      
-      
-      # DEMOGRAPHICS ===============================================================
-      
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      cod[cod$cause=="Septicemia","pop"]
+  
+      # DEMOGRAPHICS ===========================================================
       
       #Risk Factor: Sex: sex
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.113}
         else if(input$sex=="Female"){0.918})
-      
-      
+
       #Risk Factor: Race: race
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.959}
@@ -9007,7 +8319,7 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.948}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ================================================================
+      # SOCIAL STATUS ==========================================================
       
       #Risk Factor: Income Group: inc
       *(if(is.null(input$inc)){1}
@@ -9026,10 +8338,7 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
-      
-      
-      # LIFESTYLE ====================================================================
+      # LIFESTYLE ==============================================================
       
       #Risk Factor: Drinks: drk
       *(1+(input$drk*0.025))      
@@ -9043,7 +8352,7 @@ server <- function(input, output){
       #Risk Factor: Number of high intensity physical activity per week: hpa
       *(1-(input$hpa*0.00313))
       
-      # VITALS =======================================================================
+      # VITALS =================================================================
       
       #Risk Factor: Systolic Blood Pressure: sys
       *(if(is.null(input$sys)){1}
@@ -9052,7 +8361,6 @@ server <- function(input, output){
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      
       #Risk Factor: Body Mass Index: bmi
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.56}
@@ -9060,7 +8368,7 @@ server <- function(input, output){
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ==============================================================
+      # MEDICAL HISTORY ========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: hbp
       *(if(is.null(input$hbp)){1}
@@ -9096,15 +8404,13 @@ server <- function(input, output){
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.5}
         else if(input$can=="No"){1})
-      
-      
+
       #Risk Factor: Medical History - Alzheimer: alz
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1.5}
         else if(input$alz=="No"){1})
       
-      
-      # FAMILY HISTORY ===============================================================
+      # FAMILY HISTORY =========================================================
       
       #Risk Factor: Medical History - High Blood Pressure: fhbp
       *(if(is.null(input$fhbp)){1}
@@ -9145,9 +8451,8 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      
-      # CONCOMITANT MEDICATIONS ======================================================
+
+      # CONCOMITANT MEDICATIONS ================================================
       
       #Risk Factor: Immunosuppressants: cmi
       *(if(is.null(input$cmi)){1}
@@ -9155,278 +8460,108 @@ server <- function(input, output){
         else if(input$cmi=="No"){1})
       
     )) %>%
+    
       
-      # Use "mutate()" to set values for ggplot
-      
+################################################################################        
+# Use "mutate()" to set values for ggplot
+################################################################################
+    
       mutate(risk = round(risk)) %>%
       mutate(age = round(age)) %>%
       mutate(annotation=cause) %>%
       # calculating the probability of dying from the different cause using their respective risks,
-      # removing the risk related to Stroke and CHD because those risks are also part of the CVD risk
+        # removing the risk related to Stroke and CHD because those risks are also part of the CVD risk
       mutate(probability = round(risk/(sum(risk[cause!="Stroke" & cause!="Coronary Heart Diseases"]))*100,1)) %>%
       arrange(desc(pop)) %>%
       mutate(cause = factor(cause, cause)) %>%
       mutate(text = paste("Cause: ", cause, "\nRisk (n/100,000): ", risk, "\nAverage Age of Death: ", age, sep=""))
-    #     mutate(text = paste("Cause: ", cause, "\nPopulation (M): ", pop, "\nRisk: ", risk, "\nAge of Death: ", age, sep=""))    
-    
-    
-    
-    
+
   })  
   
+#create textoutput for all of the causes in order of increasing risk.
+  ({  output$textcause1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],5] }) })
+  ({  output$textcause2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],5] }) })
+  ({  output$textcause3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],5] }) })
+  ({  output$textcause4 <- renderText({ cod_react()[order(-cod_react()$risk)[4],5] }) })
+  ({  output$textcause5 <- renderText({ cod_react()[order(-cod_react()$risk)[5],5] }) })
+  ({  output$textcause6 <- renderText({ cod_react()[order(-cod_react()$risk)[6],5] }) })
+  ({  output$textcause7 <- renderText({ cod_react()[order(-cod_react()$risk)[7],5] }) })
+  ({  output$textcause8 <- renderText({ cod_react()[order(-cod_react()$risk)[8],5] }) })
+  ({  output$textcause9 <- renderText({ cod_react()[order(-cod_react()$risk)[9],5] }) })
+  ({  output$textcause10 <- renderText({ cod_react()[order(-cod_react()$risk)[10],5] }) })
+  ({  output$textcause11 <- renderText({ cod_react()[order(-cod_react()$risk)[11],5] }) })
+  ({  output$textcause12 <- renderText({ cod_react()[order(-cod_react()$risk)[12],5] }) })
+  ({  output$textcause13 <- renderText({ cod_react()[order(-cod_react()$risk)[13],5] }) })
+  ({  output$textcause14 <- renderText({ cod_react()[order(-cod_react()$risk)[14],5] }) })
+  ({  output$textcause15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],5] }) })
+  ({  output$textcause16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],5] }) })
   
-  ###########################################################################################
-  #
-  #
-  #THE NEW REALITY IS HERE
-  #
-  #
-  ###########################################################################################
+#create textoutput for all of the causes probability in order of increasing risk.
+  ({  output$textprob1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],6] }) })
+  ({  output$textprob2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],6] }) })
+  ({  output$textprob3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],6] }) })
+  ({  output$textprob4 <- renderText({ cod_react()[order(-cod_react()$risk)[4],6] }) })
+  ({  output$textprob5 <- renderText({ cod_react()[order(-cod_react()$risk)[5],6] }) })
+  ({  output$textprob6 <- renderText({ cod_react()[order(-cod_react()$risk)[6],6] }) })
+  ({  output$textprob7 <- renderText({ cod_react()[order(-cod_react()$risk)[7],6] }) })
+  ({  output$textprob8 <- renderText({ cod_react()[order(-cod_react()$risk)[8],6] }) })
+  ({  output$textprob9 <- renderText({ cod_react()[order(-cod_react()$risk)[9],6] }) })
+  ({  output$textprob10 <- renderText({ cod_react()[order(-cod_react()$risk)[10],6] }) })
+  ({  output$textprob11 <- renderText({ cod_react()[order(-cod_react()$risk)[11],6] }) })
+  ({  output$textprob12 <- renderText({ cod_react()[order(-cod_react()$risk)[12],6] }) })
+  ({  output$textprob13 <- renderText({ cod_react()[order(-cod_react()$risk)[13],6] }) })
+  ({  output$textprob14 <- renderText({ cod_react()[order(-cod_react()$risk)[14],6] }) })
+  ({  output$textprob15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],6] }) })
+  ({  output$textprob16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],6] }) })
   
-  
-  
-  # ({
-  
-  #output$textcause <- renderText({ paste("Probably from", cod77()[which.max(cod77()$risk),5] ,"at the age of", cod77()[which.max(cod77()$risk),"age"] ) })  
-  
-  #   output$textcause <- renderText({ cod77()[which.max(cod77()$risk),5] }) 
-  
-  #    })
-  
-  #  })
-  
-  
-  #  ({
-  
-  #maxcod <- max(cod55$age)
-  
-  #    output$textage <- renderText({ cod77()[which.max(cod77()$risk),"age"]  })
-  #output$text <- renderText({ max(cod77()$age) })
-  #  })
-  
-  
-  
-  
-  
-  #    output$textcause2 <- renderText({ cod77()[Rfast::nth(cod77()$risk, 6, descending = T),"age"]  })
-  
-  #    output$textcause2 <- renderText({ cod77()[which.maxn(cod77()$risk,6), 5]  })
-  
-  #create textoutput for all of the causes in order of increasing risk.
-  ({  output$textcause1 <- renderText({ cod77()[order(-cod77()$risk)[1],5] }) })
-  ({  output$textcause2 <- renderText({ cod77()[order(-cod77()$risk)[2],5] }) })
-  ({  output$textcause3 <- renderText({ cod77()[order(-cod77()$risk)[3],5] }) })
-  ({  output$textcause4 <- renderText({ cod77()[order(-cod77()$risk)[4],5] }) })
-  ({  output$textcause5 <- renderText({ cod77()[order(-cod77()$risk)[5],5] }) })
-  ({  output$textcause6 <- renderText({ cod77()[order(-cod77()$risk)[6],5] }) })
-  ({  output$textcause7 <- renderText({ cod77()[order(-cod77()$risk)[7],5] }) })
-  ({  output$textcause8 <- renderText({ cod77()[order(-cod77()$risk)[8],5] }) })
-  ({  output$textcause9 <- renderText({ cod77()[order(-cod77()$risk)[9],5] }) })
-  ({  output$textcause10 <- renderText({ cod77()[order(-cod77()$risk)[10],5] }) })
-  ({  output$textcause11 <- renderText({ cod77()[order(-cod77()$risk)[11],5] }) })
-  ({  output$textcause12 <- renderText({ cod77()[order(-cod77()$risk)[12],5] }) })
-  ({  output$textcause13 <- renderText({ cod77()[order(-cod77()$risk)[13],5] }) })
-  ({  output$textcause14 <- renderText({ cod77()[order(-cod77()$risk)[14],5] }) })
-  ({  output$textcause15 <- renderText({ cod77()[order(-cod77()$risk)[15],5] }) })
-  ({  output$textcause16 <- renderText({ cod77()[order(-cod77()$risk)[16],5] }) })
-  
-  #create textoutput for all of the causes probability in order of increasing risk.
-  ({  output$textprob1 <- renderText({ cod77()[order(-cod77()$risk)[1],6] }) })
-  ({  output$textprob2 <- renderText({ cod77()[order(-cod77()$risk)[2],6] }) })
-  ({  output$textprob3 <- renderText({ cod77()[order(-cod77()$risk)[3],6] }) })
-  ({  output$textprob4 <- renderText({ cod77()[order(-cod77()$risk)[4],6] }) })
-  ({  output$textprob5 <- renderText({ cod77()[order(-cod77()$risk)[5],6] }) })
-  ({  output$textprob6 <- renderText({ cod77()[order(-cod77()$risk)[6],6] }) })
-  ({  output$textprob7 <- renderText({ cod77()[order(-cod77()$risk)[7],6] }) })
-  ({  output$textprob8 <- renderText({ cod77()[order(-cod77()$risk)[8],6] }) })
-  ({  output$textprob9 <- renderText({ cod77()[order(-cod77()$risk)[9],6] }) })
-  ({  output$textprob10 <- renderText({ cod77()[order(-cod77()$risk)[10],6] }) })
-  ({  output$textprob11 <- renderText({ cod77()[order(-cod77()$risk)[11],6] }) })
-  ({  output$textprob12 <- renderText({ cod77()[order(-cod77()$risk)[12],6] }) })
-  ({  output$textprob13 <- renderText({ cod77()[order(-cod77()$risk)[13],6] }) })
-  ({  output$textprob14 <- renderText({ cod77()[order(-cod77()$risk)[14],6] }) })
-  ({  output$textprob15 <- renderText({ cod77()[order(-cod77()$risk)[15],6] }) })
-  ({  output$textprob16 <- renderText({ cod77()[order(-cod77()$risk)[16],6] }) })
-  
-  #create textoutput for all of the causes age in order of increasing risk.
-  ({  output$textage1 <- renderText({ cod77()[order(-cod77()$risk)[1],"age"] }) })
-  ({  output$textage2 <- renderText({ cod77()[order(-cod77()$risk)[2],"age"] }) })
-  ({  output$textage3 <- renderText({ cod77()[order(-cod77()$risk)[3],"age"] }) })
-  ({  output$textage4 <- renderText({ cod77()[order(-cod77()$risk)[4],"age"] }) })
-  ({  output$textage5 <- renderText({ cod77()[order(-cod77()$risk)[5],"age"] }) })
-  ({  output$textage6 <- renderText({ cod77()[order(-cod77()$risk)[6],"age"] }) })
-  ({  output$textage7 <- renderText({ cod77()[order(-cod77()$risk)[7],"age"] }) })
-  ({  output$textage8 <- renderText({ cod77()[order(-cod77()$risk)[8],"age"] }) })
-  ({  output$textage9 <- renderText({ cod77()[order(-cod77()$risk)[9],"age"] }) })
-  ({  output$textage10 <- renderText({ cod77()[order(-cod77()$risk)[10],"age"] }) })
-  ({  output$textage11 <- renderText({ cod77()[order(-cod77()$risk)[11],"age"] }) })
-  ({  output$textage12 <- renderText({ cod77()[order(-cod77()$risk)[12],"age"] }) })
-  ({  output$textage13 <- renderText({ cod77()[order(-cod77()$risk)[13],"age"] }) })
-  ({  output$textage14 <- renderText({ cod77()[order(-cod77()$risk)[14],"age"] }) })
-  ({  output$textage15 <- renderText({ cod77()[order(-cod77()$risk)[15],"age"] }) })
-  ({  output$textage16 <- renderText({ cod77()[order(-cod77()$risk)[16],"age"] }) })
+#create textoutput for all of the causes age in order of increasing risk.
+  ({  output$textage1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],"age"] }) })
+  ({  output$textage2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],"age"] }) })
+  ({  output$textage3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],"age"] }) })
+  ({  output$textage4 <- renderText({ cod_react()[order(-cod_react()$risk)[4],"age"] }) })
+  ({  output$textage5 <- renderText({ cod_react()[order(-cod_react()$risk)[5],"age"] }) })
+  ({  output$textage6 <- renderText({ cod_react()[order(-cod_react()$risk)[6],"age"] }) })
+  ({  output$textage7 <- renderText({ cod_react()[order(-cod_react()$risk)[7],"age"] }) })
+  ({  output$textage8 <- renderText({ cod_react()[order(-cod_react()$risk)[8],"age"] }) })
+  ({  output$textage9 <- renderText({ cod_react()[order(-cod_react()$risk)[9],"age"] }) })
+  ({  output$textage10 <- renderText({ cod_react()[order(-cod_react()$risk)[10],"age"] }) })
+  ({  output$textage11 <- renderText({ cod_react()[order(-cod_react()$risk)[11],"age"] }) })
+  ({  output$textage12 <- renderText({ cod_react()[order(-cod_react()$risk)[12],"age"] }) })
+  ({  output$textage13 <- renderText({ cod_react()[order(-cod_react()$risk)[13],"age"] }) })
+  ({  output$textage14 <- renderText({ cod_react()[order(-cod_react()$risk)[14],"age"] }) })
+  ({  output$textage15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],"age"] }) })
+  ({  output$textage16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],"age"] }) })
   
   
-  
-  
-  
-  
+################################################################################
+# Set bubble plot (ggplot) parameters
+################################################################################
   
   ({
-    #    observeEvent(input$dimension,{  #this line is to make the prot's height responsive to window's height.
-    
-    output$bubble2 <- renderPlotly({
+    output$bubble <- renderPlotly({
       ggplotly(              
-        #                 mutate(annotation=cause) %>%
-        #                 arrange(desc(pop)) %>%
-        #                 mutate(cause = factor(cause, cause)) %>%
-        #                 mutate(text = paste("Cause: ", cause, "\nPopulation (M): ", pop, "\nRisk: ", risk, "\nAge of Death: ", age, sep="")) %>%
-        ggplot(cod77(), aes(x=age, y=probability, size = pop, color = cause, text=text)) +
+        ggplot(cod_react(), aes(x=age, y=probability, size = pop, color = cause, text=text)) +
           geom_point(alpha=0.6) + #use this line to make bubble +or- transparent
           scale_size(range = c(2, 30), name="Population (M)") +
           scale_color_viridis(discrete=TRUE, guide='none') +
           theme_ipsum() +
-          #        theme_bw(legend.key.size = unit(0.1, "cm")) +
-          #        theme(legend.key.size = unit(3, "lines")) +
-          #   theme(legend.spacing.y = unit(0.05, 'cm')) +
-          #   guides(fill = guide_legend(byrow = TRUE)) +
-          #layout(legend=list('top') +
-          #theme(legend.position='top') +
-          #layout(legend = list(orientation='h',)) +
           scale_x_continuous(limits = c(input$cage, 100), breaks=c(10,20,30,40,50,60,70,80,90,100)) + #use this line to specify the x-axis range and tick positions
           scale_y_continuous(limits=c(0, NA), expand = expansion(mult = c(NA, 0.20)))
-        #theme(legend.position="top", legend.title = element_blank())
-        #layout(legend=list(orientation="h"))
-        #use this last line to specify the y-axis range and clipping data below limit
-        #        ,
-        #        height="100%"
-        ,
+          ,
         tooltip="text") %>% 
-        #layout(legend=list(orientation="h",x = 0.45, y = 0.2))
-        
         #the code below is related to legend display.
         layout(legend=list(xanchor='Right',
-                           #x=-0.1,
                            yanchor='top',
-                           #y=1.8,
-                           #orientation='h',
                            title = NA,
                            itemsizing='constant'
-                           #spacing.y = unit(0.1, "cm"),
-                           #guide_legend = "byrow"
-                           #spacing.x=unit(0.1,"cm")
         )) 
-      
-      
-      
-      
-      #the code below sorts of work to put the legend on the top of the chart, but it does not resize perfectly.
-      
-      #layout(legend=list(xanchor='left',
-      #                   x=-0.1,
-      #                   yanchor='top',
-      #                   y=1.8,
-      #                   orientation='h',
-      #                   title = NA,
-      #                   itemsizing='constant'))
-      #   })
-      
+
     })
     
-    
-    
   })
-  
-  
-  
   
 }      
 
 #this knits together the ui and the server function.
 shinyApp(ui = ui, server = server)
 
-#Use this code to deploy the app (you can also click the "publish app" button after running the app:
-# rsconnect::deployApp('C:/Users/ad905068/OneDrive - BioMarin/Documents/R_for_BMRN/Shiny2')
-
-################################################################################
-# BELOW IS TRASH
-################################################################################
-
-#---------------------------------------------------------------------------------
-#BELOW IS A COPY OF THE WORKING SERVER FUNCTION. DONT TOUCH IT
-
-#this is a function for the server to use to create the R components for the app.
-
-#inactivate/activate all below
-
-#server <- function(input, output){
-#    output$bubble <- renderPlotly({
-#        ggplotly(data %>%
-#            mutate(annotation=country) %>%
-#            mutate(gdpPercap=round(gdpPercap,0)) %>%
-#            mutate(pop=round(pop/1000000,2)) %>%
-#            mutate(lifeExp=round(lifeExp,1)) %>%
-#            arrange(desc(pop)) %>%
-#            mutate(country = factor(country, country)) %>%
-#            mutate(text = paste("Country: ", country, "\nPopulation (M): ", pop, "\nLife Expectancy: ", lifeExp, "\nGdp per capita: ", gdpPercap, sep="")) %>%
-#            ggplot( aes(x=gdpPercap, y=lifeExp, size = pop, color = continent, text=text)) +
-#                geom_point(alpha=0.7) +
-#                scale_size(range = c(1.4, 19), name="Population (M)") +
-#                scale_color_viridis(discrete=TRUE, guide=FALSE) +
-#                theme_ipsum() +
-#                theme(legend.position="none") +
-#                scale_x_continuous(limits = c(2000, 40000)), #use this last line to specify the x-axis range and clipping data below limit
-#                #coord_cartesian(xlim = c(10000, 40000)), #use this last line to specify the x-axis range wothout clipping data below limit
-#        tooltip="text")
-#    })
-#}      
-
-#ABOVE IS A COPY OF THE WORKING SERVER FUNCTION. DONT TOUCH IT
-#---------------------------------------------------------------------------------
-
-
-
-#////////////////////////////////////////////////////////////////////////////////
-# Potential Risk Factors
-#////////////////////////////////////////////////////////////////////////////////
-
-#DEMOGRAPHICS
-#AGE  #Current Age
-#SEX  #Sex
-#RACE  #Race
-
-#SOCIAL STATUS
-#INC  #Income Group
-#EDU  #Education (highest achieved degree)
-#SS1  #Marital Status (x)
-#SS2  #Number of Kids (x)
-
-#LIFESTYLE
-#DRK  #Weekly Drinks
-#SMK  #Weekly Smokes
-#HPA  #Weekly Hours of high intensity physical activity
-#MPA  #Weekly Hours of moderate intensity physical activity
-
-#VITALS
-#BMI  #Body Mass Index
-#WGH  #Weight
-#HGH  #Height
-#SYS  #Systolic Blood Pressure mm/Hg
-
-#MEDICAL HISTORY
-#HBP  #High Blood Pressure (Y/N)
-#HBC  #High Blood Cholesterol (Y/N)
-#DIA  #Diabetes (Y/N)
-#DEP  #Depression (Y/N)
-
-#CONMEDS
-#CMI  #Immunosuppression
-#CMA  #Infectious Agents
-
-#FAMILY HISTORY
-#CVD  #CVD
-#CAN  #Cancer
-#COP  #COPD
-#ALZ  #Alzheimer
-#FDI  #Diabetes
-#FDE  #Depression
