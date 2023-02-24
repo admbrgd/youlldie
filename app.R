@@ -15,8 +15,8 @@
 #                 -RISK as the y-axis
 #                 -POP as the bubble size.
 
-#-------------------------------------------------------------------------------
-#load required packages:
+# Packages ---------------------------------------------------------------------
+# load required packages:
 library(shiny)
 library(hrbrthemes)
 library(viridis)
@@ -26,40 +26,41 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
-#///////////////////////////////////////////////////////////////////////////////
+# UI ---------------------------------------------------------------------------
 # the following section is to build a ui object that lays out a webpage (html) for the app (it converts R -> html)
-#///////////////////////////////////////////////////////////////////////////////
 
-ui<-fluidPage(
+ui <- fluidPage(
   
-  #  headerPanel("You'll die"),
-
-################################################################################
-# The following section is to add input functions corresponding to Risk Factors (e.g.: Sex, Race, # of drinks/week, etc.) 
-# Individual Risk Factors are grouped by Domain (e.g.: DEMOGRAPHICS, SOCIAL STATUS, etc.)
-################################################################################
+  ## Risk Factors ----------------------------------------------------------------
+  # The following section is to add input functions corresponding to Risk Factors (e.g.: Sex, Race, # of drinks/week, etc.) 
+  # Individual Risk Factors are grouped by Domain (e.g.: DEMOGRAPHICS, SOCIAL STATUS, etc.)
   
   sidebarPanel(
     style = "overflow-y:scroll;position:relative;max-height:100vh",
-    #DEMOGRAPHICS---------------------------------------------------------------
+    
+    ### DEMOGRAPHICS ---------------------------------------------------------------
+    
     fluidRow(
       tags$h4("DEMOGRAPHICS")),
     
-    #Risk Factor: Current Age (CAGE)
+    #### Current Age ----
+    
     fluidRow(
       sliderInput(inputId="cage",
                   label="Age",
                   value=0, min=0, max=100)
     ),
     
-    #Risk Factor: Sex (SEX)
+    #### Sex ----
+    
     fluidRow(
       radioButtons(inputId="sex", label="Sex", choices=list("Male",
                                                             "Female"), 
                    selected=character(0))
     ),
     
-    #Risk Factor: Race (RACE)
+    #### Race ----
+    
     fluidRow(
       radioButtons(inputId="race", label="Race", choices=list("Caucasian (White)",
                                                               "African (Black)",
@@ -70,11 +71,13 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #SOCIAL STATUS--------------------------------------------------------------
+    ### SOCIAL STATUS --------------------------------------------------------------
+    
     fluidRow(
       tags$h4("SOCIAL STATUS")),
     
-    #Risk Factor: Income Group (INC)
+    #### Income Group ----
+    
     fluidRow(
       radioButtons(inputId="inc", label="Income Group", choices=list("Poor",
                                                                      "Lower-middle",
@@ -84,7 +87,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #Risk Factor: Highest achieved education degree (EDU)
+    #### Education ----
+    
     fluidRow(
       radioButtons(inputId="edu", label="What is your highest grade/level of school/degree?", choices=list("No Formal Schooling",
                                                                                                            "Primary Education (Elementary School)",
@@ -95,45 +99,50 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #LIFESTYLE------------------------------------------------------------------
+    ### LIFESTYLE ------------------------------------------------------------------
     
     fluidRow(
       tags$h4("LIFESTYLE")),
     
-    #Risk Factor: Weekly Drinks (DRK)
+    #### Weekly Drinks ----
+    
     fluidRow(
       sliderInput(inputId="drk",
                   label="Number of drinks per week",
                   value=0, min=0, max=20)
     ),
     
-    #Risk Factor: Weekly Smokes (SMK)
+    #### Weekly Smokes ----
+    
     fluidRow(
       sliderInput(inputId="smk",
                   label="Number of smokes per week",
                   value=0, min=0, max=140)
     ),
     
-    #Risk Factor: Number of moderate intensity physical activity minutes per week (MPA)
+    #### Number of moderate intensity physical activity minutes per week ----
+    
     fluidRow(
       sliderInput(inputId="mpa",
                   label="Number of minutes of moderate intensity physical activity per week",
                   value=0, min=0, max=300)
     ),
     
-    #Risk Factor: Number of high intensity physical activity minutes per week (HPA)
+    #### Number of high intensity physical activity minutes per week ----
+    
     fluidRow(
       sliderInput(inputId="hpa",
                   label="Number of minutes of vigorous intensity physical activity per week",
                   value=0, min=0, max=100)
     ),
     
-    #VITALS---------------------------------------------------------------------
+    ### VITALS ---------------------------------------------------------------------
     
     fluidRow(
       tags$h4("VITALS")),
     
-    #Risk Factor: Systolic Blood Pressure mm/Hg (SYS)
+    #### Systolic Blood Pressure (mm/Hg) ----
+    
     fluidRow(
       radioButtons(inputId="sys", label="Blood Pressure", choices=list("Normal (SBP <120 mmHG)",
                                                                        "Elevated (SBP 120-129 mmHG)",
@@ -142,7 +151,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),            
     
-    #Risk Factor: Body Mass Index (BMI)
+    #### Body Mass Index ----
+    
     fluidRow(
       radioButtons(inputId="bmi", label="Body Mass Index", choices=list("Underweight (<18.5)",
                                                                         "Normal Weight (18.5-24.9)",
@@ -151,14 +161,14 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #MEDICAL HISTORY----------------------------------------------------------------
+    ### MEDICAL HISTORY ------------------------------------------------------------
     
     fluidRow(
       tags$h4("MEDICAL HISTORY")),
     fluidRow(
       tags$p("Are you currently living with the following conditions?")),
     
-    #HBC #High Blood Cholesterol
+    #### High Blood Cholesterol ----
     
     fluidRow(
       radioButtons(inputId="hbc",
@@ -168,7 +178,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CVD #CVD
+    #### Cardiovascular Disease (CVD) ----
+    
     fluidRow(
       radioButtons(inputId="cvd",
                    label="Cardiovascular Disease", 
@@ -177,7 +188,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #COP #COPD
+    #### Chronic Obstructive Pulmonary Disease (COPD) ----
     
     fluidRow(
       radioButtons(inputId="copd",
@@ -187,7 +198,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #DIA #Diabetes (Y/N)
+    #### Diabetes ----
     
     fluidRow(
       radioButtons(inputId="dia",
@@ -197,7 +208,7 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #DEP #Depression (Y/N)
+    #### Depression ----
     
     fluidRow(
       radioButtons(inputId="dep",
@@ -207,7 +218,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CAN #Cancer
+    #### Cancer ----
+    
     fluidRow(
       radioButtons(inputId="can",
                    label="Cancer", 
@@ -216,7 +228,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CAN #Alzheimer
+    #### Alzheimer ----
+    
     fluidRow(
       radioButtons(inputId="alz",
                    label="Alzheimer", 
@@ -225,14 +238,15 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #FAMILY HISTORY-----------------------------------------------------------------
+    ### FAMILY HISTORY ===---------------------------------------------------------
     
     fluidRow(
       tags$h4("FAMILY HISTORY")),
     fluidRow(
       tags$p("Has someone in your family (Father, Mother, Brother, Sister experienced the following conditions?")),
     
-    #HBP  #High Blood Pressure (Y/N)
+    #### Family History of High Blood Pressure ----
+    
     fluidRow(
       radioButtons(inputId="fhbp",
                    label="Family History of High Blood Pressure", 
@@ -241,7 +255,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #HBC  #High Blood Cholesterol (Y/N)
+    #### Family History of High Blood Cholesterol ----
+    
     fluidRow(
       radioButtons(inputId="fhbc",
                    label="Family History of High Blood Cholesterol", 
@@ -250,7 +265,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CVD  #CVD
+    #### Family History of Cardiovascular Disease (CVD) ----
+    
     fluidRow(
       radioButtons(inputId="fcvd",
                    label="Family History of Cardiovascular Disease", 
@@ -259,7 +275,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #COP  #COPD
+    #### Family History of Chronic Obstructive Pulmonary Disease (COPD) ----
+    
     fluidRow(
       radioButtons(inputId="fcopd",
                    label="Family History of Chronic Obstructive Pulmonary Disease", 
@@ -268,7 +285,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #FDI  #Diabetes
+    #### Family History of Diabetes ----
+    
     fluidRow(
       radioButtons(inputId="fdia",
                    label="Family History of Diabetes", 
@@ -277,7 +295,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #FDE  #Depression
+    #### Family History of Depression ----
+    
     fluidRow(
       radioButtons(inputId="fdep",
                    label="Family History of Depression", 
@@ -286,7 +305,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CAN  #Cancer
+    #### Family History of Cancer ----
+    
     fluidRow(
       radioButtons(inputId="fcan",
                    label="Family History of Cancer", 
@@ -295,7 +315,8 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #ALZ  #Alzheimer
+    #### Family History of Alzheimer ----
+    
     fluidRow(
       radioButtons(inputId="falz",
                    label="Family History of Alzheimer", 
@@ -304,12 +325,12 @@ ui<-fluidPage(
                    selected=character(0))
     ),
     
-    #CONCOMITAN MEDICATIONS-----------------------------------------------------
+    ### CONCOMITAN MEDICATIONS ----------------------------------------------------
     
     fluidRow(
       tags$h4("CONCOMITANT MEDICATIONS")),
     
-    #CMI  #Immunosuppression
+    #### Immunosuppression ---
     
     fluidRow(
       radioButtons(inputId="cmi",
@@ -321,12 +342,11 @@ ui<-fluidPage(
     
   ),
   
-################################################################################
-# The following section is to indicate what to display on the mainPanel
-################################################################################
-
+  ## Main Panel -------------------------------------------------------------------
+  # The following section is to indicate what to display on the mainPanel
+  
   mainPanel(
-
+    
     tags$div(tags$h5("Based on the information you provided, you have, statistically speaking...")),
     
     tags$div(
@@ -396,10 +416,9 @@ ui<-fluidPage(
       br(),
       
     ),
-
-################################################################################
-# Here are parameters related to the bubble-plot's window fitting
-################################################################################
+    
+    ## Plot Window Fitting ----
+    # Here are parameters related to the bubble-plot's window fitting
     
     plotlyOutput("bubble", height="auto", width="auto"),
     
@@ -407,86 +426,90 @@ ui<-fluidPage(
   
 )
 
-#///////////////////////////////////////////////////////////////////////////////
+# DATAFRAME --------------------------------------------------------------------
 # The following section is to build the dataframe that the plot is based on
-#///////////////////////////////////////////////////////////////////////////////
 
-# Provide the list of leading causes of death here:
-cod <- data.frame(cause =  c("Cardiovascular Diseases",
-                               "Coronary Heart Diseases",
-                               "Stroke",
-                               "Cancer",
-                               "COVID-19",
-                               "Alzheimer’s Disease",
-                               "Chronic Lower Respiratory Diseases",
-                               "Diabetes",
-                               "Drug Overdose",
-                               "Motor Vehicle Accident",
-                               "Fall",
-                               "Influenza and Pneumonia",
-                               "Kidney Diseases",
-                               "Suicide",
-                               "Liver Diseases",
-                               "Septicemia"),
-                    
-# Enter the average age of death from each conditions here:                 
-                    age =  c(67.3,  #Cardiovascular Diseases
-                             76.0,  #Coronary Heart Diseases
-                             70.5,  #Stroke
-                             65.0,  #Cancer
-                             79.0,  #COVID-19
-                             78.0,  #Alzheimer’s Disease
-                             62.0,  #Chronic Lower Respiratory Diseases
-                             74.6,  #Diabetes
-                             40.0,  #Drug Overdose
-                             40.0,  #Motor Vehicle Accident
-                             70.0,  #Fall
-                             70.0,  #Influenza and Pneumonia
-                             73.0,  #Kidney Diseases
-                             30.0,  #Suicide
-                             52.0,  #Liver Diseases
-                             65.0), #Septicemia
-                    
-# Enter the baseline risk of dying from each condition (n/100,000) here:                  
-                    risk =  c(224.4, #Cardiovascular Diseases
-                              91.8, #Coronary Heart Diseases
-                              38.8,  #Stroke
-                              148.1, #Cancer
-                              85.0, #COVID-19
-                              32.4,  #Alzheimer’s Disease
-                              36.4,  #Chronic Lower Respiratory Diseases
-                              24.8,  #Diabetes
-                              25.8,  #Drug Overdose
-                              13.1,  #Motor Vehicle Accident
-                              10.3,  #Fall
-                              13.0,  #Influenza and Pneumonia
-                              12.7,  #Kidney Diseases
-                              13.5,  #Suicide
-                              13.3,  #Liver Diseases
-                              9.7), #Septicemia
-                    
-# Enter the population (n/100,000) dying form each condition per year here:                
-                    pop =  c(813804, #Cardiovascular Diseases
-                             406351, #Coronary Heart Diseases
-                             160264, #Stroke
-                             608570, #Cancer
-                             350831, #COVID-19
-                             132242, #Alzheimer’s Disease
-                             152657, #Chronic Lower Respiratory Diseases
-                             102188, #Diabetes
-                             91800,  #Drug Overdose
-                             42915,  #Motor Vehicle Accident
-                             40114,  #Fall
-                             53544,  #Influenza and Pneumonia
-                             52547,  #Kidney Diseases
-                             45940,  #Suicide
-                             51642,  #Liver Diseases
-                             40050) #Septicemia
+cod <- data.frame(
+  
+  ## CAUSES of Death ----
+  # Provide the list of leading causes of death here:
+  cause = c("Cardiovascular Diseases",
+            "Coronary Heart Diseases",
+            "Stroke",
+            "Cancer",
+            "COVID-19",
+            "Alzheimer’s Disease",
+            "Chronic Lower Respiratory Diseases",
+            "Diabetes",
+            "Drug Overdose",
+            "Motor Vehicle Accident",
+            "Fall",
+            "Influenza and Pneumonia",
+            "Kidney Diseases",
+            "Suicide",
+            "Liver Diseases",
+            "Septicemia"),
+  
+  ## AGE of death ----                  
+  # Enter the average age of death from each cause of death here:                 
+  age = c(67.3,  #Cardiovascular Diseases
+          76.0,  #Coronary Heart Diseases
+          70.5,  #Stroke
+          65.0,  #Cancer
+          79.0,  #COVID-19
+          78.0,  #Alzheimer’s Disease
+          62.0,  #Chronic Lower Respiratory Diseases
+          74.6,  #Diabetes
+          40.0,  #Drug Overdose
+          40.0,  #Motor Vehicle Accident
+          70.0,  #Fall
+          70.0,  #Influenza and Pneumonia
+          73.0,  #Kidney Diseases
+          30.0,  #Suicide
+          52.0,  #Liver Diseases
+          65.0), #Septicemia
+  
+  ## RISK of death ----                
+  # Enter the baseline risk of dying from each cause of death (n/100,000) here:                  
+  risk = c(224.4, #Cardiovascular Diseases
+           91.8, #Coronary Heart Diseases
+           38.8,  #Stroke
+           148.1, #Cancer
+           85.0, #COVID-19
+           32.4,  #Alzheimer’s Disease
+           36.4,  #Chronic Lower Respiratory Diseases
+           24.8,  #Diabetes
+           25.8,  #Drug Overdose
+           13.1,  #Motor Vehicle Accident
+           10.3,  #Fall
+           13.0,  #Influenza and Pneumonia
+           12.7,  #Kidney Diseases
+           13.5,  #Suicide
+           13.3,  #Liver Diseases
+           9.7), #Septicemia
+  
+  ## RATE of Death ----                  
+  # Enter the total population dying form each cause of death per year (Crude Death Rate) here:                
+  pop = c(813804, #Cardiovascular Diseases
+          406351, #Coronary Heart Diseases
+          160264, #Stroke
+          608570, #Cancer
+          350831, #COVID-19
+          132242, #Alzheimer’s Disease
+          152657, #Chronic Lower Respiratory Diseases
+          102188, #Diabetes
+          91800,  #Drug Overdose
+          42915,  #Motor Vehicle Accident
+          40114,  #Fall
+          53544,  #Influenza and Pneumonia
+          52547,  #Kidney Diseases
+          45940,  #Suicide
+          51642,  #Liver Diseases
+          40050) #Septicemia
 )
 
-#///////////////////////////////////////////////////////////////////////////////
+# SERVER -----------------------------------------------------------------------
 # The Section below serve to define the "server" function for the server to create/use the R components for the app.
-#///////////////////////////////////////////////////////////////////////////////
 
 server <- function(input, output){
   
@@ -494,24 +517,23 @@ server <- function(input, output){
   
   cod_react<-reactive({cod %>%
       
-################################################################################
-################################################################################
-# Setting impact of Risk Factors on AGE OF DEATH for different causes of death  
-################################################################################
-################################################################################
+      # AGE of Death -----------------------------------------------------------------
+    # Setting the impact of Risk Factors on the baseline AGE OF DEATH for different causes of death  
     
     mutate(age=c(
       
+      ## Cardiovascular Diseases -----------------------------------------------------
+      
       cod[cod$cause=="Cardiovascular Diseases","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.955}
         else if(input$sex=="Female"){1.045})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -520,9 +542,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -530,7 +552,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -539,144 +561,142 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
+      ### LIFESTYLE ===
       
-      # LIFESTYLE ==============================================================
+      #### Drinks per week---
       
-      #Risk Factor: Drinks: drk
       *(1-(input$drk*0.00157))
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.00109))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity ---
       *(1+(input$mpa*0.000219))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity ---
       *(1+(input$hpa*0.000438))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.942}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.975}
         else if(input$bmi=="Obese (>30)"){0.949})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,                 
       
-      ##########################################################################
-      # Coronary Heart Diseases
-      ##########################################################################
+      ## Coronary Heart Diseases -----------------------------------------------------
+      
       cod[cod$cause=="Coronary Heart Diseases","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.974}
         else if(input$sex=="Female"){1.026})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -685,9 +705,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -695,7 +715,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -704,146 +724,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
+      ### LIFESTYLE ===
       
-      # LIFESTYLE ==============================================================
-      
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.00157))    
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.00109))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000219))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000438))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.942}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.975}
         else if(input$bmi=="Obese (>30)"){0.949})
       
-      # MEDICAL HISTORY ==============================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
+      ### CONCOMITANT MEDICATIONS ===
       
-      # CONCOMITANT MEDICATIONS ================================================
-      
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Stroke
-      ##########################################################################
+      ## Stroke ----------------------------------------------------------------------
+      
       cod[cod$cause=="Stroke","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.965}
         else if(input$sex=="Female"){1.035})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -852,9 +867,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -862,7 +877,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -871,145 +886,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1-(input$drk*0.00157))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000894))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000168))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000336))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.982}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.958}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.907})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.942}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.978}
         else if(input$bmi=="Obese (>30)"){0.931})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Cancer                       
-      ##########################################################################
+      ## Cancer ----------------------------------------------------------------------                       
+      
       cod[cod$cause=="Cancer","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.923}
         else if(input$sex=="Female"){1.077})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -1018,9 +1032,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -1028,7 +1042,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -1037,145 +1051,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1-(input$drk*0.00437))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.00149))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000164))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000328))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.944})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.937}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.978}
         else if(input$bmi=="Obese (>30)"){0.960})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
-
-      ##########################################################################
-      # COVID-19                      
-      ##########################################################################
+      
+      ## COVID-19 --------------------------------------------------------------------                     
+      
       cod[cod$cause=="COVID-19","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.997}
         else if(input$sex=="Female"){1.038})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){1}
@@ -1184,9 +1197,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -1194,7 +1207,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -1203,143 +1216,142 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.00875))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.00242))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000320))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000640))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.926}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.977}
         else if(input$bmi=="Obese (>30)"){0.953})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
-      ,
-
-      ##########################################################################
-      #Alzeihmer's Disease
-      ##########################################################################
-      cod[cod$cause=="Alzheimer’s Disease","age"]
-
-      # DEMOGRAPHICS ===========================================================
       
-      #Risk Factor: Sex: sex
+      ,
+      
+      ## Alzeihmer's Disease ---------------------------------------------------------
+      
+      cod[cod$cause=="Alzheimer’s Disease","age"]
+      
+      ### DEMOGRAPHICS ===
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.974}
         else if(input$sex=="Female"){1.026})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -1348,9 +1360,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -1358,7 +1370,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -1367,144 +1379,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1-(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000602))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000105))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000210))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Chronic Lower Respiratory Diseases
-      ##########################################################################
+      
+      ## Chronic Lower Respiratory Diseases ------------------------------------------
+      
       cod[cod$cause=="Chronic Lower Respiratory Diseases","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -1513,9 +1525,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -1523,7 +1535,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -1532,144 +1544,143 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1-(input$drk*0.00109))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.00109))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000223))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000446))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.931}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.014}
         else if(input$bmi=="Obese (>30)"){1.020})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Diabetes
-      ##########################################################################
+      ## Diabetes --------------------------------------------------------------------
+      
       cod[cod$cause=="Diabetes","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -1678,9 +1689,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -1688,7 +1699,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -1697,142 +1708,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000613))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000261))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000522))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.983}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.961}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.923})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.926}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Drug Overdose
-      ##########################################################################
+      ## Drug Overdose ---------------------------------------------------------------
+      
       cod[cod$cause=="Drug Overdose","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.950}
         else if(input$sex=="Female"){1.025})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -1841,9 +1851,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -1851,7 +1861,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -1860,142 +1870,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.00175))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000530))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000211))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000422))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.979}
         else if(input$bmi=="Obese (>30)"){0.949})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Motor Vehicle Accident
-      ##########################################################################
+      ## Motor Vehicle Accident ------------------------------------------------------
+      
       cod[cod$cause=="Motor Vehicle Accident","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -2004,9 +2013,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -2014,7 +2023,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -2023,142 +2032,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.01137))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000609))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Fall
-      ##########################################################################
+      ## Fall ------------------------------------------------------------------------
+      
       cod[cod$cause=="Fall","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -2167,9 +2175,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -2177,7 +2185,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -2186,142 +2194,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.00122))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000677))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000177))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000354))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.979}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.951}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.894})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.912}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.980}
         else if(input$bmi=="Obese (>30)"){0.967})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-    
+      
       ,
       
-      ##########################################################################
-      # Influenza and Pneumonia
-      ##########################################################################
-      cod[cod$cause=="Influenza and Pneumonia","age"]
-
-      # DEMOGRAPHICS ===========================================================
+      ## Influenza and Pneumonia -----------------------------------------------------
       
-      #Risk Factor: Sex: sex
+      cod[cod$cause=="Influenza and Pneumonia","age"]
+      
+      ### DEMOGRAPHICS ===
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){1}
@@ -2330,9 +2337,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -2340,7 +2347,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -2349,142 +2356,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.00875))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.00162))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000109))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000218))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.902}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.974}
         else if(input$bmi=="Obese (>30)"){0.949})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
-
-      ##########################################################################
-      # Kidney Diseases
-      ##########################################################################
+      
+      ## Kidney Diseases -------------------------------------------------------------
+      
       cod[cod$cause=="Kidney Diseases","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -2493,9 +2499,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -2503,7 +2509,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -2512,142 +2518,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000435))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.0000842))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000168))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.936}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.977}
         else if(input$bmi=="Obese (>30)"){0.951})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Suicide
-      ##########################################################################
+      ## Suicide ---------------------------------------------------------------------
+      
       cod[cod$cause=="Suicide","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -2656,9 +2661,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -2666,7 +2671,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -2675,143 +2680,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.0175))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000724))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000303))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000606))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Liver Diseases
-      ##########################################################################
+      ## Liver Diseases --------------------------------------------------------------
+      
       cod[cod$cause=="Liver Diseases","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -2820,9 +2823,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -2830,7 +2833,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -2839,142 +2842,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.0175))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000538))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000253))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000506))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.978}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.948}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.886})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.980}
         else if(input$bmi=="Obese (>30)"){0.957})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Septicemia
-      ##########################################################################
+      ## Septicemia ------------------------------------------------------------------
+      
       cod[cod$cause=="Septicemia","age"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1}
         else if(input$sex=="Female"){1})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1}
         else if(input$race=="African (Black)"){0.93}
@@ -2983,9 +2985,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){0.975}
         else if(input$inc=="Lower-middle"){1}
@@ -2993,7 +2995,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){0.964}
         else if(input$edu=="Primary Education (Elementary School)"){0.982}
@@ -3002,159 +3004,154 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1-(input$drk*0.00131))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1-(input$smk*0.000922))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1+(input$mpa*0.000223))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000446))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.978}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.948}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.886})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){0.923}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
     )
     
-    #///////////////////////////////////////////////////////////////////////////
+    #///////////////////////////////////////////////////////////////////////////////
     # This piece of code is used so that all conditions Age of Death are anchored by the Current Age input
     # This is important for how plot reacts to the input Current Age
-    #///////////////////////////////////////////////////////////////////////////
+    #///////////////////////////////////////////////////////////////////////////////
     ,age = (ifelse(age-5<=input$cage,input$cage+5,age))
     
     ) %>%
       
-################################################################################
-################################################################################
-# Setting impact of Risk Factors on RISK OF DEATH from different causes of death  
-################################################################################
-################################################################################
+      # RISK of Death ----------------------------------------------------------------
+    # Setting the impact of Risk Factors on the baseline RISK OF DEATH from different causes of death  
     
     mutate(risk=c( 
       
-      ##########################################################################
-      # Cardiovascular Diseases
-      ##########################################################################
+      ## Cardiovascular Diseases -----------------------------------------------------
       
       cod[cod$cause=="Cardiovascular Diseases","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.219}
         else if(input$sex=="Female"){0.816})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.980}
         else if(input$race=="African (Black)"){1.389}
@@ -3163,9 +3160,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.672}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.42}
         else if(input$inc=="Lower-middle"){1}
@@ -3173,7 +3170,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.42}
         else if(input$edu=="Primary Education (Elementary School)"){1.42}
@@ -3182,145 +3179,143 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.04))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0175))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0016))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.06}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){2.57}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){4.98}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2.00}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
- 
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Coronary Heart Diseases
-      ##########################################################################
+      ## Coronary Heart Diseases -----------------------------------------------------
       
       cod[cod$cause=="Coronary Heart Diseases","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.375}
         else if(input$sex=="Female"){0.698})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.001}
         else if(input$race=="African (Black)"){1.233}
@@ -3329,9 +3324,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.941}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.42}
         else if(input$inc=="Lower-middle"){1}
@@ -3339,7 +3334,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.42}
         else if(input$edu=="Primary Education (Elementary School)"){1.42}
@@ -3348,148 +3343,146 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
       
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1+(input$drk*0.04))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0175))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0016))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.06}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){2.57}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){4.98}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Stroke
-      ##########################################################################
+      ## Stroke ----------------------------------------------------------------------
       
       cod[cod$cause=="Stroke","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.026}
         else if(input$sex=="Female"){0.964})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.964}
         else if(input$race=="African (Black)"){1.441}
@@ -3498,9 +3491,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.670}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.42}
         else if(input$inc=="Lower-middle"){1}
@@ -3508,7 +3501,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.42}
         else if(input$edu=="Primary Education (Elementary School)"){1.42}
@@ -3517,143 +3510,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.04))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0126))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00133))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.3}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.7}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.21})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.08}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){2.44}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){3.34}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.83}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Cancer
-      ##########################################################################
+      ## Cancer ----------------------------------------------------------------------
       
       cod[cod$cause=="Cancer","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.184}
         else if(input$sex=="Female"){0.863})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.016}
         else if(input$race=="African (Black)"){1.134}
@@ -3662,9 +3653,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.636}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.58}
         else if(input$inc=="Lower-middle"){1}
@@ -3672,7 +3663,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.58}
         else if(input$edu=="Primary Education (Elementary School)"){1.58}
@@ -3681,146 +3672,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.2))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.06523))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0006))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0012))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.21}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.33})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.29}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.285}
         else if(input$bmi=="Obese (>30)"){1.57})
       
-      # MEDICAL HISTORY =========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){4.38}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){2.5}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # COVID-19
-      ##########################################################################
+      ## COVID-19 --------------------------------------------------------------------
       
       cod[cod$cause=="COVID-19","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.267}
         else if(input$sex=="Female"){0.784})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.934}
         else if(input$race=="African (Black)"){1.645}
@@ -3829,9 +3818,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.518}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.38}
         else if(input$inc=="Lower-middle"){1}
@@ -3839,7 +3828,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.58}
         else if(input$edu=="Primary Education (Elementary School)"){1.58}
@@ -3848,146 +3837,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.045))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0511))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00253))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00507))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.85})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.77}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Alzheimer’s Disease
-      ##########################################################################
+      ## Alzheimer’s Disease ---------------------------------------------------------
       
       cod[cod$cause=="Alzheimer’s Disease","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.781}
         else if(input$sex=="Female"){1.142})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.043}
         else if(input$race=="African (Black)"){0.951}
@@ -3996,9 +3983,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.485}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -4006,7 +3993,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -4014,147 +4001,145 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
-
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1+(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0052))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.000833))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00166))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1.7}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Chronic Lower Respiratory Diseases
-      ##########################################################################
+      ## Chronic Lower Respiratory Diseases ------------------------------------------
       
       cod[cod$cause=="Chronic Lower Respiratory Diseases","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.104}
         else if(input$sex=="Female"){0.923})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.069}
         else if(input$race=="African (Black)"){0.816}
@@ -4163,9 +4148,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.657}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -4173,7 +4158,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -4182,146 +4167,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.0125))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.115))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00156))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.4})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.4}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.8}
         else if(input$bmi=="Obese (>30)"){0.77})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){3.42}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.59}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1.57}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Diabetes
-      ##########################################################################
+      ## Diabetes --------------------------------------------------------------------
       
       cod[cod$cause=="Diabetes","risk"]
-
-      # DEMOGRAPHICS ===========================================================
+      
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.258}
         else if(input$sex=="Female"){0.786})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.903}
         else if(input$race=="African (Black)"){1.859}
@@ -4330,9 +4313,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.512}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.7}
@@ -4340,7 +4323,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2.4}
         else if(input$edu=="Primary Education (Elementary School)"){1.6}
@@ -4349,146 +4332,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0055))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00126))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00253))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.24}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.58}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.82})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){3.0}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){2.04}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.77}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){5}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Drug Overdose
-      ##########################################################################
+      ## Drug Overdose ---------------------------------------------------------------
       
       cod[cod$cause=="Drug Overdose","risk"]
-
-      # DEMOGRAPHICS ===========================================================
+      
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.426}
         else if(input$sex=="Female"){0.578})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.058}
         else if(input$race=="African (Black)"){1.236}
@@ -4497,9 +4478,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.946}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.6}
         else if(input$inc=="Lower-middle"){1.375}
@@ -4507,7 +4488,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.925}
         else if(input$inc=="Rich"){0.7})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -4516,145 +4497,143 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.9}
         else if(input$edu=="Doctoral degree"){0.8})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.05))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.00342))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00166))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00333))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.24}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-    
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       ,
       
-      ##########################################################################
-      # Motor Vehicle Accident
-      ##########################################################################
+      ## Motor Vehicle Accident ------------------------------------------------------
       
       cod[cod$cause=="Motor Vehicle Accident","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.481}
         else if(input$sex=="Female"){0.534})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.992}
         else if(input$race=="African (Black)"){1.397}
@@ -4663,9 +4642,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.344}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.5}
@@ -4673,7 +4652,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2.5}
         else if(input$edu=="Primary Education (Elementary School)"){2.0}
@@ -4682,146 +4661,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.6))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0054))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1.5}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Fall
-      ##########################################################################
+      ## Fall ------------------------------------------------------------------------
       
       cod[cod$cause=="Fall","risk"]
-
-      # DEMOGRAPHICS ===========================================================
+      
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.214}
         else if(input$sex=="Female"){0.816})
-    
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.087}
         else if(input$race=="African (Black)"){0.495}
@@ -4830,9 +4807,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.796}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.5}
@@ -4840,7 +4817,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2}
         else if(input$edu=="Primary Education (Elementary School)"){2}
@@ -4848,144 +4825,142 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
-
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1+(input$drk*0.02))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0071))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0014))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0028))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.5}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.0}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.5})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.8}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.15}
         else if(input$bmi=="Obese (>30)"){1.31})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Influenza and Pneumonia
-      ##########################################################################
+      ## Influenza and Pneumonia -----------------------------------------------------
       
       cod[cod$cause=="Influenza and Pneumonia","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.215}
         else if(input$sex=="Female"){0.846})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.985}
         else if(input$race=="African (Black)"){1.292}
@@ -4994,9 +4969,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.077}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.4}
         else if(input$inc=="Lower-middle"){1.2}
@@ -5004,7 +4979,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.8}
         else if(input$inc=="Rich"){0.6})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.6}
         else if(input$edu=="Primary Education (Elementary School)"){1.4}
@@ -5013,142 +4988,140 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.45))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0311))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.000866))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00493))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.77}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){2.15}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       ,
       
-      ##########################################################################
-      # Kidney Diseases
-      ##########################################################################
+      ## Kidney Diseases -------------------------------------------------------------
       
       cod[cod$cause=="Kidney Diseases","risk"]
       
-      # DEMOGRAPHICS ===========================================================
-
-      #Risk Factor: Sex: sex
+      ### DEMOGRAPHICS ===
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.213}
         else if(input$sex=="Female"){0.843})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.898}
         else if(input$race=="African (Black)"){2.024}
@@ -5157,9 +5130,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.882}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -5167,7 +5140,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -5176,146 +5149,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.001))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.000666))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00133))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.3}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.94})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1.64}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.22}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1.75}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.29}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Suicide
-      ##########################################################################
+      ## Suicide ---------------------------------------------------------------------
       
       cod[cod$cause=="Suicide","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.630}
         else if(input$sex=="Female"){0.407})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.126}
         else if(input$race=="African (Black)"){0.556}
@@ -5324,9 +5295,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.244}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -5334,7 +5305,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -5343,143 +5314,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*1.0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0083))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0024))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0048))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.5}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.85}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){2.58}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Liver Diseases
-      ##########################################################################
+      ## Liver Diseases --------------------------------------------------------------
       
       cod[cod$cause=="Liver Diseases","risk"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.316}
         else if(input$sex=="Female"){0.707})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.083}
         else if(input$race=="African (Black)"){0.662}
@@ -5488,9 +5457,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){2.850}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -5498,7 +5467,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -5507,146 +5476,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*1.0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0036))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00133))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.56}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.13}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.69})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.16}
         else if(input$bmi=="Obese (>30)"){1.69})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){4.7}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Septicemia
-      ##########################################################################
+      ## Septicemia ------------------------------------------------------------------
       
       cod[cod$cause=="Septicemia","risk"]
-
-      # DEMOGRAPHICS ===========================================================
+      
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.113}
         else if(input$sex=="Female"){0.918})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.959}
         else if(input$race=="African (Black)"){1.680}
@@ -5655,9 +5622,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.948}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.5}
@@ -5665,7 +5632,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2}
         else if(input$edu=="Primary Education (Elementary School)"){2}
@@ -5674,123 +5641,123 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.025))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0133))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00156))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.56}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1.4}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.4}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2.2}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1.3}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.5}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1.5}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
@@ -5799,31 +5766,24 @@ server <- function(input, output){
     
     ) %>%
       
-################################################################################
-################################################################################
-# Setting impact of Risk Factors on POPULATION associated with different cods   
-################################################################################
-################################################################################   
-
+      # RATE of Death ----------------------------------------------------------------
+    # Setting the impact of Risk Factors on the baseline population dying form each 
+    # cause of death per year (Crude Death Rate)
+    
     mutate(pop=c( 
       
-      ##########################################################################
-      # Cardiovascular Diseases
-      ##########################################################################
+      ## Cardiovascular Diseases -----------------------------------------------------
       
       cod[cod$cause=="Cardiovascular Diseases","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.219}
         else if(input$sex=="Female"){0.816})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.980}
         else if(input$race=="African (Black)"){1.389}
@@ -5832,9 +5792,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.672}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.42}
         else if(input$inc=="Lower-middle"){1}
@@ -5842,7 +5802,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.42}
         else if(input$edu=="Primary Education (Elementary School)"){1.42}
@@ -5851,145 +5811,143 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      #SS1  #Marital/Significant Relationship Status (x) (TBD)
+      ### LIFESTYLE ===
       
-      # LIFESTYLE ==============================================================
-      
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.04))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0175))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0016))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.06}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
+        else if(input$cvd=="Yes"){2.57}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){4.98}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2.00}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Coronary Heart Diseases
-      ##########################################################################
-
-      cod[cod$cause=="Coronary Heart Diseases","pop"]
-
-      # DEMOGRAPHICS ===========================================================
+      ## Coronary Heart Diseases -----------------------------------------------------
       
-      #Risk Factor: Sex: sex
+      cod[cod$cause=="Coronary Heart Diseases","pop"]
+      
+      ### DEMOGRAPHICS ===
+      
+      #Risk Factor: Current Age: cage
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.375}
         else if(input$sex=="Female"){0.698})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.001}
         else if(input$race=="African (Black)"){1.233}
@@ -5998,9 +5956,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.941}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.42}
         else if(input$inc=="Lower-middle"){1}
@@ -6008,7 +5966,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.42}
         else if(input$edu=="Primary Education (Elementary School)"){1.42}
@@ -6017,143 +5975,146 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1+(input$drk*0.04))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0175))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0016))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.26}
         else if(input$bmi=="Obese (>30)"){1.76})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.06}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
+        else if(input$cvd=="Yes"){2.57}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){4.98}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.02}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
       ,
       
-      ##########################################################################
-      # Stroke
-      ##########################################################################
-
-      cod[cod$cause=="Stroke","pop"]
-
-      # DEMOGRAPHICS ===========================================================
+      ## Stroke ----------------------------------------------------------------------
       
-      #Risk Factor: Sex: sex
+      cod[cod$cause=="Stroke","pop"]
+      
+      ### DEMOGRAPHICS ===
+      
+      #Risk Factor: Current Age: cage
+      #+(input$cage/2)  
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.026}
         else if(input$sex=="Female"){0.964})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.964}
         else if(input$race=="African (Black)"){1.441}
@@ -6162,9 +6123,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.670}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.42}
         else if(input$inc=="Lower-middle"){1}
@@ -6172,7 +6133,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.42}
         else if(input$edu=="Primary Education (Elementary School)"){1.42}
@@ -6181,146 +6142,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.04))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0126))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00133))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.3}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.7}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.21})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.18}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.08}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
+        else if(input$cvd=="Yes"){2.44}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){3.34}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.83}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Cancer
-      ##########################################################################
+      ## Cancer ----------------------------------------------------------------------
       
       cod[cod$cause=="Cancer","pop"]
-
-      # DEMOGRAPHICS ===========================================================
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.184}
         else if(input$sex=="Female"){0.863})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.016}
         else if(input$race=="African (Black)"){1.134}
@@ -6329,9 +6285,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.636}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.58}
         else if(input$inc=="Lower-middle"){1}
@@ -6339,7 +6295,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.58}
         else if(input$edu=="Primary Education (Elementary School)"){1.58}
@@ -6347,147 +6303,145 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
-
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1+(input$drk*0.2))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.06523))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
-      *(1-(input$mpa*0.000333))
+      #### Moderate intensity physical activity per week ---
+      *(1-(input$mpa*0.0006))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
-      *(1-(input$hpa*0.000666))
+      #### High intensity physical activity per week ---
+      *(1-(input$hpa*0.0012))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.21}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.33})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.29}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.285}
         else if(input$bmi=="Obese (>30)"){1.57})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){4.38}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){2.5}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # COVID-19
-      ##########################################################################
+      ## COVID-19 --------------------------------------------------------------------
       
       cod[cod$cause=="COVID-19","pop"]
-
-      # DEMOGRAPHICS ===========================================================
+      
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.267}
         else if(input$sex=="Female"){0.784})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.934}
         else if(input$race=="African (Black)"){1.645}
@@ -6496,9 +6450,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.518}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.38}
         else if(input$inc=="Lower-middle"){1}
@@ -6506,7 +6460,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.58}
         else if(input$edu=="Primary Education (Elementary School)"){1.58}
@@ -6515,146 +6469,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.045))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0511))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00253))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00507))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.85})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.77}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
-
-      ##########################################################################
-      # Alzheimer’s Disease
-      ##########################################################################
+      
+      ## Alzheimer’s Disease ---------------------------------------------------------
       
       cod[cod$cause=="Alzheimer’s Disease","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){0.781}
         else if(input$sex=="Female"){1.142})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.043}
         else if(input$race=="African (Black)"){0.951}
@@ -6663,9 +6615,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.485}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -6673,7 +6625,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -6682,146 +6634,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0052))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.000833))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00166))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1.7}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Chronic Lower Respiratory Diseases
-      ##########################################################################
+      ## Chronic Lower Respiratory Diseases ------------------------------------------
       
       cod[cod$cause=="Chronic Lower Respiratory Diseases","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.104}
         else if(input$sex=="Female"){0.923})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.069}
         else if(input$race=="African (Black)"){0.816}
@@ -6830,9 +6780,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.657}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -6840,7 +6790,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -6849,145 +6799,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.0125))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.115))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00156))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.4})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.4}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){0.8}
         else if(input$bmi=="Obese (>30)"){0.77})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){3.42}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.59}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1.57}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
+      
       ,
       
-      ##########################################################################
-      # Diabetes
-      ##########################################################################
+      ## Diabetes --------------------------------------------------------------------
       
       cod[cod$cause=="Diabetes","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.258}
         else if(input$sex=="Female"){0.786})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.903}
         else if(input$race=="African (Black)"){1.859}
@@ -6996,9 +6945,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.512}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.7}
@@ -7006,7 +6955,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2.4}
         else if(input$edu=="Primary Education (Elementary School)"){1.6}
@@ -7015,146 +6964,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0055))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00126))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00253))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.24}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.58}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.82})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.5}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){3.0}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){2.04}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.77}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){5}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Drug Overdose
-      ##########################################################################
+      ## Drug Overdose ---------------------------------------------------------------
       
       cod[cod$cause=="Drug Overdose","pop"]
-
-      # DEMOGRAPHICS ===========================================================
+      
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.426}
         else if(input$sex=="Female"){0.578})
       
-      #Risk Factor: Race: race
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.058}
         else if(input$race=="African (Black)"){1.236}
@@ -7163,9 +7110,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.946}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.6}
         else if(input$inc=="Lower-middle"){1.375}
@@ -7173,7 +7120,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.925}
         else if(input$inc=="Rich"){0.7})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -7182,145 +7129,143 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.9}
         else if(input$edu=="Doctoral degree"){0.8})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Drinks per week---
+      *(1+(input$drk*0.05))      
+      
+      #### Smokes per week ---
+      *(1+(input$smk*0.00342))
+      
+      #### Moderate intensity physical activity per week ---
+      *(1-(input$mpa*0.00166))
+      
+      #### High intensity physical activity per week ---
+      *(1-(input$hpa*0.00333))
+      
+      ### VITALS ===
+      
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.24}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # VITALS =================================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
-      -(if(is.null(input$sys)){0}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){3}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){5}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){10})
-
-      #Risk Factor: Body Mass Index: bmi
-      +(if(is.null(input$bmi)){0}
-        else if(input$bmi=="Underweight (<18.5)"){5}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){0}
-        else if(input$bmi=="Overweight (25-29.9)"){10}
-        else if(input$bmi=="Obese (>30)"){30})
-      
-      # MEDICAL HISTORY ========================================================
-      
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
       ,
       
-      ##########################################################################
-      # Motor Vehicle Accident
-      ##########################################################################
+      ## Motor Vehicle Accident ------------------------------------------------------
       
       cod[cod$cause=="Motor Vehicle Accident","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #Risk Factor: Current Age: cage
+      #+(input$cage/2)  
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.481}
         else if(input$sex=="Female"){0.534})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.992}
         else if(input$race=="African (Black)"){1.397}
@@ -7329,9 +7274,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.344}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.5}
@@ -7339,7 +7284,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2.5}
         else if(input$edu=="Primary Education (Elementary School)"){2.0}
@@ -7348,146 +7293,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.6))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0054))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1.5}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Fall
-      ##########################################################################
+      ## Fall ------------------------------------------------------------------------
       
       cod[cod$cause=="Fall","pop"]
-
-      # DEMOGRAPHICS ===========================================================
+      
+      ### DEMOGRAPHICS ===
       
       #Risk Factor: Current Age: cage
       #+(input$cage/2)  
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.214}
         else if(input$sex=="Female"){0.816})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.087}
         else if(input$race=="African (Black)"){0.495}
@@ -7496,9 +7439,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.796}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.5}
@@ -7506,7 +7449,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2}
         else if(input$edu=="Primary Education (Elementary School)"){2}
@@ -7515,143 +7458,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.02))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0071))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0014))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0028))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.5}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.0}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.5})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.8}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.15}
         else if(input$bmi=="Obese (>30)"){1.31})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.66}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Influenza and Pneumonia
-      ##########################################################################
+      ## Influenza and Pneumonia -----------------------------------------------------
       
       cod[cod$cause=="Influenza and Pneumonia","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.215}
         else if(input$sex=="Female"){0.846})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.985}
         else if(input$race=="African (Black)"){1.292}
@@ -7660,9 +7601,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.077}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.4}
         else if(input$inc=="Lower-middle"){1.2}
@@ -7670,7 +7611,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.8}
         else if(input$inc=="Rich"){0.6})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.6}
         else if(input$edu=="Primary Education (Elementary School)"){1.4}
@@ -7679,146 +7620,140 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.6})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.45))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0311))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.000866))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00493))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){2}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.5}
         else if(input$bmi=="Obese (>30)"){2})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.77}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.55}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){2.15}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      # CONCOMITANT MEDICATIONS ================================================
+      ### CONCOMITANT MEDICATIONS ===
       
-      #Risk Factor: Immunosuppressants: cmi
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
       ,
       
-      ##########################################################################
-      # Kidney Diseases
-      ##########################################################################
+      ## Kidney Diseases -------------------------------------------------------------
       
       cod[cod$cause=="Kidney Diseases","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
-      #Risk Factor: Sex: sex
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.213}
         else if(input$sex=="Female"){0.843})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.898}
         else if(input$race=="African (Black)"){2.024}
@@ -7827,9 +7762,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.882}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -7837,7 +7772,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -7845,145 +7780,145 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
-
-      # LIFESTYLE ==============================================================
       
-      #Risk Factor: Drinks: drk
+      ### LIFESTYLE ===
+      
+      #### Drinks per week---
       *(1+(input$drk*0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.001))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.000666))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00133))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.3}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.34}
         else if(input$bmi=="Obese (>30)"){1.94})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
+        else if(input$cvd=="Yes"){1.64}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.22}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1.75}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.29}
         else if(input$can=="No"){1})
       
-      
-      #Risk Factor: Medical History - Alzheimer: alz
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-
+      
       ,
       
-      ##########################################################################
-      # Suicide
-      ##########################################################################
+      ## Suicide ---------------------------------------------------------------------
       
       cod[cod$cause=="Suicide","pop"]
       
-      # DEMOGRAPHICS ===========================================================
+      ### DEMOGRAPHICS ===
       
-      #Risk Factor: Sex: sex
+      #Risk Factor: Current Age: cage
+      #+(input$cage/2)  
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.630}
         else if(input$sex=="Female"){0.407})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.126}
         else if(input$race=="African (Black)"){0.556}
@@ -7992,9 +7927,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){1.244}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -8002,7 +7937,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -8011,143 +7946,141 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*1.0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0083))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.0024))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0048))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.5}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){2.85}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
-
-      # FAMILY HISTORY =========================================================
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      ### FAMILY HISTORY ===
+      
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){2.58}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
-  
+      
       ,
       
-      ##########################################################################
-      # Liver Diseases
-      ##########################################################################
+      ## Liver Diseases --------------------------------------------------------------
       
       cod[cod$cause=="Liver Diseases","pop"]
-
-      # DEMOGRAPHICS ===========================================================
       
-      #Risk Factor: Sex: sex
+      ### DEMOGRAPHICS ===
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.316}
         else if(input$sex=="Female"){0.707})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){1.083}
         else if(input$race=="African (Black)"){0.662}
@@ -8156,9 +8089,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){2.850}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){1.2}
         else if(input$inc=="Lower-middle"){1.1}
@@ -8166,7 +8099,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){0.9}
         else if(input$inc=="Rich"){0.8})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){1.2}
         else if(input$edu=="Primary Education (Elementary School)"){1.1}
@@ -8175,142 +8108,144 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.8}
         else if(input$edu=="Doctoral degree"){0.7})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*1.0))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0036))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00133))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.56}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.13}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.69})
-
-      #Risk Factor: Body Mass Index: bmi
+      
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1.16}
         else if(input$bmi=="Obese (>30)"){1.69})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1.1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){1}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){4.7}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
+      
       ,
       
-      ##########################################################################
-      # Septicemia
-      ##########################################################################
+      ## Septicemia ------------------------------------------------------------------
       
       cod[cod$cause=="Septicemia","pop"]
-  
-      # DEMOGRAPHICS ===========================================================
       
-      #Risk Factor: Sex: sex
+      ### DEMOGRAPHICS ===
+      
+      #Risk Factor: Current Age: cage
+      #+(input$cage/2)  
+      
+      #### Sex ---
       *(if(is.null(input$sex)){1}
         else if(input$sex=="Male"){1.113}
         else if(input$sex=="Female"){0.918})
-
-      #Risk Factor: Race: race
+      
+      #### Race ---
       *(if(is.null(input$race)){1}
         else if(input$race=="Caucasian (White)"){0.959}
         else if(input$race=="African (Black)"){1.680}
@@ -8319,9 +8254,9 @@ server <- function(input, output){
         else if(input$race=="Native American"){0.948}
         else if(input$race=="Other"){1})
       
-      # SOCIAL STATUS ==========================================================
+      ### SOCIAL STATUS ===
       
-      #Risk Factor: Income Group: inc
+      #### Income Group ---
       *(if(is.null(input$inc)){1}
         else if(input$inc=="Poor"){2}
         else if(input$inc=="Lower-middle"){1.5}
@@ -8329,7 +8264,7 @@ server <- function(input, output){
         else if(input$inc=="Upper-middle"){1}
         else if(input$inc=="Rich"){1})
       
-      #Risk Factor: #Education (highest achieved degree): edu
+      #### Education ---
       *(if(is.null(input$edu)){1}
         else if(input$edu=="No Formal Schooling"){2}
         else if(input$edu=="Primary Education (Elementary School)"){2}
@@ -8338,147 +8273,150 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){0.5}
         else if(input$edu=="Doctoral degree"){0.5})
       
-      # LIFESTYLE ==============================================================
+      ### LIFESTYLE ===
       
-      #Risk Factor: Drinks: drk
+      #### Drinks per week---
       *(1+(input$drk*0.025))      
       
-      #Risk Factor: Smokes: smk
+      #### Smokes per week ---
       *(1+(input$smk*0.0133))
       
-      #Risk Factor: Number of moderate intensity physical activity per week: mpa----> remind users that + does not cancel - lifestyle choices
+      #### Moderate intensity physical activity per week ---
       *(1-(input$mpa*0.00156))
       
-      #Risk Factor: Number of high intensity physical activity per week: hpa
+      #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
       
-      # VITALS =================================================================
+      ### VITALS ===
       
-      #Risk Factor: Systolic Blood Pressure: sys
+      #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
         else if(input$sys=="Normal (SBP <120 mmHG)"){1}
         else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
         else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
       
-      #Risk Factor: Body Mass Index: bmi
+      #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
         else if(input$bmi=="Underweight (<18.5)"){1.56}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
       
-      # MEDICAL HISTORY ========================================================
+      ### MEDICAL HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: hbp
+      #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
         else if(input$hbp=="Yes"){1}
         else if(input$hbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: hbc
+      #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
         else if(input$hbc=="Yes"){1}
         else if(input$hbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: cvd
+      #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
         else if(input$cvd=="Yes"){1.4}
         else if(input$cvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: copd
+      #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
         else if(input$copd=="Yes"){1.4}
         else if(input$copd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: dia
+      #### Diabetes ---
       *(if(is.null(input$dia)){1}
         else if(input$dia=="Yes"){2.2}
         else if(input$dia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: dep
+      #### Depression ---
       *(if(is.null(input$dep)){1}
         else if(input$dep=="Yes"){1.3}
         else if(input$dep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: can
+      #### Cancer ---
       *(if(is.null(input$can)){1}
         else if(input$can=="Yes"){1.5}
         else if(input$can=="No"){1})
-
-      #Risk Factor: Medical History - Alzheimer: alz
+      
+      #### Alzheimer ---
       *(if(is.null(input$alz)){1}
         else if(input$alz=="Yes"){1.5}
         else if(input$alz=="No"){1})
       
-      # FAMILY HISTORY =========================================================
+      ### FAMILY HISTORY ===
       
-      #Risk Factor: Medical History - High Blood Pressure: fhbp
+      #### Family History of High Blood Pressure ---
       *(if(is.null(input$fhbp)){1}
         else if(input$fhbp=="Yes"){1}
         else if(input$fhbp=="No"){1})
       
-      #Risk Factor: Medical History - High Blood Cholesterol: fhbc
+      #### Family History of High Blood Cholesterol ---
       *(if(is.null(input$fhbc)){1}
         else if(input$fhbc=="Yes"){1}
         else if(input$fhbc=="No"){1})
       
-      #Risk Factor: Medical History - Cardiovascular Disease: fcvd
+      #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
         else if(input$fcvd=="No"){1})
       
-      #Risk Factor: Medical History - Chronic Obstructive Pulmonary Disease: fcopd
+      #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
         else if(input$fcopd=="Yes"){1}
         else if(input$fcopd=="No"){1})
       
-      #Risk Factor: Medical History - Diabetes: fdia
+      #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
         else if(input$fdia=="Yes"){1}
         else if(input$fdia=="No"){1})
       
-      #Risk Factor: Medical History - Depression: fdep
+      #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
         else if(input$fdep=="Yes"){1}
         else if(input$fdep=="No"){1})
       
-      #Risk Factor: Medical History - Cancer: fcan
+      #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
         else if(input$fcan=="Yes"){1}
         else if(input$fcan=="No"){1})
       
-      #Risk Factor: Medical History - Alzheimer: falz
+      #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-
-      # CONCOMITANT MEDICATIONS ================================================
       
-      #Risk Factor: Immunosuppressants: cmi
+      ### CONCOMITANT MEDICATIONS ===
+      
+      #### Immunosuppressants ---
       *(if(is.null(input$cmi)){1}
         else if(input$cmi=="Yes"){1}
         else if(input$cmi=="No"){1})
       
-    )) %>%
+    )
     
+    ) %>%
       
-################################################################################        
-# Use "mutate()" to set values for ggplot
-################################################################################
-    
+      #///////////////////////////////////////////////////////////////////////////////       
+      # Use "mutate()" to set values for ggplot
+      #///////////////////////////////////////////////////////////////////////////////
+      
       mutate(risk = round(risk)) %>%
       mutate(age = round(age)) %>%
-      mutate(annotation=cause) %>%
+      mutate(annotation = cause) %>%
       # calculating the probability of dying from the different cause using their respective risks,
-        # removing the risk related to Stroke and CHD because those risks are also part of the CVD risk
+      # removing the risk related to Stroke and CHD because those risks are also part of the CVD risk
       mutate(probability = round(risk/(sum(risk[cause!="Stroke" & cause!="Coronary Heart Diseases"]))*100,1)) %>%
       arrange(desc(pop)) %>%
       mutate(cause = factor(cause, cause)) %>%
-      mutate(text = paste("Cause: ", cause, "\nRisk (n/100,000): ", risk, "\nAverage Age of Death: ", age, sep=""))
-
+      mutate(text = paste("Cause: ", cause, "\nCrude Death Rate: ", pop, "\nRisk (%): ", probability, "\nAverage Age of Death: ", age, sep=""))
+    
   })  
   
-#create textoutput for all of the causes in order of increasing risk.
+  #///////////////////////////////////////////////////////////////////////////////   
+  #create textoutput for all of the causes in order of increasing risk.
+  
   ({  output$textcause1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],5] }) })
   ({  output$textcause2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],5] }) })
   ({  output$textcause3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],5] }) })
@@ -8496,7 +8434,7 @@ server <- function(input, output){
   ({  output$textcause15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],5] }) })
   ({  output$textcause16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],5] }) })
   
-#create textoutput for all of the causes probability in order of increasing risk.
+  #create textoutput for all of the causes probability in order of increasing risk.
   ({  output$textprob1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],6] }) })
   ({  output$textprob2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],6] }) })
   ({  output$textprob3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],6] }) })
@@ -8514,7 +8452,7 @@ server <- function(input, output){
   ({  output$textprob15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],6] }) })
   ({  output$textprob16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],6] }) })
   
-#create textoutput for all of the causes age in order of increasing risk.
+  #create textoutput for all of the causes age in order of increasing risk.
   ({  output$textage1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],"age"] }) })
   ({  output$textage2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],"age"] }) })
   ({  output$textage3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],"age"] }) })
@@ -8533,9 +8471,8 @@ server <- function(input, output){
   ({  output$textage16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],"age"] }) })
   
   
-################################################################################
-# Set bubble plot (ggplot) parameters
-################################################################################
+  # PLOT -------------------------------------------------------------------------
+  # Set bubble plot (ggplot) parameters
   
   ({
     output$bubble <- renderPlotly({
@@ -8547,7 +8484,7 @@ server <- function(input, output){
           theme_ipsum() +
           scale_x_continuous(limits = c(input$cage, 100), breaks=c(10,20,30,40,50,60,70,80,90,100)) + #use this line to specify the x-axis range and tick positions
           scale_y_continuous(limits=c(0, NA), expand = expansion(mult = c(NA, 0.20)))
-          ,
+        ,
         tooltip="text") %>% 
         #the code below is related to legend display.
         layout(legend=list(xanchor='Right',
@@ -8555,7 +8492,7 @@ server <- function(input, output){
                            title = NA,
                            itemsizing='constant'
         )) 
-
+      
     })
     
   })
@@ -8565,3 +8502,173 @@ server <- function(input, output){
 #this knits together the ui and the server function.
 shinyApp(ui = ui, server = server)
 
+
+# The app code ends here
+# everything below is for reference only
+
+#...............................................................................
+# TEMPLATE ----
+#...............................................................................
+
+## Cardiovascular Diseases -----------------------------------------------------
+
+#cod[cod$cause=="Cardiovascular Diseases","age"]
+
+### DEMOGRAPHICS ===
+
+#### Sex ---
+# *(if(is.null(input$sex)){1}
+#  else if(input$sex=="Male"){0.955}
+#  else if(input$sex=="Female"){1.045})
+
+#### Race ---
+# *(if(is.null(input$race)){1}
+#  else if(input$race=="Caucasian (White)"){1}
+#  else if(input$race=="African (Black)"){0.93}
+#  else if(input$race=="Asian"){1.1}
+#  else if(input$race=="Middle Eastern (Indian)"){1}
+#  else if(input$race=="Native American"){0.85}
+#  else if(input$race=="Other"){1})
+
+### SOCIAL STATUS ===
+
+#### Income Group ---
+# *(if(is.null(input$inc)){1}
+#  else if(input$inc=="Poor"){0.975}
+#  else if(input$inc=="Lower-middle"){1}
+#  else if(input$inc=="Middle"){1}
+#  else if(input$inc=="Upper-middle"){1}
+#  else if(input$inc=="Rich"){1})
+
+#### Education ---
+# *(if(is.null(input$edu)){1}
+#  else if(input$edu=="No Formal Schooling"){0.964}
+#  else if(input$edu=="Primary Education (Elementary School)"){0.982}
+#  else if(input$edu=="Secondary Education (High School)"){1}
+#  else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
+#  else if(input$edu=="Master's degree"){1.036}
+#  else if(input$edu=="Doctoral degree"){1.054})
+
+### LIFESTYLE ===
+
+#### Drinks per week---
+
+# *(1-(input$drk*0.00157))
+
+#### Smokes per week ---
+# *(1-(input$smk*0.00109))
+
+#### Moderate intensity physical activity ---
+# *(1+(input$mpa*0.000219))
+
+#### High intensity physical activity ---
+# *(1+(input$hpa*0.000438))
+
+### VITALS ===
+
+#### Systolic Blood Pressure ---
+# *(if(is.null(input$sys)){1}
+#  else if(input$sys=="Normal (SBP <120 mmHG)"){1}
+#  else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
+#  else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
+#  else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
+
+#### Body Mass Index ---
+# *(if(is.null(input$bmi)){1}
+#  else if(input$bmi=="Underweight (<18.5)"){0.942}
+#  else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
+#  else if(input$bmi=="Overweight (25-29.9)"){0.975}
+#  else if(input$bmi=="Obese (>30)"){0.949})
+
+### MEDICAL HISTORY ===
+
+#### High Blood Pressure ---
+# *(if(is.null(input$hbp)){1}
+#  else if(input$hbp=="Yes"){1}
+#  else if(input$hbp=="No"){1})
+
+#### High Blood Cholesterol ---
+# *(if(is.null(input$hbc)){1}
+#  else if(input$hbc=="Yes"){1}
+#  else if(input$hbc=="No"){1})
+
+#### Cardiovascular Disease ---
+# *(if(is.null(input$cvd)){1}
+#  else if(input$cvd=="Yes"){1}
+#  else if(input$cvd=="No"){1})
+
+#### Chronic Obstructive Pulmonary Disease ---
+# *(if(is.null(input$copd)){1}
+#  else if(input$copd=="Yes"){1}
+#  else if(input$copd=="No"){1})
+
+#### Diabetes ---
+# *(if(is.null(input$dia)){1}
+#  else if(input$dia=="Yes"){1}
+#  else if(input$dia=="No"){1})
+
+#### Depression ---
+# *(if(is.null(input$dep)){1}
+#  else if(input$dep=="Yes"){1}
+#  else if(input$dep=="No"){1})
+
+#### Cancer ---
+# *(if(is.null(input$can)){1}
+#  else if(input$can=="Yes"){1}
+#  else if(input$can=="No"){1})
+
+#### Alzheimer ---
+# *(if(is.null(input$alz)){1}
+#  else if(input$alz=="Yes"){1}
+#  else if(input$alz=="No"){1})
+
+### FAMILY HISTORY ===
+
+#### Family History of High Blood Pressure ---
+# *(if(is.null(input$fhbp)){1}
+#  else if(input$fhbp=="Yes"){1}
+#  else if(input$fhbp=="No"){1})
+
+#### Family History of High Blood Cholesterol ---
+# *(if(is.null(input$fhbc)){1}
+#  else if(input$fhbc=="Yes"){1}
+#  else if(input$fhbc=="No"){1})
+
+#### Family History of Cardiovascular Disease ---
+# *(if(is.null(input$fcvd)){1}
+#  else if(input$fcvd=="Yes"){1}
+#  else if(input$fcvd=="No"){1})
+
+#### Family History of Chronic Obstructive Pulmonary Disease ---
+# *(if(is.null(input$fcopd)){1}
+#  else if(input$fcopd=="Yes"){1}
+#  else if(input$fcopd=="No"){1})
+
+#### Family History of Diabetes ---
+# *(if(is.null(input$fdia)){1}
+#  else if(input$fdia=="Yes"){1}
+#  else if(input$fdia=="No"){1})
+
+#### Family History of Depression ---
+# *(if(is.null(input$fdep)){1}
+#  else if(input$fdep=="Yes"){1}
+#  else if(input$fdep=="No"){1})
+
+#### Family History of Cancer ---
+# *(if(is.null(input$fcan)){1}
+#  else if(input$fcan=="Yes"){1}
+#  else if(input$fcan=="No"){1})
+
+#### Family History of Alzheimer ---
+# *(if(is.null(input$falz)){1}
+#  else if(input$falz=="Yes"){1}
+#  else if(input$falz=="No"){1})
+
+### CONCOMITANT MEDICATIONS ===
+
+### Immunosuppressants ---
+# *(if(is.null(input$cmi)){1}
+#  else if(input$cmi=="Yes"){1}
+#  else if(input$cmi=="No"){1})
+
+# ,                 
