@@ -18,25 +18,17 @@ As such, all the code contained within "ui <- fluidPage()" serve to present inpu
 
 The calculation is done as described below. The values that are used as inputs are drawn from an extensive review of peer-reviewed scientific literature available on the apps [References](https://youlldie.com/references/) page. 
 
-1. A dataframe is built to tabulate the 16 most common cause of death and their baseline AGE OF DEATH, RISK OF DEATH and POPULATION. 
-    * Baseline AGE OF DEATH correspond to the average age of death form each cause of death, 
-    * Baseline RISK OF DEATH corresponds to the average risk of dying from each cause of death (n / 100,000)
-    * Baseline POPULATION corresponds to the total population dying from each cause of death per year.    
+1. A dataframe is built to tabulate the 16 most common cause of death and their baseline AGE OF DEATH (AGE), RISK OF DEATH (RISK) and RATE OF DEATH (RATE). 
+    * Baseline AGE corresponds to the average age of death associated with each cause of death 
+    * Baseline RISK corresponds to the death rate associated with each causes of death (n / 100,000) divided by the sum of the death rates associated with all causes of death. As such, RISK is a probability that death from a given cause will happen. It is a value confined between 0 and 1.  
+    * Baseline RATE corresponds to the total population dying from each cause of death per year. It is also known as the Crude Death Rate.    
 
-2. The impacts of individual Risk Factors on the baseline AGE OF DEATH for different causes of death is set.
-
-3. The impacts of individual Risk Factors on the baseline RISK OF DEATH from different causes of death is set.  
-
-4. The impacts of individual Risk Factors on the baseline POPULATION associated with different causes of death is set.
+2. Values associated with the risk factors parameters impacts on the baseline AGE, RISK and RATE for different causes of death are set. For examples, "male" and "female" are the two parameters of the risk factor "sex". The value for the impact of the "male" parameter on AGE is <1 for the cause of death "cardiovascular diseases" because male die from cadiovascular diseases at a younger age than the average population composed of males and female. The values of the risk factors parameters impacts act as multiplier of the baseline AGE, RISK and RATE. Namely, risk factors parameters with impact values >1 increase the baseline AGE, RISK and RATE values whereas risk factors parameters with impact values <1 decrease the baseline AGE, RISK and RATE values. Risk factors parameters that increase AGE and decrease RISK and RATE are beneficial. Risk factors parameter that decrease AGE and increase RISK and RATE are detrimental. 
 
 ## The Output
 
 The calculations performed above yield an updated dataframe which is displayed. Namely: 
 
-* The updated dataframe is plotted as a bubble plot with the AGE OF DEATH on the x-axis and the RISK of DEATH on the y-axis. The size of the bubbles corresponds to the POPULATION.
+* The updated dataframe is plotted as a bubble plot with the AGE on the x-axis and the RISK on the y-axis. The size of the bubbles corresponds to the RATE.
 
-* The probability of dying from the different causes of death is calculated by dividing the RISK OF DEATH from the individual causes of death by the sum of the RISK OF DEATH from any causes of death.
 
-## Template
-
-You can find a template for setting a given cause of death AGE OF DEATH, RISK OF DEATH or POPULATION at the end of the code.
