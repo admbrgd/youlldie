@@ -4,8 +4,6 @@ youlldie is an R Shiny web app that statistically predicts one's cause and age o
 
 The app is currently available at https://youlldie.com
 
-A combination of publicly available databases and peer-reviewed articles were used in the programming of the statistical model behind the app. Those are available on the apps [References](https://youlldie.com/references/) page. When contributing, please provide reference for your claims and make sure it is peer-reviewed material.
-
 ## The Code
 
 The code behind the app follows the standard Shiny application structure. Please see the following for more information on Shiny apps: https://shiny.rstudio.com/tutorial/.
@@ -16,7 +14,7 @@ As such, all the code contained within "ui <- fluidPage()" serve to present inpu
 
 ## The Calculation
 
-The calculation is done as described below. The values that are used as inputs are drawn from an extensive review of peer-reviewed scientific literature available on the apps [References](https://youlldie.com/references/) page. 
+The calculation is done as described below. The values that are used as inputs are drawn from an extensive review of publicly available databases and peer-reviewed articles. Those are available on the apps [References](https://youlldie.com/references/) page.
 
 1. A dataframe is built to tabulate the 16 most common cause of death and their baseline AGE OF DEATH (AGE), RISK OF DEATH (RISK) and RATE OF DEATH (RATE). 
     * Baseline AGE corresponds to the average age of death associated with each cause of death 
@@ -27,8 +25,4 @@ The calculation is done as described below. The values that are used as inputs a
 
 ## The Output
 
-The calculations performed above yield an updated dataframe which is displayed. Namely: 
-
-* The updated dataframe is plotted as a bubble plot with the AGE on the x-axis and the RISK on the y-axis. The size of the bubbles corresponds to the RATE.
-
-
+The calculations performed above yield an updated dataframe which is plotted as a bubble plot with the AGE of Death on the x-axis and the RISK of Death on the y-axis. The size of the bubbles corresponds to the RATE of death aka the Crude Death Rate.
