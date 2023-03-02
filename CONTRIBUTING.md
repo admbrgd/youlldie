@@ -50,11 +50,16 @@ For example, if methods are named using camelcase, like thisIsMyNewMethod, then 
 
 ## Contributrion workflow
 
-Contributions are made to this repo via [Discussions](https://docs.github.com/en/discussions) -> [Issues](https://docs.github.com/en/pull-requests) -> [Pull Requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) (PRs). Some general guidelines:
-* Search for existing Discussions, Issues and PRs before creating your own.
-* Open a Discussion before opening an Issue and PR to get a general impression of your idea from fellow contributors. Issues with supporting discussion are more likely to lead to an approved PR and gets merged to the main branch.
+Contributions are made to this repo via [Discussions](https://docs.github.com/en/discussions) -> [Issues](https://docs.github.com/en/pull-requests) -> [Pull Requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) (PRs).
 
-## Issues
+
+### Discussions
+
+Open a Discussion before opening an Issue and PR to get a general impression of your idea from fellow contributors. Issues with supporting discussion are more likely to lead to an approved PR and gets merged to the main branch.Search for existing Discussions, Issues and PRs before creating your own.
+Select the discussion category "Ideas" to present your idea and suggest new features.
+
+
+### Issues
 
 Issues should be used to follow up on a Discussion to report problems, request a new feature, or to discuss potential changes before a PR is created. When you create a new Issue, a template will be loaded that will guide you through collecting and providing the information we need to investigate. Please provide reference for your claims and ensure it is peer-reviewed material. Unsupported claims will not be considered.
 
@@ -62,7 +67,7 @@ If you find an Issue that addresses your problem, please add your own informatio
 
 If you find a closed issue about your problem, please open a new issue and reference the closed issue in your description.
 
-## Pull Requests
+### Pull Requests
 
 PRs to our libraries are always welcome but it's best to open a Discussion and Issue to discuss your proposal first. Otherwise, you risk doing a lot of work for nothing!  
 
