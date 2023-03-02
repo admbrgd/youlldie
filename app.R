@@ -2,18 +2,33 @@
 # one's cause and age of death based on one's inherited risk factors and lifestyle choices.
 
 # The steps followed to build this model are the following:
-# 1.    Take the 16 most common worldwide cause of death.  
-# 2.       Assign an 'anchor' value for the RISK of dying from any of those causes (n/100,000).
-# 3.       Assign an 'anchor' value for the average AGE of death associated with any of those causes.
-# 4.       Assign an 'anchor' value for the POPulation that dies from any of those causes each year.  
-# 5.          Find factors that will impact one's RISK, AGE and POP. Build those as reactive inputs.
-# 6.            Find the weights of individual Risk Factors on the impact to one's RISK, AGE and POP
-#               (this is the hardest part which requires reading lots of scientific peer-reviewed papers
-#               and interpreting their findings) 
-# 7.              Graph an output table as a bubble plot with: 
-#                 -AGE as the x-axis
-#                 -RISK as the y-axis
-#                 -POP as the bubble size.
+
+# 1. A dataframe is built to tabulate the most common causes of death and their 
+# baseline AGE OF DEATH (AGE), RISK OF DEATH (RISK) and RATE OF DEATH (RATE). 
+# * Baseline AGE corresponds to the average age of death associated with each cause of death 
+# * Baseline RISK corresponds to the death rate associated with each causes of 
+# death (n / 100,000) divided by the sum of the death rates associated with all 
+# causes of death. As such, RISK is a probability that death from a given cause 
+# will happen. It is a value confined between 0 and 1.  
+# * Baseline RATE corresponds to the total population dying from each cause of 
+# death per year. It is also known as the Crude Death Rate.    
+
+# 2. Values associated with the risk factors parameters impacts on the baseline 
+# AGE, RISK and RATE for different causes of death are set. For examples, "male"
+# and "female" are the two parameters of the risk factor "sex". The value for 
+# the impact of the "male" parameter on AGE is <1 for the cause of death 
+# "cardiovascular diseases" because male die from cadiovascular diseases at a 
+# younger age than the average population composed of males and female. The 
+# values of the risk factors parameters impacts act as multiplier of the baseline
+# AGE, RISK and RATE. Namely, risk factors parameters with impact values >1 
+# increase the baseline AGE, RISK and RATE values whereas risk factors parameters 
+# with impact values <1 decrease the baseline AGE, RISK and RATE values. Risk 
+# factors parameters that increase AGE and decrease RISK and RATE are beneficial. 
+# Risk factors parameter that decrease AGE and increase RISK and RATE are detrimental. 
+
+# 3. The calculations performed above yield an updated dataframe which is plotted 
+# as a bubble plot with the AGE of Death on the x-axis and the RISK of Death on 
+# the y-axis. The size of the bubbles corresponds to the RATE of death aka the Crude Death Rate.
 
 # Packages ---------------------------------------------------------------------
 # load required packages:
@@ -135,6 +150,15 @@ ui <- fluidPage(
                   label="Number of minutes of vigorous intensity physical activity per week",
                   value=0, min=0, max=100)
     ),
+    
+    #### Number of Hours of Sleep per Day ----
+    
+    fluidRow(
+      sliderInput(inputId="hsd",
+                  label="Number of hours of sleep per day",
+                  value=7, min=0, max=24)
+    ),  
+    
     
     ### VITALS ---------------------------------------------------------------------
     
@@ -431,7 +455,7 @@ ui <- fluidPage(
 
 cod <- data.frame(
   
-  ## CAUSES of Death ----
+  ## CAUSES OF DEATH ----
   # Provide the list of leading causes of death here:
   cause = c("Cardiovascular Diseases",
             "Coronary Heart Diseases",
@@ -450,7 +474,7 @@ cod <- data.frame(
             "Liver Diseases",
             "Septicemia"),
   
-  ## AGE of death ----                  
+  ## AGE OF DEATH ----                  
   # Enter the average age of death from each cause of death here:                 
   age = c(67.3,  #Cardiovascular Diseases
           76.0,  #Coronary Heart Diseases
@@ -469,7 +493,7 @@ cod <- data.frame(
           52.0,  #Liver Diseases
           65.0), #Septicemia
   
-  ## RISK of death ----                
+  ## RISK OF DEATH ----                
   # Enter the baseline risk of dying from each cause of death (n/100,000) here:                  
   risk = c(224.4, #Cardiovascular Diseases
            91.8, #Coronary Heart Diseases
@@ -488,7 +512,7 @@ cod <- data.frame(
            13.3,  #Liver Diseases
            9.7), #Septicemia
   
-  ## RATE of Death ----                  
+  ## RATE OF DEATH ----                  
   # Enter the total population dying form each cause of death per year (Crude Death Rate) here:                
   pop = c(813804, #Cardiovascular Diseases
           406351, #Coronary Heart Diseases
@@ -517,7 +541,7 @@ server <- function(input, output){
   
   cod_react<-reactive({cod %>%
       
-      # AGE of Death -----------------------------------------------------------------
+      # AGE OF DEATH -----------------------------------------------------------------
     # Setting the impact of Risk Factors on the baseline AGE OF DEATH for different causes of death  
     
     mutate(age=c(
@@ -575,6 +599,26 @@ server <- function(input, output){
       
       #### High intensity physical activity ---
       *(1+(input$hpa*0.000438))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.70}
+        else if(input$hsd==2){0.75}
+        else if(input$hsd==3){0.80}
+        else if(input$hsd==4){0.85}
+        else if(input$hsd==5){0.90}
+        else if(input$hsd==6){0.95}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.85}
+        else if(input$hsd==10){0.80}       
+        else if(input$hsd==11){0.75}
+        else if(input$hsd==12){0.70}
+        else if(input$hsd==13){0.65}
+        else if(input$hsd==14){0.60}
+        else if(input$hsd==15){0.55}
+        else if(input$hsd>=16){0.50}
+        )    
       
       ### VITALS ===
       
@@ -738,6 +782,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000438))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -886,8 +950,6 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      
-      
       ### LIFESTYLE ===
       
       #### Drinks per week---
@@ -901,6 +963,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000336))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.70}
+        else if(input$hsd==2){0.75}
+        else if(input$hsd==3){0.80}
+        else if(input$hsd==4){0.85}
+        else if(input$hsd==5){0.90}
+        else if(input$hsd==6){0.95}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.85}
+        else if(input$hsd==10){0.80}       
+        else if(input$hsd==11){0.75}
+        else if(input$hsd==12){0.70}
+        else if(input$hsd==13){0.65}
+        else if(input$hsd==14){0.60}
+        else if(input$hsd==15){0.55}
+        else if(input$hsd>=16){0.50}
+      ) 
       
       ### VITALS ===
       
@@ -1051,8 +1133,6 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      
-      
       ### LIFESTYLE ===
       
       #### Drinks per week---
@@ -1066,6 +1146,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000328))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
       
       ### VITALS ===
       
@@ -1230,6 +1330,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000640))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -1379,8 +1499,6 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
       
-      
-      
       ### LIFESTYLE ===
       
       #### Drinks per week---
@@ -1394,6 +1512,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000210))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
       
       ### VITALS ===
       
@@ -1543,9 +1681,7 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
         else if(input$edu=="Master's degree"){1.036}
         else if(input$edu=="Doctoral degree"){1.054})
-      
-      
-      
+
       ### LIFESTYLE ===
       
       #### Drinks per week---
@@ -1559,6 +1695,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000446))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
       
       ### VITALS ===
       
@@ -1722,6 +1878,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000522))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -1883,6 +2059,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000422))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
       
       ### VITALS ===
       
@@ -2046,6 +2242,28 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.70}
+        else if(input$hsd==2){0.75}
+        else if(input$hsd==3){0.80}
+        else if(input$hsd==4){0.85}
+        else if(input$hsd==5){0.90}
+        else if(input$hsd==6){0.95}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1}
+        else if(input$hsd==9){1}
+        else if(input$hsd==10){1}       
+        else if(input$hsd==11){1}
+        else if(input$hsd==12){1}
+        else if(input$hsd==13){1}
+        else if(input$hsd==14){1}
+        else if(input$hsd==15){1}
+        else if(input$hsd>=16){1}
+      ) 
+      
+      
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -2207,6 +2425,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000354))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      ) 
       
       ### VITALS ===
       
@@ -2370,6 +2608,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000218))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.70}
+        else if(input$hsd==2){0.75}
+        else if(input$hsd==3){0.80}
+        else if(input$hsd==4){0.85}
+        else if(input$hsd==5){0.90}
+        else if(input$hsd==6){0.95}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.95}
+        else if(input$hsd==9){0.90}
+        else if(input$hsd==10){0.85}       
+        else if(input$hsd==11){0.80}
+        else if(input$hsd==12){0.75}
+        else if(input$hsd==13){0.70}
+        else if(input$hsd==14){0.65}
+        else if(input$hsd==15){0.60}
+        else if(input$hsd>=16){0.55}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -2531,6 +2789,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000168))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
       
       ### VITALS ===
       
@@ -2694,6 +2972,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000606))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -2855,6 +3153,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000506))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
       
       ### VITALS ===
       
@@ -3018,6 +3336,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1+(input$hpa*0.000446))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){0.83}
+        else if(input$hsd==2){0.86}
+        else if(input$hsd==3){0.89}
+        else if(input$hsd==4){0.92}
+        else if(input$hsd==5){0.95}
+        else if(input$hsd==6){0.98}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){0.98}
+        else if(input$hsd==9){0.95}
+        else if(input$hsd==10){0.92}       
+        else if(input$hsd==11){0.89}
+        else if(input$hsd==12){0.86}
+        else if(input$hsd==13){0.83}
+        else if(input$hsd==14){0.80}
+        else if(input$hsd==15){0.77}
+        else if(input$hsd>=16){0.74}
+      )
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -3135,7 +3473,7 @@ server <- function(input, output){
     
     ) %>%
       
-      # RISK of Death ----------------------------------------------------------------
+      # RISK OF DEATH ----------------------------------------------------------------
     # Setting the impact of Risk Factors on the baseline RISK OF DEATH from different causes of death  
     
     mutate(risk=c( 
@@ -3192,6 +3530,27 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){3.70}
+        else if(input$hsd==2){3.19}
+        else if(input$hsd==3){2.68}
+        else if(input$hsd==4){2.17}
+        else if(input$hsd==5){1.66}
+        else if(input$hsd==6){1.15}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.40}
+        else if(input$hsd==9){1.80}
+        else if(input$hsd==10){2.20}       
+        else if(input$hsd==11){2.60}
+        else if(input$hsd==12){3.00}
+        else if(input$hsd==13){3.40}
+        else if(input$hsd==14){3.80}
+        else if(input$hsd==15){4.20}
+        else if(input$hsd>=16){4.60}
+      )  
+      
       
       ### VITALS ===
       
@@ -3342,9 +3701,7 @@ server <- function(input, output){
         else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
-      
-      
-      
+
       ### LIFESTYLE ===
       
       #### Drinks per week---
@@ -3358,6 +3715,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -3524,6 +3901,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){2.20}
+        else if(input$hsd==2){2.00}
+        else if(input$hsd==3){1.80}
+        else if(input$hsd==4){1.60}
+        else if(input$hsd==5){1.40}
+        else if(input$hsd==6){1.20}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.07}
+        else if(input$hsd==9){1.14}
+        else if(input$hsd==10){1.21}       
+        else if(input$hsd==11){1.28}
+        else if(input$hsd==12){1.35}
+        else if(input$hsd==13){1.42}
+        else if(input$hsd==14){1.49}
+        else if(input$hsd==15){1.56}
+        else if(input$hsd>=16){1.63}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -3685,6 +4082,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0012))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -3851,6 +4268,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00507))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -4015,6 +4452,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00166))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -4181,6 +4638,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -4345,6 +4822,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00253))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.35}
+        else if(input$hsd==1){1.30}
+        else if(input$hsd==2){1.25}
+        else if(input$hsd==3){1.20}
+        else if(input$hsd==4){1.15}
+        else if(input$hsd==5){1.10}
+        else if(input$hsd==6){1.05}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.07}
+        else if(input$hsd==9){1.14}
+        else if(input$hsd==10){1.21}       
+        else if(input$hsd==11){1.28}
+        else if(input$hsd==12){1.35}
+        else if(input$hsd==13){1.42}
+        else if(input$hsd==14){1.49}
+        else if(input$hsd==15){1.56}
+        else if(input$hsd>=16){1.63}
+      ) 
       
       ### VITALS ===
       
@@ -4511,6 +5008,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00333))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -4674,6 +5191,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){3.31}
+        else if(input$hsd==1){2.98}
+        else if(input$hsd==2){2.65}
+        else if(input$hsd==3){2.32}
+        else if(input$hsd==4){1.99}
+        else if(input$hsd==5){1.66}
+        else if(input$hsd==6){1.33}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1}
+        else if(input$hsd==9){1}
+        else if(input$hsd==10){1}       
+        else if(input$hsd==11){1}
+        else if(input$hsd==12){1}
+        else if(input$hsd==13){1}
+        else if(input$hsd==14){1}
+        else if(input$hsd==15){1}
+        else if(input$hsd>=16){1}
+      )   
       
       ### VITALS ===
       
@@ -4840,6 +5377,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0028))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){1.78}
+        else if(input$hsd==2){1.65}
+        else if(input$hsd==3){1.52}
+        else if(input$hsd==4){1.39}
+        else if(input$hsd==5){1.26}
+        else if(input$hsd==6){1.13}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.06}
+        else if(input$hsd==9){1.12}
+        else if(input$hsd==10){1.18}       
+        else if(input$hsd==11){1.24}
+        else if(input$hsd==12){1.30}
+        else if(input$hsd==13){1.36}
+        else if(input$hsd==14){1.42}
+        else if(input$hsd==15){1.48}
+        else if(input$hsd>=16){1.54}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -5002,6 +5559,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00493))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.35}
+        else if(input$hsd==1){3.30}
+        else if(input$hsd==2){2.90}
+        else if(input$hsd==3){2.50}
+        else if(input$hsd==4){2.10}
+        else if(input$hsd==5){1.70}
+        else if(input$hsd==6){1.30}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.20}
+        else if(input$hsd==9){1.50}
+        else if(input$hsd==10){1.80}       
+        else if(input$hsd==11){2.10}
+        else if(input$hsd==12){2.40}
+        else if(input$hsd==13){2.70}
+        else if(input$hsd==14){3.00}
+        else if(input$hsd==15){3.30}
+        else if(input$hsd>=16){3.60}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -5162,6 +5739,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00133))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -5328,6 +5925,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0048))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -5489,6 +6106,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -5655,6 +6292,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -5766,7 +6423,7 @@ server <- function(input, output){
     
     ) %>%
       
-      # RATE of Death ----------------------------------------------------------------
+      # RATE DEATH ----------------------------------------------------------------
     # Setting the impact of Risk Factors on the baseline population dying form each 
     # cause of death per year (Crude Death Rate)
     
@@ -5824,6 +6481,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){3.70}
+        else if(input$hsd==2){3.19}
+        else if(input$hsd==3){2.68}
+        else if(input$hsd==4){2.17}
+        else if(input$hsd==5){1.66}
+        else if(input$hsd==6){1.15}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.40}
+        else if(input$hsd==9){1.80}
+        else if(input$hsd==10){2.20}       
+        else if(input$hsd==11){2.60}
+        else if(input$hsd==12){3.00}
+        else if(input$hsd==13){3.40}
+        else if(input$hsd==14){3.80}
+        else if(input$hsd==15){4.20}
+        else if(input$hsd>=16){4.60}
+      ) 
       
       ### VITALS ===
       
@@ -5975,8 +6652,6 @@ server <- function(input, output){
         else if(input$edu=="Master's degree"){1}
         else if(input$edu=="Doctoral degree"){1})
       
-      
-      
       ### LIFESTYLE ===
       
       #### Drinks per week---
@@ -5990,6 +6665,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0032))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -6156,6 +6851,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){2.20}
+        else if(input$hsd==2){2.00}
+        else if(input$hsd==3){1.80}
+        else if(input$hsd==4){1.60}
+        else if(input$hsd==5){1.40}
+        else if(input$hsd==6){1.20}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.07}
+        else if(input$hsd==9){1.14}
+        else if(input$hsd==10){1.21}       
+        else if(input$hsd==11){1.28}
+        else if(input$hsd==12){1.35}
+        else if(input$hsd==13){1.42}
+        else if(input$hsd==14){1.49}
+        else if(input$hsd==15){1.56}
+        else if(input$hsd>=16){1.63}
+      )
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -6317,6 +7032,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0012))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -6483,6 +7218,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00507))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -6647,6 +7402,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00166))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -6813,6 +7588,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -6977,6 +7772,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00253))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.35}
+        else if(input$hsd==1){1.30}
+        else if(input$hsd==2){1.25}
+        else if(input$hsd==3){1.20}
+        else if(input$hsd==4){1.15}
+        else if(input$hsd==5){1.10}
+        else if(input$hsd==6){1.05}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.07}
+        else if(input$hsd==9){1.14}
+        else if(input$hsd==10){1.21}       
+        else if(input$hsd==11){1.28}
+        else if(input$hsd==12){1.35}
+        else if(input$hsd==13){1.42}
+        else if(input$hsd==14){1.49}
+        else if(input$hsd==15){1.56}
+        else if(input$hsd>=16){1.63}
+      ) 
       
       ### VITALS ===
       
@@ -7143,6 +7958,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00333))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      )
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -7306,6 +8141,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){3.31}
+        else if(input$hsd==1){2.98}
+        else if(input$hsd==2){2.65}
+        else if(input$hsd==3){2.32}
+        else if(input$hsd==4){1.99}
+        else if(input$hsd==5){1.66}
+        else if(input$hsd==6){1.33}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1}
+        else if(input$hsd==9){1}
+        else if(input$hsd==10){1}       
+        else if(input$hsd==11){1}
+        else if(input$hsd==12){1}
+        else if(input$hsd==13){1}
+        else if(input$hsd==14){1}
+        else if(input$hsd==15){1}
+        else if(input$hsd>=16){1}
+      ) 
       
       ### VITALS ===
       
@@ -7472,6 +8327,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0028))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){0.65}
+        else if(input$hsd==1){1.78}
+        else if(input$hsd==2){1.65}
+        else if(input$hsd==3){1.52}
+        else if(input$hsd==4){1.39}
+        else if(input$hsd==5){1.26}
+        else if(input$hsd==6){1.13}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.06}
+        else if(input$hsd==9){1.12}
+        else if(input$hsd==10){1.18}       
+        else if(input$hsd==11){1.24}
+        else if(input$hsd==12){1.30}
+        else if(input$hsd==13){1.36}
+        else if(input$hsd==14){1.42}
+        else if(input$hsd==15){1.48}
+        else if(input$hsd>=16){1.54}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -7634,6 +8509,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00493))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.35}
+        else if(input$hsd==1){3.30}
+        else if(input$hsd==2){2.90}
+        else if(input$hsd==3){2.50}
+        else if(input$hsd==4){2.10}
+        else if(input$hsd==5){1.70}
+        else if(input$hsd==6){1.30}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.20}
+        else if(input$hsd==9){1.50}
+        else if(input$hsd==10){1.80}       
+        else if(input$hsd==11){2.10}
+        else if(input$hsd==12){2.40}
+        else if(input$hsd==13){2.70}
+        else if(input$hsd==14){3.00}
+        else if(input$hsd==15){3.30}
+        else if(input$hsd>=16){3.60}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -7794,6 +8689,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00133))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -7960,6 +8875,26 @@ server <- function(input, output){
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.0048))
       
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
+      
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
@@ -8121,6 +9056,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00266))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -8286,6 +9241,26 @@ server <- function(input, output){
       
       #### High intensity physical activity per week ---
       *(1-(input$hpa*0.00313))
+      
+      #### Hours of sleep per day ---
+      *(if(input$hsd==0){1.42}
+        else if(input$hsd==1){1.36}
+        else if(input$hsd==2){1.30}
+        else if(input$hsd==3){1.24}
+        else if(input$hsd==4){1.18}
+        else if(input$hsd==5){1.12}
+        else if(input$hsd==6){1.06}
+        else if(input$hsd==7){1}
+        else if(input$hsd==8){1.10}
+        else if(input$hsd==9){1.30}
+        else if(input$hsd==10){1.50}       
+        else if(input$hsd==11){1.70}
+        else if(input$hsd==12){1.90}
+        else if(input$hsd==13){2.10}
+        else if(input$hsd==14){2.30}
+        else if(input$hsd==15){2.50}
+        else if(input$hsd>=16){2.70}
+      ) 
       
       ### VITALS ===
       
@@ -8502,173 +9477,4 @@ server <- function(input, output){
 #this knits together the ui and the server function.
 shinyApp(ui = ui, server = server)
 
-
 # The app code ends here
-# everything below is for reference only
-
-#...............................................................................
-# TEMPLATE ----
-#...............................................................................
-
-## Cardiovascular Diseases -----------------------------------------------------
-
-#cod[cod$cause=="Cardiovascular Diseases","age"]
-
-### DEMOGRAPHICS ===
-
-#### Sex ---
-# *(if(is.null(input$sex)){1}
-#  else if(input$sex=="Male"){0.955}
-#  else if(input$sex=="Female"){1.045})
-
-#### Race ---
-# *(if(is.null(input$race)){1}
-#  else if(input$race=="Caucasian (White)"){1}
-#  else if(input$race=="African (Black)"){0.93}
-#  else if(input$race=="Asian"){1.1}
-#  else if(input$race=="Middle Eastern (Indian)"){1}
-#  else if(input$race=="Native American"){0.85}
-#  else if(input$race=="Other"){1})
-
-### SOCIAL STATUS ===
-
-#### Income Group ---
-# *(if(is.null(input$inc)){1}
-#  else if(input$inc=="Poor"){0.975}
-#  else if(input$inc=="Lower-middle"){1}
-#  else if(input$inc=="Middle"){1}
-#  else if(input$inc=="Upper-middle"){1}
-#  else if(input$inc=="Rich"){1})
-
-#### Education ---
-# *(if(is.null(input$edu)){1}
-#  else if(input$edu=="No Formal Schooling"){0.964}
-#  else if(input$edu=="Primary Education (Elementary School)"){0.982}
-#  else if(input$edu=="Secondary Education (High School)"){1}
-#  else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-#  else if(input$edu=="Master's degree"){1.036}
-#  else if(input$edu=="Doctoral degree"){1.054})
-
-### LIFESTYLE ===
-
-#### Drinks per week---
-
-# *(1-(input$drk*0.00157))
-
-#### Smokes per week ---
-# *(1-(input$smk*0.00109))
-
-#### Moderate intensity physical activity ---
-# *(1+(input$mpa*0.000219))
-
-#### High intensity physical activity ---
-# *(1+(input$hpa*0.000438))
-
-### VITALS ===
-
-#### Systolic Blood Pressure ---
-# *(if(is.null(input$sys)){1}
-#  else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-#  else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
-#  else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
-#  else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
-
-#### Body Mass Index ---
-# *(if(is.null(input$bmi)){1}
-#  else if(input$bmi=="Underweight (<18.5)"){0.942}
-#  else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-#  else if(input$bmi=="Overweight (25-29.9)"){0.975}
-#  else if(input$bmi=="Obese (>30)"){0.949})
-
-### MEDICAL HISTORY ===
-
-#### High Blood Pressure ---
-# *(if(is.null(input$hbp)){1}
-#  else if(input$hbp=="Yes"){1}
-#  else if(input$hbp=="No"){1})
-
-#### High Blood Cholesterol ---
-# *(if(is.null(input$hbc)){1}
-#  else if(input$hbc=="Yes"){1}
-#  else if(input$hbc=="No"){1})
-
-#### Cardiovascular Disease ---
-# *(if(is.null(input$cvd)){1}
-#  else if(input$cvd=="Yes"){1}
-#  else if(input$cvd=="No"){1})
-
-#### Chronic Obstructive Pulmonary Disease ---
-# *(if(is.null(input$copd)){1}
-#  else if(input$copd=="Yes"){1}
-#  else if(input$copd=="No"){1})
-
-#### Diabetes ---
-# *(if(is.null(input$dia)){1}
-#  else if(input$dia=="Yes"){1}
-#  else if(input$dia=="No"){1})
-
-#### Depression ---
-# *(if(is.null(input$dep)){1}
-#  else if(input$dep=="Yes"){1}
-#  else if(input$dep=="No"){1})
-
-#### Cancer ---
-# *(if(is.null(input$can)){1}
-#  else if(input$can=="Yes"){1}
-#  else if(input$can=="No"){1})
-
-#### Alzheimer ---
-# *(if(is.null(input$alz)){1}
-#  else if(input$alz=="Yes"){1}
-#  else if(input$alz=="No"){1})
-
-### FAMILY HISTORY ===
-
-#### Family History of High Blood Pressure ---
-# *(if(is.null(input$fhbp)){1}
-#  else if(input$fhbp=="Yes"){1}
-#  else if(input$fhbp=="No"){1})
-
-#### Family History of High Blood Cholesterol ---
-# *(if(is.null(input$fhbc)){1}
-#  else if(input$fhbc=="Yes"){1}
-#  else if(input$fhbc=="No"){1})
-
-#### Family History of Cardiovascular Disease ---
-# *(if(is.null(input$fcvd)){1}
-#  else if(input$fcvd=="Yes"){1}
-#  else if(input$fcvd=="No"){1})
-
-#### Family History of Chronic Obstructive Pulmonary Disease ---
-# *(if(is.null(input$fcopd)){1}
-#  else if(input$fcopd=="Yes"){1}
-#  else if(input$fcopd=="No"){1})
-
-#### Family History of Diabetes ---
-# *(if(is.null(input$fdia)){1}
-#  else if(input$fdia=="Yes"){1}
-#  else if(input$fdia=="No"){1})
-
-#### Family History of Depression ---
-# *(if(is.null(input$fdep)){1}
-#  else if(input$fdep=="Yes"){1}
-#  else if(input$fdep=="No"){1})
-
-#### Family History of Cancer ---
-# *(if(is.null(input$fcan)){1}
-#  else if(input$fcan=="Yes"){1}
-#  else if(input$fcan=="No"){1})
-
-#### Family History of Alzheimer ---
-# *(if(is.null(input$falz)){1}
-#  else if(input$falz=="Yes"){1}
-#  else if(input$falz=="No"){1})
-
-### CONCOMITANT MEDICATIONS ===
-
-### Immunosuppressants ---
-# *(if(is.null(input$cmi)){1}
-#  else if(input$cmi=="Yes"){1}
-#  else if(input$cmi=="No"){1})
-
-# ,                 
