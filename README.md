@@ -16,7 +16,7 @@ As such, all the code contained within "ui <- fluidPage()" serve to present inpu
 
 The calculation is done as described below. The values that are used as inputs are drawn from an extensive review of publicly available databases and peer-reviewed articles. Those are available on the apps [References](https://youlldie.com/references/) page.
 
-1. A dataframe is built to tabulate the 16 most common cause of death and their baseline AGE OF DEATH (AGE), RISK OF DEATH (RISK) and RATE OF DEATH (RATE). 
+1. A dataframe is built to tabulate the most common causes of death and their baseline AGE OF DEATH (AGE), RISK OF DEATH (RISK) and RATE OF DEATH (RATE). 
     * Baseline AGE corresponds to the average age of death associated with each cause of death 
     * Baseline RISK corresponds to the death rate associated with each causes of death (n / 100,000) divided by the sum of the death rates associated with all causes of death. As such, RISK is a probability that death from a given cause will happen. It is a value confined between 0 and 1.  
     * Baseline RATE corresponds to the total population dying from each cause of death per year. It is also known as the Crude Death Rate.    
