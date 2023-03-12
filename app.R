@@ -582,13 +582,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -775,13 +775,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -967,13 +967,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -1160,13 +1160,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -1353,13 +1353,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -1546,13 +1546,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -1739,13 +1739,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -1931,13 +1931,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -2123,13 +2123,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -2315,13 +2315,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -2509,13 +2509,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -2701,13 +2701,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -2893,13 +2893,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -3085,13 +3085,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -3277,13 +3277,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
@@ -3469,13 +3469,13 @@ server <- function(input, output){
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else if(input$wbr=="East Asia & Pacific"){1.035}
+        else if(input$wbr=="Europe & Central Asia"){1.065}
+        else if(input$wbr=="Latin America & Caribbean"){1.022}
+        else if(input$wbr=="Middle East & North Africa"){1.007}
+        else if(input$wbr=="North America"){1.078}
+        else if(input$wbr=="South Asia"){0.960}
+        else if(input$wbr=="Sub-Saharan Africa"){0.834})
       
       ### SOCIAL STATUS ===
       
