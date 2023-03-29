@@ -1,6 +1,6 @@
 # youlldie
 
-youlldie is an R Shiny web app that statistically predicts one's cause and age of death based on one's inherited risk factors and lifestyle choices. It displays how and when death will likely occur in individual cases based on current scientific knowledge. It aims to provide a realistic perspective on death and incite users to adopt healthy lifestyles.
+A web app that statistically predicts when and how you'll die based on your inherited risk factors and lifestyle choices, leveraging data from peer-reviewed literature and public databases. It aims to provide a realistic perspective on death and incite users to adopt healthy lifestyles.
 
 The app is currently available at https://youlldie.com
 
