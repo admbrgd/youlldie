@@ -77,10 +77,9 @@ ui <- fluidPage(
     #### Race ----
     
     fluidRow(
-      radioButtons(inputId="race", label="Race", choices=list("Caucasian (White)",
-                                                              "African (Black)",
+      radioButtons(inputId="race", label="Race", choices=list("White",
+                                                              "Black",
                                                               "Asian",
-                                                              "Middle Eastern (Indian)",
                                                               "Native American",
                                                               "Other"), 
                    selected=character(0))
@@ -573,10 +572,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -766,10 +764,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -958,10 +955,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -1151,10 +1147,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -1344,10 +1339,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){1}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){1}
         else if(input$race=="Asian"){1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1}
         else if(input$race=="Other"){1})
       
@@ -1537,10 +1531,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -1730,10 +1723,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -1922,10 +1914,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -2114,10 +2105,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -2306,10 +2296,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -2500,10 +2489,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -2692,10 +2680,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){1}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){1}
         else if(input$race=="Asian"){1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1}
         else if(input$race=="Other"){1})
       
@@ -2884,10 +2871,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -3076,10 +3062,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -3268,10 +3253,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -3460,10 +3444,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1}
-        else if(input$race=="African (Black)"){0.93}
+        else if(input$race=="White"){1}
+        else if(input$race=="Black"){0.93}
         else if(input$race=="Asian"){1.1}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.85}
         else if(input$race=="Other"){1})
       
@@ -3665,10 +3648,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.980}
-        else if(input$race=="African (Black)"){1.389}
+        else if(input$race=="White"){0.980}
+        else if(input$race=="Black"){1.389}
         else if(input$race=="Asian"){0.582}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.672}
         else if(input$race=="Other"){1})
       
@@ -3860,10 +3842,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.001}
-        else if(input$race=="African (Black)"){1.233}
+        else if(input$race=="White"){1.001}
+        else if(input$race=="Black"){1.233}
         else if(input$race=="Asian"){0.596}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.941}
         else if(input$race=="Other"){1})
       
@@ -4055,10 +4036,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.964}
-        else if(input$race=="African (Black)"){1.441}
+        else if(input$race=="White"){0.964}
+        else if(input$race=="Black"){1.441}
         else if(input$race=="Asian"){0.809}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.670}
         else if(input$race=="Other"){1})
       
@@ -4247,10 +4227,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.016}
-        else if(input$race=="African (Black)"){1.134}
+        else if(input$race=="White"){1.016}
+        else if(input$race=="Black"){1.134}
         else if(input$race=="Asian"){0.614}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.636}
         else if(input$race=="Other"){1})
       
@@ -4442,10 +4421,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.934}
-        else if(input$race=="African (Black)"){1.645}
+        else if(input$race=="White"){0.934}
+        else if(input$race=="Black"){1.645}
         else if(input$race=="Asian"){0.741}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.518}
         else if(input$race=="Other"){1})
       
@@ -4637,10 +4615,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.043}
-        else if(input$race=="African (Black)"){0.951}
+        else if(input$race=="White"){1.043}
+        else if(input$race=="Black"){0.951}
         else if(input$race=="Asian"){0.540}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.485}
         else if(input$race=="Other"){1})
       
@@ -4832,10 +4809,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.069}
-        else if(input$race=="African (Black)"){0.816}
+        else if(input$race=="White"){1.069}
+        else if(input$race=="Black"){0.816}
         else if(input$race=="Asian"){0.280}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.657}
         else if(input$race=="Other"){1})
       
@@ -5027,10 +5003,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.903}
-        else if(input$race=="African (Black)"){1.859}
+        else if(input$race=="White"){0.903}
+        else if(input$race=="Black"){1.859}
         else if(input$race=="Asian"){0.750}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.512}
         else if(input$race=="Other"){1})
       
@@ -5222,10 +5197,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.058}
-        else if(input$race=="African (Black)"){1.236}
+        else if(input$race=="White"){1.058}
+        else if(input$race=="Black"){1.236}
         else if(input$race=="Asian"){0.155}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.946}
         else if(input$race=="Other"){1})
       
@@ -5416,10 +5390,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.992}
-        else if(input$race=="African (Black)"){1.397}
+        else if(input$race=="White"){0.992}
+        else if(input$race=="Black"){1.397}
         else if(input$race=="Asian"){0.313}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.344}
         else if(input$race=="Other"){1})
       
@@ -5611,10 +5584,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.087}
-        else if(input$race=="African (Black)"){0.495}
+        else if(input$race=="White"){1.087}
+        else if(input$race=="Black"){0.495}
         else if(input$race=="Asian"){0.524}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.796}
         else if(input$race=="Other"){1})
       
@@ -5803,10 +5775,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.985}
-        else if(input$race=="African (Black)"){1.292}
+        else if(input$race=="White"){0.985}
+        else if(input$race=="Black"){1.292}
         else if(input$race=="Asian"){0.792}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.077}
         else if(input$race=="Other"){1})
       
@@ -5994,10 +5965,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.898}
-        else if(input$race=="African (Black)"){2.024}
+        else if(input$race=="White"){0.898}
+        else if(input$race=="Black"){2.024}
         else if(input$race=="Asian"){0.638}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.882}
         else if(input$race=="Other"){1})
       
@@ -6189,10 +6159,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.126}
-        else if(input$race=="African (Black)"){0.556}
+        else if(input$race=="White"){1.126}
+        else if(input$race=="Black"){0.556}
         else if(input$race=="Asian"){0.474}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.244}
         else if(input$race=="Other"){1})
       
@@ -6381,10 +6350,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.083}
-        else if(input$race=="African (Black)"){0.662}
+        else if(input$race=="White"){1.083}
+        else if(input$race=="Black"){0.662}
         else if(input$race=="Asian"){0.308}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){2.850}
         else if(input$race=="Other"){1})
       
@@ -6576,10 +6544,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.959}
-        else if(input$race=="African (Black)"){1.680}
+        else if(input$race=="White"){0.959}
+        else if(input$race=="Black"){1.680}
         else if(input$race=="Asian"){0.464}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.948}
         else if(input$race=="Other"){1})
       
@@ -6776,10 +6743,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.980}
-        else if(input$race=="African (Black)"){1.389}
+        else if(input$race=="White"){0.980}
+        else if(input$race=="Black"){1.389}
         else if(input$race=="Asian"){0.582}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.672}
         else if(input$race=="Other"){1})
       
@@ -6970,10 +6936,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.001}
-        else if(input$race=="African (Black)"){1.233}
+        else if(input$race=="White"){1.001}
+        else if(input$race=="Black"){1.233}
         else if(input$race=="Asian"){0.596}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.941}
         else if(input$race=="Other"){1})
       
@@ -7165,10 +7130,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.964}
-        else if(input$race=="African (Black)"){1.441}
+        else if(input$race=="White"){0.964}
+        else if(input$race=="Black"){1.441}
         else if(input$race=="Asian"){0.809}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.670}
         else if(input$race=="Other"){1})
       
@@ -7357,10 +7321,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.016}
-        else if(input$race=="African (Black)"){1.134}
+        else if(input$race=="White"){1.016}
+        else if(input$race=="Black"){1.134}
         else if(input$race=="Asian"){0.614}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.636}
         else if(input$race=="Other"){1})
       
@@ -7552,10 +7515,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.934}
-        else if(input$race=="African (Black)"){1.645}
+        else if(input$race=="White"){0.934}
+        else if(input$race=="Black"){1.645}
         else if(input$race=="Asian"){0.741}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.518}
         else if(input$race=="Other"){1})
       
@@ -7747,10 +7709,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.043}
-        else if(input$race=="African (Black)"){0.951}
+        else if(input$race=="White"){1.043}
+        else if(input$race=="Black"){0.951}
         else if(input$race=="Asian"){0.540}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.485}
         else if(input$race=="Other"){1})
       
@@ -7942,10 +7903,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.069}
-        else if(input$race=="African (Black)"){0.816}
+        else if(input$race=="White"){1.069}
+        else if(input$race=="Black"){0.816}
         else if(input$race=="Asian"){0.280}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.657}
         else if(input$race=="Other"){1})
       
@@ -8137,10 +8097,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.903}
-        else if(input$race=="African (Black)"){1.859}
+        else if(input$race=="White"){0.903}
+        else if(input$race=="Black"){1.859}
         else if(input$race=="Asian"){0.750}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.512}
         else if(input$race=="Other"){1})
       
@@ -8332,10 +8291,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.058}
-        else if(input$race=="African (Black)"){1.236}
+        else if(input$race=="White"){1.058}
+        else if(input$race=="Black"){1.236}
         else if(input$race=="Asian"){0.155}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.946}
         else if(input$race=="Other"){1})
       
@@ -8526,10 +8484,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.992}
-        else if(input$race=="African (Black)"){1.397}
+        else if(input$race=="White"){0.992}
+        else if(input$race=="Black"){1.397}
         else if(input$race=="Asian"){0.313}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.344}
         else if(input$race=="Other"){1})
       
@@ -8721,10 +8678,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.087}
-        else if(input$race=="African (Black)"){0.495}
+        else if(input$race=="White"){1.087}
+        else if(input$race=="Black"){0.495}
         else if(input$race=="Asian"){0.524}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.796}
         else if(input$race=="Other"){1})
       
@@ -8913,10 +8869,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.985}
-        else if(input$race=="African (Black)"){1.292}
+        else if(input$race=="White"){0.985}
+        else if(input$race=="Black"){1.292}
         else if(input$race=="Asian"){0.792}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.077}
         else if(input$race=="Other"){1})
       
@@ -9104,10 +9059,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.898}
-        else if(input$race=="African (Black)"){2.024}
+        else if(input$race=="White"){0.898}
+        else if(input$race=="Black"){2.024}
         else if(input$race=="Asian"){0.638}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.882}
         else if(input$race=="Other"){1})
       
@@ -9299,10 +9253,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.126}
-        else if(input$race=="African (Black)"){0.556}
+        else if(input$race=="White"){1.126}
+        else if(input$race=="Black"){0.556}
         else if(input$race=="Asian"){0.474}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){1.244}
         else if(input$race=="Other"){1})
       
@@ -9491,10 +9444,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){1.083}
-        else if(input$race=="African (Black)"){0.662}
+        else if(input$race=="White"){1.083}
+        else if(input$race=="Black"){0.662}
         else if(input$race=="Asian"){0.308}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){2.850}
         else if(input$race=="Other"){1})
       
@@ -9686,10 +9638,9 @@ server <- function(input, output){
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="Caucasian (White)"){0.959}
-        else if(input$race=="African (Black)"){1.680}
+        else if(input$race=="White"){0.959}
+        else if(input$race=="Black"){1.680}
         else if(input$race=="Asian"){0.464}
-        else if(input$race=="Middle Eastern (Indian)"){1}
         else if(input$race=="Native American"){0.948}
         else if(input$race=="Other"){1})
       
