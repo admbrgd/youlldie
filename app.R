@@ -3698,7 +3698,7 @@ server <- function(input, output){
       *(1-(input$hpa*0.0032))
       
       #### Hours of sleep per day ---
-      *(if(input$hsd==0){0.65}
+      *(if(input$hsd==0){4.21}
         else if(input$hsd==1){3.70}
         else if(input$hsd==2){3.19}
         else if(input$hsd==3){2.68}
@@ -5440,13 +5440,13 @@ server <- function(input, output){
       *(1-(input$hpa*0))
       
       #### Hours of sleep per day ---
-      *(if(input$hsd==0){3.31}
-        else if(input$hsd==1){2.98}
-        else if(input$hsd==2){2.65}
-        else if(input$hsd==3){2.32}
-        else if(input$hsd==4){1.99}
-        else if(input$hsd==5){1.66}
-        else if(input$hsd==6){1.33}
+      *(if(input$hsd==0){2.16}
+        else if(input$hsd==1){1.99}
+        else if(input$hsd==2){1.83}
+        else if(input$hsd==3){1.66}
+        else if(input$hsd==4){1.50}
+        else if(input$hsd==5){1.33}
+        else if(input$hsd==6){1.17}
         else if(input$hsd==7){1}
         else if(input$hsd==8){1}
         else if(input$hsd==9){1}
@@ -6793,7 +6793,7 @@ server <- function(input, output){
       *(1-(input$hpa*0.0032))
       
       #### Hours of sleep per day ---
-      *(if(input$hsd==0){0.65}
+      *(if(input$hsd==0){4.21}
         else if(input$hsd==1){3.70}
         else if(input$hsd==2){3.19}
         else if(input$hsd==3){2.68}
@@ -8534,13 +8534,13 @@ server <- function(input, output){
       *(1-(input$hpa*0))
       
       #### Hours of sleep per day ---
-      *(if(input$hsd==0){3.31}
-        else if(input$hsd==1){2.98}
-        else if(input$hsd==2){2.65}
-        else if(input$hsd==3){2.32}
-        else if(input$hsd==4){1.99}
-        else if(input$hsd==5){1.66}
-        else if(input$hsd==6){1.33}
+      *(if(input$hsd==0){2.16}
+        else if(input$hsd==1){1.99}
+        else if(input$hsd==2){1.83}
+        else if(input$hsd==3){1.66}
+        else if(input$hsd==4){1.50}
+        else if(input$hsd==5){1.33}
+        else if(input$hsd==6){1.17}
         else if(input$hsd==7){1}
         else if(input$hsd==8){1}
         else if(input$hsd==9){1}
