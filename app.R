@@ -6239,7 +6239,7 @@ server <- function(input, output){
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
+        else if(input$bmi=="Underweight (<18.5)"){2}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
@@ -9333,7 +9333,7 @@ server <- function(input, output){
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
+        else if(input$bmi=="Underweight (<18.5)"){2}
         else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
         else if(input$bmi=="Overweight (25-29.9)"){1}
         else if(input$bmi=="Obese (>30)"){1})
