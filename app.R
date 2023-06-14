@@ -282,26 +282,6 @@ ui <- fluidPage(
     fluidRow(
       tags$p("Has someone in your family (Father, Mother, Brother, Sister experienced the following conditions?")),
     
-    #### Family History of High Blood Pressure ----
-    
-    fluidRow(
-      radioButtons(inputId="fhbp",
-                   label="Family History of High Blood Pressure", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Family History of High Blood Cholesterol ----
-    
-    fluidRow(
-      radioButtons(inputId="fhbc",
-                   label="Family History of High Blood Cholesterol", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
     #### Family History of Cardiovascular Disease (CVD) ----
     
     fluidRow(
@@ -702,16 +682,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -892,16 +862,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -1085,16 +1045,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -1276,16 +1226,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -1469,16 +1409,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -1659,16 +1589,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -1852,16 +1772,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -2043,16 +1953,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -2233,16 +2133,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -2427,16 +2317,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -2617,16 +2497,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -2809,16 +2679,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -2999,16 +2859,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -3191,16 +3041,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -3382,16 +3222,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -3572,16 +3402,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -3778,16 +3598,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
@@ -3970,16 +3780,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -4165,16 +3965,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
@@ -4356,16 +4146,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -4388,7 +4168,7 @@ server <- function(input, output){
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){2.5}
+        else if(input$fcan=="Yes"){2.88}
         else if(input$fcan=="No"){1})
       
       #### Family History of Alzheimer ---
@@ -4549,16 +4329,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -4744,16 +4514,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -4937,16 +4697,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -5132,16 +4882,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -5326,16 +5066,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -5518,16 +5248,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -5713,16 +5433,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -5904,16 +5614,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -6093,16 +5793,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -6288,16 +5978,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -6478,16 +6158,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -6672,16 +6342,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -6872,16 +6532,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
@@ -7064,16 +6714,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -7259,16 +6899,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){2.5}
@@ -7450,16 +7080,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -7482,7 +7102,7 @@ server <- function(input, output){
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){2.5}
+        else if(input$fcan=="Yes"){2.88}
         else if(input$fcan=="No"){1})
       
       #### Family History of Alzheimer ---
@@ -7643,16 +7263,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -7837,17 +7447,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
+
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -8031,17 +7631,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
+
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -8225,16 +7815,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -8420,16 +8000,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -8612,17 +8182,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
+
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -8807,16 +8367,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -8998,16 +8548,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -9187,17 +8727,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
+
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -9382,16 +8912,6 @@ server <- function(input, output){
       
       ### FAMILY HISTORY ===
       
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -9572,16 +9092,6 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
@@ -9766,17 +9276,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-      
-      #### Family History of High Blood Pressure ---
-      *(if(is.null(input$fhbp)){1}
-        else if(input$fhbp=="Yes"){1}
-        else if(input$fhbp=="No"){1})
-      
-      #### Family History of High Blood Cholesterol ---
-      *(if(is.null(input$fhbc)){1}
-        else if(input$fhbc=="Yes"){1}
-        else if(input$fhbc=="No"){1})
-      
+
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
