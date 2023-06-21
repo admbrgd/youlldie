@@ -19,11 +19,43 @@ We take our contributors seriously and hold our community to high standards of c
 
 ## Vision for the project
 
-**Practically**, the goal of this project is to provide a tool that statistically predicts one's cause and age of death based on one's inherited risk factors and lifestyle choices. It aims to provide a realistic perspective on death and incite users to adopt healthy lifestyles.
+**Practically**, the goal of this project is to provide a tool that statistically predicts one's age and cause of death based on risk factors related to one's genetics, environment and lifestyle choice. This tool aims to provide a realistic perspective of death to the general public and the medical profession. It also aims to incite users to adopt healthy lifestyles.
 
-**Technically**, the contribution from the open-source community helps making this app an accurate tool for the health research community. This model of human longevity can in turn be used to measure the impact of external factors on human health and ultimately improve the human condition. 
+The first step of this project is to gain endorsement by the world health authorities for a pilot project to collect death related data in a standard format. This standard format would include the vaiables listed below. Gathering data in this format will allow to train the model so that it can become a reliable, accurate tool.
 
-**Phylosophically**, the purpose of the app is to make people contemplate their position in the stream of life. To borrow some words form Alan Watts, everybody should, sometime in their lifetime, consider death. Observe skulls and skeletons and wonder what it will be like to go to sleep and never wake up—never! That is a very gloomy thing for contemplation. But it’s just like manure. Just as manure fertilizes the plants and so on, so the contemplation of death and the acceptance of death is very highly generative of creating life. You’ll get wonderful things out of that. Death is important to think about. It must not be swept under the carpet. Thinking about and accepting death brings a trust in life. It incites one to let go. Stop clinging to constantly changing things that cannot be clung to. Recognize oneself as an unstable particle in the constantly changing flux of eternal life. Acknowledge the union and inseparability from everything else that there is. The contemplation of death allows one to change point of view and to find oneself. It awakens the senses. Thinking about death gives the opportunity to understand what life is all about and see what this universe is for. It is conducive to liberation. Understanding that everything is in the right place is the opportunity presented by the contemplation of death.
+* Death ID
+* Primary cause of death
+* Gender
+* Race
+* Age of Death
+* World Bank Region
+* Financial Status
+* Highest level of Schooling
+* Number of Drinks per week
+* Number of smokes per week
+* Number of moderate-intensity physical activity minutes per week
+* Number of vigorous-intensity physical activity minutes per week
+* Number of hours of sleep per day
+* Systolic Blood Pressure
+* Body Mass Index	
+* High Blood Cholesterol (Yes/No)
+* Cardiovascular Disease (Yes/No)
+* Chronic Obstructive Pulmunary Disease (Yes/No)
+* Diabetes (Yes/No)
+* Depression (Yes/No)
+* Cancer (Yes/No)
+* Alzeimer (Yes/No)
+* Family History of Cardiovascular Disease (Yes/No)
+* Family History of Family History of Chronic Obstructive
+* Pulmunary (Yes/No)
+* Family History of Diabetes (Yes/No)
+* Family History of Depression (Yes/No)
+* Family History of Cancer (Yes/No)
+* Family History of Alzeimer (Yes/No)
+
+**Technically**, the contribution from the open-source community helps making this app a statistically accurate tool. The algorythm behind the app represents model of human longevity which can in turn be used to measure the impact of external factors on human health and ultimately improve the human condition. 
+
+**Phylosophically**, the purpose of the app is to make people contemplate their position in the stream of life. To borrow some words form Alan Watts, everybody should, sometime in their lifetime, consider death. Observe skulls and skeletons and wonder what it will be like to go to sleep and never wake up.Never! That is a very gloomy thing for contemplation. But it’s just like manure. Just as manure fertilizes the plants and so on, so the contemplation of death and the acceptance of death is very highly generative of creating life. You’ll get wonderful things out of that. Death is important to think about. It must not be swept under the carpet. Thinking about and accepting death brings a trust in life. It incites one to let go. Stop clinging to constantly changing things that cannot be clung to. Recognize oneself as an unstable particle in the constantly changing flux of eternal life. Acknowledge the union and inseparability from everything else that there is. The contemplation of death allows one to change point of view and to find oneself. It awakens the senses. Thinking about death gives the opportunity to understand what life is all about and see what this universe is for. It is conducive to liberation. Understanding that everything is in the right place is the opportunity presented by the contemplation of death.
 
 ### Reasons for making the project open source
 
