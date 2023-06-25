@@ -342,21 +342,6 @@ ui <- fluidPage(
                    selected=character(0))
     ),
     
-    ### CONCOMITAN MEDICATIONS ----------------------------------------------------
-    
-    fluidRow(
-      tags$h4("CONCOMITANT MEDICATIONS")),
-    
-    #### Immunosuppression ---
-    
-    fluidRow(
-      radioButtons(inputId="cmi",
-                   label="Are you taking immunosuppressants?", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
   ),
   
   ## Main Panel -------------------------------------------------------------------
@@ -712,13 +697,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      ### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,                 
       
       ## Coronary Heart Diseases -----------------------------------------------------
@@ -892,13 +870,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -1075,13 +1046,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Cancer ----------------------------------------------------------------------                       
@@ -1256,13 +1220,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -1439,13 +1396,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Alzeihmer's Disease ---------------------------------------------------------
@@ -1619,13 +1569,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -1802,13 +1745,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Diabetes --------------------------------------------------------------------
@@ -1983,13 +1919,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Drug Overdose ---------------------------------------------------------------
@@ -2163,13 +2092,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -2347,13 +2269,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Fall ------------------------------------------------------------------------
@@ -2527,13 +2442,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -2709,13 +2617,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Kidney Diseases -------------------------------------------------------------
@@ -2889,13 +2790,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -3071,13 +2965,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Liver Diseases --------------------------------------------------------------
@@ -3252,13 +3139,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Septicemia ------------------------------------------------------------------
@@ -3432,13 +3312,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
     )
     
@@ -3628,13 +3501,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Coronary Heart Diseases -----------------------------------------------------
@@ -3810,13 +3676,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -3995,13 +3854,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Cancer ----------------------------------------------------------------------
@@ -4175,13 +4027,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -4360,13 +4205,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Alzheimer’s Disease ---------------------------------------------------------
@@ -4543,13 +4381,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1.7}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -4728,13 +4559,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Diabetes --------------------------------------------------------------------
@@ -4911,13 +4735,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -5096,12 +4913,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       ,
       
       ## Motor Vehicle Accident ------------------------------------------------------
@@ -5278,13 +5089,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -5463,13 +5267,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Influenza and Pneumonia -----------------------------------------------------
@@ -5644,12 +5441,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       ,
       
       ## Kidney Diseases -------------------------------------------------------------
@@ -5823,13 +5614,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -6008,13 +5792,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Liver Diseases --------------------------------------------------------------
@@ -6188,13 +5965,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -6372,13 +6142,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
     )
     
@@ -6562,13 +6325,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Coronary Heart Diseases -----------------------------------------------------
@@ -6744,13 +6500,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -6929,13 +6678,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Cancer ----------------------------------------------------------------------
@@ -7109,13 +6851,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -7294,13 +7029,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Alzheimer’s Disease ---------------------------------------------------------
@@ -7447,7 +7175,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-
+      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -7477,13 +7205,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1.7}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -7631,7 +7352,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-
+      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -7661,13 +7382,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -7846,13 +7560,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Drug Overdose ---------------------------------------------------------------
@@ -8030,12 +7737,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       ,
       
       ## Motor Vehicle Accident ------------------------------------------------------
@@ -8182,7 +7883,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-
+      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -8212,13 +7913,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -8397,13 +8091,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Influenza and Pneumonia -----------------------------------------------------
@@ -8578,12 +8265,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       ,
       
       ## Kidney Diseases -------------------------------------------------------------
@@ -8727,7 +8408,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-
+      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -8757,13 +8438,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
       ,
       
@@ -8942,13 +8616,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Liver Diseases --------------------------------------------------------------
@@ -9123,13 +8790,6 @@ server <- function(input, output){
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
       
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
-      
       ,
       
       ## Septicemia ------------------------------------------------------------------
@@ -9276,7 +8936,7 @@ server <- function(input, output){
         else if(input$alz=="No"){1})
       
       ### FAMILY HISTORY ===
-
+      
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
         else if(input$fcvd=="Yes"){1}
@@ -9306,13 +8966,6 @@ server <- function(input, output){
       *(if(is.null(input$falz)){1}
         else if(input$falz=="Yes"){1}
         else if(input$falz=="No"){1})
-      
-      ### CONCOMITANT MEDICATIONS ===
-      
-      #### Immunosuppressants ---
-      *(if(is.null(input$cmi)){1}
-        else if(input$cmi=="Yes"){1}
-        else if(input$cmi=="No"){1})
       
     )
     
@@ -9399,19 +9052,23 @@ server <- function(input, output){
       ggplotly(              
         ggplot(cod_react(), aes(x=age, y=probability, size = pop, color = cause, text=text)) +
           geom_point(alpha=0.6) + #use this line to make bubble +or- transparent
+          geom_text(aes(label = cause), size=3, color="black") +
           scale_size(range = c(2, 30), name="Population (M)") +
           scale_color_viridis(discrete=TRUE, guide='none') +
           theme_ipsum() +
           scale_x_continuous(limits = c(input$cage, 100), breaks=c(10,20,30,40,50,60,70,80,90,100)) + #use this line to specify the x-axis range and tick positions
-          scale_y_continuous(limits=c(0, NA), expand = expansion(mult = c(NA, 0.20)))
-        ,
-        tooltip="text") %>% 
-        #the code below is related to legend display.
-        layout(legend=list(xanchor='Right',
-                           yanchor='top',
-                           title = NA,
-                           itemsizing='constant'
-        )) 
+          scale_y_continuous(limits=c(0, NA), expand = expansion(mult = c(NA, 0.20))) +
+          theme(legend.position="none"), 
+        tooltip="text"
+      )
+      #        ,
+      #        tooltip="text")
+      #the code below is related to legend display.
+      #       layout(legend=list(xanchor='Right',
+      #                           yanchor='top',
+      #                           title = NA,
+      #                           itemsizing='constant'
+      #        )) 
       
     })
     
