@@ -349,7 +349,7 @@ ui <- fluidPage(
   
   mainPanel(
     
-    tags$div(tags$h5("Based on the information you provided, you have, statistically speaking...")),
+    tags$div(tags$h5("Based on the information entered in the grey area, statistically, your have:")),
     
     tags$div(
       tags$strong(textOutput("textprob1", inline = TRUE),"%"),
@@ -9054,6 +9054,7 @@ server <- function(input, output){
           geom_point(alpha=0.6) + #use this line to make bubble +or- transparent
           geom_text(aes(label = cause), size=3, color="black") +
           scale_size(range = c(2, 30), name="Population (M)") +
+          #coord_fixed() + 
           scale_color_viridis(discrete=TRUE, guide='none') +
           theme_ipsum() +
           scale_x_continuous(limits = c(input$cage, 100), breaks=c(10,20,30,40,50,60,70,80,90,100)) + #use this line to specify the x-axis range and tick positions
