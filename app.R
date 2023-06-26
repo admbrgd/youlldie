@@ -422,7 +422,7 @@ ui <- fluidPage(
     ## Plot Window Fitting ----
     # Here are parameters related to the bubble-plot's window fitting
     
-    plotlyOutput("bubble", height="auto", width="auto"),
+    plotlyOutput("bubble", height="600", width="auto"),
     
   ),
   
