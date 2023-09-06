@@ -1,6 +1,9 @@
 # youlldie
 
-A web app that statistically predicts when and from what you'll die based on your inherited risk factors and lifestyle choices, leveraging data from peer-reviewed literature and public databases. It aims to provide a realistic perspective on death and incite users to adopt healthy lifestyles.
+youlldie is a web app that statistically predicts your life expectancy. Namely, it determines when and from what you'll die based on your inherited risk factors and lifestyle choices. The algorithm behing youlldie leverages information gathered from peer-reviewed literature and public databases. This project aims to 
+1. Develop an accurate life expectancy model
+2. Provide a realistic perspective of death
+3. Incite users to adopt healthy lifestyles
 
 The app is currently available at https://youlldie.com
 
