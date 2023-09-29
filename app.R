@@ -118,12 +118,12 @@ ui <- fluidPage(
     #### Education ----
     
     fluidRow(
-      radioButtons(inputId="edu", label="What is your highest grade/level of school/degree?", choices=list("No Formal Schooling",
-                                                                                                           "Primary Education (Elementary School)",
-                                                                                                           "Secondary Education (High School)",
-                                                                                                           "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",
-                                                                                                           "Master's degree",
-                                                                                                           "Doctoral degree"),
+      radioButtons(inputId="edu", label="Education", choices=list("No Formal Schooling",
+                                                                  "Primary Education (Elementary School)",
+                                                                  "Secondary Education (High School)",
+                                                                  "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",
+                                                                  "Master's degree",
+                                                                  "Doctoral degree"),
                    selected=character(0))
     ),
     
