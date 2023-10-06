@@ -41,383 +41,267 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(bslib)
 
 # UI ---------------------------------------------------------------------------
 # the following section is to build a ui object that lays out a webpage (html) for the app (it converts R -> html)
 
-ui <- fluidPage(
-  
+ui <- page_sidebar(
+  title = "YOU'LL DIE",
   ## Risk Factors ----------------------------------------------------------------
   # The following section is to add input functions corresponding to Risk Factors (e.g.: Sex, Race, # of drinks/week, etc.) 
   # Individual Risk Factors are grouped by Domain (e.g.: DEMOGRAPHICS, SOCIAL STATUS, etc.)
   
-  sidebarPanel(
-    style = "overflow-y:scroll;position:relative;max-height:100vh",
-    
-    ### DEMOGRAPHICS ---------------------------------------------------------------
-    
-    fluidRow(
-      tags$h4("DEMOGRAPHICS")),
-    
-    #### Current Age ----
-    
-    fluidRow(
-      sliderInput(inputId="cage",
-                  label="Age",
-                  value=0, min=0, max=100)
-    ),
-    
-    #### Sex ----
-    
-    fluidRow(
-      radioButtons(inputId="sex", label="Sex", choices=list("Male",
-                                                            "Female"), 
-                   selected=character(0))
-    ),
-    
-    #### Race ----
-    
-    fluidRow(
-      radioButtons(inputId="race", label="Race", choices=list("White",
-                                                              "Black",
-                                                              "Asian",
-                                                              "Native American",
-                                                              "Other"), 
-                   selected=character(0))
-    ),
-    
-    #### World Region ----
-    
-    fluidRow(
-      radioButtons(inputId="wbr", label="World Region", choices=list("East Asia & Pacific",
-                                                                     "Europe & Central Asia",
-                                                                     "Latin America & Caribbean",
-                                                                     "Middle East & North Africa",
-                                                                     "North America",
-                                                                     "South Asia",
-                                                                     "Sub-Saharan Africa"), 
-                   selected=character(0))
-    ),
-    
-    
-    ### SOCIAL STATUS --------------------------------------------------------------
-    
-    fluidRow(
-      tags$h4("SOCIAL STATUS")),
-    
-    #### Income Group ----
-    
-    fluidRow(
-      radioButtons(inputId="inc", label="Income Group", choices=list("Poor",
-                                                                     "Lower-middle",
-                                                                     "Middle",
-                                                                     "Upper-middle",
-                                                                     "Rich"),
-                   selected=character(0))
-    ),
-    
-    #### Education ----
-    
-    fluidRow(
-      radioButtons(inputId="edu", label="Education", choices=list("No Formal Schooling",
-                                                                  "Primary Education (Elementary School)",
-                                                                  "Secondary Education (High School)",
-                                                                  "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",
-                                                                  "Master's degree",
-                                                                  "Doctoral degree"),
-                   selected=character(0))
-    ),
-    
-    ### LIFESTYLE ------------------------------------------------------------------
-    
-    fluidRow(
-      tags$h4("LIFESTYLE")),
-    
-    #### Weekly Drinks ----
-    
-    fluidRow(
-      sliderInput(inputId="drk",
-                  label="Number of drinks per week",
-                  value=0, min=0, max=20)
-    ),
-    
-    #### Weekly Smokes ----
-    
-    fluidRow(
-      sliderInput(inputId="smk",
-                  label="Number of smokes per week",
-                  value=0, min=0, max=140)
-    ),
-    
-    #### Number of moderate intensity physical activity minutes per week ----
-    
-    fluidRow(
-      sliderInput(inputId="mpa",
-                  label="Number of minutes of moderate intensity physical activity per week",
-                  value=0, min=0, max=300)
-    ),
-    
-    #### Number of high intensity physical activity minutes per week ----
-    
-    fluidRow(
-      sliderInput(inputId="hpa",
-                  label="Number of minutes of vigorous intensity physical activity per week",
-                  value=0, min=0, max=100)
-    ),
-    
-    #### Number of Hours of Sleep per Day ----
-    
-    fluidRow(
-      sliderInput(inputId="hsd",
-                  label="Number of hours of sleep per day",
-                  value=7, min=0, max=24)
-    ),  
-    
-    
-    ### VITALS ---------------------------------------------------------------------
-    
-    fluidRow(
-      tags$h4("VITALS")),
-    
-    #### Systolic Blood Pressure (mm/Hg) ----
-    
-    fluidRow(
-      radioButtons(inputId="sys", label="Blood Pressure", choices=list("Normal (SBP <120 mmHG)",
-                                                                       "Elevated (SBP 120-129 mmHG)",
-                                                                       "High Blood Pressure Stage 1 (SBP 130-140 mmHG)",
-                                                                       "High Blood Pressure Stage 2 (SBP >140 mmHG)"),
-                   selected=character(0))
-    ),            
-    
-    #### Body Mass Index ----
-    
-    fluidRow(
-      radioButtons(inputId="bmi", label="Body Mass Index", choices=list("Underweight (<18.5)",
-                                                                        "Normal Weight (18.5-24.9)",
-                                                                        "Overweight (25-29.9)",
-                                                                        "Obese (>30)"),
-                   selected=character(0))
-    ),
-    
-    ### MEDICAL HISTORY ------------------------------------------------------------
-    
-    fluidRow(
-      tags$h4("MEDICAL HISTORY")),
-    fluidRow(
-      tags$p("Are you currently living with the following conditions?")),
-    
-    #### High Blood Cholesterol ----
-    
-    fluidRow(
-      radioButtons(inputId="hbc",
-                   label="High Blood Cholesterol", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Cardiovascular Disease (CVD) ----
-    
-    fluidRow(
-      radioButtons(inputId="cvd",
-                   label="Cardiovascular Disease", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Chronic Obstructive Pulmonary Disease (COPD) ----
-    
-    fluidRow(
-      radioButtons(inputId="copd",
-                   label="Chronic Obstructive Pulmonary Disease", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Diabetes ----
-    
-    fluidRow(
-      radioButtons(inputId="dia",
-                   label="Diabetes", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Depression ----
-    
-    fluidRow(
-      radioButtons(inputId="dep",
-                   label="Depression", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Cancer ----
-    
-    fluidRow(
-      radioButtons(inputId="can",
-                   label="Cancer", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Alzheimer ----
-    
-    fluidRow(
-      radioButtons(inputId="alz",
-                   label="Alzheimer", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    ### FAMILY HISTORY ===---------------------------------------------------------
-    
-    fluidRow(
-      tags$h4("FAMILY HISTORY")),
-    fluidRow(
-      tags$p("Has someone in your family (Father, Mother, Brother, Sister experienced the following conditions?")),
-    
-    #### Family History of Cardiovascular Disease (CVD) ----
-    
-    fluidRow(
-      radioButtons(inputId="fcvd",
-                   label="Family History of Cardiovascular Disease", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Family History of Chronic Obstructive Pulmonary Disease (COPD) ----
-    
-    fluidRow(
-      radioButtons(inputId="fcopd",
-                   label="Family History of Chronic Obstructive Pulmonary Disease", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Family History of Diabetes ----
-    
-    fluidRow(
-      radioButtons(inputId="fdia",
-                   label="Family History of Diabetes", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Family History of Depression ----
-    
-    fluidRow(
-      radioButtons(inputId="fdep",
-                   label="Family History of Depression", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Family History of Cancer ----
-    
-    fluidRow(
-      radioButtons(inputId="fcan",
-                   label="Family History of Cancer", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
-    #### Family History of Alzheimer ----
-    
-    fluidRow(
-      radioButtons(inputId="falz",
-                   label="Family History of Alzheimer", 
-                   choices=list("Yes",
-                                "No"),
-                   selected=character(0))
-    ),
-    
+  sidebar = sidebar(width = 400, open = "open",
+    accordion(style = "--bs-accordion-bg: unset;", multiple = FALSE,
+      ### DEMOGRAPHICS ---------------------------------------------------------------
+      accordion_panel(
+        "DEMOGRAPHICS",
+        
+        #### Current Age ----
+        
+        sliderInput(inputId="cage",
+          label="Age",
+          value=0, min=0, max=100),
+        
+        #### Sex ----
+        
+        radioButtons(inputId="sex", label="Sex", choices=list("Male",
+          "Female"), 
+          selected=character(0)),
+        
+        #### Race ----
+        
+        radioButtons(inputId="race", label="Race", choices=list("White",
+          "Black",
+          "Asian",
+          "Native American",
+          "Other"), 
+          selected=character(0)),
+        
+        #### World Region ----
+        
+        radioButtons(inputId="wbr", label="World Region", choices=list("East Asia & Pacific",
+          "Europe & Central Asia",
+          "Latin America & Caribbean",
+          "Middle East & North Africa",
+          "North America",
+          "South Asia",
+          "Sub-Saharan Africa"), 
+          selected=character(0)),
+        
+        
+      ),
+      ### SOCIAL STATUS --------------------------------------------------------------
+      accordion_panel(
+        "SOCIAL STATUS",
+        
+        #### Income Group ----
+        
+        radioButtons(inputId="inc", label="Income Group", choices=list("Poor",
+          "Lower-middle",
+          "Middle",
+          "Upper-middle",
+          "Rich"),
+          selected=character(0)),
+        
+        #### Education ----
+        
+        radioButtons(inputId="edu", label="Education", choices=list("No Formal Schooling",
+          "Primary Education (Elementary School)",
+          "Secondary Education (High School)",
+          "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",
+          "Master's degree",
+          "Doctoral degree"),
+          selected=character(0)),
+      ),
+      ### LIFESTYLE ------------------------------------------------------------------
+      accordion_panel(
+        "LIFESTYLE",
+        
+        #### Weekly Drinks ----
+        
+        sliderInput(inputId="drk",
+          label="Number of drinks per week",
+          value=0, min=0, max=20),
+        
+        #### Weekly Smokes ----
+        
+        sliderInput(inputId="smk",
+          label="Number of smokes per week",
+          value=0, min=0, max=140),
+        
+        #### Number of moderate intensity physical activity minutes per week ----
+        
+        sliderInput(inputId="mpa",
+          label="Number of minutes of moderate intensity physical activity per week",
+          value=0, min=0, max=300),
+        
+        #### Number of high intensity physical activity minutes per week ----
+        
+        sliderInput(inputId="hpa",
+          label="Number of minutes of vigorous intensity physical activity per week",
+          value=0, min=0, max=100),
+        
+        #### Number of Hours of Sleep per Day ----
+        
+        sliderInput(inputId="hsd",
+          label="Number of hours of sleep per day",
+          value=7, min=0, max=24),
+        
+      ),
+      ### VITALS ---------------------------------------------------------------------
+      accordion_panel(
+        "VITALS",
+        
+        #### Systolic Blood Pressure (mm/Hg) ----
+        
+        radioButtons(inputId="sys", label="Blood Pressure", choices=list("Normal (SBP <120 mmHG)",
+          "Elevated (SBP 120-129 mmHG)",
+          "High Blood Pressure Stage 1 (SBP 130-140 mmHG)",
+          "High Blood Pressure Stage 2 (SBP >140 mmHG)"),
+          selected=character(0)),
+        
+        #### Body Mass Index ----
+        
+        radioButtons(inputId="bmi", label="Body Mass Index", choices=list("Underweight (<18.5)",
+          "Normal Weight (18.5-24.9)",
+          "Overweight (25-29.9)",
+          "Obese (>30)"),
+          selected=character(0)),
+      ),
+      ### MEDICAL HISTORY ------------------------------------------------------------
+      accordion_panel(
+        "MEDICAL HISTORY",
+        tags$p("Are you currently living with the following conditions?"),
+        
+        #### High Blood Cholesterol ----
+        
+        radioButtons(inputId="hbc",
+          label="High Blood Cholesterol", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Cardiovascular Disease (CVD) ----
+        
+        radioButtons(inputId="cvd",
+          label="Cardiovascular Disease", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Chronic Obstructive Pulmonary Disease (COPD) ----
+        
+        radioButtons(inputId="copd",
+          label="Chronic Obstructive Pulmonary Disease", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Diabetes ----
+        
+        radioButtons(inputId="dia",
+          label="Diabetes", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Depression ----
+        
+        radioButtons(inputId="dep",
+          label="Depression", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Cancer ----
+        
+        radioButtons(inputId="can",
+          label="Cancer", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Alzheimer ----
+        
+        radioButtons(inputId="alz",
+          label="Alzheimer", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+      ),
+      ### FAMILY HISTORY ===---------------------------------------------------------
+      accordion_panel(
+        "FAMILY HISTORY",
+        tags$p("Has someone in your family (Father, Mother, Brother, Sister experienced the following conditions?"),
+        
+        #### Family History of Cardiovascular Disease (CVD) ----
+        
+        radioButtons(inputId="fcvd",
+          label="Family History of Cardiovascular Disease", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Family History of Chronic Obstructive Pulmonary Disease (COPD) ----
+        
+        radioButtons(inputId="fcopd",
+          label="Family History of Chronic Obstructive Pulmonary Disease", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Family History of Diabetes ----
+        
+        radioButtons(inputId="fdia",
+          label="Family History of Diabetes", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Family History of Depression ----
+        
+        radioButtons(inputId="fdep",
+          label="Family History of Depression", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Family History of Cancer ----
+        
+        radioButtons(inputId="fcan",
+          label="Family History of Cancer", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0)),
+        
+        #### Family History of Alzheimer ----
+        
+        radioButtons(inputId="falz",
+          label="Family History of Alzheimer", 
+          choices=list("Yes",
+            "No"),
+          selected=character(0))
+      )
+    )
   ),
   
   ## Main Panel -------------------------------------------------------------------
   # The following section is to indicate what to display on the mainPanel
   
-  mainPanel(
-    
-    tags$div(tags$h5("Based on the information entered in the grey area, statistically, your have:")),
+  layout_columns(
     
     tags$div(
-      tags$strong(textOutput("textprob1", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause1", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage1", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob2", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause2", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage2", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob3", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause3", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage3", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob4", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause4", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage4", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob5", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause5", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage5", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob6", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause6", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage6", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob7", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause7", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage7", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob8", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause8", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage8", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob9", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause9", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage9", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob10", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause10", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage10", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob11", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause11", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage11", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob12", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause12", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage12", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob13", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause13", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage13", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob14", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause14", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage14", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob15", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause15", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage15", inline = TRUE)),
-      br(),
-      tags$strong(textOutput("textprob16", inline = TRUE),"%"),
-      "chance of dying from", tags$strong(textOutput("textcause16", inline = TRUE)),
-      "at the age of",tags$strong(textOutput("textage16", inline = TRUE)),
-      br(),
-      
+      tags$h5("Based on the information entered in the grey area, statistically, you have:"),
+      lapply(1:16, function(i) {
+        tagList(
+          tags$strong(textOutput(paste0("textprob", i), inline = TRUE),"%"),
+          "chance of dying from", tags$strong(textOutput(paste0("textcause", i), inline = TRUE)),
+          "at the age of",tags$strong(textOutput(paste0("textage", i), inline = TRUE)),
+          br(),
+        )
+      })
     ),
     
     ## Plot Window Fitting ----
@@ -437,78 +321,78 @@ cod <- data.frame(
   ## CAUSES OF DEATH ----
   # Provide the list of leading causes of death here:
   cause = c("Cardiovascular Diseases",
-            "Coronary Heart Diseases",
-            "Stroke",
-            "Cancer",
-            "COVID-19",
-            "Alzheimer’s Disease",
-            "Chronic Lower Respiratory Diseases",
-            "Diabetes",
-            "Drug Overdose",
-            "Motor Vehicle Accident",
-            "Fall",
-            "Influenza and Pneumonia",
-            "Kidney Diseases",
-            "Suicide",
-            "Liver Diseases",
-            "Septicemia"),
+    "Coronary Heart Diseases",
+    "Stroke",
+    "Cancer",
+    "COVID-19",
+    "Alzheimer’s Disease",
+    "Chronic Lower Respiratory Diseases",
+    "Diabetes",
+    "Drug Overdose",
+    "Motor Vehicle Accident",
+    "Fall",
+    "Influenza and Pneumonia",
+    "Kidney Diseases",
+    "Suicide",
+    "Liver Diseases",
+    "Septicemia"),
   
   ## AGE OF DEATH ----                  
   # Enter the average age of death from each cause of death here:                 
   age = c(67.3,  #Cardiovascular Diseases
-          76.0,  #Coronary Heart Diseases
-          70.5,  #Stroke
-          65.0,  #Cancer
-          79.0,  #COVID-19
-          78.0,  #Alzheimer’s Disease
-          62.0,  #Chronic Lower Respiratory Diseases
-          74.6,  #Diabetes
-          40.0,  #Drug Overdose
-          40.0,  #Motor Vehicle Accident
-          70.0,  #Fall
-          70.0,  #Influenza and Pneumonia
-          73.0,  #Kidney Diseases
-          30.0,  #Suicide
-          52.0,  #Liver Diseases
-          65.0), #Septicemia
+    76.0,  #Coronary Heart Diseases
+    70.5,  #Stroke
+    65.0,  #Cancer
+    79.0,  #COVID-19
+    78.0,  #Alzheimer’s Disease
+    62.0,  #Chronic Lower Respiratory Diseases
+    74.6,  #Diabetes
+    40.0,  #Drug Overdose
+    40.0,  #Motor Vehicle Accident
+    70.0,  #Fall
+    70.0,  #Influenza and Pneumonia
+    73.0,  #Kidney Diseases
+    30.0,  #Suicide
+    52.0,  #Liver Diseases
+    65.0), #Septicemia
   
   ## RISK OF DEATH ----                
   # Enter the baseline risk of dying from each cause of death (n/100,000) here:                  
   risk = c(224.4, #Cardiovascular Diseases
-           91.8, #Coronary Heart Diseases
-           38.8,  #Stroke
-           148.1, #Cancer
-           85.0, #COVID-19
-           32.4,  #Alzheimer’s Disease
-           36.4,  #Chronic Lower Respiratory Diseases
-           24.8,  #Diabetes
-           25.8,  #Drug Overdose
-           13.1,  #Motor Vehicle Accident
-           10.3,  #Fall
-           13.0,  #Influenza and Pneumonia
-           12.7,  #Kidney Diseases
-           13.5,  #Suicide
-           13.3,  #Liver Diseases
-           9.7), #Septicemia
+    91.8, #Coronary Heart Diseases
+    38.8,  #Stroke
+    148.1, #Cancer
+    85.0, #COVID-19
+    32.4,  #Alzheimer’s Disease
+    36.4,  #Chronic Lower Respiratory Diseases
+    24.8,  #Diabetes
+    25.8,  #Drug Overdose
+    13.1,  #Motor Vehicle Accident
+    10.3,  #Fall
+    13.0,  #Influenza and Pneumonia
+    12.7,  #Kidney Diseases
+    13.5,  #Suicide
+    13.3,  #Liver Diseases
+    9.7), #Septicemia
   
   ## RATE OF DEATH ----                  
   # Enter the total population dying form each cause of death per year (Crude Death Rate) here:                
   pop = c(813804, #Cardiovascular Diseases
-          406351, #Coronary Heart Diseases
-          160264, #Stroke
-          608570, #Cancer
-          350831, #COVID-19
-          132242, #Alzheimer’s Disease
-          152657, #Chronic Lower Respiratory Diseases
-          102188, #Diabetes
-          91800,  #Drug Overdose
-          42915,  #Motor Vehicle Accident
-          40114,  #Fall
-          53544,  #Influenza and Pneumonia
-          52547,  #Kidney Diseases
-          45940,  #Suicide
-          51642,  #Liver Diseases
-          40050) #Septicemia
+    406351, #Coronary Heart Diseases
+    160264, #Stroke
+    608570, #Cancer
+    350831, #COVID-19
+    132242, #Alzheimer’s Disease
+    152657, #Chronic Lower Respiratory Diseases
+    102188, #Diabetes
+    91800,  #Drug Overdose
+    42915,  #Motor Vehicle Accident
+    40114,  #Fall
+    53544,  #Influenza and Pneumonia
+    52547,  #Kidney Diseases
+    45940,  #Suicide
+    51642,  #Liver Diseases
+    40050) #Septicemia
 )
 
 factors <- readr::read_csv("factors.csv")
@@ -560,10 +444,10 @@ server <- function(input, output){
       group_by(category, cause) %>%
       summarise(multiplier = prod(multiplier), .groups = "drop") %>%
       pivot_wider(names_from=category, values_from=multiplier, names_prefix="f_")
-
+    
     current_factors_cont <- multiply_by_inputs(factors_cont, input) |>
       pivot_wider(names_from=category, values_from=multiplier, names_prefix="f_")
-
+    
     cod %>%
       left_join(current_factors, by = "cause") %>%
       mutate(
@@ -595,64 +479,20 @@ server <- function(input, output){
       mutate(cause = factor(cause, cause)) %>%
       mutate(text = paste("Cause: ", cause, "\nCrude Death Rate: ", pop, "\nRisk (%): ", probability, "\nAverage Age of Death: ", age, sep=""))
     
-  })  
+  })
+  
+  cod_react_ordered <- reactive({
+    cod_react()[order(-cod_react()$risk),]
+  })
   
   #///////////////////////////////////////////////////////////////////////////////   
   #create textoutput for all of the causes in order of increasing risk.
   
-  ({  output$textcause1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],5] }) })
-  ({  output$textcause2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],5] }) })
-  ({  output$textcause3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],5] }) })
-  ({  output$textcause4 <- renderText({ cod_react()[order(-cod_react()$risk)[4],5] }) })
-  ({  output$textcause5 <- renderText({ cod_react()[order(-cod_react()$risk)[5],5] }) })
-  ({  output$textcause6 <- renderText({ cod_react()[order(-cod_react()$risk)[6],5] }) })
-  ({  output$textcause7 <- renderText({ cod_react()[order(-cod_react()$risk)[7],5] }) })
-  ({  output$textcause8 <- renderText({ cod_react()[order(-cod_react()$risk)[8],5] }) })
-  ({  output$textcause9 <- renderText({ cod_react()[order(-cod_react()$risk)[9],5] }) })
-  ({  output$textcause10 <- renderText({ cod_react()[order(-cod_react()$risk)[10],5] }) })
-  ({  output$textcause11 <- renderText({ cod_react()[order(-cod_react()$risk)[11],5] }) })
-  ({  output$textcause12 <- renderText({ cod_react()[order(-cod_react()$risk)[12],5] }) })
-  ({  output$textcause13 <- renderText({ cod_react()[order(-cod_react()$risk)[13],5] }) })
-  ({  output$textcause14 <- renderText({ cod_react()[order(-cod_react()$risk)[14],5] }) })
-  ({  output$textcause15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],5] }) })
-  ({  output$textcause16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],5] }) })
-  
-  #create textoutput for all of the causes probability in order of increasing risk.
-  ({  output$textprob1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],6] }) })
-  ({  output$textprob2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],6] }) })
-  ({  output$textprob3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],6] }) })
-  ({  output$textprob4 <- renderText({ cod_react()[order(-cod_react()$risk)[4],6] }) })
-  ({  output$textprob5 <- renderText({ cod_react()[order(-cod_react()$risk)[5],6] }) })
-  ({  output$textprob6 <- renderText({ cod_react()[order(-cod_react()$risk)[6],6] }) })
-  ({  output$textprob7 <- renderText({ cod_react()[order(-cod_react()$risk)[7],6] }) })
-  ({  output$textprob8 <- renderText({ cod_react()[order(-cod_react()$risk)[8],6] }) })
-  ({  output$textprob9 <- renderText({ cod_react()[order(-cod_react()$risk)[9],6] }) })
-  ({  output$textprob10 <- renderText({ cod_react()[order(-cod_react()$risk)[10],6] }) })
-  ({  output$textprob11 <- renderText({ cod_react()[order(-cod_react()$risk)[11],6] }) })
-  ({  output$textprob12 <- renderText({ cod_react()[order(-cod_react()$risk)[12],6] }) })
-  ({  output$textprob13 <- renderText({ cod_react()[order(-cod_react()$risk)[13],6] }) })
-  ({  output$textprob14 <- renderText({ cod_react()[order(-cod_react()$risk)[14],6] }) })
-  ({  output$textprob15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],6] }) })
-  ({  output$textprob16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],6] }) })
-  
-  #create textoutput for all of the causes age in order of increasing risk.
-  ({  output$textage1 <- renderText({ cod_react()[order(-cod_react()$risk)[1],"age"] }) })
-  ({  output$textage2 <- renderText({ cod_react()[order(-cod_react()$risk)[2],"age"] }) })
-  ({  output$textage3 <- renderText({ cod_react()[order(-cod_react()$risk)[3],"age"] }) })
-  ({  output$textage4 <- renderText({ cod_react()[order(-cod_react()$risk)[4],"age"] }) })
-  ({  output$textage5 <- renderText({ cod_react()[order(-cod_react()$risk)[5],"age"] }) })
-  ({  output$textage6 <- renderText({ cod_react()[order(-cod_react()$risk)[6],"age"] }) })
-  ({  output$textage7 <- renderText({ cod_react()[order(-cod_react()$risk)[7],"age"] }) })
-  ({  output$textage8 <- renderText({ cod_react()[order(-cod_react()$risk)[8],"age"] }) })
-  ({  output$textage9 <- renderText({ cod_react()[order(-cod_react()$risk)[9],"age"] }) })
-  ({  output$textage10 <- renderText({ cod_react()[order(-cod_react()$risk)[10],"age"] }) })
-  ({  output$textage11 <- renderText({ cod_react()[order(-cod_react()$risk)[11],"age"] }) })
-  ({  output$textage12 <- renderText({ cod_react()[order(-cod_react()$risk)[12],"age"] }) })
-  ({  output$textage13 <- renderText({ cod_react()[order(-cod_react()$risk)[13],"age"] }) })
-  ({  output$textage14 <- renderText({ cod_react()[order(-cod_react()$risk)[14],"age"] }) })
-  ({  output$textage15 <- renderText({ cod_react()[order(-cod_react()$risk)[15],"age"] }) })
-  ({  output$textage16 <- renderText({ cod_react()[order(-cod_react()$risk)[16],"age"] }) })
-  
+  lapply(1:16, function(i) {
+    output[[paste0("textcause", i)]] <- renderText({ cod_react_ordered()[i,5] })
+    output[[paste0("textprob", i)]] <- renderText({ cod_react_ordered()[i,6] })
+    output[[paste0("textage", i)]] <- renderText({ cod_react_ordered()[i,"age"] })
+  })
   
   # PLOT -------------------------------------------------------------------------
   # Set bubble plot (ggplot) parameters
