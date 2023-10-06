@@ -1,0 +1,4129 @@
+"category","cause","var","value","multiplier"
+"age","Cardiovascular Diseases","sex","Male",0.955
+"age","Cardiovascular Diseases","sex","Female",1.045
+"age","Cardiovascular Diseases","race","White",1
+"age","Cardiovascular Diseases","race","Black",0.93
+"age","Cardiovascular Diseases","race","Asian",1.1
+"age","Cardiovascular Diseases","race","Native American",0.85
+"age","Cardiovascular Diseases","race","Other",1
+"age","Cardiovascular Diseases","wbr","East Asia & Pacific",1.035
+"age","Cardiovascular Diseases","wbr","Europe & Central Asia",1.065
+"age","Cardiovascular Diseases","wbr","Latin America & Caribbean",1.022
+"age","Cardiovascular Diseases","wbr","Middle East & North Africa",1.007
+"age","Cardiovascular Diseases","wbr","North America",1.078
+"age","Cardiovascular Diseases","wbr","South Asia",0.96
+"age","Cardiovascular Diseases","wbr","Sub-Saharan Africa",0.834
+"age","Cardiovascular Diseases","inc","Poor",0.975
+"age","Cardiovascular Diseases","inc","Lower-middle",1
+"age","Cardiovascular Diseases","inc","Middle",1
+"age","Cardiovascular Diseases","inc","Upper-middle",1
+"age","Cardiovascular Diseases","inc","Rich",1
+"age","Cardiovascular Diseases","edu","No Formal Schooling",0.964
+"age","Cardiovascular Diseases","edu","Primary Education (Elementary School)",0.982
+"age","Cardiovascular Diseases","edu","Secondary Education (High School)",1
+"age","Cardiovascular Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Cardiovascular Diseases","edu","Master's degree",1.036
+"age","Cardiovascular Diseases","edu","Doctoral degree",1.054
+"age","Cardiovascular Diseases","hsd","0",0.65
+"age","Cardiovascular Diseases","hsd","1",0.7
+"age","Cardiovascular Diseases","hsd","2",0.75
+"age","Cardiovascular Diseases","hsd","3",0.8
+"age","Cardiovascular Diseases","hsd","4",0.85
+"age","Cardiovascular Diseases","hsd","5",0.9
+"age","Cardiovascular Diseases","hsd","6",0.95
+"age","Cardiovascular Diseases","hsd","7",1
+"age","Cardiovascular Diseases","hsd","8",0.98
+"age","Cardiovascular Diseases","hsd","9",0.85
+"age","Cardiovascular Diseases","hsd","10",0.8
+"age","Cardiovascular Diseases","hsd","11",0.75
+"age","Cardiovascular Diseases","hsd","12",0.7
+"age","Cardiovascular Diseases","hsd","13",0.65
+"age","Cardiovascular Diseases","hsd","14",0.6
+"age","Cardiovascular Diseases","hsd","15",0.55
+"age","Cardiovascular Diseases","hsd","16",0.5
+"age","Cardiovascular Diseases","hsd","17",0.5
+"age","Cardiovascular Diseases","hsd","18",0.5
+"age","Cardiovascular Diseases","hsd","19",0.5
+"age","Cardiovascular Diseases","hsd","20",0.5
+"age","Cardiovascular Diseases","hsd","21",0.5
+"age","Cardiovascular Diseases","hsd","22",0.5
+"age","Cardiovascular Diseases","hsd","23",0.5
+"age","Cardiovascular Diseases","hsd","24",0.5
+"age","Cardiovascular Diseases","sys","Normal (SBP <120 mmHG)",1
+"age","Cardiovascular Diseases","sys","Elevated (SBP 120-129 mmHG)",0.984
+"age","Cardiovascular Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.967
+"age","Cardiovascular Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.934
+"age","Cardiovascular Diseases","bmi","Underweight (<18.5)",0.942
+"age","Cardiovascular Diseases","bmi","Normal Weight (18.5-24.9)",1
+"age","Cardiovascular Diseases","bmi","Overweight (25-29.9)",0.975
+"age","Cardiovascular Diseases","bmi","Obese (>30)",0.949
+"age","Cardiovascular Diseases","hbp","Yes",1
+"age","Cardiovascular Diseases","hbp","No",1
+"age","Cardiovascular Diseases","hbc","Yes",1
+"age","Cardiovascular Diseases","hbc","No",1
+"age","Cardiovascular Diseases","cvd","Yes",1
+"age","Cardiovascular Diseases","cvd","No",1
+"age","Cardiovascular Diseases","copd","Yes",1
+"age","Cardiovascular Diseases","copd","No",1
+"age","Cardiovascular Diseases","dia","Yes",1
+"age","Cardiovascular Diseases","dia","No",1
+"age","Cardiovascular Diseases","dep","Yes",1
+"age","Cardiovascular Diseases","dep","No",1
+"age","Cardiovascular Diseases","can","Yes",1
+"age","Cardiovascular Diseases","can","No",1
+"age","Cardiovascular Diseases","alz","Yes",1
+"age","Cardiovascular Diseases","alz","No",1
+"age","Cardiovascular Diseases","fcvd","Yes",1
+"age","Cardiovascular Diseases","fcvd","No",1
+"age","Cardiovascular Diseases","fcopd","Yes",1
+"age","Cardiovascular Diseases","fcopd","No",1
+"age","Cardiovascular Diseases","fdia","Yes",1
+"age","Cardiovascular Diseases","fdia","No",1
+"age","Cardiovascular Diseases","fdep","Yes",1
+"age","Cardiovascular Diseases","fdep","No",1
+"age","Cardiovascular Diseases","fcan","Yes",1
+"age","Cardiovascular Diseases","fcan","No",1
+"age","Cardiovascular Diseases","falz","Yes",1
+"age","Cardiovascular Diseases","falz","No",1
+"age","Coronary Heart Diseases","sex","Male",0.974
+"age","Coronary Heart Diseases","sex","Female",1.026
+"age","Coronary Heart Diseases","race","White",1
+"age","Coronary Heart Diseases","race","Black",0.93
+"age","Coronary Heart Diseases","race","Asian",1.1
+"age","Coronary Heart Diseases","race","Native American",0.85
+"age","Coronary Heart Diseases","race","Other",1
+"age","Coronary Heart Diseases","wbr","East Asia & Pacific",1.035
+"age","Coronary Heart Diseases","wbr","Europe & Central Asia",1.065
+"age","Coronary Heart Diseases","wbr","Latin America & Caribbean",1.022
+"age","Coronary Heart Diseases","wbr","Middle East & North Africa",1.007
+"age","Coronary Heart Diseases","wbr","North America",1.078
+"age","Coronary Heart Diseases","wbr","South Asia",0.96
+"age","Coronary Heart Diseases","wbr","Sub-Saharan Africa",0.834
+"age","Coronary Heart Diseases","inc","Poor",0.975
+"age","Coronary Heart Diseases","inc","Lower-middle",1
+"age","Coronary Heart Diseases","inc","Middle",1
+"age","Coronary Heart Diseases","inc","Upper-middle",1
+"age","Coronary Heart Diseases","inc","Rich",1
+"age","Coronary Heart Diseases","edu","No Formal Schooling",0.964
+"age","Coronary Heart Diseases","edu","Primary Education (Elementary School)",0.982
+"age","Coronary Heart Diseases","edu","Secondary Education (High School)",1
+"age","Coronary Heart Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Coronary Heart Diseases","edu","Master's degree",1.036
+"age","Coronary Heart Diseases","edu","Doctoral degree",1.054
+"age","Coronary Heart Diseases","hsd","0",0.65
+"age","Coronary Heart Diseases","hsd","1",0.83
+"age","Coronary Heart Diseases","hsd","2",0.86
+"age","Coronary Heart Diseases","hsd","3",0.89
+"age","Coronary Heart Diseases","hsd","4",0.92
+"age","Coronary Heart Diseases","hsd","5",0.95
+"age","Coronary Heart Diseases","hsd","6",0.98
+"age","Coronary Heart Diseases","hsd","7",1
+"age","Coronary Heart Diseases","hsd","8",0.98
+"age","Coronary Heart Diseases","hsd","9",0.95
+"age","Coronary Heart Diseases","hsd","10",0.92
+"age","Coronary Heart Diseases","hsd","11",0.89
+"age","Coronary Heart Diseases","hsd","12",0.86
+"age","Coronary Heart Diseases","hsd","13",0.83
+"age","Coronary Heart Diseases","hsd","14",0.8
+"age","Coronary Heart Diseases","hsd","15",0.77
+"age","Coronary Heart Diseases","hsd","16",0.74
+"age","Coronary Heart Diseases","hsd","17",0.74
+"age","Coronary Heart Diseases","hsd","18",0.74
+"age","Coronary Heart Diseases","hsd","19",0.74
+"age","Coronary Heart Diseases","hsd","20",0.74
+"age","Coronary Heart Diseases","hsd","21",0.74
+"age","Coronary Heart Diseases","hsd","22",0.74
+"age","Coronary Heart Diseases","hsd","23",0.74
+"age","Coronary Heart Diseases","hsd","24",0.74
+"age","Coronary Heart Diseases","sys","Normal (SBP <120 mmHG)",1
+"age","Coronary Heart Diseases","sys","Elevated (SBP 120-129 mmHG)",0.984
+"age","Coronary Heart Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.967
+"age","Coronary Heart Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.934
+"age","Coronary Heart Diseases","bmi","Underweight (<18.5)",0.942
+"age","Coronary Heart Diseases","bmi","Normal Weight (18.5-24.9)",1
+"age","Coronary Heart Diseases","bmi","Overweight (25-29.9)",0.975
+"age","Coronary Heart Diseases","bmi","Obese (>30)",0.949
+"age","Coronary Heart Diseases","hbp","Yes",1
+"age","Coronary Heart Diseases","hbp","No",1
+"age","Coronary Heart Diseases","hbc","Yes",1
+"age","Coronary Heart Diseases","hbc","No",1
+"age","Coronary Heart Diseases","cvd","Yes",1
+"age","Coronary Heart Diseases","cvd","No",1
+"age","Coronary Heart Diseases","copd","Yes",1
+"age","Coronary Heart Diseases","copd","No",1
+"age","Coronary Heart Diseases","dia","Yes",1
+"age","Coronary Heart Diseases","dia","No",1
+"age","Coronary Heart Diseases","dep","Yes",1
+"age","Coronary Heart Diseases","dep","No",1
+"age","Coronary Heart Diseases","can","Yes",1
+"age","Coronary Heart Diseases","can","No",1
+"age","Coronary Heart Diseases","alz","Yes",1
+"age","Coronary Heart Diseases","alz","No",1
+"age","Coronary Heart Diseases","fcvd","Yes",1
+"age","Coronary Heart Diseases","fcvd","No",1
+"age","Coronary Heart Diseases","fcopd","Yes",1
+"age","Coronary Heart Diseases","fcopd","No",1
+"age","Coronary Heart Diseases","fdia","Yes",1
+"age","Coronary Heart Diseases","fdia","No",1
+"age","Coronary Heart Diseases","fdep","Yes",1
+"age","Coronary Heart Diseases","fdep","No",1
+"age","Coronary Heart Diseases","fcan","Yes",1
+"age","Coronary Heart Diseases","fcan","No",1
+"age","Coronary Heart Diseases","falz","Yes",1
+"age","Coronary Heart Diseases","falz","No",1
+"age","Stroke","sex","Male",0.965
+"age","Stroke","sex","Female",1.035
+"age","Stroke","race","White",1
+"age","Stroke","race","Black",0.93
+"age","Stroke","race","Asian",1.1
+"age","Stroke","race","Native American",0.85
+"age","Stroke","race","Other",1
+"age","Stroke","wbr","East Asia & Pacific",1.035
+"age","Stroke","wbr","Europe & Central Asia",1.065
+"age","Stroke","wbr","Latin America & Caribbean",1.022
+"age","Stroke","wbr","Middle East & North Africa",1.007
+"age","Stroke","wbr","North America",1.078
+"age","Stroke","wbr","South Asia",0.96
+"age","Stroke","wbr","Sub-Saharan Africa",0.834
+"age","Stroke","inc","Poor",0.975
+"age","Stroke","inc","Lower-middle",1
+"age","Stroke","inc","Middle",1
+"age","Stroke","inc","Upper-middle",1
+"age","Stroke","inc","Rich",1
+"age","Stroke","edu","No Formal Schooling",0.964
+"age","Stroke","edu","Primary Education (Elementary School)",0.982
+"age","Stroke","edu","Secondary Education (High School)",1
+"age","Stroke","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Stroke","edu","Master's degree",1.036
+"age","Stroke","edu","Doctoral degree",1.054
+"age","Stroke","hsd","0",0.65
+"age","Stroke","hsd","1",0.7
+"age","Stroke","hsd","2",0.75
+"age","Stroke","hsd","3",0.8
+"age","Stroke","hsd","4",0.85
+"age","Stroke","hsd","5",0.9
+"age","Stroke","hsd","6",0.95
+"age","Stroke","hsd","7",1
+"age","Stroke","hsd","8",0.98
+"age","Stroke","hsd","9",0.85
+"age","Stroke","hsd","10",0.8
+"age","Stroke","hsd","11",0.75
+"age","Stroke","hsd","12",0.7
+"age","Stroke","hsd","13",0.65
+"age","Stroke","hsd","14",0.6
+"age","Stroke","hsd","15",0.55
+"age","Stroke","hsd","16",0.5
+"age","Stroke","hsd","17",0.5
+"age","Stroke","hsd","18",0.5
+"age","Stroke","hsd","19",0.5
+"age","Stroke","hsd","20",0.5
+"age","Stroke","hsd","21",0.5
+"age","Stroke","hsd","22",0.5
+"age","Stroke","hsd","23",0.5
+"age","Stroke","hsd","24",0.5
+"age","Stroke","sys","Normal (SBP <120 mmHG)",1
+"age","Stroke","sys","Elevated (SBP 120-129 mmHG)",0.982
+"age","Stroke","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.958
+"age","Stroke","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.907
+"age","Stroke","bmi","Underweight (<18.5)",0.942
+"age","Stroke","bmi","Normal Weight (18.5-24.9)",1
+"age","Stroke","bmi","Overweight (25-29.9)",0.978
+"age","Stroke","bmi","Obese (>30)",0.931
+"age","Stroke","hbp","Yes",1
+"age","Stroke","hbp","No",1
+"age","Stroke","hbc","Yes",1
+"age","Stroke","hbc","No",1
+"age","Stroke","cvd","Yes",1
+"age","Stroke","cvd","No",1
+"age","Stroke","copd","Yes",1
+"age","Stroke","copd","No",1
+"age","Stroke","dia","Yes",1
+"age","Stroke","dia","No",1
+"age","Stroke","dep","Yes",1
+"age","Stroke","dep","No",1
+"age","Stroke","can","Yes",1
+"age","Stroke","can","No",1
+"age","Stroke","alz","Yes",1
+"age","Stroke","alz","No",1
+"age","Stroke","fcvd","Yes",1
+"age","Stroke","fcvd","No",1
+"age","Stroke","fcopd","Yes",1
+"age","Stroke","fcopd","No",1
+"age","Stroke","fdia","Yes",1
+"age","Stroke","fdia","No",1
+"age","Stroke","fdep","Yes",1
+"age","Stroke","fdep","No",1
+"age","Stroke","fcan","Yes",1
+"age","Stroke","fcan","No",1
+"age","Stroke","falz","Yes",1
+"age","Stroke","falz","No",1
+"age","Cancer","sex","Male",0.923
+"age","Cancer","sex","Female",1.077
+"age","Cancer","race","White",1
+"age","Cancer","race","Black",0.93
+"age","Cancer","race","Asian",1.1
+"age","Cancer","race","Native American",0.85
+"age","Cancer","race","Other",1
+"age","Cancer","wbr","East Asia & Pacific",1.035
+"age","Cancer","wbr","Europe & Central Asia",1.065
+"age","Cancer","wbr","Latin America & Caribbean",1.022
+"age","Cancer","wbr","Middle East & North Africa",1.007
+"age","Cancer","wbr","North America",1.078
+"age","Cancer","wbr","South Asia",0.96
+"age","Cancer","wbr","Sub-Saharan Africa",0.834
+"age","Cancer","inc","Poor",0.975
+"age","Cancer","inc","Lower-middle",1
+"age","Cancer","inc","Middle",1
+"age","Cancer","inc","Upper-middle",1
+"age","Cancer","inc","Rich",1
+"age","Cancer","edu","No Formal Schooling",0.964
+"age","Cancer","edu","Primary Education (Elementary School)",0.982
+"age","Cancer","edu","Secondary Education (High School)",1
+"age","Cancer","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Cancer","edu","Master's degree",1.036
+"age","Cancer","edu","Doctoral degree",1.054
+"age","Cancer","hsd","0",0.65
+"age","Cancer","hsd","1",0.83
+"age","Cancer","hsd","2",0.86
+"age","Cancer","hsd","3",0.89
+"age","Cancer","hsd","4",0.92
+"age","Cancer","hsd","5",0.95
+"age","Cancer","hsd","6",0.98
+"age","Cancer","hsd","7",1
+"age","Cancer","hsd","8",0.98
+"age","Cancer","hsd","9",0.95
+"age","Cancer","hsd","10",0.92
+"age","Cancer","hsd","11",0.89
+"age","Cancer","hsd","12",0.86
+"age","Cancer","hsd","13",0.83
+"age","Cancer","hsd","14",0.8
+"age","Cancer","hsd","15",0.77
+"age","Cancer","hsd","16",0.74
+"age","Cancer","hsd","17",0.74
+"age","Cancer","hsd","18",0.74
+"age","Cancer","hsd","19",0.74
+"age","Cancer","hsd","20",0.74
+"age","Cancer","hsd","21",0.74
+"age","Cancer","hsd","22",0.74
+"age","Cancer","hsd","23",0.74
+"age","Cancer","hsd","24",0.74
+"age","Cancer","sys","Normal (SBP <120 mmHG)",1
+"age","Cancer","sys","Elevated (SBP 120-129 mmHG)",0.985
+"age","Cancer","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.97
+"age","Cancer","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.944
+"age","Cancer","bmi","Underweight (<18.5)",0.937
+"age","Cancer","bmi","Normal Weight (18.5-24.9)",1
+"age","Cancer","bmi","Overweight (25-29.9)",0.978
+"age","Cancer","bmi","Obese (>30)",0.96
+"age","Cancer","hbp","Yes",1
+"age","Cancer","hbp","No",1
+"age","Cancer","hbc","Yes",1
+"age","Cancer","hbc","No",1
+"age","Cancer","cvd","Yes",1
+"age","Cancer","cvd","No",1
+"age","Cancer","copd","Yes",1
+"age","Cancer","copd","No",1
+"age","Cancer","dia","Yes",1
+"age","Cancer","dia","No",1
+"age","Cancer","dep","Yes",1
+"age","Cancer","dep","No",1
+"age","Cancer","can","Yes",1
+"age","Cancer","can","No",1
+"age","Cancer","alz","Yes",1
+"age","Cancer","alz","No",1
+"age","Cancer","fcvd","Yes",1
+"age","Cancer","fcvd","No",1
+"age","Cancer","fcopd","Yes",1
+"age","Cancer","fcopd","No",1
+"age","Cancer","fdia","Yes",1
+"age","Cancer","fdia","No",1
+"age","Cancer","fdep","Yes",1
+"age","Cancer","fdep","No",1
+"age","Cancer","fcan","Yes",1
+"age","Cancer","fcan","No",1
+"age","Cancer","falz","Yes",1
+"age","Cancer","falz","No",1
+"age","COVID-19","sex","Male",0.997
+"age","COVID-19","sex","Female",1.038
+"age","COVID-19","race","White",1
+"age","COVID-19","race","Black",1
+"age","COVID-19","race","Asian",1
+"age","COVID-19","race","Native American",1
+"age","COVID-19","race","Other",1
+"age","COVID-19","wbr","East Asia & Pacific",1.035
+"age","COVID-19","wbr","Europe & Central Asia",1.065
+"age","COVID-19","wbr","Latin America & Caribbean",1.022
+"age","COVID-19","wbr","Middle East & North Africa",1.007
+"age","COVID-19","wbr","North America",1.078
+"age","COVID-19","wbr","South Asia",0.96
+"age","COVID-19","wbr","Sub-Saharan Africa",0.834
+"age","COVID-19","inc","Poor",0.975
+"age","COVID-19","inc","Lower-middle",1
+"age","COVID-19","inc","Middle",1
+"age","COVID-19","inc","Upper-middle",1
+"age","COVID-19","inc","Rich",1
+"age","COVID-19","edu","No Formal Schooling",0.964
+"age","COVID-19","edu","Primary Education (Elementary School)",0.982
+"age","COVID-19","edu","Secondary Education (High School)",1
+"age","COVID-19","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","COVID-19","edu","Master's degree",1.036
+"age","COVID-19","edu","Doctoral degree",1.054
+"age","COVID-19","hsd","0",0.65
+"age","COVID-19","hsd","1",0.83
+"age","COVID-19","hsd","2",0.86
+"age","COVID-19","hsd","3",0.89
+"age","COVID-19","hsd","4",0.92
+"age","COVID-19","hsd","5",0.95
+"age","COVID-19","hsd","6",0.98
+"age","COVID-19","hsd","7",1
+"age","COVID-19","hsd","8",0.98
+"age","COVID-19","hsd","9",0.95
+"age","COVID-19","hsd","10",0.92
+"age","COVID-19","hsd","11",0.89
+"age","COVID-19","hsd","12",0.86
+"age","COVID-19","hsd","13",0.83
+"age","COVID-19","hsd","14",0.8
+"age","COVID-19","hsd","15",0.77
+"age","COVID-19","hsd","16",0.74
+"age","COVID-19","hsd","17",0.74
+"age","COVID-19","hsd","18",0.74
+"age","COVID-19","hsd","19",0.74
+"age","COVID-19","hsd","20",0.74
+"age","COVID-19","hsd","21",0.74
+"age","COVID-19","hsd","22",0.74
+"age","COVID-19","hsd","23",0.74
+"age","COVID-19","hsd","24",0.74
+"age","COVID-19","sys","Normal (SBP <120 mmHG)",1
+"age","COVID-19","sys","Elevated (SBP 120-129 mmHG)",0.985
+"age","COVID-19","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.97
+"age","COVID-19","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.942
+"age","COVID-19","bmi","Underweight (<18.5)",0.926
+"age","COVID-19","bmi","Normal Weight (18.5-24.9)",1
+"age","COVID-19","bmi","Overweight (25-29.9)",0.977
+"age","COVID-19","bmi","Obese (>30)",0.953
+"age","COVID-19","hbp","Yes",1
+"age","COVID-19","hbp","No",1
+"age","COVID-19","hbc","Yes",1
+"age","COVID-19","hbc","No",1
+"age","COVID-19","cvd","Yes",1
+"age","COVID-19","cvd","No",1
+"age","COVID-19","copd","Yes",1
+"age","COVID-19","copd","No",1
+"age","COVID-19","dia","Yes",1
+"age","COVID-19","dia","No",1
+"age","COVID-19","dep","Yes",1
+"age","COVID-19","dep","No",1
+"age","COVID-19","can","Yes",1
+"age","COVID-19","can","No",1
+"age","COVID-19","alz","Yes",1
+"age","COVID-19","alz","No",1
+"age","COVID-19","fcvd","Yes",1
+"age","COVID-19","fcvd","No",1
+"age","COVID-19","fcopd","Yes",1
+"age","COVID-19","fcopd","No",1
+"age","COVID-19","fdia","Yes",1
+"age","COVID-19","fdia","No",1
+"age","COVID-19","fdep","Yes",1
+"age","COVID-19","fdep","No",1
+"age","COVID-19","fcan","Yes",1
+"age","COVID-19","fcan","No",1
+"age","COVID-19","falz","Yes",1
+"age","COVID-19","falz","No",1
+"age","Alzheimer’s Disease","sex","Male",0.974
+"age","Alzheimer’s Disease","sex","Female",1.026
+"age","Alzheimer’s Disease","race","White",1
+"age","Alzheimer’s Disease","race","Black",0.93
+"age","Alzheimer’s Disease","race","Asian",1.1
+"age","Alzheimer’s Disease","race","Native American",0.85
+"age","Alzheimer’s Disease","race","Other",1
+"age","Alzheimer’s Disease","wbr","East Asia & Pacific",1.035
+"age","Alzheimer’s Disease","wbr","Europe & Central Asia",1.065
+"age","Alzheimer’s Disease","wbr","Latin America & Caribbean",1.022
+"age","Alzheimer’s Disease","wbr","Middle East & North Africa",1.007
+"age","Alzheimer’s Disease","wbr","North America",1.078
+"age","Alzheimer’s Disease","wbr","South Asia",0.96
+"age","Alzheimer’s Disease","wbr","Sub-Saharan Africa",0.834
+"age","Alzheimer’s Disease","inc","Poor",0.975
+"age","Alzheimer’s Disease","inc","Lower-middle",1
+"age","Alzheimer’s Disease","inc","Middle",1
+"age","Alzheimer’s Disease","inc","Upper-middle",1
+"age","Alzheimer’s Disease","inc","Rich",1
+"age","Alzheimer’s Disease","edu","No Formal Schooling",0.964
+"age","Alzheimer’s Disease","edu","Primary Education (Elementary School)",0.982
+"age","Alzheimer’s Disease","edu","Secondary Education (High School)",1
+"age","Alzheimer’s Disease","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Alzheimer’s Disease","edu","Master's degree",1.036
+"age","Alzheimer’s Disease","edu","Doctoral degree",1.054
+"age","Alzheimer’s Disease","hsd","0",0.65
+"age","Alzheimer’s Disease","hsd","1",0.83
+"age","Alzheimer’s Disease","hsd","2",0.86
+"age","Alzheimer’s Disease","hsd","3",0.89
+"age","Alzheimer’s Disease","hsd","4",0.92
+"age","Alzheimer’s Disease","hsd","5",0.95
+"age","Alzheimer’s Disease","hsd","6",0.98
+"age","Alzheimer’s Disease","hsd","7",1
+"age","Alzheimer’s Disease","hsd","8",0.98
+"age","Alzheimer’s Disease","hsd","9",0.95
+"age","Alzheimer’s Disease","hsd","10",0.92
+"age","Alzheimer’s Disease","hsd","11",0.89
+"age","Alzheimer’s Disease","hsd","12",0.86
+"age","Alzheimer’s Disease","hsd","13",0.83
+"age","Alzheimer’s Disease","hsd","14",0.8
+"age","Alzheimer’s Disease","hsd","15",0.77
+"age","Alzheimer’s Disease","hsd","16",0.74
+"age","Alzheimer’s Disease","hsd","17",0.74
+"age","Alzheimer’s Disease","hsd","18",0.74
+"age","Alzheimer’s Disease","hsd","19",0.74
+"age","Alzheimer’s Disease","hsd","20",0.74
+"age","Alzheimer’s Disease","hsd","21",0.74
+"age","Alzheimer’s Disease","hsd","22",0.74
+"age","Alzheimer’s Disease","hsd","23",0.74
+"age","Alzheimer’s Disease","hsd","24",0.74
+"age","Alzheimer’s Disease","sys","Normal (SBP <120 mmHG)",1
+"age","Alzheimer’s Disease","sys","Elevated (SBP 120-129 mmHG)",1
+"age","Alzheimer’s Disease","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"age","Alzheimer’s Disease","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"age","Alzheimer’s Disease","bmi","Underweight (<18.5)",1
+"age","Alzheimer’s Disease","bmi","Normal Weight (18.5-24.9)",1
+"age","Alzheimer’s Disease","bmi","Overweight (25-29.9)",1
+"age","Alzheimer’s Disease","bmi","Obese (>30)",1
+"age","Alzheimer’s Disease","hbp","Yes",1
+"age","Alzheimer’s Disease","hbp","No",1
+"age","Alzheimer’s Disease","hbc","Yes",1
+"age","Alzheimer’s Disease","hbc","No",1
+"age","Alzheimer’s Disease","cvd","Yes",1
+"age","Alzheimer’s Disease","cvd","No",1
+"age","Alzheimer’s Disease","copd","Yes",1
+"age","Alzheimer’s Disease","copd","No",1
+"age","Alzheimer’s Disease","dia","Yes",1
+"age","Alzheimer’s Disease","dia","No",1
+"age","Alzheimer’s Disease","dep","Yes",1
+"age","Alzheimer’s Disease","dep","No",1
+"age","Alzheimer’s Disease","can","Yes",1
+"age","Alzheimer’s Disease","can","No",1
+"age","Alzheimer’s Disease","alz","Yes",1
+"age","Alzheimer’s Disease","alz","No",1
+"age","Alzheimer’s Disease","fcvd","Yes",1
+"age","Alzheimer’s Disease","fcvd","No",1
+"age","Alzheimer’s Disease","fcopd","Yes",1
+"age","Alzheimer’s Disease","fcopd","No",1
+"age","Alzheimer’s Disease","fdia","Yes",1
+"age","Alzheimer’s Disease","fdia","No",1
+"age","Alzheimer’s Disease","fdep","Yes",1
+"age","Alzheimer’s Disease","fdep","No",1
+"age","Alzheimer’s Disease","fcan","Yes",1
+"age","Alzheimer’s Disease","fcan","No",1
+"age","Alzheimer’s Disease","falz","Yes",1
+"age","Alzheimer’s Disease","falz","No",1
+"age","Chronic Lower Respiratory Diseases","sex","Male",1
+"age","Chronic Lower Respiratory Diseases","sex","Female",1
+"age","Chronic Lower Respiratory Diseases","race","White",1
+"age","Chronic Lower Respiratory Diseases","race","Black",0.93
+"age","Chronic Lower Respiratory Diseases","race","Asian",1.1
+"age","Chronic Lower Respiratory Diseases","race","Native American",0.85
+"age","Chronic Lower Respiratory Diseases","race","Other",1
+"age","Chronic Lower Respiratory Diseases","wbr","East Asia & Pacific",1.035
+"age","Chronic Lower Respiratory Diseases","wbr","Europe & Central Asia",1.065
+"age","Chronic Lower Respiratory Diseases","wbr","Latin America & Caribbean",1.022
+"age","Chronic Lower Respiratory Diseases","wbr","Middle East & North Africa",1.007
+"age","Chronic Lower Respiratory Diseases","wbr","North America",1.078
+"age","Chronic Lower Respiratory Diseases","wbr","South Asia",0.96
+"age","Chronic Lower Respiratory Diseases","wbr","Sub-Saharan Africa",0.834
+"age","Chronic Lower Respiratory Diseases","inc","Poor",0.975
+"age","Chronic Lower Respiratory Diseases","inc","Lower-middle",1
+"age","Chronic Lower Respiratory Diseases","inc","Middle",1
+"age","Chronic Lower Respiratory Diseases","inc","Upper-middle",1
+"age","Chronic Lower Respiratory Diseases","inc","Rich",1
+"age","Chronic Lower Respiratory Diseases","edu","No Formal Schooling",0.964
+"age","Chronic Lower Respiratory Diseases","edu","Primary Education (Elementary School)",0.982
+"age","Chronic Lower Respiratory Diseases","edu","Secondary Education (High School)",1
+"age","Chronic Lower Respiratory Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Chronic Lower Respiratory Diseases","edu","Master's degree",1.036
+"age","Chronic Lower Respiratory Diseases","edu","Doctoral degree",1.054
+"age","Chronic Lower Respiratory Diseases","hsd","0",0.65
+"age","Chronic Lower Respiratory Diseases","hsd","1",0.83
+"age","Chronic Lower Respiratory Diseases","hsd","2",0.86
+"age","Chronic Lower Respiratory Diseases","hsd","3",0.89
+"age","Chronic Lower Respiratory Diseases","hsd","4",0.92
+"age","Chronic Lower Respiratory Diseases","hsd","5",0.95
+"age","Chronic Lower Respiratory Diseases","hsd","6",0.98
+"age","Chronic Lower Respiratory Diseases","hsd","7",1
+"age","Chronic Lower Respiratory Diseases","hsd","8",0.98
+"age","Chronic Lower Respiratory Diseases","hsd","9",0.95
+"age","Chronic Lower Respiratory Diseases","hsd","10",0.92
+"age","Chronic Lower Respiratory Diseases","hsd","11",0.89
+"age","Chronic Lower Respiratory Diseases","hsd","12",0.86
+"age","Chronic Lower Respiratory Diseases","hsd","13",0.83
+"age","Chronic Lower Respiratory Diseases","hsd","14",0.8
+"age","Chronic Lower Respiratory Diseases","hsd","15",0.77
+"age","Chronic Lower Respiratory Diseases","hsd","16",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","17",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","18",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","19",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","20",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","21",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","22",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","23",0.74
+"age","Chronic Lower Respiratory Diseases","hsd","24",0.74
+"age","Chronic Lower Respiratory Diseases","sys","Normal (SBP <120 mmHG)",1
+"age","Chronic Lower Respiratory Diseases","sys","Elevated (SBP 120-129 mmHG)",0.985
+"age","Chronic Lower Respiratory Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.97
+"age","Chronic Lower Respiratory Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.942
+"age","Chronic Lower Respiratory Diseases","bmi","Underweight (<18.5)",0.931
+"age","Chronic Lower Respiratory Diseases","bmi","Normal Weight (18.5-24.9)",1
+"age","Chronic Lower Respiratory Diseases","bmi","Overweight (25-29.9)",1.014
+"age","Chronic Lower Respiratory Diseases","bmi","Obese (>30)",1.02
+"age","Chronic Lower Respiratory Diseases","hbp","Yes",1
+"age","Chronic Lower Respiratory Diseases","hbp","No",1
+"age","Chronic Lower Respiratory Diseases","hbc","Yes",1
+"age","Chronic Lower Respiratory Diseases","hbc","No",1
+"age","Chronic Lower Respiratory Diseases","cvd","Yes",1
+"age","Chronic Lower Respiratory Diseases","cvd","No",1
+"age","Chronic Lower Respiratory Diseases","copd","Yes",1
+"age","Chronic Lower Respiratory Diseases","copd","No",1
+"age","Chronic Lower Respiratory Diseases","dia","Yes",1
+"age","Chronic Lower Respiratory Diseases","dia","No",1
+"age","Chronic Lower Respiratory Diseases","dep","Yes",1
+"age","Chronic Lower Respiratory Diseases","dep","No",1
+"age","Chronic Lower Respiratory Diseases","can","Yes",1
+"age","Chronic Lower Respiratory Diseases","can","No",1
+"age","Chronic Lower Respiratory Diseases","alz","Yes",1
+"age","Chronic Lower Respiratory Diseases","alz","No",1
+"age","Chronic Lower Respiratory Diseases","fcvd","Yes",1
+"age","Chronic Lower Respiratory Diseases","fcvd","No",1
+"age","Chronic Lower Respiratory Diseases","fcopd","Yes",1
+"age","Chronic Lower Respiratory Diseases","fcopd","No",1
+"age","Chronic Lower Respiratory Diseases","fdia","Yes",1
+"age","Chronic Lower Respiratory Diseases","fdia","No",1
+"age","Chronic Lower Respiratory Diseases","fdep","Yes",1
+"age","Chronic Lower Respiratory Diseases","fdep","No",1
+"age","Chronic Lower Respiratory Diseases","fcan","Yes",1
+"age","Chronic Lower Respiratory Diseases","fcan","No",1
+"age","Chronic Lower Respiratory Diseases","falz","Yes",1
+"age","Chronic Lower Respiratory Diseases","falz","No",1
+"age","Diabetes","sex","Male",1
+"age","Diabetes","sex","Female",1
+"age","Diabetes","race","White",1
+"age","Diabetes","race","Black",0.93
+"age","Diabetes","race","Asian",1.1
+"age","Diabetes","race","Native American",0.85
+"age","Diabetes","race","Other",1
+"age","Diabetes","wbr","East Asia & Pacific",1.035
+"age","Diabetes","wbr","Europe & Central Asia",1.065
+"age","Diabetes","wbr","Latin America & Caribbean",1.022
+"age","Diabetes","wbr","Middle East & North Africa",1.007
+"age","Diabetes","wbr","North America",1.078
+"age","Diabetes","wbr","South Asia",0.96
+"age","Diabetes","wbr","Sub-Saharan Africa",0.834
+"age","Diabetes","inc","Poor",0.975
+"age","Diabetes","inc","Lower-middle",1
+"age","Diabetes","inc","Middle",1
+"age","Diabetes","inc","Upper-middle",1
+"age","Diabetes","inc","Rich",1
+"age","Diabetes","edu","No Formal Schooling",0.964
+"age","Diabetes","edu","Primary Education (Elementary School)",0.982
+"age","Diabetes","edu","Secondary Education (High School)",1
+"age","Diabetes","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Diabetes","edu","Master's degree",1.036
+"age","Diabetes","edu","Doctoral degree",1.054
+"age","Diabetes","hsd","0",0.65
+"age","Diabetes","hsd","1",0.83
+"age","Diabetes","hsd","2",0.86
+"age","Diabetes","hsd","3",0.89
+"age","Diabetes","hsd","4",0.92
+"age","Diabetes","hsd","5",0.95
+"age","Diabetes","hsd","6",0.98
+"age","Diabetes","hsd","7",1
+"age","Diabetes","hsd","8",0.98
+"age","Diabetes","hsd","9",0.95
+"age","Diabetes","hsd","10",0.92
+"age","Diabetes","hsd","11",0.89
+"age","Diabetes","hsd","12",0.86
+"age","Diabetes","hsd","13",0.83
+"age","Diabetes","hsd","14",0.8
+"age","Diabetes","hsd","15",0.77
+"age","Diabetes","hsd","16",0.74
+"age","Diabetes","hsd","17",0.74
+"age","Diabetes","hsd","18",0.74
+"age","Diabetes","hsd","19",0.74
+"age","Diabetes","hsd","20",0.74
+"age","Diabetes","hsd","21",0.74
+"age","Diabetes","hsd","22",0.74
+"age","Diabetes","hsd","23",0.74
+"age","Diabetes","hsd","24",0.74
+"age","Diabetes","sys","Normal (SBP <120 mmHG)",1
+"age","Diabetes","sys","Elevated (SBP 120-129 mmHG)",0.983
+"age","Diabetes","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.961
+"age","Diabetes","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.923
+"age","Diabetes","bmi","Underweight (<18.5)",0.926
+"age","Diabetes","bmi","Normal Weight (18.5-24.9)",1
+"age","Diabetes","bmi","Overweight (25-29.9)",1
+"age","Diabetes","bmi","Obese (>30)",1
+"age","Diabetes","hbp","Yes",1
+"age","Diabetes","hbp","No",1
+"age","Diabetes","hbc","Yes",1
+"age","Diabetes","hbc","No",1
+"age","Diabetes","cvd","Yes",1
+"age","Diabetes","cvd","No",1
+"age","Diabetes","copd","Yes",1
+"age","Diabetes","copd","No",1
+"age","Diabetes","dia","Yes",1
+"age","Diabetes","dia","No",1
+"age","Diabetes","dep","Yes",1
+"age","Diabetes","dep","No",1
+"age","Diabetes","can","Yes",1
+"age","Diabetes","can","No",1
+"age","Diabetes","alz","Yes",1
+"age","Diabetes","alz","No",1
+"age","Diabetes","fcvd","Yes",1
+"age","Diabetes","fcvd","No",1
+"age","Diabetes","fcopd","Yes",1
+"age","Diabetes","fcopd","No",1
+"age","Diabetes","fdia","Yes",1
+"age","Diabetes","fdia","No",1
+"age","Diabetes","fdep","Yes",1
+"age","Diabetes","fdep","No",1
+"age","Diabetes","fcan","Yes",1
+"age","Diabetes","fcan","No",1
+"age","Diabetes","falz","Yes",1
+"age","Diabetes","falz","No",1
+"age","Drug Overdose","sex","Male",0.95
+"age","Drug Overdose","sex","Female",1.025
+"age","Drug Overdose","race","White",1
+"age","Drug Overdose","race","Black",0.93
+"age","Drug Overdose","race","Asian",1.1
+"age","Drug Overdose","race","Native American",0.85
+"age","Drug Overdose","race","Other",1
+"age","Drug Overdose","wbr","East Asia & Pacific",1.035
+"age","Drug Overdose","wbr","Europe & Central Asia",1.065
+"age","Drug Overdose","wbr","Latin America & Caribbean",1.022
+"age","Drug Overdose","wbr","Middle East & North Africa",1.007
+"age","Drug Overdose","wbr","North America",1.078
+"age","Drug Overdose","wbr","South Asia",0.96
+"age","Drug Overdose","wbr","Sub-Saharan Africa",0.834
+"age","Drug Overdose","inc","Poor",0.975
+"age","Drug Overdose","inc","Lower-middle",1
+"age","Drug Overdose","inc","Middle",1
+"age","Drug Overdose","inc","Upper-middle",1
+"age","Drug Overdose","inc","Rich",1
+"age","Drug Overdose","edu","No Formal Schooling",0.964
+"age","Drug Overdose","edu","Primary Education (Elementary School)",0.982
+"age","Drug Overdose","edu","Secondary Education (High School)",1
+"age","Drug Overdose","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Drug Overdose","edu","Master's degree",1.036
+"age","Drug Overdose","edu","Doctoral degree",1.054
+"age","Drug Overdose","hsd","0",0.65
+"age","Drug Overdose","hsd","1",0.83
+"age","Drug Overdose","hsd","2",0.86
+"age","Drug Overdose","hsd","3",0.89
+"age","Drug Overdose","hsd","4",0.92
+"age","Drug Overdose","hsd","5",0.95
+"age","Drug Overdose","hsd","6",0.98
+"age","Drug Overdose","hsd","7",1
+"age","Drug Overdose","hsd","8",0.98
+"age","Drug Overdose","hsd","9",0.95
+"age","Drug Overdose","hsd","10",0.92
+"age","Drug Overdose","hsd","11",0.89
+"age","Drug Overdose","hsd","12",0.86
+"age","Drug Overdose","hsd","13",0.83
+"age","Drug Overdose","hsd","14",0.8
+"age","Drug Overdose","hsd","15",0.77
+"age","Drug Overdose","hsd","16",0.74
+"age","Drug Overdose","hsd","17",0.74
+"age","Drug Overdose","hsd","18",0.74
+"age","Drug Overdose","hsd","19",0.74
+"age","Drug Overdose","hsd","20",0.74
+"age","Drug Overdose","hsd","21",0.74
+"age","Drug Overdose","hsd","22",0.74
+"age","Drug Overdose","hsd","23",0.74
+"age","Drug Overdose","hsd","24",0.74
+"age","Drug Overdose","sys","Normal (SBP <120 mmHG)",1
+"age","Drug Overdose","sys","Elevated (SBP 120-129 mmHG)",1
+"age","Drug Overdose","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"age","Drug Overdose","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"age","Drug Overdose","bmi","Underweight (<18.5)",1
+"age","Drug Overdose","bmi","Normal Weight (18.5-24.9)",1
+"age","Drug Overdose","bmi","Overweight (25-29.9)",0.979
+"age","Drug Overdose","bmi","Obese (>30)",0.949
+"age","Drug Overdose","hbp","Yes",1
+"age","Drug Overdose","hbp","No",1
+"age","Drug Overdose","hbc","Yes",1
+"age","Drug Overdose","hbc","No",1
+"age","Drug Overdose","cvd","Yes",1
+"age","Drug Overdose","cvd","No",1
+"age","Drug Overdose","copd","Yes",1
+"age","Drug Overdose","copd","No",1
+"age","Drug Overdose","dia","Yes",1
+"age","Drug Overdose","dia","No",1
+"age","Drug Overdose","dep","Yes",1
+"age","Drug Overdose","dep","No",1
+"age","Drug Overdose","can","Yes",1
+"age","Drug Overdose","can","No",1
+"age","Drug Overdose","alz","Yes",1
+"age","Drug Overdose","alz","No",1
+"age","Drug Overdose","fcvd","Yes",1
+"age","Drug Overdose","fcvd","No",1
+"age","Drug Overdose","fcopd","Yes",1
+"age","Drug Overdose","fcopd","No",1
+"age","Drug Overdose","fdia","Yes",1
+"age","Drug Overdose","fdia","No",1
+"age","Drug Overdose","fdep","Yes",1
+"age","Drug Overdose","fdep","No",1
+"age","Drug Overdose","fcan","Yes",1
+"age","Drug Overdose","fcan","No",1
+"age","Drug Overdose","falz","Yes",1
+"age","Drug Overdose","falz","No",1
+"age","Motor Vehicle Accident","sex","Male",1
+"age","Motor Vehicle Accident","sex","Female",1
+"age","Motor Vehicle Accident","race","White",1
+"age","Motor Vehicle Accident","race","Black",0.93
+"age","Motor Vehicle Accident","race","Asian",1.1
+"age","Motor Vehicle Accident","race","Native American",0.85
+"age","Motor Vehicle Accident","race","Other",1
+"age","Motor Vehicle Accident","wbr","East Asia & Pacific",1.035
+"age","Motor Vehicle Accident","wbr","Europe & Central Asia",1.065
+"age","Motor Vehicle Accident","wbr","Latin America & Caribbean",1.022
+"age","Motor Vehicle Accident","wbr","Middle East & North Africa",1.007
+"age","Motor Vehicle Accident","wbr","North America",1.078
+"age","Motor Vehicle Accident","wbr","South Asia",0.96
+"age","Motor Vehicle Accident","wbr","Sub-Saharan Africa",0.834
+"age","Motor Vehicle Accident","inc","Poor",0.975
+"age","Motor Vehicle Accident","inc","Lower-middle",1
+"age","Motor Vehicle Accident","inc","Middle",1
+"age","Motor Vehicle Accident","inc","Upper-middle",1
+"age","Motor Vehicle Accident","inc","Rich",1
+"age","Motor Vehicle Accident","edu","No Formal Schooling",0.964
+"age","Motor Vehicle Accident","edu","Primary Education (Elementary School)",0.982
+"age","Motor Vehicle Accident","edu","Secondary Education (High School)",1
+"age","Motor Vehicle Accident","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Motor Vehicle Accident","edu","Master's degree",1.036
+"age","Motor Vehicle Accident","edu","Doctoral degree",1.054
+"age","Motor Vehicle Accident","hsd","0",0.65
+"age","Motor Vehicle Accident","hsd","1",0.7
+"age","Motor Vehicle Accident","hsd","2",0.75
+"age","Motor Vehicle Accident","hsd","3",0.8
+"age","Motor Vehicle Accident","hsd","4",0.85
+"age","Motor Vehicle Accident","hsd","5",0.9
+"age","Motor Vehicle Accident","hsd","6",0.95
+"age","Motor Vehicle Accident","hsd","7",1
+"age","Motor Vehicle Accident","hsd","8",1
+"age","Motor Vehicle Accident","hsd","9",1
+"age","Motor Vehicle Accident","hsd","10",1
+"age","Motor Vehicle Accident","hsd","11",1
+"age","Motor Vehicle Accident","hsd","12",1
+"age","Motor Vehicle Accident","hsd","13",1
+"age","Motor Vehicle Accident","hsd","14",1
+"age","Motor Vehicle Accident","hsd","15",1
+"age","Motor Vehicle Accident","hsd","16",1
+"age","Motor Vehicle Accident","hsd","17",1
+"age","Motor Vehicle Accident","hsd","18",1
+"age","Motor Vehicle Accident","hsd","19",1
+"age","Motor Vehicle Accident","hsd","20",1
+"age","Motor Vehicle Accident","hsd","21",1
+"age","Motor Vehicle Accident","hsd","22",1
+"age","Motor Vehicle Accident","hsd","23",1
+"age","Motor Vehicle Accident","hsd","24",1
+"age","Motor Vehicle Accident","sys","Normal (SBP <120 mmHG)",1
+"age","Motor Vehicle Accident","sys","Elevated (SBP 120-129 mmHG)",1
+"age","Motor Vehicle Accident","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"age","Motor Vehicle Accident","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"age","Motor Vehicle Accident","bmi","Underweight (<18.5)",1
+"age","Motor Vehicle Accident","bmi","Normal Weight (18.5-24.9)",1
+"age","Motor Vehicle Accident","bmi","Overweight (25-29.9)",1
+"age","Motor Vehicle Accident","bmi","Obese (>30)",1
+"age","Motor Vehicle Accident","hbp","Yes",1
+"age","Motor Vehicle Accident","hbp","No",1
+"age","Motor Vehicle Accident","hbc","Yes",1
+"age","Motor Vehicle Accident","hbc","No",1
+"age","Motor Vehicle Accident","cvd","Yes",1
+"age","Motor Vehicle Accident","cvd","No",1
+"age","Motor Vehicle Accident","copd","Yes",1
+"age","Motor Vehicle Accident","copd","No",1
+"age","Motor Vehicle Accident","dia","Yes",1
+"age","Motor Vehicle Accident","dia","No",1
+"age","Motor Vehicle Accident","dep","Yes",1
+"age","Motor Vehicle Accident","dep","No",1
+"age","Motor Vehicle Accident","can","Yes",1
+"age","Motor Vehicle Accident","can","No",1
+"age","Motor Vehicle Accident","alz","Yes",1
+"age","Motor Vehicle Accident","alz","No",1
+"age","Motor Vehicle Accident","fcvd","Yes",1
+"age","Motor Vehicle Accident","fcvd","No",1
+"age","Motor Vehicle Accident","fcopd","Yes",1
+"age","Motor Vehicle Accident","fcopd","No",1
+"age","Motor Vehicle Accident","fdia","Yes",1
+"age","Motor Vehicle Accident","fdia","No",1
+"age","Motor Vehicle Accident","fdep","Yes",1
+"age","Motor Vehicle Accident","fdep","No",1
+"age","Motor Vehicle Accident","fcan","Yes",1
+"age","Motor Vehicle Accident","fcan","No",1
+"age","Motor Vehicle Accident","falz","Yes",1
+"age","Motor Vehicle Accident","falz","No",1
+"age","Fall","sex","Male",1
+"age","Fall","sex","Female",1
+"age","Fall","race","White",1
+"age","Fall","race","Black",0.93
+"age","Fall","race","Asian",1.1
+"age","Fall","race","Native American",0.85
+"age","Fall","race","Other",1
+"age","Fall","wbr","East Asia & Pacific",1.035
+"age","Fall","wbr","Europe & Central Asia",1.065
+"age","Fall","wbr","Latin America & Caribbean",1.022
+"age","Fall","wbr","Middle East & North Africa",1.007
+"age","Fall","wbr","North America",1.078
+"age","Fall","wbr","South Asia",0.96
+"age","Fall","wbr","Sub-Saharan Africa",0.834
+"age","Fall","inc","Poor",0.975
+"age","Fall","inc","Lower-middle",1
+"age","Fall","inc","Middle",1
+"age","Fall","inc","Upper-middle",1
+"age","Fall","inc","Rich",1
+"age","Fall","edu","No Formal Schooling",0.964
+"age","Fall","edu","Primary Education (Elementary School)",0.982
+"age","Fall","edu","Secondary Education (High School)",1
+"age","Fall","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Fall","edu","Master's degree",1.036
+"age","Fall","edu","Doctoral degree",1.054
+"age","Fall","hsd","0",0.65
+"age","Fall","hsd","1",0.83
+"age","Fall","hsd","2",0.86
+"age","Fall","hsd","3",0.89
+"age","Fall","hsd","4",0.92
+"age","Fall","hsd","5",0.95
+"age","Fall","hsd","6",0.98
+"age","Fall","hsd","7",1
+"age","Fall","hsd","8",0.98
+"age","Fall","hsd","9",0.95
+"age","Fall","hsd","10",0.92
+"age","Fall","hsd","11",0.89
+"age","Fall","hsd","12",0.86
+"age","Fall","hsd","13",0.83
+"age","Fall","hsd","14",0.8
+"age","Fall","hsd","15",0.77
+"age","Fall","hsd","16",0.74
+"age","Fall","hsd","17",0.74
+"age","Fall","hsd","18",0.74
+"age","Fall","hsd","19",0.74
+"age","Fall","hsd","20",0.74
+"age","Fall","hsd","21",0.74
+"age","Fall","hsd","22",0.74
+"age","Fall","hsd","23",0.74
+"age","Fall","hsd","24",0.74
+"age","Fall","sys","Normal (SBP <120 mmHG)",1
+"age","Fall","sys","Elevated (SBP 120-129 mmHG)",0.979
+"age","Fall","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.951
+"age","Fall","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.894
+"age","Fall","bmi","Underweight (<18.5)",0.912
+"age","Fall","bmi","Normal Weight (18.5-24.9)",1
+"age","Fall","bmi","Overweight (25-29.9)",0.98
+"age","Fall","bmi","Obese (>30)",0.967
+"age","Fall","hbp","Yes",1
+"age","Fall","hbp","No",1
+"age","Fall","hbc","Yes",1
+"age","Fall","hbc","No",1
+"age","Fall","cvd","Yes",1
+"age","Fall","cvd","No",1
+"age","Fall","copd","Yes",1
+"age","Fall","copd","No",1
+"age","Fall","dia","Yes",1
+"age","Fall","dia","No",1
+"age","Fall","dep","Yes",1
+"age","Fall","dep","No",1
+"age","Fall","can","Yes",1
+"age","Fall","can","No",1
+"age","Fall","alz","Yes",1
+"age","Fall","alz","No",1
+"age","Fall","fcvd","Yes",1
+"age","Fall","fcvd","No",1
+"age","Fall","fcopd","Yes",1
+"age","Fall","fcopd","No",1
+"age","Fall","fdia","Yes",1
+"age","Fall","fdia","No",1
+"age","Fall","fdep","Yes",1
+"age","Fall","fdep","No",1
+"age","Fall","fcan","Yes",1
+"age","Fall","fcan","No",1
+"age","Fall","falz","Yes",1
+"age","Fall","falz","No",1
+"age","Influenza and Pneumonia","sex","Male",1
+"age","Influenza and Pneumonia","sex","Female",1
+"age","Influenza and Pneumonia","race","White",1
+"age","Influenza and Pneumonia","race","Black",1
+"age","Influenza and Pneumonia","race","Asian",1
+"age","Influenza and Pneumonia","race","Native American",1
+"age","Influenza and Pneumonia","race","Other",1
+"age","Influenza and Pneumonia","wbr","East Asia & Pacific",1.035
+"age","Influenza and Pneumonia","wbr","Europe & Central Asia",1.065
+"age","Influenza and Pneumonia","wbr","Latin America & Caribbean",1.022
+"age","Influenza and Pneumonia","wbr","Middle East & North Africa",1.007
+"age","Influenza and Pneumonia","wbr","North America",1.078
+"age","Influenza and Pneumonia","wbr","South Asia",0.96
+"age","Influenza and Pneumonia","wbr","Sub-Saharan Africa",0.834
+"age","Influenza and Pneumonia","inc","Poor",0.975
+"age","Influenza and Pneumonia","inc","Lower-middle",1
+"age","Influenza and Pneumonia","inc","Middle",1
+"age","Influenza and Pneumonia","inc","Upper-middle",1
+"age","Influenza and Pneumonia","inc","Rich",1
+"age","Influenza and Pneumonia","edu","No Formal Schooling",0.964
+"age","Influenza and Pneumonia","edu","Primary Education (Elementary School)",0.982
+"age","Influenza and Pneumonia","edu","Secondary Education (High School)",1
+"age","Influenza and Pneumonia","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Influenza and Pneumonia","edu","Master's degree",1.036
+"age","Influenza and Pneumonia","edu","Doctoral degree",1.054
+"age","Influenza and Pneumonia","hsd","0",0.65
+"age","Influenza and Pneumonia","hsd","1",0.7
+"age","Influenza and Pneumonia","hsd","2",0.75
+"age","Influenza and Pneumonia","hsd","3",0.8
+"age","Influenza and Pneumonia","hsd","4",0.85
+"age","Influenza and Pneumonia","hsd","5",0.9
+"age","Influenza and Pneumonia","hsd","6",0.95
+"age","Influenza and Pneumonia","hsd","7",1
+"age","Influenza and Pneumonia","hsd","8",0.95
+"age","Influenza and Pneumonia","hsd","9",0.9
+"age","Influenza and Pneumonia","hsd","10",0.85
+"age","Influenza and Pneumonia","hsd","11",0.8
+"age","Influenza and Pneumonia","hsd","12",0.75
+"age","Influenza and Pneumonia","hsd","13",0.7
+"age","Influenza and Pneumonia","hsd","14",0.65
+"age","Influenza and Pneumonia","hsd","15",0.6
+"age","Influenza and Pneumonia","hsd","16",0.55
+"age","Influenza and Pneumonia","hsd","17",0.55
+"age","Influenza and Pneumonia","hsd","18",0.55
+"age","Influenza and Pneumonia","hsd","19",0.55
+"age","Influenza and Pneumonia","hsd","20",0.55
+"age","Influenza and Pneumonia","hsd","21",0.55
+"age","Influenza and Pneumonia","hsd","22",0.55
+"age","Influenza and Pneumonia","hsd","23",0.55
+"age","Influenza and Pneumonia","hsd","24",0.55
+"age","Influenza and Pneumonia","sys","Normal (SBP <120 mmHG)",1
+"age","Influenza and Pneumonia","sys","Elevated (SBP 120-129 mmHG)",0.985
+"age","Influenza and Pneumonia","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.97
+"age","Influenza and Pneumonia","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.942
+"age","Influenza and Pneumonia","bmi","Underweight (<18.5)",0.902
+"age","Influenza and Pneumonia","bmi","Normal Weight (18.5-24.9)",1
+"age","Influenza and Pneumonia","bmi","Overweight (25-29.9)",0.974
+"age","Influenza and Pneumonia","bmi","Obese (>30)",0.949
+"age","Influenza and Pneumonia","hbp","Yes",1
+"age","Influenza and Pneumonia","hbp","No",1
+"age","Influenza and Pneumonia","hbc","Yes",1
+"age","Influenza and Pneumonia","hbc","No",1
+"age","Influenza and Pneumonia","cvd","Yes",1
+"age","Influenza and Pneumonia","cvd","No",1
+"age","Influenza and Pneumonia","copd","Yes",1
+"age","Influenza and Pneumonia","copd","No",1
+"age","Influenza and Pneumonia","dia","Yes",1
+"age","Influenza and Pneumonia","dia","No",1
+"age","Influenza and Pneumonia","dep","Yes",1
+"age","Influenza and Pneumonia","dep","No",1
+"age","Influenza and Pneumonia","can","Yes",1
+"age","Influenza and Pneumonia","can","No",1
+"age","Influenza and Pneumonia","alz","Yes",1
+"age","Influenza and Pneumonia","alz","No",1
+"age","Influenza and Pneumonia","fcvd","Yes",1
+"age","Influenza and Pneumonia","fcvd","No",1
+"age","Influenza and Pneumonia","fcopd","Yes",1
+"age","Influenza and Pneumonia","fcopd","No",1
+"age","Influenza and Pneumonia","fdia","Yes",1
+"age","Influenza and Pneumonia","fdia","No",1
+"age","Influenza and Pneumonia","fdep","Yes",1
+"age","Influenza and Pneumonia","fdep","No",1
+"age","Influenza and Pneumonia","fcan","Yes",1
+"age","Influenza and Pneumonia","fcan","No",1
+"age","Influenza and Pneumonia","falz","Yes",1
+"age","Influenza and Pneumonia","falz","No",1
+"age","Kidney Diseases","sex","Male",1
+"age","Kidney Diseases","sex","Female",1
+"age","Kidney Diseases","race","White",1
+"age","Kidney Diseases","race","Black",0.93
+"age","Kidney Diseases","race","Asian",1.1
+"age","Kidney Diseases","race","Native American",0.85
+"age","Kidney Diseases","race","Other",1
+"age","Kidney Diseases","wbr","East Asia & Pacific",1.035
+"age","Kidney Diseases","wbr","Europe & Central Asia",1.065
+"age","Kidney Diseases","wbr","Latin America & Caribbean",1.022
+"age","Kidney Diseases","wbr","Middle East & North Africa",1.007
+"age","Kidney Diseases","wbr","North America",1.078
+"age","Kidney Diseases","wbr","South Asia",0.96
+"age","Kidney Diseases","wbr","Sub-Saharan Africa",0.834
+"age","Kidney Diseases","inc","Poor",0.975
+"age","Kidney Diseases","inc","Lower-middle",1
+"age","Kidney Diseases","inc","Middle",1
+"age","Kidney Diseases","inc","Upper-middle",1
+"age","Kidney Diseases","inc","Rich",1
+"age","Kidney Diseases","edu","No Formal Schooling",0.964
+"age","Kidney Diseases","edu","Primary Education (Elementary School)",0.982
+"age","Kidney Diseases","edu","Secondary Education (High School)",1
+"age","Kidney Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Kidney Diseases","edu","Master's degree",1.036
+"age","Kidney Diseases","edu","Doctoral degree",1.054
+"age","Kidney Diseases","hsd","0",0.65
+"age","Kidney Diseases","hsd","1",0.83
+"age","Kidney Diseases","hsd","2",0.86
+"age","Kidney Diseases","hsd","3",0.89
+"age","Kidney Diseases","hsd","4",0.92
+"age","Kidney Diseases","hsd","5",0.95
+"age","Kidney Diseases","hsd","6",0.98
+"age","Kidney Diseases","hsd","7",1
+"age","Kidney Diseases","hsd","8",0.98
+"age","Kidney Diseases","hsd","9",0.95
+"age","Kidney Diseases","hsd","10",0.92
+"age","Kidney Diseases","hsd","11",0.89
+"age","Kidney Diseases","hsd","12",0.86
+"age","Kidney Diseases","hsd","13",0.83
+"age","Kidney Diseases","hsd","14",0.8
+"age","Kidney Diseases","hsd","15",0.77
+"age","Kidney Diseases","hsd","16",0.74
+"age","Kidney Diseases","hsd","17",0.74
+"age","Kidney Diseases","hsd","18",0.74
+"age","Kidney Diseases","hsd","19",0.74
+"age","Kidney Diseases","hsd","20",0.74
+"age","Kidney Diseases","hsd","21",0.74
+"age","Kidney Diseases","hsd","22",0.74
+"age","Kidney Diseases","hsd","23",0.74
+"age","Kidney Diseases","hsd","24",0.74
+"age","Kidney Diseases","sys","Normal (SBP <120 mmHG)",1
+"age","Kidney Diseases","sys","Elevated (SBP 120-129 mmHG)",0.984
+"age","Kidney Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.967
+"age","Kidney Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.934
+"age","Kidney Diseases","bmi","Underweight (<18.5)",0.936
+"age","Kidney Diseases","bmi","Normal Weight (18.5-24.9)",1
+"age","Kidney Diseases","bmi","Overweight (25-29.9)",0.977
+"age","Kidney Diseases","bmi","Obese (>30)",0.951
+"age","Kidney Diseases","hbp","Yes",1
+"age","Kidney Diseases","hbp","No",1
+"age","Kidney Diseases","hbc","Yes",1
+"age","Kidney Diseases","hbc","No",1
+"age","Kidney Diseases","cvd","Yes",1
+"age","Kidney Diseases","cvd","No",1
+"age","Kidney Diseases","copd","Yes",1
+"age","Kidney Diseases","copd","No",1
+"age","Kidney Diseases","dia","Yes",1
+"age","Kidney Diseases","dia","No",1
+"age","Kidney Diseases","dep","Yes",1
+"age","Kidney Diseases","dep","No",1
+"age","Kidney Diseases","can","Yes",1
+"age","Kidney Diseases","can","No",1
+"age","Kidney Diseases","alz","Yes",1
+"age","Kidney Diseases","alz","No",1
+"age","Kidney Diseases","fcvd","Yes",1
+"age","Kidney Diseases","fcvd","No",1
+"age","Kidney Diseases","fcopd","Yes",1
+"age","Kidney Diseases","fcopd","No",1
+"age","Kidney Diseases","fdia","Yes",1
+"age","Kidney Diseases","fdia","No",1
+"age","Kidney Diseases","fdep","Yes",1
+"age","Kidney Diseases","fdep","No",1
+"age","Kidney Diseases","fcan","Yes",1
+"age","Kidney Diseases","fcan","No",1
+"age","Kidney Diseases","falz","Yes",1
+"age","Kidney Diseases","falz","No",1
+"age","Suicide","sex","Male",1
+"age","Suicide","sex","Female",1
+"age","Suicide","race","White",1
+"age","Suicide","race","Black",0.93
+"age","Suicide","race","Asian",1.1
+"age","Suicide","race","Native American",0.85
+"age","Suicide","race","Other",1
+"age","Suicide","wbr","East Asia & Pacific",1.035
+"age","Suicide","wbr","Europe & Central Asia",1.065
+"age","Suicide","wbr","Latin America & Caribbean",1.022
+"age","Suicide","wbr","Middle East & North Africa",1.007
+"age","Suicide","wbr","North America",1.078
+"age","Suicide","wbr","South Asia",0.96
+"age","Suicide","wbr","Sub-Saharan Africa",0.834
+"age","Suicide","inc","Poor",0.975
+"age","Suicide","inc","Lower-middle",1
+"age","Suicide","inc","Middle",1
+"age","Suicide","inc","Upper-middle",1
+"age","Suicide","inc","Rich",1
+"age","Suicide","edu","No Formal Schooling",0.964
+"age","Suicide","edu","Primary Education (Elementary School)",0.982
+"age","Suicide","edu","Secondary Education (High School)",1
+"age","Suicide","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Suicide","edu","Master's degree",1.036
+"age","Suicide","edu","Doctoral degree",1.054
+"age","Suicide","hsd","0",0.65
+"age","Suicide","hsd","1",0.83
+"age","Suicide","hsd","2",0.86
+"age","Suicide","hsd","3",0.89
+"age","Suicide","hsd","4",0.92
+"age","Suicide","hsd","5",0.95
+"age","Suicide","hsd","6",0.98
+"age","Suicide","hsd","7",1
+"age","Suicide","hsd","8",0.98
+"age","Suicide","hsd","9",0.95
+"age","Suicide","hsd","10",0.92
+"age","Suicide","hsd","11",0.89
+"age","Suicide","hsd","12",0.86
+"age","Suicide","hsd","13",0.83
+"age","Suicide","hsd","14",0.8
+"age","Suicide","hsd","15",0.77
+"age","Suicide","hsd","16",0.74
+"age","Suicide","hsd","17",0.74
+"age","Suicide","hsd","18",0.74
+"age","Suicide","hsd","19",0.74
+"age","Suicide","hsd","20",0.74
+"age","Suicide","hsd","21",0.74
+"age","Suicide","hsd","22",0.74
+"age","Suicide","hsd","23",0.74
+"age","Suicide","hsd","24",0.74
+"age","Suicide","sys","Normal (SBP <120 mmHG)",1
+"age","Suicide","sys","Elevated (SBP 120-129 mmHG)",1
+"age","Suicide","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"age","Suicide","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"age","Suicide","bmi","Underweight (<18.5)",1
+"age","Suicide","bmi","Normal Weight (18.5-24.9)",1
+"age","Suicide","bmi","Overweight (25-29.9)",1
+"age","Suicide","bmi","Obese (>30)",1
+"age","Suicide","hbp","Yes",1
+"age","Suicide","hbp","No",1
+"age","Suicide","hbc","Yes",1
+"age","Suicide","hbc","No",1
+"age","Suicide","cvd","Yes",1
+"age","Suicide","cvd","No",1
+"age","Suicide","copd","Yes",1
+"age","Suicide","copd","No",1
+"age","Suicide","dia","Yes",1
+"age","Suicide","dia","No",1
+"age","Suicide","dep","Yes",1
+"age","Suicide","dep","No",1
+"age","Suicide","can","Yes",1
+"age","Suicide","can","No",1
+"age","Suicide","alz","Yes",1
+"age","Suicide","alz","No",1
+"age","Suicide","fcvd","Yes",1
+"age","Suicide","fcvd","No",1
+"age","Suicide","fcopd","Yes",1
+"age","Suicide","fcopd","No",1
+"age","Suicide","fdia","Yes",1
+"age","Suicide","fdia","No",1
+"age","Suicide","fdep","Yes",1
+"age","Suicide","fdep","No",1
+"age","Suicide","fcan","Yes",1
+"age","Suicide","fcan","No",1
+"age","Suicide","falz","Yes",1
+"age","Suicide","falz","No",1
+"age","Liver Diseases","sex","Male",1
+"age","Liver Diseases","sex","Female",1
+"age","Liver Diseases","race","White",1
+"age","Liver Diseases","race","Black",0.93
+"age","Liver Diseases","race","Asian",1.1
+"age","Liver Diseases","race","Native American",0.85
+"age","Liver Diseases","race","Other",1
+"age","Liver Diseases","wbr","East Asia & Pacific",1.035
+"age","Liver Diseases","wbr","Europe & Central Asia",1.065
+"age","Liver Diseases","wbr","Latin America & Caribbean",1.022
+"age","Liver Diseases","wbr","Middle East & North Africa",1.007
+"age","Liver Diseases","wbr","North America",1.078
+"age","Liver Diseases","wbr","South Asia",0.96
+"age","Liver Diseases","wbr","Sub-Saharan Africa",0.834
+"age","Liver Diseases","inc","Poor",0.975
+"age","Liver Diseases","inc","Lower-middle",1
+"age","Liver Diseases","inc","Middle",1
+"age","Liver Diseases","inc","Upper-middle",1
+"age","Liver Diseases","inc","Rich",1
+"age","Liver Diseases","edu","No Formal Schooling",0.964
+"age","Liver Diseases","edu","Primary Education (Elementary School)",0.982
+"age","Liver Diseases","edu","Secondary Education (High School)",1
+"age","Liver Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Liver Diseases","edu","Master's degree",1.036
+"age","Liver Diseases","edu","Doctoral degree",1.054
+"age","Liver Diseases","hsd","0",0.65
+"age","Liver Diseases","hsd","1",0.83
+"age","Liver Diseases","hsd","2",0.86
+"age","Liver Diseases","hsd","3",0.89
+"age","Liver Diseases","hsd","4",0.92
+"age","Liver Diseases","hsd","5",0.95
+"age","Liver Diseases","hsd","6",0.98
+"age","Liver Diseases","hsd","7",1
+"age","Liver Diseases","hsd","8",0.98
+"age","Liver Diseases","hsd","9",0.95
+"age","Liver Diseases","hsd","10",0.92
+"age","Liver Diseases","hsd","11",0.89
+"age","Liver Diseases","hsd","12",0.86
+"age","Liver Diseases","hsd","13",0.83
+"age","Liver Diseases","hsd","14",0.8
+"age","Liver Diseases","hsd","15",0.77
+"age","Liver Diseases","hsd","16",0.74
+"age","Liver Diseases","hsd","17",0.74
+"age","Liver Diseases","hsd","18",0.74
+"age","Liver Diseases","hsd","19",0.74
+"age","Liver Diseases","hsd","20",0.74
+"age","Liver Diseases","hsd","21",0.74
+"age","Liver Diseases","hsd","22",0.74
+"age","Liver Diseases","hsd","23",0.74
+"age","Liver Diseases","hsd","24",0.74
+"age","Liver Diseases","sys","Normal (SBP <120 mmHG)",1
+"age","Liver Diseases","sys","Elevated (SBP 120-129 mmHG)",0.978
+"age","Liver Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.948
+"age","Liver Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.886
+"age","Liver Diseases","bmi","Underweight (<18.5)",1
+"age","Liver Diseases","bmi","Normal Weight (18.5-24.9)",1
+"age","Liver Diseases","bmi","Overweight (25-29.9)",0.98
+"age","Liver Diseases","bmi","Obese (>30)",0.957
+"age","Liver Diseases","hbp","Yes",1
+"age","Liver Diseases","hbp","No",1
+"age","Liver Diseases","hbc","Yes",1
+"age","Liver Diseases","hbc","No",1
+"age","Liver Diseases","cvd","Yes",1
+"age","Liver Diseases","cvd","No",1
+"age","Liver Diseases","copd","Yes",1
+"age","Liver Diseases","copd","No",1
+"age","Liver Diseases","dia","Yes",1
+"age","Liver Diseases","dia","No",1
+"age","Liver Diseases","dep","Yes",1
+"age","Liver Diseases","dep","No",1
+"age","Liver Diseases","can","Yes",1
+"age","Liver Diseases","can","No",1
+"age","Liver Diseases","alz","Yes",1
+"age","Liver Diseases","alz","No",1
+"age","Liver Diseases","fcvd","Yes",1
+"age","Liver Diseases","fcvd","No",1
+"age","Liver Diseases","fcopd","Yes",1
+"age","Liver Diseases","fcopd","No",1
+"age","Liver Diseases","fdia","Yes",1
+"age","Liver Diseases","fdia","No",1
+"age","Liver Diseases","fdep","Yes",1
+"age","Liver Diseases","fdep","No",1
+"age","Liver Diseases","fcan","Yes",1
+"age","Liver Diseases","fcan","No",1
+"age","Liver Diseases","falz","Yes",1
+"age","Liver Diseases","falz","No",1
+"age","Septicemia","sex","Male",1
+"age","Septicemia","sex","Female",1
+"age","Septicemia","race","White",1
+"age","Septicemia","race","Black",0.93
+"age","Septicemia","race","Asian",1.1
+"age","Septicemia","race","Native American",0.85
+"age","Septicemia","race","Other",1
+"age","Septicemia","wbr","East Asia & Pacific",1.035
+"age","Septicemia","wbr","Europe & Central Asia",1.065
+"age","Septicemia","wbr","Latin America & Caribbean",1.022
+"age","Septicemia","wbr","Middle East & North Africa",1.007
+"age","Septicemia","wbr","North America",1.078
+"age","Septicemia","wbr","South Asia",0.96
+"age","Septicemia","wbr","Sub-Saharan Africa",0.834
+"age","Septicemia","inc","Poor",0.975
+"age","Septicemia","inc","Lower-middle",1
+"age","Septicemia","inc","Middle",1
+"age","Septicemia","inc","Upper-middle",1
+"age","Septicemia","inc","Rich",1
+"age","Septicemia","edu","No Formal Schooling",0.964
+"age","Septicemia","edu","Primary Education (Elementary School)",0.982
+"age","Septicemia","edu","Secondary Education (High School)",1
+"age","Septicemia","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1.018
+"age","Septicemia","edu","Master's degree",1.036
+"age","Septicemia","edu","Doctoral degree",1.054
+"age","Septicemia","hsd","0",0.65
+"age","Septicemia","hsd","1",0.83
+"age","Septicemia","hsd","2",0.86
+"age","Septicemia","hsd","3",0.89
+"age","Septicemia","hsd","4",0.92
+"age","Septicemia","hsd","5",0.95
+"age","Septicemia","hsd","6",0.98
+"age","Septicemia","hsd","7",1
+"age","Septicemia","hsd","8",0.98
+"age","Septicemia","hsd","9",0.95
+"age","Septicemia","hsd","10",0.92
+"age","Septicemia","hsd","11",0.89
+"age","Septicemia","hsd","12",0.86
+"age","Septicemia","hsd","13",0.83
+"age","Septicemia","hsd","14",0.8
+"age","Septicemia","hsd","15",0.77
+"age","Septicemia","hsd","16",0.74
+"age","Septicemia","hsd","17",0.74
+"age","Septicemia","hsd","18",0.74
+"age","Septicemia","hsd","19",0.74
+"age","Septicemia","hsd","20",0.74
+"age","Septicemia","hsd","21",0.74
+"age","Septicemia","hsd","22",0.74
+"age","Septicemia","hsd","23",0.74
+"age","Septicemia","hsd","24",0.74
+"age","Septicemia","sys","Normal (SBP <120 mmHG)",1
+"age","Septicemia","sys","Elevated (SBP 120-129 mmHG)",0.978
+"age","Septicemia","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",0.948
+"age","Septicemia","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",0.886
+"age","Septicemia","bmi","Underweight (<18.5)",0.923
+"age","Septicemia","bmi","Normal Weight (18.5-24.9)",1
+"age","Septicemia","bmi","Overweight (25-29.9)",1
+"age","Septicemia","bmi","Obese (>30)",1
+"age","Septicemia","hbp","Yes",1
+"age","Septicemia","hbp","No",1
+"age","Septicemia","hbc","Yes",1
+"age","Septicemia","hbc","No",1
+"age","Septicemia","cvd","Yes",1
+"age","Septicemia","cvd","No",1
+"age","Septicemia","copd","Yes",1
+"age","Septicemia","copd","No",1
+"age","Septicemia","dia","Yes",1
+"age","Septicemia","dia","No",1
+"age","Septicemia","dep","Yes",1
+"age","Septicemia","dep","No",1
+"age","Septicemia","can","Yes",1
+"age","Septicemia","can","No",1
+"age","Septicemia","alz","Yes",1
+"age","Septicemia","alz","No",1
+"age","Septicemia","fcvd","Yes",1
+"age","Septicemia","fcvd","No",1
+"age","Septicemia","fcopd","Yes",1
+"age","Septicemia","fcopd","No",1
+"age","Septicemia","fdia","Yes",1
+"age","Septicemia","fdia","No",1
+"age","Septicemia","fdep","Yes",1
+"age","Septicemia","fdep","No",1
+"age","Septicemia","fcan","Yes",1
+"age","Septicemia","fcan","No",1
+"age","Septicemia","falz","Yes",1
+"age","Septicemia","falz","No",1
+"risk","Cardiovascular Diseases","sex","Male",1.219
+"risk","Cardiovascular Diseases","sex","Female",0.816
+"risk","Cardiovascular Diseases","race","White",0.98
+"risk","Cardiovascular Diseases","race","Black",1.389
+"risk","Cardiovascular Diseases","race","Asian",0.582
+"risk","Cardiovascular Diseases","race","Native American",0.672
+"risk","Cardiovascular Diseases","race","Other",1
+"risk","Cardiovascular Diseases","wbr","East Asia & Pacific",1.189
+"risk","Cardiovascular Diseases","wbr","Europe & Central Asia",1.888
+"risk","Cardiovascular Diseases","wbr","Latin America & Caribbean",0.708
+"risk","Cardiovascular Diseases","wbr","Middle East & North Africa",0.876
+"risk","Cardiovascular Diseases","wbr","North America",1.181
+"risk","Cardiovascular Diseases","wbr","South Asia",0.758
+"risk","Cardiovascular Diseases","wbr","Sub-Saharan Africa",0.4
+"risk","Cardiovascular Diseases","inc","Poor",1.42
+"risk","Cardiovascular Diseases","inc","Lower-middle",1
+"risk","Cardiovascular Diseases","inc","Middle",1
+"risk","Cardiovascular Diseases","inc","Upper-middle",1
+"risk","Cardiovascular Diseases","inc","Rich",1
+"risk","Cardiovascular Diseases","edu","No Formal Schooling",1.42
+"risk","Cardiovascular Diseases","edu","Primary Education (Elementary School)",1.42
+"risk","Cardiovascular Diseases","edu","Secondary Education (High School)",1
+"risk","Cardiovascular Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Cardiovascular Diseases","edu","Master's degree",1
+"risk","Cardiovascular Diseases","edu","Doctoral degree",1
+"risk","Cardiovascular Diseases","hsd","0",4.21
+"risk","Cardiovascular Diseases","hsd","1",3.7
+"risk","Cardiovascular Diseases","hsd","2",3.19
+"risk","Cardiovascular Diseases","hsd","3",2.68
+"risk","Cardiovascular Diseases","hsd","4",2.17
+"risk","Cardiovascular Diseases","hsd","5",1.66
+"risk","Cardiovascular Diseases","hsd","6",1.15
+"risk","Cardiovascular Diseases","hsd","7",1
+"risk","Cardiovascular Diseases","hsd","8",1.4
+"risk","Cardiovascular Diseases","hsd","9",1.8
+"risk","Cardiovascular Diseases","hsd","10",2.2
+"risk","Cardiovascular Diseases","hsd","11",2.6
+"risk","Cardiovascular Diseases","hsd","12",3
+"risk","Cardiovascular Diseases","hsd","13",3.4
+"risk","Cardiovascular Diseases","hsd","14",3.8
+"risk","Cardiovascular Diseases","hsd","15",4.2
+"risk","Cardiovascular Diseases","hsd","16",4.6
+"risk","Cardiovascular Diseases","hsd","17",4.6
+"risk","Cardiovascular Diseases","hsd","18",4.6
+"risk","Cardiovascular Diseases","hsd","19",4.6
+"risk","Cardiovascular Diseases","hsd","20",4.6
+"risk","Cardiovascular Diseases","hsd","21",4.6
+"risk","Cardiovascular Diseases","hsd","22",4.6
+"risk","Cardiovascular Diseases","hsd","23",4.6
+"risk","Cardiovascular Diseases","hsd","24",4.6
+"risk","Cardiovascular Diseases","sys","Normal (SBP <120 mmHG)",1
+"risk","Cardiovascular Diseases","sys","Elevated (SBP 120-129 mmHG)",1.16
+"risk","Cardiovascular Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.34
+"risk","Cardiovascular Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.56
+"risk","Cardiovascular Diseases","bmi","Underweight (<18.5)",1.18
+"risk","Cardiovascular Diseases","bmi","Normal Weight (18.5-24.9)",1
+"risk","Cardiovascular Diseases","bmi","Overweight (25-29.9)",1.26
+"risk","Cardiovascular Diseases","bmi","Obese (>30)",1.76
+"risk","Cardiovascular Diseases","hbp","Yes",1
+"risk","Cardiovascular Diseases","hbp","No",1
+"risk","Cardiovascular Diseases","hbc","Yes",1.06
+"risk","Cardiovascular Diseases","hbc","No",1
+"risk","Cardiovascular Diseases","cvd","Yes",2.57
+"risk","Cardiovascular Diseases","cvd","No",1
+"risk","Cardiovascular Diseases","copd","Yes",4.98
+"risk","Cardiovascular Diseases","copd","No",1
+"risk","Cardiovascular Diseases","dia","Yes",2
+"risk","Cardiovascular Diseases","dia","No",1
+"risk","Cardiovascular Diseases","dep","Yes",1
+"risk","Cardiovascular Diseases","dep","No",1
+"risk","Cardiovascular Diseases","can","Yes",2.02
+"risk","Cardiovascular Diseases","can","No",1
+"risk","Cardiovascular Diseases","alz","Yes",1
+"risk","Cardiovascular Diseases","alz","No",1
+"risk","Cardiovascular Diseases","fcvd","Yes",2.5
+"risk","Cardiovascular Diseases","fcvd","No",1
+"risk","Cardiovascular Diseases","fcopd","Yes",1
+"risk","Cardiovascular Diseases","fcopd","No",1
+"risk","Cardiovascular Diseases","fdia","Yes",1
+"risk","Cardiovascular Diseases","fdia","No",1
+"risk","Cardiovascular Diseases","fdep","Yes",1
+"risk","Cardiovascular Diseases","fdep","No",1
+"risk","Cardiovascular Diseases","fcan","Yes",1
+"risk","Cardiovascular Diseases","fcan","No",1
+"risk","Cardiovascular Diseases","falz","Yes",1
+"risk","Cardiovascular Diseases","falz","No",1
+"risk","Coronary Heart Diseases","sex","Male",1.375
+"risk","Coronary Heart Diseases","sex","Female",0.698
+"risk","Coronary Heart Diseases","race","White",1.001
+"risk","Coronary Heart Diseases","race","Black",1.233
+"risk","Coronary Heart Diseases","race","Asian",0.596
+"risk","Coronary Heart Diseases","race","Native American",0.941
+"risk","Coronary Heart Diseases","race","Other",1
+"risk","Coronary Heart Diseases","wbr","East Asia & Pacific",1.189
+"risk","Coronary Heart Diseases","wbr","Europe & Central Asia",1.888
+"risk","Coronary Heart Diseases","wbr","Latin America & Caribbean",0.708
+"risk","Coronary Heart Diseases","wbr","Middle East & North Africa",0.876
+"risk","Coronary Heart Diseases","wbr","North America",1.181
+"risk","Coronary Heart Diseases","wbr","South Asia",0.758
+"risk","Coronary Heart Diseases","wbr","Sub-Saharan Africa",0.4
+"risk","Coronary Heart Diseases","inc","Poor",1.42
+"risk","Coronary Heart Diseases","inc","Lower-middle",1
+"risk","Coronary Heart Diseases","inc","Middle",1
+"risk","Coronary Heart Diseases","inc","Upper-middle",1
+"risk","Coronary Heart Diseases","inc","Rich",1
+"risk","Coronary Heart Diseases","edu","No Formal Schooling",1.42
+"risk","Coronary Heart Diseases","edu","Primary Education (Elementary School)",1.42
+"risk","Coronary Heart Diseases","edu","Secondary Education (High School)",1
+"risk","Coronary Heart Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Coronary Heart Diseases","edu","Master's degree",1
+"risk","Coronary Heart Diseases","edu","Doctoral degree",1
+"risk","Coronary Heart Diseases","hsd","0",1.42
+"risk","Coronary Heart Diseases","hsd","1",1.36
+"risk","Coronary Heart Diseases","hsd","2",1.3
+"risk","Coronary Heart Diseases","hsd","3",1.24
+"risk","Coronary Heart Diseases","hsd","4",1.18
+"risk","Coronary Heart Diseases","hsd","5",1.12
+"risk","Coronary Heart Diseases","hsd","6",1.06
+"risk","Coronary Heart Diseases","hsd","7",1
+"risk","Coronary Heart Diseases","hsd","8",1.1
+"risk","Coronary Heart Diseases","hsd","9",1.3
+"risk","Coronary Heart Diseases","hsd","10",1.5
+"risk","Coronary Heart Diseases","hsd","11",1.7
+"risk","Coronary Heart Diseases","hsd","12",1.9
+"risk","Coronary Heart Diseases","hsd","13",2.1
+"risk","Coronary Heart Diseases","hsd","14",2.3
+"risk","Coronary Heart Diseases","hsd","15",2.5
+"risk","Coronary Heart Diseases","hsd","16",2.7
+"risk","Coronary Heart Diseases","hsd","17",2.7
+"risk","Coronary Heart Diseases","hsd","18",2.7
+"risk","Coronary Heart Diseases","hsd","19",2.7
+"risk","Coronary Heart Diseases","hsd","20",2.7
+"risk","Coronary Heart Diseases","hsd","21",2.7
+"risk","Coronary Heart Diseases","hsd","22",2.7
+"risk","Coronary Heart Diseases","hsd","23",2.7
+"risk","Coronary Heart Diseases","hsd","24",2.7
+"risk","Coronary Heart Diseases","sys","Normal (SBP <120 mmHG)",1
+"risk","Coronary Heart Diseases","sys","Elevated (SBP 120-129 mmHG)",1.16
+"risk","Coronary Heart Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.34
+"risk","Coronary Heart Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.56
+"risk","Coronary Heart Diseases","bmi","Underweight (<18.5)",1.18
+"risk","Coronary Heart Diseases","bmi","Normal Weight (18.5-24.9)",1
+"risk","Coronary Heart Diseases","bmi","Overweight (25-29.9)",1.26
+"risk","Coronary Heart Diseases","bmi","Obese (>30)",1.76
+"risk","Coronary Heart Diseases","hbp","Yes",1
+"risk","Coronary Heart Diseases","hbp","No",1
+"risk","Coronary Heart Diseases","hbc","Yes",1.06
+"risk","Coronary Heart Diseases","hbc","No",1
+"risk","Coronary Heart Diseases","cvd","Yes",2.57
+"risk","Coronary Heart Diseases","cvd","No",1
+"risk","Coronary Heart Diseases","copd","Yes",4.98
+"risk","Coronary Heart Diseases","copd","No",1
+"risk","Coronary Heart Diseases","dia","Yes",2
+"risk","Coronary Heart Diseases","dia","No",1
+"risk","Coronary Heart Diseases","dep","Yes",1
+"risk","Coronary Heart Diseases","dep","No",1
+"risk","Coronary Heart Diseases","can","Yes",2.02
+"risk","Coronary Heart Diseases","can","No",1
+"risk","Coronary Heart Diseases","alz","Yes",1
+"risk","Coronary Heart Diseases","alz","No",1
+"risk","Coronary Heart Diseases","fcvd","Yes",2.5
+"risk","Coronary Heart Diseases","fcvd","No",1
+"risk","Coronary Heart Diseases","fcopd","Yes",1
+"risk","Coronary Heart Diseases","fcopd","No",1
+"risk","Coronary Heart Diseases","fdia","Yes",1
+"risk","Coronary Heart Diseases","fdia","No",1
+"risk","Coronary Heart Diseases","fdep","Yes",1
+"risk","Coronary Heart Diseases","fdep","No",1
+"risk","Coronary Heart Diseases","fcan","Yes",1
+"risk","Coronary Heart Diseases","fcan","No",1
+"risk","Coronary Heart Diseases","falz","Yes",1
+"risk","Coronary Heart Diseases","falz","No",1
+"risk","Stroke","sex","Male",1.026
+"risk","Stroke","sex","Female",0.964
+"risk","Stroke","race","White",0.964
+"risk","Stroke","race","Black",1.441
+"risk","Stroke","race","Asian",0.809
+"risk","Stroke","race","Native American",0.67
+"risk","Stroke","race","Other",1
+"risk","Stroke","wbr","East Asia & Pacific",1.189
+"risk","Stroke","wbr","Europe & Central Asia",1.888
+"risk","Stroke","wbr","Latin America & Caribbean",0.708
+"risk","Stroke","wbr","Middle East & North Africa",0.876
+"risk","Stroke","wbr","North America",1.181
+"risk","Stroke","wbr","South Asia",0.758
+"risk","Stroke","wbr","Sub-Saharan Africa",0.4
+"risk","Stroke","inc","Poor",1.42
+"risk","Stroke","inc","Lower-middle",1
+"risk","Stroke","inc","Middle",1
+"risk","Stroke","inc","Upper-middle",1
+"risk","Stroke","inc","Rich",1
+"risk","Stroke","edu","No Formal Schooling",1.42
+"risk","Stroke","edu","Primary Education (Elementary School)",1.42
+"risk","Stroke","edu","Secondary Education (High School)",1
+"risk","Stroke","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Stroke","edu","Master's degree",1
+"risk","Stroke","edu","Doctoral degree",1
+"risk","Stroke","hsd","0",0.65
+"risk","Stroke","hsd","1",2.2
+"risk","Stroke","hsd","2",2
+"risk","Stroke","hsd","3",1.8
+"risk","Stroke","hsd","4",1.6
+"risk","Stroke","hsd","5",1.4
+"risk","Stroke","hsd","6",1.2
+"risk","Stroke","hsd","7",1
+"risk","Stroke","hsd","8",1.07
+"risk","Stroke","hsd","9",1.14
+"risk","Stroke","hsd","10",1.21
+"risk","Stroke","hsd","11",1.28
+"risk","Stroke","hsd","12",1.35
+"risk","Stroke","hsd","13",1.42
+"risk","Stroke","hsd","14",1.49
+"risk","Stroke","hsd","15",1.56
+"risk","Stroke","hsd","16",1.63
+"risk","Stroke","hsd","17",1.63
+"risk","Stroke","hsd","18",1.63
+"risk","Stroke","hsd","19",1.63
+"risk","Stroke","hsd","20",1.63
+"risk","Stroke","hsd","21",1.63
+"risk","Stroke","hsd","22",1.63
+"risk","Stroke","hsd","23",1.63
+"risk","Stroke","hsd","24",1.63
+"risk","Stroke","sys","Normal (SBP <120 mmHG)",1
+"risk","Stroke","sys","Elevated (SBP 120-129 mmHG)",1.3
+"risk","Stroke","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.7
+"risk","Stroke","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",2.21
+"risk","Stroke","bmi","Underweight (<18.5)",1.18
+"risk","Stroke","bmi","Normal Weight (18.5-24.9)",1
+"risk","Stroke","bmi","Overweight (25-29.9)",1.5
+"risk","Stroke","bmi","Obese (>30)",2
+"risk","Stroke","hbp","Yes",1
+"risk","Stroke","hbp","No",1
+"risk","Stroke","hbc","Yes",1.08
+"risk","Stroke","hbc","No",1
+"risk","Stroke","cvd","Yes",2.44
+"risk","Stroke","cvd","No",1
+"risk","Stroke","copd","Yes",3.34
+"risk","Stroke","copd","No",1
+"risk","Stroke","dia","Yes",2
+"risk","Stroke","dia","No",1
+"risk","Stroke","dep","Yes",1
+"risk","Stroke","dep","No",1
+"risk","Stroke","can","Yes",1.83
+"risk","Stroke","can","No",1
+"risk","Stroke","alz","Yes",1
+"risk","Stroke","alz","No",1
+"risk","Stroke","fcvd","Yes",2.5
+"risk","Stroke","fcvd","No",1
+"risk","Stroke","fcopd","Yes",1
+"risk","Stroke","fcopd","No",1
+"risk","Stroke","fdia","Yes",1
+"risk","Stroke","fdia","No",1
+"risk","Stroke","fdep","Yes",1
+"risk","Stroke","fdep","No",1
+"risk","Stroke","fcan","Yes",1
+"risk","Stroke","fcan","No",1
+"risk","Stroke","falz","Yes",1
+"risk","Stroke","falz","No",1
+"risk","Cancer","sex","Male",1.184
+"risk","Cancer","sex","Female",0.863
+"risk","Cancer","race","White",1.016
+"risk","Cancer","race","Black",1.134
+"risk","Cancer","race","Asian",0.614
+"risk","Cancer","race","Native American",0.636
+"risk","Cancer","race","Other",1
+"risk","Cancer","wbr","East Asia & Pacific",1.28
+"risk","Cancer","wbr","Europe & Central Asia",1.79
+"risk","Cancer","wbr","Latin America & Caribbean",0.87
+"risk","Cancer","wbr","Middle East & North Africa",0.457
+"risk","Cancer","wbr","North America",1.745
+"risk","Cancer","wbr","South Asia",0.507
+"risk","Cancer","wbr","Sub-Saharan Africa",0.351
+"risk","Cancer","inc","Poor",1.58
+"risk","Cancer","inc","Lower-middle",1
+"risk","Cancer","inc","Middle",1
+"risk","Cancer","inc","Upper-middle",1
+"risk","Cancer","inc","Rich",1
+"risk","Cancer","edu","No Formal Schooling",1.58
+"risk","Cancer","edu","Primary Education (Elementary School)",1.58
+"risk","Cancer","edu","Secondary Education (High School)",1
+"risk","Cancer","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Cancer","edu","Master's degree",1
+"risk","Cancer","edu","Doctoral degree",1
+"risk","Cancer","hsd","0",1.42
+"risk","Cancer","hsd","1",1.36
+"risk","Cancer","hsd","2",1.3
+"risk","Cancer","hsd","3",1.24
+"risk","Cancer","hsd","4",1.18
+"risk","Cancer","hsd","5",1.12
+"risk","Cancer","hsd","6",1.06
+"risk","Cancer","hsd","7",1
+"risk","Cancer","hsd","8",1.1
+"risk","Cancer","hsd","9",1.3
+"risk","Cancer","hsd","10",1.5
+"risk","Cancer","hsd","11",1.7
+"risk","Cancer","hsd","12",1.9
+"risk","Cancer","hsd","13",2.1
+"risk","Cancer","hsd","14",2.3
+"risk","Cancer","hsd","15",2.5
+"risk","Cancer","hsd","16",2.7
+"risk","Cancer","hsd","17",2.7
+"risk","Cancer","hsd","18",2.7
+"risk","Cancer","hsd","19",2.7
+"risk","Cancer","hsd","20",2.7
+"risk","Cancer","hsd","21",2.7
+"risk","Cancer","hsd","22",2.7
+"risk","Cancer","hsd","23",2.7
+"risk","Cancer","hsd","24",2.7
+"risk","Cancer","sys","Normal (SBP <120 mmHG)",1
+"risk","Cancer","sys","Elevated (SBP 120-129 mmHG)",1.1
+"risk","Cancer","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.21
+"risk","Cancer","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.33
+"risk","Cancer","bmi","Underweight (<18.5)",1.29
+"risk","Cancer","bmi","Normal Weight (18.5-24.9)",1
+"risk","Cancer","bmi","Overweight (25-29.9)",1.285
+"risk","Cancer","bmi","Obese (>30)",1.57
+"risk","Cancer","hbp","Yes",1
+"risk","Cancer","hbp","No",1
+"risk","Cancer","hbc","Yes",1
+"risk","Cancer","hbc","No",1
+"risk","Cancer","cvd","Yes",1
+"risk","Cancer","cvd","No",1
+"risk","Cancer","copd","Yes",1
+"risk","Cancer","copd","No",1
+"risk","Cancer","dia","Yes",1
+"risk","Cancer","dia","No",1
+"risk","Cancer","dep","Yes",1
+"risk","Cancer","dep","No",1
+"risk","Cancer","can","Yes",4.38
+"risk","Cancer","can","No",1
+"risk","Cancer","alz","Yes",1
+"risk","Cancer","alz","No",1
+"risk","Cancer","fcvd","Yes",1
+"risk","Cancer","fcvd","No",1
+"risk","Cancer","fcopd","Yes",1
+"risk","Cancer","fcopd","No",1
+"risk","Cancer","fdia","Yes",1
+"risk","Cancer","fdia","No",1
+"risk","Cancer","fdep","Yes",1
+"risk","Cancer","fdep","No",1
+"risk","Cancer","fcan","Yes",2.88
+"risk","Cancer","fcan","No",1
+"risk","Cancer","falz","Yes",1
+"risk","Cancer","falz","No",1
+"risk","COVID-19","sex","Male",1.267
+"risk","COVID-19","sex","Female",0.784
+"risk","COVID-19","race","White",0.934
+"risk","COVID-19","race","Black",1.645
+"risk","COVID-19","race","Asian",0.741
+"risk","COVID-19","race","Native American",1.518
+"risk","COVID-19","race","Other",1
+"risk","COVID-19","wbr","East Asia & Pacific",0.141
+"risk","COVID-19","wbr","Europe & Central Asia",1.816
+"risk","COVID-19","wbr","Latin America & Caribbean",1.636
+"risk","COVID-19","wbr","Middle East & North Africa",0.512
+"risk","COVID-19","wbr","North America",2.457
+"risk","COVID-19","wbr","South Asia",0.258
+"risk","COVID-19","wbr","Sub-Saharan Africa",0.181
+"risk","COVID-19","inc","Poor",1.38
+"risk","COVID-19","inc","Lower-middle",1
+"risk","COVID-19","inc","Middle",1
+"risk","COVID-19","inc","Upper-middle",1
+"risk","COVID-19","inc","Rich",1
+"risk","COVID-19","edu","No Formal Schooling",1.58
+"risk","COVID-19","edu","Primary Education (Elementary School)",1.58
+"risk","COVID-19","edu","Secondary Education (High School)",1
+"risk","COVID-19","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","COVID-19","edu","Master's degree",1
+"risk","COVID-19","edu","Doctoral degree",1
+"risk","COVID-19","hsd","0",1.42
+"risk","COVID-19","hsd","1",1.36
+"risk","COVID-19","hsd","2",1.3
+"risk","COVID-19","hsd","3",1.24
+"risk","COVID-19","hsd","4",1.18
+"risk","COVID-19","hsd","5",1.12
+"risk","COVID-19","hsd","6",1.06
+"risk","COVID-19","hsd","7",1
+"risk","COVID-19","hsd","8",1.1
+"risk","COVID-19","hsd","9",1.3
+"risk","COVID-19","hsd","10",1.5
+"risk","COVID-19","hsd","11",1.7
+"risk","COVID-19","hsd","12",1.9
+"risk","COVID-19","hsd","13",2.1
+"risk","COVID-19","hsd","14",2.3
+"risk","COVID-19","hsd","15",2.5
+"risk","COVID-19","hsd","16",2.7
+"risk","COVID-19","hsd","17",2.7
+"risk","COVID-19","hsd","18",2.7
+"risk","COVID-19","hsd","19",2.7
+"risk","COVID-19","hsd","20",2.7
+"risk","COVID-19","hsd","21",2.7
+"risk","COVID-19","hsd","22",2.7
+"risk","COVID-19","hsd","23",2.7
+"risk","COVID-19","hsd","24",2.7
+"risk","COVID-19","sys","Normal (SBP <120 mmHG)",1
+"risk","COVID-19","sys","Elevated (SBP 120-129 mmHG)",1.1
+"risk","COVID-19","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.2
+"risk","COVID-19","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.36
+"risk","COVID-19","bmi","Underweight (<18.5)",1.5
+"risk","COVID-19","bmi","Normal Weight (18.5-24.9)",1
+"risk","COVID-19","bmi","Overweight (25-29.9)",1.34
+"risk","COVID-19","bmi","Obese (>30)",1.85
+"risk","COVID-19","hbp","Yes",1
+"risk","COVID-19","hbp","No",1
+"risk","COVID-19","hbc","Yes",1
+"risk","COVID-19","hbc","No",1
+"risk","COVID-19","cvd","Yes",1
+"risk","COVID-19","cvd","No",1
+"risk","COVID-19","copd","Yes",1.77
+"risk","COVID-19","copd","No",1
+"risk","COVID-19","dia","Yes",1
+"risk","COVID-19","dia","No",1
+"risk","COVID-19","dep","Yes",1
+"risk","COVID-19","dep","No",1
+"risk","COVID-19","can","Yes",2.55
+"risk","COVID-19","can","No",1
+"risk","COVID-19","alz","Yes",1
+"risk","COVID-19","alz","No",1
+"risk","COVID-19","fcvd","Yes",1
+"risk","COVID-19","fcvd","No",1
+"risk","COVID-19","fcopd","Yes",1
+"risk","COVID-19","fcopd","No",1
+"risk","COVID-19","fdia","Yes",1
+"risk","COVID-19","fdia","No",1
+"risk","COVID-19","fdep","Yes",1
+"risk","COVID-19","fdep","No",1
+"risk","COVID-19","fcan","Yes",1
+"risk","COVID-19","fcan","No",1
+"risk","COVID-19","falz","Yes",1
+"risk","COVID-19","falz","No",1
+"risk","Alzheimer’s Disease","sex","Male",0.781
+"risk","Alzheimer’s Disease","sex","Female",1.142
+"risk","Alzheimer’s Disease","race","White",1.043
+"risk","Alzheimer’s Disease","race","Black",0.951
+"risk","Alzheimer’s Disease","race","Asian",0.54
+"risk","Alzheimer’s Disease","race","Native American",0.485
+"risk","Alzheimer’s Disease","race","Other",1
+"risk","Alzheimer’s Disease","wbr","East Asia & Pacific",1.135
+"risk","Alzheimer’s Disease","wbr","Europe & Central Asia",1.928
+"risk","Alzheimer’s Disease","wbr","Latin America & Caribbean",0.98
+"risk","Alzheimer’s Disease","wbr","Middle East & North Africa",0.446
+"risk","Alzheimer’s Disease","wbr","North America",1.888
+"risk","Alzheimer’s Disease","wbr","South Asia",0.378
+"risk","Alzheimer’s Disease","wbr","Sub-Saharan Africa",0.246
+"risk","Alzheimer’s Disease","inc","Poor",1.2
+"risk","Alzheimer’s Disease","inc","Lower-middle",1.1
+"risk","Alzheimer’s Disease","inc","Middle",1
+"risk","Alzheimer’s Disease","inc","Upper-middle",0.9
+"risk","Alzheimer’s Disease","inc","Rich",0.8
+"risk","Alzheimer’s Disease","edu","No Formal Schooling",1.2
+"risk","Alzheimer’s Disease","edu","Primary Education (Elementary School)",1.1
+"risk","Alzheimer’s Disease","edu","Secondary Education (High School)",1
+"risk","Alzheimer’s Disease","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"risk","Alzheimer’s Disease","edu","Master's degree",0.8
+"risk","Alzheimer’s Disease","edu","Doctoral degree",0.7
+"risk","Alzheimer’s Disease","hsd","0",1.42
+"risk","Alzheimer’s Disease","hsd","1",1.36
+"risk","Alzheimer’s Disease","hsd","2",1.3
+"risk","Alzheimer’s Disease","hsd","3",1.24
+"risk","Alzheimer’s Disease","hsd","4",1.18
+"risk","Alzheimer’s Disease","hsd","5",1.12
+"risk","Alzheimer’s Disease","hsd","6",1.06
+"risk","Alzheimer’s Disease","hsd","7",1
+"risk","Alzheimer’s Disease","hsd","8",1.1
+"risk","Alzheimer’s Disease","hsd","9",1.3
+"risk","Alzheimer’s Disease","hsd","10",1.5
+"risk","Alzheimer’s Disease","hsd","11",1.7
+"risk","Alzheimer’s Disease","hsd","12",1.9
+"risk","Alzheimer’s Disease","hsd","13",2.1
+"risk","Alzheimer’s Disease","hsd","14",2.3
+"risk","Alzheimer’s Disease","hsd","15",2.5
+"risk","Alzheimer’s Disease","hsd","16",2.7
+"risk","Alzheimer’s Disease","hsd","17",2.7
+"risk","Alzheimer’s Disease","hsd","18",2.7
+"risk","Alzheimer’s Disease","hsd","19",2.7
+"risk","Alzheimer’s Disease","hsd","20",2.7
+"risk","Alzheimer’s Disease","hsd","21",2.7
+"risk","Alzheimer’s Disease","hsd","22",2.7
+"risk","Alzheimer’s Disease","hsd","23",2.7
+"risk","Alzheimer’s Disease","hsd","24",2.7
+"risk","Alzheimer’s Disease","sys","Normal (SBP <120 mmHG)",1
+"risk","Alzheimer’s Disease","sys","Elevated (SBP 120-129 mmHG)",1
+"risk","Alzheimer’s Disease","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"risk","Alzheimer’s Disease","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"risk","Alzheimer’s Disease","bmi","Underweight (<18.5)",1
+"risk","Alzheimer’s Disease","bmi","Normal Weight (18.5-24.9)",1
+"risk","Alzheimer’s Disease","bmi","Overweight (25-29.9)",1
+"risk","Alzheimer’s Disease","bmi","Obese (>30)",1
+"risk","Alzheimer’s Disease","hbp","Yes",1
+"risk","Alzheimer’s Disease","hbp","No",1
+"risk","Alzheimer’s Disease","hbc","Yes",1
+"risk","Alzheimer’s Disease","hbc","No",1
+"risk","Alzheimer’s Disease","cvd","Yes",1
+"risk","Alzheimer’s Disease","cvd","No",1
+"risk","Alzheimer’s Disease","copd","Yes",1
+"risk","Alzheimer’s Disease","copd","No",1
+"risk","Alzheimer’s Disease","dia","Yes",1
+"risk","Alzheimer’s Disease","dia","No",1
+"risk","Alzheimer’s Disease","dep","Yes",1
+"risk","Alzheimer’s Disease","dep","No",1
+"risk","Alzheimer’s Disease","can","Yes",1
+"risk","Alzheimer’s Disease","can","No",1
+"risk","Alzheimer’s Disease","alz","Yes",1
+"risk","Alzheimer’s Disease","alz","No",1
+"risk","Alzheimer’s Disease","fcvd","Yes",1
+"risk","Alzheimer’s Disease","fcvd","No",1
+"risk","Alzheimer’s Disease","fcopd","Yes",1
+"risk","Alzheimer’s Disease","fcopd","No",1
+"risk","Alzheimer’s Disease","fdia","Yes",1
+"risk","Alzheimer’s Disease","fdia","No",1
+"risk","Alzheimer’s Disease","fdep","Yes",1
+"risk","Alzheimer’s Disease","fdep","No",1
+"risk","Alzheimer’s Disease","fcan","Yes",1
+"risk","Alzheimer’s Disease","fcan","No",1
+"risk","Alzheimer’s Disease","falz","Yes",1.7
+"risk","Alzheimer’s Disease","falz","No",1
+"risk","Chronic Lower Respiratory Diseases","sex","Male",1.104
+"risk","Chronic Lower Respiratory Diseases","sex","Female",0.923
+"risk","Chronic Lower Respiratory Diseases","race","White",1.069
+"risk","Chronic Lower Respiratory Diseases","race","Black",0.816
+"risk","Chronic Lower Respiratory Diseases","race","Asian",0.28
+"risk","Chronic Lower Respiratory Diseases","race","Native American",0.657
+"risk","Chronic Lower Respiratory Diseases","race","Other",1
+"risk","Chronic Lower Respiratory Diseases","wbr","East Asia & Pacific",1.403
+"risk","Chronic Lower Respiratory Diseases","wbr","Europe & Central Asia",0.962
+"risk","Chronic Lower Respiratory Diseases","wbr","Latin America & Caribbean",0.721
+"risk","Chronic Lower Respiratory Diseases","wbr","Middle East & North Africa",0.395
+"risk","Chronic Lower Respiratory Diseases","wbr","North America",1.489
+"risk","Chronic Lower Respiratory Diseases","wbr","South Asia",1.665
+"risk","Chronic Lower Respiratory Diseases","wbr","Sub-Saharan Africa",0.365
+"risk","Chronic Lower Respiratory Diseases","inc","Poor",1.2
+"risk","Chronic Lower Respiratory Diseases","inc","Lower-middle",1.1
+"risk","Chronic Lower Respiratory Diseases","inc","Middle",1
+"risk","Chronic Lower Respiratory Diseases","inc","Upper-middle",0.9
+"risk","Chronic Lower Respiratory Diseases","inc","Rich",0.8
+"risk","Chronic Lower Respiratory Diseases","edu","No Formal Schooling",1.2
+"risk","Chronic Lower Respiratory Diseases","edu","Primary Education (Elementary School)",1.1
+"risk","Chronic Lower Respiratory Diseases","edu","Secondary Education (High School)",1
+"risk","Chronic Lower Respiratory Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"risk","Chronic Lower Respiratory Diseases","edu","Master's degree",0.8
+"risk","Chronic Lower Respiratory Diseases","edu","Doctoral degree",0.7
+"risk","Chronic Lower Respiratory Diseases","hsd","0",1.42
+"risk","Chronic Lower Respiratory Diseases","hsd","1",1.36
+"risk","Chronic Lower Respiratory Diseases","hsd","2",1.3
+"risk","Chronic Lower Respiratory Diseases","hsd","3",1.24
+"risk","Chronic Lower Respiratory Diseases","hsd","4",1.18
+"risk","Chronic Lower Respiratory Diseases","hsd","5",1.12
+"risk","Chronic Lower Respiratory Diseases","hsd","6",1.06
+"risk","Chronic Lower Respiratory Diseases","hsd","7",1
+"risk","Chronic Lower Respiratory Diseases","hsd","8",1.1
+"risk","Chronic Lower Respiratory Diseases","hsd","9",1.3
+"risk","Chronic Lower Respiratory Diseases","hsd","10",1.5
+"risk","Chronic Lower Respiratory Diseases","hsd","11",1.7
+"risk","Chronic Lower Respiratory Diseases","hsd","12",1.9
+"risk","Chronic Lower Respiratory Diseases","hsd","13",2.1
+"risk","Chronic Lower Respiratory Diseases","hsd","14",2.3
+"risk","Chronic Lower Respiratory Diseases","hsd","15",2.5
+"risk","Chronic Lower Respiratory Diseases","hsd","16",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","17",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","18",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","19",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","20",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","21",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","22",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","23",2.7
+"risk","Chronic Lower Respiratory Diseases","hsd","24",2.7
+"risk","Chronic Lower Respiratory Diseases","sys","Normal (SBP <120 mmHG)",1
+"risk","Chronic Lower Respiratory Diseases","sys","Elevated (SBP 120-129 mmHG)",1.1
+"risk","Chronic Lower Respiratory Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.2
+"risk","Chronic Lower Respiratory Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.4
+"risk","Chronic Lower Respiratory Diseases","bmi","Underweight (<18.5)",1.4
+"risk","Chronic Lower Respiratory Diseases","bmi","Normal Weight (18.5-24.9)",1
+"risk","Chronic Lower Respiratory Diseases","bmi","Overweight (25-29.9)",0.8
+"risk","Chronic Lower Respiratory Diseases","bmi","Obese (>30)",0.77
+"risk","Chronic Lower Respiratory Diseases","hbp","Yes",1
+"risk","Chronic Lower Respiratory Diseases","hbp","No",1
+"risk","Chronic Lower Respiratory Diseases","hbc","Yes",1.1
+"risk","Chronic Lower Respiratory Diseases","hbc","No",1
+"risk","Chronic Lower Respiratory Diseases","cvd","Yes",1
+"risk","Chronic Lower Respiratory Diseases","cvd","No",1
+"risk","Chronic Lower Respiratory Diseases","copd","Yes",3.42
+"risk","Chronic Lower Respiratory Diseases","copd","No",1
+"risk","Chronic Lower Respiratory Diseases","dia","Yes",1
+"risk","Chronic Lower Respiratory Diseases","dia","No",1
+"risk","Chronic Lower Respiratory Diseases","dep","Yes",1
+"risk","Chronic Lower Respiratory Diseases","dep","No",1
+"risk","Chronic Lower Respiratory Diseases","can","Yes",2.59
+"risk","Chronic Lower Respiratory Diseases","can","No",1
+"risk","Chronic Lower Respiratory Diseases","alz","Yes",1
+"risk","Chronic Lower Respiratory Diseases","alz","No",1
+"risk","Chronic Lower Respiratory Diseases","fcvd","Yes",1
+"risk","Chronic Lower Respiratory Diseases","fcvd","No",1
+"risk","Chronic Lower Respiratory Diseases","fcopd","Yes",1.57
+"risk","Chronic Lower Respiratory Diseases","fcopd","No",1
+"risk","Chronic Lower Respiratory Diseases","fdia","Yes",1
+"risk","Chronic Lower Respiratory Diseases","fdia","No",1
+"risk","Chronic Lower Respiratory Diseases","fdep","Yes",1
+"risk","Chronic Lower Respiratory Diseases","fdep","No",1
+"risk","Chronic Lower Respiratory Diseases","fcan","Yes",1
+"risk","Chronic Lower Respiratory Diseases","fcan","No",1
+"risk","Chronic Lower Respiratory Diseases","falz","Yes",1
+"risk","Chronic Lower Respiratory Diseases","falz","No",1
+"risk","Diabetes","sex","Male",1.258
+"risk","Diabetes","sex","Female",0.786
+"risk","Diabetes","race","White",0.903
+"risk","Diabetes","race","Black",1.859
+"risk","Diabetes","race","Asian",0.75
+"risk","Diabetes","race","Native American",1.512
+"risk","Diabetes","race","Other",1
+"risk","Diabetes","wbr","East Asia & Pacific",0.883
+"risk","Diabetes","wbr","Europe & Central Asia",0.938
+"risk","Diabetes","wbr","Latin America & Caribbean",1.627
+"risk","Diabetes","wbr","Middle East & North Africa",0.767
+"risk","Diabetes","wbr","North America",1.105
+"risk","Diabetes","wbr","South Asia",0.958
+"risk","Diabetes","wbr","Sub-Saharan Africa",0.723
+"risk","Diabetes","inc","Poor",2
+"risk","Diabetes","inc","Lower-middle",1.7
+"risk","Diabetes","inc","Middle",1.5
+"risk","Diabetes","inc","Upper-middle",1
+"risk","Diabetes","inc","Rich",1
+"risk","Diabetes","edu","No Formal Schooling",2.4
+"risk","Diabetes","edu","Primary Education (Elementary School)",1.6
+"risk","Diabetes","edu","Secondary Education (High School)",1.4
+"risk","Diabetes","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Diabetes","edu","Master's degree",1
+"risk","Diabetes","edu","Doctoral degree",1
+"risk","Diabetes","hsd","0",1.35
+"risk","Diabetes","hsd","1",1.3
+"risk","Diabetes","hsd","2",1.25
+"risk","Diabetes","hsd","3",1.2
+"risk","Diabetes","hsd","4",1.15
+"risk","Diabetes","hsd","5",1.1
+"risk","Diabetes","hsd","6",1.05
+"risk","Diabetes","hsd","7",1
+"risk","Diabetes","hsd","8",1.07
+"risk","Diabetes","hsd","9",1.14
+"risk","Diabetes","hsd","10",1.21
+"risk","Diabetes","hsd","11",1.28
+"risk","Diabetes","hsd","12",1.35
+"risk","Diabetes","hsd","13",1.42
+"risk","Diabetes","hsd","14",1.49
+"risk","Diabetes","hsd","15",1.56
+"risk","Diabetes","hsd","16",1.63
+"risk","Diabetes","hsd","17",1.63
+"risk","Diabetes","hsd","18",1.63
+"risk","Diabetes","hsd","19",1.63
+"risk","Diabetes","hsd","20",1.63
+"risk","Diabetes","hsd","21",1.63
+"risk","Diabetes","hsd","22",1.63
+"risk","Diabetes","hsd","23",1.63
+"risk","Diabetes","hsd","24",1.63
+"risk","Diabetes","sys","Normal (SBP <120 mmHG)",1
+"risk","Diabetes","sys","Elevated (SBP 120-129 mmHG)",1.24
+"risk","Diabetes","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.58
+"risk","Diabetes","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.82
+"risk","Diabetes","bmi","Underweight (<18.5)",1.5
+"risk","Diabetes","bmi","Normal Weight (18.5-24.9)",1
+"risk","Diabetes","bmi","Overweight (25-29.9)",1
+"risk","Diabetes","bmi","Obese (>30)",1
+"risk","Diabetes","hbp","Yes",1
+"risk","Diabetes","hbp","No",1
+"risk","Diabetes","hbc","Yes",1.1
+"risk","Diabetes","hbc","No",1
+"risk","Diabetes","cvd","Yes",3
+"risk","Diabetes","cvd","No",1
+"risk","Diabetes","copd","Yes",2.04
+"risk","Diabetes","copd","No",1
+"risk","Diabetes","dia","Yes",1
+"risk","Diabetes","dia","No",1
+"risk","Diabetes","dep","Yes",1
+"risk","Diabetes","dep","No",1
+"risk","Diabetes","can","Yes",1.77
+"risk","Diabetes","can","No",1
+"risk","Diabetes","alz","Yes",1
+"risk","Diabetes","alz","No",1
+"risk","Diabetes","fcvd","Yes",1
+"risk","Diabetes","fcvd","No",1
+"risk","Diabetes","fcopd","Yes",1
+"risk","Diabetes","fcopd","No",1
+"risk","Diabetes","fdia","Yes",5
+"risk","Diabetes","fdia","No",1
+"risk","Diabetes","fdep","Yes",1
+"risk","Diabetes","fdep","No",1
+"risk","Diabetes","fcan","Yes",1
+"risk","Diabetes","fcan","No",1
+"risk","Diabetes","falz","Yes",1
+"risk","Diabetes","falz","No",1
+"risk","Drug Overdose","sex","Male",1.426
+"risk","Drug Overdose","sex","Female",0.578
+"risk","Drug Overdose","race","White",1.058
+"risk","Drug Overdose","race","Black",1.236
+"risk","Drug Overdose","race","Asian",0.155
+"risk","Drug Overdose","race","Native American",0.946
+"risk","Drug Overdose","race","Other",1
+"risk","Drug Overdose","wbr","East Asia & Pacific",0.211
+"risk","Drug Overdose","wbr","Europe & Central Asia",0.635
+"risk","Drug Overdose","wbr","Latin America & Caribbean",0.135
+"risk","Drug Overdose","wbr","Middle East & North Africa",0.402
+"risk","Drug Overdose","wbr","North America",5.392
+"risk","Drug Overdose","wbr","South Asia",0.159
+"risk","Drug Overdose","wbr","Sub-Saharan Africa",0.067
+"risk","Drug Overdose","inc","Poor",1.6
+"risk","Drug Overdose","inc","Lower-middle",1.375
+"risk","Drug Overdose","inc","Middle",1
+"risk","Drug Overdose","inc","Upper-middle",0.925
+"risk","Drug Overdose","inc","Rich",0.7
+"risk","Drug Overdose","edu","No Formal Schooling",1.2
+"risk","Drug Overdose","edu","Primary Education (Elementary School)",1.1
+"risk","Drug Overdose","edu","Secondary Education (High School)",1
+"risk","Drug Overdose","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Drug Overdose","edu","Master's degree",0.9
+"risk","Drug Overdose","edu","Doctoral degree",0.8
+"risk","Drug Overdose","hsd","0",1.42
+"risk","Drug Overdose","hsd","1",1.36
+"risk","Drug Overdose","hsd","2",1.3
+"risk","Drug Overdose","hsd","3",1.24
+"risk","Drug Overdose","hsd","4",1.18
+"risk","Drug Overdose","hsd","5",1.12
+"risk","Drug Overdose","hsd","6",1.06
+"risk","Drug Overdose","hsd","7",1
+"risk","Drug Overdose","hsd","8",1.1
+"risk","Drug Overdose","hsd","9",1.3
+"risk","Drug Overdose","hsd","10",1.5
+"risk","Drug Overdose","hsd","11",1.7
+"risk","Drug Overdose","hsd","12",1.9
+"risk","Drug Overdose","hsd","13",2.1
+"risk","Drug Overdose","hsd","14",2.3
+"risk","Drug Overdose","hsd","15",2.5
+"risk","Drug Overdose","hsd","16",2.7
+"risk","Drug Overdose","hsd","17",2.7
+"risk","Drug Overdose","hsd","18",2.7
+"risk","Drug Overdose","hsd","19",2.7
+"risk","Drug Overdose","hsd","20",2.7
+"risk","Drug Overdose","hsd","21",2.7
+"risk","Drug Overdose","hsd","22",2.7
+"risk","Drug Overdose","hsd","23",2.7
+"risk","Drug Overdose","hsd","24",2.7
+"risk","Drug Overdose","sys","Normal (SBP <120 mmHG)",1
+"risk","Drug Overdose","sys","Elevated (SBP 120-129 mmHG)",1
+"risk","Drug Overdose","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"risk","Drug Overdose","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"risk","Drug Overdose","bmi","Underweight (<18.5)",1
+"risk","Drug Overdose","bmi","Normal Weight (18.5-24.9)",1
+"risk","Drug Overdose","bmi","Overweight (25-29.9)",1.24
+"risk","Drug Overdose","bmi","Obese (>30)",2
+"risk","Drug Overdose","hbp","Yes",1
+"risk","Drug Overdose","hbp","No",1
+"risk","Drug Overdose","hbc","Yes",1
+"risk","Drug Overdose","hbc","No",1
+"risk","Drug Overdose","cvd","Yes",1
+"risk","Drug Overdose","cvd","No",1
+"risk","Drug Overdose","copd","Yes",1
+"risk","Drug Overdose","copd","No",1
+"risk","Drug Overdose","dia","Yes",1
+"risk","Drug Overdose","dia","No",1
+"risk","Drug Overdose","dep","Yes",1
+"risk","Drug Overdose","dep","No",1
+"risk","Drug Overdose","can","Yes",1.66
+"risk","Drug Overdose","can","No",1
+"risk","Drug Overdose","alz","Yes",1
+"risk","Drug Overdose","alz","No",1
+"risk","Drug Overdose","fcvd","Yes",1
+"risk","Drug Overdose","fcvd","No",1
+"risk","Drug Overdose","fcopd","Yes",1
+"risk","Drug Overdose","fcopd","No",1
+"risk","Drug Overdose","fdia","Yes",1
+"risk","Drug Overdose","fdia","No",1
+"risk","Drug Overdose","fdep","Yes",1
+"risk","Drug Overdose","fdep","No",1
+"risk","Drug Overdose","fcan","Yes",1
+"risk","Drug Overdose","fcan","No",1
+"risk","Drug Overdose","falz","Yes",1
+"risk","Drug Overdose","falz","No",1
+"risk","Motor Vehicle Accident","sex","Male",1.481
+"risk","Motor Vehicle Accident","sex","Female",0.534
+"risk","Motor Vehicle Accident","race","White",0.992
+"risk","Motor Vehicle Accident","race","Black",1.397
+"risk","Motor Vehicle Accident","race","Asian",0.313
+"risk","Motor Vehicle Accident","race","Native American",1.344
+"risk","Motor Vehicle Accident","race","Other",1
+"risk","Motor Vehicle Accident","wbr","East Asia & Pacific",1.035
+"risk","Motor Vehicle Accident","wbr","Europe & Central Asia",0.575
+"risk","Motor Vehicle Accident","wbr","Latin America & Caribbean",1.114
+"risk","Motor Vehicle Accident","wbr","Middle East & North Africa",1.664
+"risk","Motor Vehicle Accident","wbr","North America",0.747
+"risk","Motor Vehicle Accident","wbr","South Asia",0.852
+"risk","Motor Vehicle Accident","wbr","Sub-Saharan Africa",1.012
+"risk","Motor Vehicle Accident","inc","Poor",2
+"risk","Motor Vehicle Accident","inc","Lower-middle",1.5
+"risk","Motor Vehicle Accident","inc","Middle",1
+"risk","Motor Vehicle Accident","inc","Upper-middle",0.9
+"risk","Motor Vehicle Accident","inc","Rich",0.8
+"risk","Motor Vehicle Accident","edu","No Formal Schooling",2.5
+"risk","Motor Vehicle Accident","edu","Primary Education (Elementary School)",2
+"risk","Motor Vehicle Accident","edu","Secondary Education (High School)",1.5
+"risk","Motor Vehicle Accident","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Motor Vehicle Accident","edu","Master's degree",0.8
+"risk","Motor Vehicle Accident","edu","Doctoral degree",0.6
+"risk","Motor Vehicle Accident","hsd","0",2.16
+"risk","Motor Vehicle Accident","hsd","1",1.99
+"risk","Motor Vehicle Accident","hsd","2",1.83
+"risk","Motor Vehicle Accident","hsd","3",1.66
+"risk","Motor Vehicle Accident","hsd","4",1.5
+"risk","Motor Vehicle Accident","hsd","5",1.33
+"risk","Motor Vehicle Accident","hsd","6",1.17
+"risk","Motor Vehicle Accident","hsd","7",1
+"risk","Motor Vehicle Accident","hsd","8",1
+"risk","Motor Vehicle Accident","hsd","9",1
+"risk","Motor Vehicle Accident","hsd","10",1
+"risk","Motor Vehicle Accident","hsd","11",1
+"risk","Motor Vehicle Accident","hsd","12",1
+"risk","Motor Vehicle Accident","hsd","13",1
+"risk","Motor Vehicle Accident","hsd","14",1
+"risk","Motor Vehicle Accident","hsd","15",1
+"risk","Motor Vehicle Accident","hsd","16",1
+"risk","Motor Vehicle Accident","hsd","17",1
+"risk","Motor Vehicle Accident","hsd","18",1
+"risk","Motor Vehicle Accident","hsd","19",1
+"risk","Motor Vehicle Accident","hsd","20",1
+"risk","Motor Vehicle Accident","hsd","21",1
+"risk","Motor Vehicle Accident","hsd","22",1
+"risk","Motor Vehicle Accident","hsd","23",1
+"risk","Motor Vehicle Accident","hsd","24",1
+"risk","Motor Vehicle Accident","sys","Normal (SBP <120 mmHG)",1
+"risk","Motor Vehicle Accident","sys","Elevated (SBP 120-129 mmHG)",1
+"risk","Motor Vehicle Accident","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"risk","Motor Vehicle Accident","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"risk","Motor Vehicle Accident","bmi","Underweight (<18.5)",2
+"risk","Motor Vehicle Accident","bmi","Normal Weight (18.5-24.9)",1.5
+"risk","Motor Vehicle Accident","bmi","Overweight (25-29.9)",1
+"risk","Motor Vehicle Accident","bmi","Obese (>30)",2
+"risk","Motor Vehicle Accident","hbp","Yes",1
+"risk","Motor Vehicle Accident","hbp","No",1
+"risk","Motor Vehicle Accident","hbc","Yes",1
+"risk","Motor Vehicle Accident","hbc","No",1
+"risk","Motor Vehicle Accident","cvd","Yes",1
+"risk","Motor Vehicle Accident","cvd","No",1
+"risk","Motor Vehicle Accident","copd","Yes",1
+"risk","Motor Vehicle Accident","copd","No",1
+"risk","Motor Vehicle Accident","dia","Yes",1
+"risk","Motor Vehicle Accident","dia","No",1
+"risk","Motor Vehicle Accident","dep","Yes",1
+"risk","Motor Vehicle Accident","dep","No",1
+"risk","Motor Vehicle Accident","can","Yes",1.66
+"risk","Motor Vehicle Accident","can","No",1
+"risk","Motor Vehicle Accident","alz","Yes",1
+"risk","Motor Vehicle Accident","alz","No",1
+"risk","Motor Vehicle Accident","fcvd","Yes",1
+"risk","Motor Vehicle Accident","fcvd","No",1
+"risk","Motor Vehicle Accident","fcopd","Yes",1
+"risk","Motor Vehicle Accident","fcopd","No",1
+"risk","Motor Vehicle Accident","fdia","Yes",1
+"risk","Motor Vehicle Accident","fdia","No",1
+"risk","Motor Vehicle Accident","fdep","Yes",1
+"risk","Motor Vehicle Accident","fdep","No",1
+"risk","Motor Vehicle Accident","fcan","Yes",1
+"risk","Motor Vehicle Accident","fcan","No",1
+"risk","Motor Vehicle Accident","falz","Yes",1
+"risk","Motor Vehicle Accident","falz","No",1
+"risk","Fall","sex","Male",1.214
+"risk","Fall","sex","Female",0.816
+"risk","Fall","race","White",1.087
+"risk","Fall","race","Black",0.495
+"risk","Fall","race","Asian",0.524
+"risk","Fall","race","Native American",0.796
+"risk","Fall","race","Other",1
+"risk","Fall","wbr","East Asia & Pacific",1
+"risk","Fall","wbr","Europe & Central Asia",1
+"risk","Fall","wbr","Latin America & Caribbean",1
+"risk","Fall","wbr","Middle East & North Africa",1
+"risk","Fall","wbr","North America",1
+"risk","Fall","wbr","South Asia",1
+"risk","Fall","wbr","Sub-Saharan Africa",1
+"risk","Fall","inc","Poor",2
+"risk","Fall","inc","Lower-middle",1.5
+"risk","Fall","inc","Middle",1
+"risk","Fall","inc","Upper-middle",1
+"risk","Fall","inc","Rich",1
+"risk","Fall","edu","No Formal Schooling",2
+"risk","Fall","edu","Primary Education (Elementary School)",2
+"risk","Fall","edu","Secondary Education (High School)",1
+"risk","Fall","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Fall","edu","Master's degree",0.5
+"risk","Fall","edu","Doctoral degree",0.5
+"risk","Fall","hsd","0",0.65
+"risk","Fall","hsd","1",1.78
+"risk","Fall","hsd","2",1.65
+"risk","Fall","hsd","3",1.52
+"risk","Fall","hsd","4",1.39
+"risk","Fall","hsd","5",1.26
+"risk","Fall","hsd","6",1.13
+"risk","Fall","hsd","7",1
+"risk","Fall","hsd","8",1.06
+"risk","Fall","hsd","9",1.12
+"risk","Fall","hsd","10",1.18
+"risk","Fall","hsd","11",1.24
+"risk","Fall","hsd","12",1.3
+"risk","Fall","hsd","13",1.36
+"risk","Fall","hsd","14",1.42
+"risk","Fall","hsd","15",1.48
+"risk","Fall","hsd","16",1.54
+"risk","Fall","hsd","17",1.54
+"risk","Fall","hsd","18",1.54
+"risk","Fall","hsd","19",1.54
+"risk","Fall","hsd","20",1.54
+"risk","Fall","hsd","21",1.54
+"risk","Fall","hsd","22",1.54
+"risk","Fall","hsd","23",1.54
+"risk","Fall","hsd","24",1.54
+"risk","Fall","sys","Normal (SBP <120 mmHG)",1
+"risk","Fall","sys","Elevated (SBP 120-129 mmHG)",1.5
+"risk","Fall","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",2
+"risk","Fall","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",2.5
+"risk","Fall","bmi","Underweight (<18.5)",1.8
+"risk","Fall","bmi","Normal Weight (18.5-24.9)",1
+"risk","Fall","bmi","Overweight (25-29.9)",1.15
+"risk","Fall","bmi","Obese (>30)",1.31
+"risk","Fall","hbp","Yes",1
+"risk","Fall","hbp","No",1
+"risk","Fall","hbc","Yes",1
+"risk","Fall","hbc","No",1
+"risk","Fall","cvd","Yes",1
+"risk","Fall","cvd","No",1
+"risk","Fall","copd","Yes",1
+"risk","Fall","copd","No",1
+"risk","Fall","dia","Yes",1
+"risk","Fall","dia","No",1
+"risk","Fall","dep","Yes",1
+"risk","Fall","dep","No",1
+"risk","Fall","can","Yes",1.66
+"risk","Fall","can","No",1
+"risk","Fall","alz","Yes",1
+"risk","Fall","alz","No",1
+"risk","Fall","fcvd","Yes",1
+"risk","Fall","fcvd","No",1
+"risk","Fall","fcopd","Yes",1
+"risk","Fall","fcopd","No",1
+"risk","Fall","fdia","Yes",1
+"risk","Fall","fdia","No",1
+"risk","Fall","fdep","Yes",1
+"risk","Fall","fdep","No",1
+"risk","Fall","fcan","Yes",1
+"risk","Fall","fcan","No",1
+"risk","Fall","falz","Yes",1
+"risk","Fall","falz","No",1
+"risk","Influenza and Pneumonia","sex","Male",1.215
+"risk","Influenza and Pneumonia","sex","Female",0.846
+"risk","Influenza and Pneumonia","race","White",0.985
+"risk","Influenza and Pneumonia","race","Black",1.292
+"risk","Influenza and Pneumonia","race","Asian",0.792
+"risk","Influenza and Pneumonia","race","Native American",1.077
+"risk","Influenza and Pneumonia","race","Other",1
+"risk","Influenza and Pneumonia","wbr","East Asia & Pacific",0.768
+"risk","Influenza and Pneumonia","wbr","Europe & Central Asia",0.932
+"risk","Influenza and Pneumonia","wbr","Latin America & Caribbean",1.144
+"risk","Influenza and Pneumonia","wbr","Middle East & North Africa",0.465
+"risk","Influenza and Pneumonia","wbr","North America",0.788
+"risk","Influenza and Pneumonia","wbr","South Asia",0.972
+"risk","Influenza and Pneumonia","wbr","Sub-Saharan Africa",1.931
+"risk","Influenza and Pneumonia","inc","Poor",1.4
+"risk","Influenza and Pneumonia","inc","Lower-middle",1.2
+"risk","Influenza and Pneumonia","inc","Middle",1
+"risk","Influenza and Pneumonia","inc","Upper-middle",0.8
+"risk","Influenza and Pneumonia","inc","Rich",0.6
+"risk","Influenza and Pneumonia","edu","No Formal Schooling",1.6
+"risk","Influenza and Pneumonia","edu","Primary Education (Elementary School)",1.4
+"risk","Influenza and Pneumonia","edu","Secondary Education (High School)",1.2
+"risk","Influenza and Pneumonia","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"risk","Influenza and Pneumonia","edu","Master's degree",0.8
+"risk","Influenza and Pneumonia","edu","Doctoral degree",0.6
+"risk","Influenza and Pneumonia","hsd","0",1.35
+"risk","Influenza and Pneumonia","hsd","1",3.3
+"risk","Influenza and Pneumonia","hsd","2",2.9
+"risk","Influenza and Pneumonia","hsd","3",2.5
+"risk","Influenza and Pneumonia","hsd","4",2.1
+"risk","Influenza and Pneumonia","hsd","5",1.7
+"risk","Influenza and Pneumonia","hsd","6",1.3
+"risk","Influenza and Pneumonia","hsd","7",1
+"risk","Influenza and Pneumonia","hsd","8",1.2
+"risk","Influenza and Pneumonia","hsd","9",1.5
+"risk","Influenza and Pneumonia","hsd","10",1.8
+"risk","Influenza and Pneumonia","hsd","11",2.1
+"risk","Influenza and Pneumonia","hsd","12",2.4
+"risk","Influenza and Pneumonia","hsd","13",2.7
+"risk","Influenza and Pneumonia","hsd","14",3
+"risk","Influenza and Pneumonia","hsd","15",3.3
+"risk","Influenza and Pneumonia","hsd","16",3.6
+"risk","Influenza and Pneumonia","hsd","17",3.6
+"risk","Influenza and Pneumonia","hsd","18",3.6
+"risk","Influenza and Pneumonia","hsd","19",3.6
+"risk","Influenza and Pneumonia","hsd","20",3.6
+"risk","Influenza and Pneumonia","hsd","21",3.6
+"risk","Influenza and Pneumonia","hsd","22",3.6
+"risk","Influenza and Pneumonia","hsd","23",3.6
+"risk","Influenza and Pneumonia","hsd","24",3.6
+"risk","Influenza and Pneumonia","sys","Normal (SBP <120 mmHG)",1
+"risk","Influenza and Pneumonia","sys","Elevated (SBP 120-129 mmHG)",1.1
+"risk","Influenza and Pneumonia","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.2
+"risk","Influenza and Pneumonia","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.36
+"risk","Influenza and Pneumonia","bmi","Underweight (<18.5)",2
+"risk","Influenza and Pneumonia","bmi","Normal Weight (18.5-24.9)",1
+"risk","Influenza and Pneumonia","bmi","Overweight (25-29.9)",1.5
+"risk","Influenza and Pneumonia","bmi","Obese (>30)",2
+"risk","Influenza and Pneumonia","hbp","Yes",1
+"risk","Influenza and Pneumonia","hbp","No",1
+"risk","Influenza and Pneumonia","hbc","Yes",1
+"risk","Influenza and Pneumonia","hbc","No",1
+"risk","Influenza and Pneumonia","cvd","Yes",1
+"risk","Influenza and Pneumonia","cvd","No",1
+"risk","Influenza and Pneumonia","copd","Yes",1.77
+"risk","Influenza and Pneumonia","copd","No",1
+"risk","Influenza and Pneumonia","dia","Yes",1
+"risk","Influenza and Pneumonia","dia","No",1
+"risk","Influenza and Pneumonia","dep","Yes",1
+"risk","Influenza and Pneumonia","dep","No",1
+"risk","Influenza and Pneumonia","can","Yes",2.55
+"risk","Influenza and Pneumonia","can","No",1
+"risk","Influenza and Pneumonia","alz","Yes",2.15
+"risk","Influenza and Pneumonia","alz","No",1
+"risk","Influenza and Pneumonia","fcvd","Yes",1
+"risk","Influenza and Pneumonia","fcvd","No",1
+"risk","Influenza and Pneumonia","fcopd","Yes",1
+"risk","Influenza and Pneumonia","fcopd","No",1
+"risk","Influenza and Pneumonia","fdia","Yes",1
+"risk","Influenza and Pneumonia","fdia","No",1
+"risk","Influenza and Pneumonia","fdep","Yes",1
+"risk","Influenza and Pneumonia","fdep","No",1
+"risk","Influenza and Pneumonia","fcan","Yes",1
+"risk","Influenza and Pneumonia","fcan","No",1
+"risk","Influenza and Pneumonia","falz","Yes",1
+"risk","Influenza and Pneumonia","falz","No",1
+"risk","Kidney Diseases","sex","Male",1.213
+"risk","Kidney Diseases","sex","Female",0.843
+"risk","Kidney Diseases","race","White",0.898
+"risk","Kidney Diseases","race","Black",2.024
+"risk","Kidney Diseases","race","Asian",0.638
+"risk","Kidney Diseases","race","Native American",0.882
+"risk","Kidney Diseases","race","Other",1
+"risk","Kidney Diseases","wbr","East Asia & Pacific",0.852
+"risk","Kidney Diseases","wbr","Europe & Central Asia",0.924
+"risk","Kidney Diseases","wbr","Latin America & Caribbean",1.557
+"risk","Kidney Diseases","wbr","Middle East & North Africa",0.864
+"risk","Kidney Diseases","wbr","North America",1.502
+"risk","Kidney Diseases","wbr","South Asia",0.765
+"risk","Kidney Diseases","wbr","Sub-Saharan Africa",0.538
+"risk","Kidney Diseases","inc","Poor",1.2
+"risk","Kidney Diseases","inc","Lower-middle",1.1
+"risk","Kidney Diseases","inc","Middle",1
+"risk","Kidney Diseases","inc","Upper-middle",0.9
+"risk","Kidney Diseases","inc","Rich",0.8
+"risk","Kidney Diseases","edu","No Formal Schooling",1.2
+"risk","Kidney Diseases","edu","Primary Education (Elementary School)",1.1
+"risk","Kidney Diseases","edu","Secondary Education (High School)",1
+"risk","Kidney Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"risk","Kidney Diseases","edu","Master's degree",0.8
+"risk","Kidney Diseases","edu","Doctoral degree",0.7
+"risk","Kidney Diseases","hsd","0",1.42
+"risk","Kidney Diseases","hsd","1",1.36
+"risk","Kidney Diseases","hsd","2",1.3
+"risk","Kidney Diseases","hsd","3",1.24
+"risk","Kidney Diseases","hsd","4",1.18
+"risk","Kidney Diseases","hsd","5",1.12
+"risk","Kidney Diseases","hsd","6",1.06
+"risk","Kidney Diseases","hsd","7",1
+"risk","Kidney Diseases","hsd","8",1.1
+"risk","Kidney Diseases","hsd","9",1.3
+"risk","Kidney Diseases","hsd","10",1.5
+"risk","Kidney Diseases","hsd","11",1.7
+"risk","Kidney Diseases","hsd","12",1.9
+"risk","Kidney Diseases","hsd","13",2.1
+"risk","Kidney Diseases","hsd","14",2.3
+"risk","Kidney Diseases","hsd","15",2.5
+"risk","Kidney Diseases","hsd","16",2.7
+"risk","Kidney Diseases","hsd","17",2.7
+"risk","Kidney Diseases","hsd","18",2.7
+"risk","Kidney Diseases","hsd","19",2.7
+"risk","Kidney Diseases","hsd","20",2.7
+"risk","Kidney Diseases","hsd","21",2.7
+"risk","Kidney Diseases","hsd","22",2.7
+"risk","Kidney Diseases","hsd","23",2.7
+"risk","Kidney Diseases","hsd","24",2.7
+"risk","Kidney Diseases","sys","Normal (SBP <120 mmHG)",1
+"risk","Kidney Diseases","sys","Elevated (SBP 120-129 mmHG)",1.16
+"risk","Kidney Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.34
+"risk","Kidney Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.56
+"risk","Kidney Diseases","bmi","Underweight (<18.5)",1.3
+"risk","Kidney Diseases","bmi","Normal Weight (18.5-24.9)",1
+"risk","Kidney Diseases","bmi","Overweight (25-29.9)",1.34
+"risk","Kidney Diseases","bmi","Obese (>30)",1.94
+"risk","Kidney Diseases","hbp","Yes",1
+"risk","Kidney Diseases","hbp","No",1
+"risk","Kidney Diseases","hbc","Yes",1.1
+"risk","Kidney Diseases","hbc","No",1
+"risk","Kidney Diseases","cvd","Yes",1.64
+"risk","Kidney Diseases","cvd","No",1
+"risk","Kidney Diseases","copd","Yes",1.22
+"risk","Kidney Diseases","copd","No",1
+"risk","Kidney Diseases","dia","Yes",1.75
+"risk","Kidney Diseases","dia","No",1
+"risk","Kidney Diseases","dep","Yes",1
+"risk","Kidney Diseases","dep","No",1
+"risk","Kidney Diseases","can","Yes",2.29
+"risk","Kidney Diseases","can","No",1
+"risk","Kidney Diseases","alz","Yes",1
+"risk","Kidney Diseases","alz","No",1
+"risk","Kidney Diseases","fcvd","Yes",1
+"risk","Kidney Diseases","fcvd","No",1
+"risk","Kidney Diseases","fcopd","Yes",1
+"risk","Kidney Diseases","fcopd","No",1
+"risk","Kidney Diseases","fdia","Yes",1
+"risk","Kidney Diseases","fdia","No",1
+"risk","Kidney Diseases","fdep","Yes",1
+"risk","Kidney Diseases","fdep","No",1
+"risk","Kidney Diseases","fcan","Yes",1
+"risk","Kidney Diseases","fcan","No",1
+"risk","Kidney Diseases","falz","Yes",1
+"risk","Kidney Diseases","falz","No",1
+"risk","Suicide","sex","Male",1.63
+"risk","Suicide","sex","Female",0.407
+"risk","Suicide","race","White",1.126
+"risk","Suicide","race","Black",0.556
+"risk","Suicide","race","Asian",0.474
+"risk","Suicide","race","Native American",1.244
+"risk","Suicide","race","Other",1
+"risk","Suicide","wbr","East Asia & Pacific",0.91
+"risk","Suicide","wbr","Europe & Central Asia",1.544
+"risk","Suicide","wbr","Latin America & Caribbean",0.727
+"risk","Suicide","wbr","Middle East & North Africa",0.445
+"risk","Suicide","wbr","North America",1.425
+"risk","Suicide","wbr","South Asia",1.288
+"risk","Suicide","wbr","Sub-Saharan Africa",0.662
+"risk","Suicide","inc","Poor",1.2
+"risk","Suicide","inc","Lower-middle",1.1
+"risk","Suicide","inc","Middle",1
+"risk","Suicide","inc","Upper-middle",0.9
+"risk","Suicide","inc","Rich",0.8
+"risk","Suicide","edu","No Formal Schooling",1.2
+"risk","Suicide","edu","Primary Education (Elementary School)",1.1
+"risk","Suicide","edu","Secondary Education (High School)",1
+"risk","Suicide","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"risk","Suicide","edu","Master's degree",0.8
+"risk","Suicide","edu","Doctoral degree",0.7
+"risk","Suicide","hsd","0",1.42
+"risk","Suicide","hsd","1",1.36
+"risk","Suicide","hsd","2",1.3
+"risk","Suicide","hsd","3",1.24
+"risk","Suicide","hsd","4",1.18
+"risk","Suicide","hsd","5",1.12
+"risk","Suicide","hsd","6",1.06
+"risk","Suicide","hsd","7",1
+"risk","Suicide","hsd","8",1.1
+"risk","Suicide","hsd","9",1.3
+"risk","Suicide","hsd","10",1.5
+"risk","Suicide","hsd","11",1.7
+"risk","Suicide","hsd","12",1.9
+"risk","Suicide","hsd","13",2.1
+"risk","Suicide","hsd","14",2.3
+"risk","Suicide","hsd","15",2.5
+"risk","Suicide","hsd","16",2.7
+"risk","Suicide","hsd","17",2.7
+"risk","Suicide","hsd","18",2.7
+"risk","Suicide","hsd","19",2.7
+"risk","Suicide","hsd","20",2.7
+"risk","Suicide","hsd","21",2.7
+"risk","Suicide","hsd","22",2.7
+"risk","Suicide","hsd","23",2.7
+"risk","Suicide","hsd","24",2.7
+"risk","Suicide","sys","Normal (SBP <120 mmHG)",1
+"risk","Suicide","sys","Elevated (SBP 120-129 mmHG)",1
+"risk","Suicide","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"risk","Suicide","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"risk","Suicide","bmi","Underweight (<18.5)",2
+"risk","Suicide","bmi","Normal Weight (18.5-24.9)",1
+"risk","Suicide","bmi","Overweight (25-29.9)",1
+"risk","Suicide","bmi","Obese (>30)",1
+"risk","Suicide","hbp","Yes",1
+"risk","Suicide","hbp","No",1
+"risk","Suicide","hbc","Yes",1.5
+"risk","Suicide","hbc","No",1
+"risk","Suicide","cvd","Yes",1
+"risk","Suicide","cvd","No",1
+"risk","Suicide","copd","Yes",1
+"risk","Suicide","copd","No",1
+"risk","Suicide","dia","Yes",1
+"risk","Suicide","dia","No",1
+"risk","Suicide","dep","Yes",1
+"risk","Suicide","dep","No",1
+"risk","Suicide","can","Yes",2.85
+"risk","Suicide","can","No",1
+"risk","Suicide","alz","Yes",1
+"risk","Suicide","alz","No",1
+"risk","Suicide","fcvd","Yes",1
+"risk","Suicide","fcvd","No",1
+"risk","Suicide","fcopd","Yes",1
+"risk","Suicide","fcopd","No",1
+"risk","Suicide","fdia","Yes",1
+"risk","Suicide","fdia","No",1
+"risk","Suicide","fdep","Yes",2.58
+"risk","Suicide","fdep","No",1
+"risk","Suicide","fcan","Yes",1
+"risk","Suicide","fcan","No",1
+"risk","Suicide","falz","Yes",1
+"risk","Suicide","falz","No",1
+"risk","Liver Diseases","sex","Male",1.316
+"risk","Liver Diseases","sex","Female",0.707
+"risk","Liver Diseases","race","White",1.083
+"risk","Liver Diseases","race","Black",0.662
+"risk","Liver Diseases","race","Asian",0.308
+"risk","Liver Diseases","race","Native American",2.85
+"risk","Liver Diseases","race","Other",1
+"risk","Liver Diseases","wbr","East Asia & Pacific",0.829
+"risk","Liver Diseases","wbr","Europe & Central Asia",1.212
+"risk","Liver Diseases","wbr","Latin America & Caribbean",1.124
+"risk","Liver Diseases","wbr","Middle East & North Africa",1.013
+"risk","Liver Diseases","wbr","North America",0.999
+"risk","Liver Diseases","wbr","South Asia",0.963
+"risk","Liver Diseases","wbr","Sub-Saharan Africa",0.86
+"risk","Liver Diseases","inc","Poor",1.2
+"risk","Liver Diseases","inc","Lower-middle",1.1
+"risk","Liver Diseases","inc","Middle",1
+"risk","Liver Diseases","inc","Upper-middle",0.9
+"risk","Liver Diseases","inc","Rich",0.8
+"risk","Liver Diseases","edu","No Formal Schooling",1.2
+"risk","Liver Diseases","edu","Primary Education (Elementary School)",1.1
+"risk","Liver Diseases","edu","Secondary Education (High School)",1
+"risk","Liver Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"risk","Liver Diseases","edu","Master's degree",0.8
+"risk","Liver Diseases","edu","Doctoral degree",0.7
+"risk","Liver Diseases","hsd","0",1.42
+"risk","Liver Diseases","hsd","1",1.36
+"risk","Liver Diseases","hsd","2",1.3
+"risk","Liver Diseases","hsd","3",1.24
+"risk","Liver Diseases","hsd","4",1.18
+"risk","Liver Diseases","hsd","5",1.12
+"risk","Liver Diseases","hsd","6",1.06
+"risk","Liver Diseases","hsd","7",1
+"risk","Liver Diseases","hsd","8",1.1
+"risk","Liver Diseases","hsd","9",1.3
+"risk","Liver Diseases","hsd","10",1.5
+"risk","Liver Diseases","hsd","11",1.7
+"risk","Liver Diseases","hsd","12",1.9
+"risk","Liver Diseases","hsd","13",2.1
+"risk","Liver Diseases","hsd","14",2.3
+"risk","Liver Diseases","hsd","15",2.5
+"risk","Liver Diseases","hsd","16",2.7
+"risk","Liver Diseases","hsd","17",2.7
+"risk","Liver Diseases","hsd","18",2.7
+"risk","Liver Diseases","hsd","19",2.7
+"risk","Liver Diseases","hsd","20",2.7
+"risk","Liver Diseases","hsd","21",2.7
+"risk","Liver Diseases","hsd","22",2.7
+"risk","Liver Diseases","hsd","23",2.7
+"risk","Liver Diseases","hsd","24",2.7
+"risk","Liver Diseases","sys","Normal (SBP <120 mmHG)",1
+"risk","Liver Diseases","sys","Elevated (SBP 120-129 mmHG)",1.56
+"risk","Liver Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",2.13
+"risk","Liver Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",2.69
+"risk","Liver Diseases","bmi","Underweight (<18.5)",1
+"risk","Liver Diseases","bmi","Normal Weight (18.5-24.9)",1
+"risk","Liver Diseases","bmi","Overweight (25-29.9)",1.16
+"risk","Liver Diseases","bmi","Obese (>30)",1.69
+"risk","Liver Diseases","hbp","Yes",1
+"risk","Liver Diseases","hbp","No",1
+"risk","Liver Diseases","hbc","Yes",1.1
+"risk","Liver Diseases","hbc","No",1
+"risk","Liver Diseases","cvd","Yes",1
+"risk","Liver Diseases","cvd","No",1
+"risk","Liver Diseases","copd","Yes",1
+"risk","Liver Diseases","copd","No",1
+"risk","Liver Diseases","dia","Yes",1
+"risk","Liver Diseases","dia","No",1
+"risk","Liver Diseases","dep","Yes",1
+"risk","Liver Diseases","dep","No",1
+"risk","Liver Diseases","can","Yes",4.7
+"risk","Liver Diseases","can","No",1
+"risk","Liver Diseases","alz","Yes",1
+"risk","Liver Diseases","alz","No",1
+"risk","Liver Diseases","fcvd","Yes",1
+"risk","Liver Diseases","fcvd","No",1
+"risk","Liver Diseases","fcopd","Yes",1
+"risk","Liver Diseases","fcopd","No",1
+"risk","Liver Diseases","fdia","Yes",1
+"risk","Liver Diseases","fdia","No",1
+"risk","Liver Diseases","fdep","Yes",1
+"risk","Liver Diseases","fdep","No",1
+"risk","Liver Diseases","fcan","Yes",1
+"risk","Liver Diseases","fcan","No",1
+"risk","Liver Diseases","falz","Yes",1
+"risk","Liver Diseases","falz","No",1
+"risk","Septicemia","sex","Male",1.113
+"risk","Septicemia","sex","Female",0.918
+"risk","Septicemia","race","White",0.959
+"risk","Septicemia","race","Black",1.68
+"risk","Septicemia","race","Asian",0.464
+"risk","Septicemia","race","Native American",0.948
+"risk","Septicemia","race","Other",1
+"risk","Septicemia","wbr","East Asia & Pacific",1.5
+"risk","Septicemia","wbr","Europe & Central Asia",1.5
+"risk","Septicemia","wbr","Latin America & Caribbean",2
+"risk","Septicemia","wbr","Middle East & North Africa",2
+"risk","Septicemia","wbr","North America",1
+"risk","Septicemia","wbr","South Asia",4
+"risk","Septicemia","wbr","Sub-Saharan Africa",6
+"risk","Septicemia","inc","Poor",2
+"risk","Septicemia","inc","Lower-middle",1.5
+"risk","Septicemia","inc","Middle",1
+"risk","Septicemia","inc","Upper-middle",1
+"risk","Septicemia","inc","Rich",1
+"risk","Septicemia","edu","No Formal Schooling",2
+"risk","Septicemia","edu","Primary Education (Elementary School)",2
+"risk","Septicemia","edu","Secondary Education (High School)",1
+"risk","Septicemia","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",2
+"risk","Septicemia","edu","Master's degree",0.5
+"risk","Septicemia","edu","Doctoral degree",0.5
+"risk","Septicemia","hsd","0",1.42
+"risk","Septicemia","hsd","1",1.36
+"risk","Septicemia","hsd","2",1.3
+"risk","Septicemia","hsd","3",1.24
+"risk","Septicemia","hsd","4",1.18
+"risk","Septicemia","hsd","5",1.12
+"risk","Septicemia","hsd","6",1.06
+"risk","Septicemia","hsd","7",1
+"risk","Septicemia","hsd","8",1.1
+"risk","Septicemia","hsd","9",1.3
+"risk","Septicemia","hsd","10",1.5
+"risk","Septicemia","hsd","11",1.7
+"risk","Septicemia","hsd","12",1.9
+"risk","Septicemia","hsd","13",2.1
+"risk","Septicemia","hsd","14",2.3
+"risk","Septicemia","hsd","15",2.5
+"risk","Septicemia","hsd","16",2.7
+"risk","Septicemia","hsd","17",2.7
+"risk","Septicemia","hsd","18",2.7
+"risk","Septicemia","hsd","19",2.7
+"risk","Septicemia","hsd","20",2.7
+"risk","Septicemia","hsd","21",2.7
+"risk","Septicemia","hsd","22",2.7
+"risk","Septicemia","hsd","23",2.7
+"risk","Septicemia","hsd","24",2.7
+"risk","Septicemia","sys","Normal (SBP <120 mmHG)",1
+"risk","Septicemia","sys","Elevated (SBP 120-129 mmHG)",1
+"risk","Septicemia","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"risk","Septicemia","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"risk","Septicemia","bmi","Underweight (<18.5)",1.56
+"risk","Septicemia","bmi","Normal Weight (18.5-24.9)",1
+"risk","Septicemia","bmi","Overweight (25-29.9)",1
+"risk","Septicemia","bmi","Obese (>30)",1
+"risk","Septicemia","hbp","Yes",1
+"risk","Septicemia","hbp","No",1
+"risk","Septicemia","hbc","Yes",1
+"risk","Septicemia","hbc","No",1
+"risk","Septicemia","cvd","Yes",1.4
+"risk","Septicemia","cvd","No",1
+"risk","Septicemia","copd","Yes",1.4
+"risk","Septicemia","copd","No",1
+"risk","Septicemia","dia","Yes",2.2
+"risk","Septicemia","dia","No",1
+"risk","Septicemia","dep","Yes",1.3
+"risk","Septicemia","dep","No",1
+"risk","Septicemia","can","Yes",1.5
+"risk","Septicemia","can","No",1
+"risk","Septicemia","alz","Yes",1.5
+"risk","Septicemia","alz","No",1
+"risk","Septicemia","fcvd","Yes",1
+"risk","Septicemia","fcvd","No",1
+"risk","Septicemia","fcopd","Yes",1
+"risk","Septicemia","fcopd","No",1
+"risk","Septicemia","fdia","Yes",1
+"risk","Septicemia","fdia","No",1
+"risk","Septicemia","fdep","Yes",1
+"risk","Septicemia","fdep","No",1
+"risk","Septicemia","fcan","Yes",1
+"risk","Septicemia","fcan","No",1
+"risk","Septicemia","falz","Yes",1
+"risk","Septicemia","falz","No",1
+"pop","Cardiovascular Diseases","sex","Male",1.219
+"pop","Cardiovascular Diseases","sex","Female",0.816
+"pop","Cardiovascular Diseases","race","White",0.98
+"pop","Cardiovascular Diseases","race","Black",1.389
+"pop","Cardiovascular Diseases","race","Asian",0.582
+"pop","Cardiovascular Diseases","race","Native American",0.672
+"pop","Cardiovascular Diseases","race","Other",1
+"pop","Cardiovascular Diseases","wbr","East Asia & Pacific",1.189
+"pop","Cardiovascular Diseases","wbr","Europe & Central Asia",1.888
+"pop","Cardiovascular Diseases","wbr","Latin America & Caribbean",0.708
+"pop","Cardiovascular Diseases","wbr","Middle East & North Africa",0.876
+"pop","Cardiovascular Diseases","wbr","North America",1.181
+"pop","Cardiovascular Diseases","wbr","South Asia",0.758
+"pop","Cardiovascular Diseases","wbr","Sub-Saharan Africa",0.4
+"pop","Cardiovascular Diseases","inc","Poor",1.42
+"pop","Cardiovascular Diseases","inc","Lower-middle",1
+"pop","Cardiovascular Diseases","inc","Middle",1
+"pop","Cardiovascular Diseases","inc","Upper-middle",1
+"pop","Cardiovascular Diseases","inc","Rich",1
+"pop","Cardiovascular Diseases","edu","No Formal Schooling",1.42
+"pop","Cardiovascular Diseases","edu","Primary Education (Elementary School)",1.42
+"pop","Cardiovascular Diseases","edu","Secondary Education (High School)",1
+"pop","Cardiovascular Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Cardiovascular Diseases","edu","Master's degree",1
+"pop","Cardiovascular Diseases","edu","Doctoral degree",1
+"pop","Cardiovascular Diseases","hsd","0",4.21
+"pop","Cardiovascular Diseases","hsd","1",3.7
+"pop","Cardiovascular Diseases","hsd","2",3.19
+"pop","Cardiovascular Diseases","hsd","3",2.68
+"pop","Cardiovascular Diseases","hsd","4",2.17
+"pop","Cardiovascular Diseases","hsd","5",1.66
+"pop","Cardiovascular Diseases","hsd","6",1.15
+"pop","Cardiovascular Diseases","hsd","7",1
+"pop","Cardiovascular Diseases","hsd","8",1.4
+"pop","Cardiovascular Diseases","hsd","9",1.8
+"pop","Cardiovascular Diseases","hsd","10",2.2
+"pop","Cardiovascular Diseases","hsd","11",2.6
+"pop","Cardiovascular Diseases","hsd","12",3
+"pop","Cardiovascular Diseases","hsd","13",3.4
+"pop","Cardiovascular Diseases","hsd","14",3.8
+"pop","Cardiovascular Diseases","hsd","15",4.2
+"pop","Cardiovascular Diseases","hsd","16",4.6
+"pop","Cardiovascular Diseases","hsd","17",4.6
+"pop","Cardiovascular Diseases","hsd","18",4.6
+"pop","Cardiovascular Diseases","hsd","19",4.6
+"pop","Cardiovascular Diseases","hsd","20",4.6
+"pop","Cardiovascular Diseases","hsd","21",4.6
+"pop","Cardiovascular Diseases","hsd","22",4.6
+"pop","Cardiovascular Diseases","hsd","23",4.6
+"pop","Cardiovascular Diseases","hsd","24",4.6
+"pop","Cardiovascular Diseases","sys","Normal (SBP <120 mmHG)",1
+"pop","Cardiovascular Diseases","sys","Elevated (SBP 120-129 mmHG)",1.16
+"pop","Cardiovascular Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.34
+"pop","Cardiovascular Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.56
+"pop","Cardiovascular Diseases","bmi","Underweight (<18.5)",1.18
+"pop","Cardiovascular Diseases","bmi","Normal Weight (18.5-24.9)",1
+"pop","Cardiovascular Diseases","bmi","Overweight (25-29.9)",1.26
+"pop","Cardiovascular Diseases","bmi","Obese (>30)",1.76
+"pop","Cardiovascular Diseases","hbp","Yes",1
+"pop","Cardiovascular Diseases","hbp","No",1
+"pop","Cardiovascular Diseases","hbc","Yes",1.06
+"pop","Cardiovascular Diseases","hbc","No",1
+"pop","Cardiovascular Diseases","cvd","Yes",2.57
+"pop","Cardiovascular Diseases","cvd","No",1
+"pop","Cardiovascular Diseases","copd","Yes",4.98
+"pop","Cardiovascular Diseases","copd","No",1
+"pop","Cardiovascular Diseases","dia","Yes",2
+"pop","Cardiovascular Diseases","dia","No",1
+"pop","Cardiovascular Diseases","dep","Yes",1
+"pop","Cardiovascular Diseases","dep","No",1
+"pop","Cardiovascular Diseases","can","Yes",2.02
+"pop","Cardiovascular Diseases","can","No",1
+"pop","Cardiovascular Diseases","alz","Yes",1
+"pop","Cardiovascular Diseases","alz","No",1
+"pop","Cardiovascular Diseases","fcvd","Yes",2.5
+"pop","Cardiovascular Diseases","fcvd","No",1
+"pop","Cardiovascular Diseases","fcopd","Yes",1
+"pop","Cardiovascular Diseases","fcopd","No",1
+"pop","Cardiovascular Diseases","fdia","Yes",1
+"pop","Cardiovascular Diseases","fdia","No",1
+"pop","Cardiovascular Diseases","fdep","Yes",1
+"pop","Cardiovascular Diseases","fdep","No",1
+"pop","Cardiovascular Diseases","fcan","Yes",1
+"pop","Cardiovascular Diseases","fcan","No",1
+"pop","Cardiovascular Diseases","falz","Yes",1
+"pop","Cardiovascular Diseases","falz","No",1
+"pop","Coronary Heart Diseases","sex","Male",1.375
+"pop","Coronary Heart Diseases","sex","Female",0.698
+"pop","Coronary Heart Diseases","race","White",1.001
+"pop","Coronary Heart Diseases","race","Black",1.233
+"pop","Coronary Heart Diseases","race","Asian",0.596
+"pop","Coronary Heart Diseases","race","Native American",0.941
+"pop","Coronary Heart Diseases","race","Other",1
+"pop","Coronary Heart Diseases","wbr","East Asia & Pacific",1.189
+"pop","Coronary Heart Diseases","wbr","Europe & Central Asia",1.888
+"pop","Coronary Heart Diseases","wbr","Latin America & Caribbean",0.708
+"pop","Coronary Heart Diseases","wbr","Middle East & North Africa",0.876
+"pop","Coronary Heart Diseases","wbr","North America",1.181
+"pop","Coronary Heart Diseases","wbr","South Asia",0.758
+"pop","Coronary Heart Diseases","wbr","Sub-Saharan Africa",0.4
+"pop","Coronary Heart Diseases","inc","Poor",1.42
+"pop","Coronary Heart Diseases","inc","Lower-middle",1
+"pop","Coronary Heart Diseases","inc","Middle",1
+"pop","Coronary Heart Diseases","inc","Upper-middle",1
+"pop","Coronary Heart Diseases","inc","Rich",1
+"pop","Coronary Heart Diseases","edu","No Formal Schooling",1.42
+"pop","Coronary Heart Diseases","edu","Primary Education (Elementary School)",1.42
+"pop","Coronary Heart Diseases","edu","Secondary Education (High School)",1
+"pop","Coronary Heart Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Coronary Heart Diseases","edu","Master's degree",1
+"pop","Coronary Heart Diseases","edu","Doctoral degree",1
+"pop","Coronary Heart Diseases","hsd","0",1.42
+"pop","Coronary Heart Diseases","hsd","1",1.36
+"pop","Coronary Heart Diseases","hsd","2",1.3
+"pop","Coronary Heart Diseases","hsd","3",1.24
+"pop","Coronary Heart Diseases","hsd","4",1.18
+"pop","Coronary Heart Diseases","hsd","5",1.12
+"pop","Coronary Heart Diseases","hsd","6",1.06
+"pop","Coronary Heart Diseases","hsd","7",1
+"pop","Coronary Heart Diseases","hsd","8",1.1
+"pop","Coronary Heart Diseases","hsd","9",1.3
+"pop","Coronary Heart Diseases","hsd","10",1.5
+"pop","Coronary Heart Diseases","hsd","11",1.7
+"pop","Coronary Heart Diseases","hsd","12",1.9
+"pop","Coronary Heart Diseases","hsd","13",2.1
+"pop","Coronary Heart Diseases","hsd","14",2.3
+"pop","Coronary Heart Diseases","hsd","15",2.5
+"pop","Coronary Heart Diseases","hsd","16",2.7
+"pop","Coronary Heart Diseases","hsd","17",2.7
+"pop","Coronary Heart Diseases","hsd","18",2.7
+"pop","Coronary Heart Diseases","hsd","19",2.7
+"pop","Coronary Heart Diseases","hsd","20",2.7
+"pop","Coronary Heart Diseases","hsd","21",2.7
+"pop","Coronary Heart Diseases","hsd","22",2.7
+"pop","Coronary Heart Diseases","hsd","23",2.7
+"pop","Coronary Heart Diseases","hsd","24",2.7
+"pop","Coronary Heart Diseases","sys","Normal (SBP <120 mmHG)",1
+"pop","Coronary Heart Diseases","sys","Elevated (SBP 120-129 mmHG)",1.16
+"pop","Coronary Heart Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.34
+"pop","Coronary Heart Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.56
+"pop","Coronary Heart Diseases","bmi","Underweight (<18.5)",1.18
+"pop","Coronary Heart Diseases","bmi","Normal Weight (18.5-24.9)",1
+"pop","Coronary Heart Diseases","bmi","Overweight (25-29.9)",1.26
+"pop","Coronary Heart Diseases","bmi","Obese (>30)",1.76
+"pop","Coronary Heart Diseases","hbp","Yes",1
+"pop","Coronary Heart Diseases","hbp","No",1
+"pop","Coronary Heart Diseases","hbc","Yes",1.06
+"pop","Coronary Heart Diseases","hbc","No",1
+"pop","Coronary Heart Diseases","cvd","Yes",2.57
+"pop","Coronary Heart Diseases","cvd","No",1
+"pop","Coronary Heart Diseases","copd","Yes",4.98
+"pop","Coronary Heart Diseases","copd","No",1
+"pop","Coronary Heart Diseases","dia","Yes",2
+"pop","Coronary Heart Diseases","dia","No",1
+"pop","Coronary Heart Diseases","dep","Yes",1
+"pop","Coronary Heart Diseases","dep","No",1
+"pop","Coronary Heart Diseases","can","Yes",2.02
+"pop","Coronary Heart Diseases","can","No",1
+"pop","Coronary Heart Diseases","alz","Yes",1
+"pop","Coronary Heart Diseases","alz","No",1
+"pop","Coronary Heart Diseases","fcvd","Yes",2.5
+"pop","Coronary Heart Diseases","fcvd","No",1
+"pop","Coronary Heart Diseases","fcopd","Yes",1
+"pop","Coronary Heart Diseases","fcopd","No",1
+"pop","Coronary Heart Diseases","fdia","Yes",1
+"pop","Coronary Heart Diseases","fdia","No",1
+"pop","Coronary Heart Diseases","fdep","Yes",1
+"pop","Coronary Heart Diseases","fdep","No",1
+"pop","Coronary Heart Diseases","fcan","Yes",1
+"pop","Coronary Heart Diseases","fcan","No",1
+"pop","Coronary Heart Diseases","falz","Yes",1
+"pop","Coronary Heart Diseases","falz","No",1
+"pop","Stroke","sex","Male",1.026
+"pop","Stroke","sex","Female",0.964
+"pop","Stroke","race","White",0.964
+"pop","Stroke","race","Black",1.441
+"pop","Stroke","race","Asian",0.809
+"pop","Stroke","race","Native American",0.67
+"pop","Stroke","race","Other",1
+"pop","Stroke","wbr","East Asia & Pacific",1.189
+"pop","Stroke","wbr","Europe & Central Asia",1.888
+"pop","Stroke","wbr","Latin America & Caribbean",0.708
+"pop","Stroke","wbr","Middle East & North Africa",0.876
+"pop","Stroke","wbr","North America",1.181
+"pop","Stroke","wbr","South Asia",0.758
+"pop","Stroke","wbr","Sub-Saharan Africa",0.4
+"pop","Stroke","inc","Poor",1.42
+"pop","Stroke","inc","Lower-middle",1
+"pop","Stroke","inc","Middle",1
+"pop","Stroke","inc","Upper-middle",1
+"pop","Stroke","inc","Rich",1
+"pop","Stroke","edu","No Formal Schooling",1.42
+"pop","Stroke","edu","Primary Education (Elementary School)",1.42
+"pop","Stroke","edu","Secondary Education (High School)",1
+"pop","Stroke","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Stroke","edu","Master's degree",1
+"pop","Stroke","edu","Doctoral degree",1
+"pop","Stroke","hsd","0",0.65
+"pop","Stroke","hsd","1",2.2
+"pop","Stroke","hsd","2",2
+"pop","Stroke","hsd","3",1.8
+"pop","Stroke","hsd","4",1.6
+"pop","Stroke","hsd","5",1.4
+"pop","Stroke","hsd","6",1.2
+"pop","Stroke","hsd","7",1
+"pop","Stroke","hsd","8",1.07
+"pop","Stroke","hsd","9",1.14
+"pop","Stroke","hsd","10",1.21
+"pop","Stroke","hsd","11",1.28
+"pop","Stroke","hsd","12",1.35
+"pop","Stroke","hsd","13",1.42
+"pop","Stroke","hsd","14",1.49
+"pop","Stroke","hsd","15",1.56
+"pop","Stroke","hsd","16",1.63
+"pop","Stroke","hsd","17",1.63
+"pop","Stroke","hsd","18",1.63
+"pop","Stroke","hsd","19",1.63
+"pop","Stroke","hsd","20",1.63
+"pop","Stroke","hsd","21",1.63
+"pop","Stroke","hsd","22",1.63
+"pop","Stroke","hsd","23",1.63
+"pop","Stroke","hsd","24",1.63
+"pop","Stroke","sys","Normal (SBP <120 mmHG)",1
+"pop","Stroke","sys","Elevated (SBP 120-129 mmHG)",1.3
+"pop","Stroke","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.7
+"pop","Stroke","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",2.21
+"pop","Stroke","bmi","Underweight (<18.5)",1.18
+"pop","Stroke","bmi","Normal Weight (18.5-24.9)",1
+"pop","Stroke","bmi","Overweight (25-29.9)",1.5
+"pop","Stroke","bmi","Obese (>30)",2
+"pop","Stroke","hbp","Yes",1
+"pop","Stroke","hbp","No",1
+"pop","Stroke","hbc","Yes",1.08
+"pop","Stroke","hbc","No",1
+"pop","Stroke","cvd","Yes",2.44
+"pop","Stroke","cvd","No",1
+"pop","Stroke","copd","Yes",3.34
+"pop","Stroke","copd","No",1
+"pop","Stroke","dia","Yes",2
+"pop","Stroke","dia","No",1
+"pop","Stroke","dep","Yes",1
+"pop","Stroke","dep","No",1
+"pop","Stroke","can","Yes",1.83
+"pop","Stroke","can","No",1
+"pop","Stroke","alz","Yes",1
+"pop","Stroke","alz","No",1
+"pop","Stroke","fcvd","Yes",2.5
+"pop","Stroke","fcvd","No",1
+"pop","Stroke","fcopd","Yes",1
+"pop","Stroke","fcopd","No",1
+"pop","Stroke","fdia","Yes",1
+"pop","Stroke","fdia","No",1
+"pop","Stroke","fdep","Yes",1
+"pop","Stroke","fdep","No",1
+"pop","Stroke","fcan","Yes",1
+"pop","Stroke","fcan","No",1
+"pop","Stroke","falz","Yes",1
+"pop","Stroke","falz","No",1
+"pop","Cancer","sex","Male",1.184
+"pop","Cancer","sex","Female",0.863
+"pop","Cancer","race","White",1.016
+"pop","Cancer","race","Black",1.134
+"pop","Cancer","race","Asian",0.614
+"pop","Cancer","race","Native American",0.636
+"pop","Cancer","race","Other",1
+"pop","Cancer","wbr","East Asia & Pacific",1.28
+"pop","Cancer","wbr","Europe & Central Asia",1.79
+"pop","Cancer","wbr","Latin America & Caribbean",0.87
+"pop","Cancer","wbr","Middle East & North Africa",0.457
+"pop","Cancer","wbr","North America",1.745
+"pop","Cancer","wbr","South Asia",0.507
+"pop","Cancer","wbr","Sub-Saharan Africa",0.351
+"pop","Cancer","inc","Poor",1.58
+"pop","Cancer","inc","Lower-middle",1
+"pop","Cancer","inc","Middle",1
+"pop","Cancer","inc","Upper-middle",1
+"pop","Cancer","inc","Rich",1
+"pop","Cancer","edu","No Formal Schooling",1.58
+"pop","Cancer","edu","Primary Education (Elementary School)",1.58
+"pop","Cancer","edu","Secondary Education (High School)",1
+"pop","Cancer","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Cancer","edu","Master's degree",1
+"pop","Cancer","edu","Doctoral degree",1
+"pop","Cancer","hsd","0",1.42
+"pop","Cancer","hsd","1",1.36
+"pop","Cancer","hsd","2",1.3
+"pop","Cancer","hsd","3",1.24
+"pop","Cancer","hsd","4",1.18
+"pop","Cancer","hsd","5",1.12
+"pop","Cancer","hsd","6",1.06
+"pop","Cancer","hsd","7",1
+"pop","Cancer","hsd","8",1.1
+"pop","Cancer","hsd","9",1.3
+"pop","Cancer","hsd","10",1.5
+"pop","Cancer","hsd","11",1.7
+"pop","Cancer","hsd","12",1.9
+"pop","Cancer","hsd","13",2.1
+"pop","Cancer","hsd","14",2.3
+"pop","Cancer","hsd","15",2.5
+"pop","Cancer","hsd","16",2.7
+"pop","Cancer","hsd","17",2.7
+"pop","Cancer","hsd","18",2.7
+"pop","Cancer","hsd","19",2.7
+"pop","Cancer","hsd","20",2.7
+"pop","Cancer","hsd","21",2.7
+"pop","Cancer","hsd","22",2.7
+"pop","Cancer","hsd","23",2.7
+"pop","Cancer","hsd","24",2.7
+"pop","Cancer","sys","Normal (SBP <120 mmHG)",1
+"pop","Cancer","sys","Elevated (SBP 120-129 mmHG)",1.1
+"pop","Cancer","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.21
+"pop","Cancer","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.33
+"pop","Cancer","bmi","Underweight (<18.5)",1.29
+"pop","Cancer","bmi","Normal Weight (18.5-24.9)",1
+"pop","Cancer","bmi","Overweight (25-29.9)",1.285
+"pop","Cancer","bmi","Obese (>30)",1.57
+"pop","Cancer","hbp","Yes",1
+"pop","Cancer","hbp","No",1
+"pop","Cancer","hbc","Yes",1
+"pop","Cancer","hbc","No",1
+"pop","Cancer","cvd","Yes",1
+"pop","Cancer","cvd","No",1
+"pop","Cancer","copd","Yes",1
+"pop","Cancer","copd","No",1
+"pop","Cancer","dia","Yes",1
+"pop","Cancer","dia","No",1
+"pop","Cancer","dep","Yes",1
+"pop","Cancer","dep","No",1
+"pop","Cancer","can","Yes",4.38
+"pop","Cancer","can","No",1
+"pop","Cancer","alz","Yes",1
+"pop","Cancer","alz","No",1
+"pop","Cancer","fcvd","Yes",1
+"pop","Cancer","fcvd","No",1
+"pop","Cancer","fcopd","Yes",1
+"pop","Cancer","fcopd","No",1
+"pop","Cancer","fdia","Yes",1
+"pop","Cancer","fdia","No",1
+"pop","Cancer","fdep","Yes",1
+"pop","Cancer","fdep","No",1
+"pop","Cancer","fcan","Yes",2.88
+"pop","Cancer","fcan","No",1
+"pop","Cancer","falz","Yes",1
+"pop","Cancer","falz","No",1
+"pop","COVID-19","sex","Male",1.267
+"pop","COVID-19","sex","Female",0.784
+"pop","COVID-19","race","White",0.934
+"pop","COVID-19","race","Black",1.645
+"pop","COVID-19","race","Asian",0.741
+"pop","COVID-19","race","Native American",1.518
+"pop","COVID-19","race","Other",1
+"pop","COVID-19","wbr","East Asia & Pacific",0.141
+"pop","COVID-19","wbr","Europe & Central Asia",1.816
+"pop","COVID-19","wbr","Latin America & Caribbean",1.636
+"pop","COVID-19","wbr","Middle East & North Africa",0.512
+"pop","COVID-19","wbr","North America",2.457
+"pop","COVID-19","wbr","South Asia",0.258
+"pop","COVID-19","wbr","Sub-Saharan Africa",0.181
+"pop","COVID-19","inc","Poor",1.38
+"pop","COVID-19","inc","Lower-middle",1
+"pop","COVID-19","inc","Middle",1
+"pop","COVID-19","inc","Upper-middle",1
+"pop","COVID-19","inc","Rich",1
+"pop","COVID-19","edu","No Formal Schooling",1.58
+"pop","COVID-19","edu","Primary Education (Elementary School)",1.58
+"pop","COVID-19","edu","Secondary Education (High School)",1
+"pop","COVID-19","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","COVID-19","edu","Master's degree",1
+"pop","COVID-19","edu","Doctoral degree",1
+"pop","COVID-19","hsd","0",1.42
+"pop","COVID-19","hsd","1",1.36
+"pop","COVID-19","hsd","2",1.3
+"pop","COVID-19","hsd","3",1.24
+"pop","COVID-19","hsd","4",1.18
+"pop","COVID-19","hsd","5",1.12
+"pop","COVID-19","hsd","6",1.06
+"pop","COVID-19","hsd","7",1
+"pop","COVID-19","hsd","8",1.1
+"pop","COVID-19","hsd","9",1.3
+"pop","COVID-19","hsd","10",1.5
+"pop","COVID-19","hsd","11",1.7
+"pop","COVID-19","hsd","12",1.9
+"pop","COVID-19","hsd","13",2.1
+"pop","COVID-19","hsd","14",2.3
+"pop","COVID-19","hsd","15",2.5
+"pop","COVID-19","hsd","16",2.7
+"pop","COVID-19","hsd","17",2.7
+"pop","COVID-19","hsd","18",2.7
+"pop","COVID-19","hsd","19",2.7
+"pop","COVID-19","hsd","20",2.7
+"pop","COVID-19","hsd","21",2.7
+"pop","COVID-19","hsd","22",2.7
+"pop","COVID-19","hsd","23",2.7
+"pop","COVID-19","hsd","24",2.7
+"pop","COVID-19","sys","Normal (SBP <120 mmHG)",1
+"pop","COVID-19","sys","Elevated (SBP 120-129 mmHG)",1.1
+"pop","COVID-19","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.2
+"pop","COVID-19","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.36
+"pop","COVID-19","bmi","Underweight (<18.5)",1.5
+"pop","COVID-19","bmi","Normal Weight (18.5-24.9)",1
+"pop","COVID-19","bmi","Overweight (25-29.9)",1.34
+"pop","COVID-19","bmi","Obese (>30)",1.85
+"pop","COVID-19","hbp","Yes",1
+"pop","COVID-19","hbp","No",1
+"pop","COVID-19","hbc","Yes",1
+"pop","COVID-19","hbc","No",1
+"pop","COVID-19","cvd","Yes",1
+"pop","COVID-19","cvd","No",1
+"pop","COVID-19","copd","Yes",1.77
+"pop","COVID-19","copd","No",1
+"pop","COVID-19","dia","Yes",1
+"pop","COVID-19","dia","No",1
+"pop","COVID-19","dep","Yes",1
+"pop","COVID-19","dep","No",1
+"pop","COVID-19","can","Yes",2.55
+"pop","COVID-19","can","No",1
+"pop","COVID-19","alz","Yes",1
+"pop","COVID-19","alz","No",1
+"pop","COVID-19","fcvd","Yes",1
+"pop","COVID-19","fcvd","No",1
+"pop","COVID-19","fcopd","Yes",1
+"pop","COVID-19","fcopd","No",1
+"pop","COVID-19","fdia","Yes",1
+"pop","COVID-19","fdia","No",1
+"pop","COVID-19","fdep","Yes",1
+"pop","COVID-19","fdep","No",1
+"pop","COVID-19","fcan","Yes",1
+"pop","COVID-19","fcan","No",1
+"pop","COVID-19","falz","Yes",1
+"pop","COVID-19","falz","No",1
+"pop","Alzheimer’s Disease","sex","Male",0.781
+"pop","Alzheimer’s Disease","sex","Female",1.142
+"pop","Alzheimer’s Disease","race","White",1.043
+"pop","Alzheimer’s Disease","race","Black",0.951
+"pop","Alzheimer’s Disease","race","Asian",0.54
+"pop","Alzheimer’s Disease","race","Native American",0.485
+"pop","Alzheimer’s Disease","race","Other",1
+"pop","Alzheimer’s Disease","wbr","East Asia & Pacific",1.135
+"pop","Alzheimer’s Disease","wbr","Europe & Central Asia",1.928
+"pop","Alzheimer’s Disease","wbr","Latin America & Caribbean",0.98
+"pop","Alzheimer’s Disease","wbr","Middle East & North Africa",0.446
+"pop","Alzheimer’s Disease","wbr","North America",1.888
+"pop","Alzheimer’s Disease","wbr","South Asia",0.378
+"pop","Alzheimer’s Disease","wbr","Sub-Saharan Africa",0.246
+"pop","Alzheimer’s Disease","inc","Poor",1.2
+"pop","Alzheimer’s Disease","inc","Lower-middle",1.1
+"pop","Alzheimer’s Disease","inc","Middle",1
+"pop","Alzheimer’s Disease","inc","Upper-middle",0.9
+"pop","Alzheimer’s Disease","inc","Rich",0.8
+"pop","Alzheimer’s Disease","edu","No Formal Schooling",1.2
+"pop","Alzheimer’s Disease","edu","Primary Education (Elementary School)",1.1
+"pop","Alzheimer’s Disease","edu","Secondary Education (High School)",1
+"pop","Alzheimer’s Disease","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"pop","Alzheimer’s Disease","edu","Master's degree",0.8
+"pop","Alzheimer’s Disease","edu","Doctoral degree",0.7
+"pop","Alzheimer’s Disease","hsd","0",1.42
+"pop","Alzheimer’s Disease","hsd","1",1.36
+"pop","Alzheimer’s Disease","hsd","2",1.3
+"pop","Alzheimer’s Disease","hsd","3",1.24
+"pop","Alzheimer’s Disease","hsd","4",1.18
+"pop","Alzheimer’s Disease","hsd","5",1.12
+"pop","Alzheimer’s Disease","hsd","6",1.06
+"pop","Alzheimer’s Disease","hsd","7",1
+"pop","Alzheimer’s Disease","hsd","8",1.1
+"pop","Alzheimer’s Disease","hsd","9",1.3
+"pop","Alzheimer’s Disease","hsd","10",1.5
+"pop","Alzheimer’s Disease","hsd","11",1.7
+"pop","Alzheimer’s Disease","hsd","12",1.9
+"pop","Alzheimer’s Disease","hsd","13",2.1
+"pop","Alzheimer’s Disease","hsd","14",2.3
+"pop","Alzheimer’s Disease","hsd","15",2.5
+"pop","Alzheimer’s Disease","hsd","16",2.7
+"pop","Alzheimer’s Disease","hsd","17",2.7
+"pop","Alzheimer’s Disease","hsd","18",2.7
+"pop","Alzheimer’s Disease","hsd","19",2.7
+"pop","Alzheimer’s Disease","hsd","20",2.7
+"pop","Alzheimer’s Disease","hsd","21",2.7
+"pop","Alzheimer’s Disease","hsd","22",2.7
+"pop","Alzheimer’s Disease","hsd","23",2.7
+"pop","Alzheimer’s Disease","hsd","24",2.7
+"pop","Alzheimer’s Disease","sys","Normal (SBP <120 mmHG)",1
+"pop","Alzheimer’s Disease","sys","Elevated (SBP 120-129 mmHG)",1
+"pop","Alzheimer’s Disease","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"pop","Alzheimer’s Disease","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"pop","Alzheimer’s Disease","bmi","Underweight (<18.5)",1
+"pop","Alzheimer’s Disease","bmi","Normal Weight (18.5-24.9)",1
+"pop","Alzheimer’s Disease","bmi","Overweight (25-29.9)",1
+"pop","Alzheimer’s Disease","bmi","Obese (>30)",1
+"pop","Alzheimer’s Disease","hbp","Yes",1
+"pop","Alzheimer’s Disease","hbp","No",1
+"pop","Alzheimer’s Disease","hbc","Yes",1
+"pop","Alzheimer’s Disease","hbc","No",1
+"pop","Alzheimer’s Disease","cvd","Yes",1
+"pop","Alzheimer’s Disease","cvd","No",1
+"pop","Alzheimer’s Disease","copd","Yes",1
+"pop","Alzheimer’s Disease","copd","No",1
+"pop","Alzheimer’s Disease","dia","Yes",1
+"pop","Alzheimer’s Disease","dia","No",1
+"pop","Alzheimer’s Disease","dep","Yes",1
+"pop","Alzheimer’s Disease","dep","No",1
+"pop","Alzheimer’s Disease","can","Yes",1
+"pop","Alzheimer’s Disease","can","No",1
+"pop","Alzheimer’s Disease","alz","Yes",1
+"pop","Alzheimer’s Disease","alz","No",1
+"pop","Alzheimer’s Disease","fcvd","Yes",1
+"pop","Alzheimer’s Disease","fcvd","No",1
+"pop","Alzheimer’s Disease","fcopd","Yes",1
+"pop","Alzheimer’s Disease","fcopd","No",1
+"pop","Alzheimer’s Disease","fdia","Yes",1
+"pop","Alzheimer’s Disease","fdia","No",1
+"pop","Alzheimer’s Disease","fdep","Yes",1
+"pop","Alzheimer’s Disease","fdep","No",1
+"pop","Alzheimer’s Disease","fcan","Yes",1
+"pop","Alzheimer’s Disease","fcan","No",1
+"pop","Alzheimer’s Disease","falz","Yes",1.7
+"pop","Alzheimer’s Disease","falz","No",1
+"pop","Chronic Lower Respiratory Diseases","sex","Male",1.104
+"pop","Chronic Lower Respiratory Diseases","sex","Female",0.923
+"pop","Chronic Lower Respiratory Diseases","race","White",1.069
+"pop","Chronic Lower Respiratory Diseases","race","Black",0.816
+"pop","Chronic Lower Respiratory Diseases","race","Asian",0.28
+"pop","Chronic Lower Respiratory Diseases","race","Native American",0.657
+"pop","Chronic Lower Respiratory Diseases","race","Other",1
+"pop","Chronic Lower Respiratory Diseases","wbr","East Asia & Pacific",1.403
+"pop","Chronic Lower Respiratory Diseases","wbr","Europe & Central Asia",0.962
+"pop","Chronic Lower Respiratory Diseases","wbr","Latin America & Caribbean",0.721
+"pop","Chronic Lower Respiratory Diseases","wbr","Middle East & North Africa",0.395
+"pop","Chronic Lower Respiratory Diseases","wbr","North America",1.489
+"pop","Chronic Lower Respiratory Diseases","wbr","South Asia",1.665
+"pop","Chronic Lower Respiratory Diseases","wbr","Sub-Saharan Africa",0.365
+"pop","Chronic Lower Respiratory Diseases","inc","Poor",1.2
+"pop","Chronic Lower Respiratory Diseases","inc","Lower-middle",1.1
+"pop","Chronic Lower Respiratory Diseases","inc","Middle",1
+"pop","Chronic Lower Respiratory Diseases","inc","Upper-middle",0.9
+"pop","Chronic Lower Respiratory Diseases","inc","Rich",0.8
+"pop","Chronic Lower Respiratory Diseases","edu","No Formal Schooling",1.2
+"pop","Chronic Lower Respiratory Diseases","edu","Primary Education (Elementary School)",1.1
+"pop","Chronic Lower Respiratory Diseases","edu","Secondary Education (High School)",1
+"pop","Chronic Lower Respiratory Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"pop","Chronic Lower Respiratory Diseases","edu","Master's degree",0.8
+"pop","Chronic Lower Respiratory Diseases","edu","Doctoral degree",0.7
+"pop","Chronic Lower Respiratory Diseases","hsd","0",1.42
+"pop","Chronic Lower Respiratory Diseases","hsd","1",1.36
+"pop","Chronic Lower Respiratory Diseases","hsd","2",1.3
+"pop","Chronic Lower Respiratory Diseases","hsd","3",1.24
+"pop","Chronic Lower Respiratory Diseases","hsd","4",1.18
+"pop","Chronic Lower Respiratory Diseases","hsd","5",1.12
+"pop","Chronic Lower Respiratory Diseases","hsd","6",1.06
+"pop","Chronic Lower Respiratory Diseases","hsd","7",1
+"pop","Chronic Lower Respiratory Diseases","hsd","8",1.1
+"pop","Chronic Lower Respiratory Diseases","hsd","9",1.3
+"pop","Chronic Lower Respiratory Diseases","hsd","10",1.5
+"pop","Chronic Lower Respiratory Diseases","hsd","11",1.7
+"pop","Chronic Lower Respiratory Diseases","hsd","12",1.9
+"pop","Chronic Lower Respiratory Diseases","hsd","13",2.1
+"pop","Chronic Lower Respiratory Diseases","hsd","14",2.3
+"pop","Chronic Lower Respiratory Diseases","hsd","15",2.5
+"pop","Chronic Lower Respiratory Diseases","hsd","16",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","17",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","18",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","19",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","20",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","21",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","22",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","23",2.7
+"pop","Chronic Lower Respiratory Diseases","hsd","24",2.7
+"pop","Chronic Lower Respiratory Diseases","sys","Normal (SBP <120 mmHG)",1
+"pop","Chronic Lower Respiratory Diseases","sys","Elevated (SBP 120-129 mmHG)",1.1
+"pop","Chronic Lower Respiratory Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.2
+"pop","Chronic Lower Respiratory Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.4
+"pop","Chronic Lower Respiratory Diseases","bmi","Underweight (<18.5)",1.4
+"pop","Chronic Lower Respiratory Diseases","bmi","Normal Weight (18.5-24.9)",1
+"pop","Chronic Lower Respiratory Diseases","bmi","Overweight (25-29.9)",0.8
+"pop","Chronic Lower Respiratory Diseases","bmi","Obese (>30)",0.77
+"pop","Chronic Lower Respiratory Diseases","hbp","Yes",1
+"pop","Chronic Lower Respiratory Diseases","hbp","No",1
+"pop","Chronic Lower Respiratory Diseases","hbc","Yes",1.1
+"pop","Chronic Lower Respiratory Diseases","hbc","No",1
+"pop","Chronic Lower Respiratory Diseases","cvd","Yes",1
+"pop","Chronic Lower Respiratory Diseases","cvd","No",1
+"pop","Chronic Lower Respiratory Diseases","copd","Yes",3.42
+"pop","Chronic Lower Respiratory Diseases","copd","No",1
+"pop","Chronic Lower Respiratory Diseases","dia","Yes",1
+"pop","Chronic Lower Respiratory Diseases","dia","No",1
+"pop","Chronic Lower Respiratory Diseases","dep","Yes",1
+"pop","Chronic Lower Respiratory Diseases","dep","No",1
+"pop","Chronic Lower Respiratory Diseases","can","Yes",2.59
+"pop","Chronic Lower Respiratory Diseases","can","No",1
+"pop","Chronic Lower Respiratory Diseases","alz","Yes",1
+"pop","Chronic Lower Respiratory Diseases","alz","No",1
+"pop","Chronic Lower Respiratory Diseases","fcvd","Yes",1
+"pop","Chronic Lower Respiratory Diseases","fcvd","No",1
+"pop","Chronic Lower Respiratory Diseases","fcopd","Yes",1.57
+"pop","Chronic Lower Respiratory Diseases","fcopd","No",1
+"pop","Chronic Lower Respiratory Diseases","fdia","Yes",1
+"pop","Chronic Lower Respiratory Diseases","fdia","No",1
+"pop","Chronic Lower Respiratory Diseases","fdep","Yes",1
+"pop","Chronic Lower Respiratory Diseases","fdep","No",1
+"pop","Chronic Lower Respiratory Diseases","fcan","Yes",1
+"pop","Chronic Lower Respiratory Diseases","fcan","No",1
+"pop","Chronic Lower Respiratory Diseases","falz","Yes",1
+"pop","Chronic Lower Respiratory Diseases","falz","No",1
+"pop","Diabetes","sex","Male",1.258
+"pop","Diabetes","sex","Female",0.786
+"pop","Diabetes","race","White",0.903
+"pop","Diabetes","race","Black",1.859
+"pop","Diabetes","race","Asian",0.75
+"pop","Diabetes","race","Native American",1.512
+"pop","Diabetes","race","Other",1
+"pop","Diabetes","wbr","East Asia & Pacific",0.883
+"pop","Diabetes","wbr","Europe & Central Asia",0.938
+"pop","Diabetes","wbr","Latin America & Caribbean",1.627
+"pop","Diabetes","wbr","Middle East & North Africa",0.767
+"pop","Diabetes","wbr","North America",1.105
+"pop","Diabetes","wbr","South Asia",0.958
+"pop","Diabetes","wbr","Sub-Saharan Africa",0.723
+"pop","Diabetes","inc","Poor",2
+"pop","Diabetes","inc","Lower-middle",1.7
+"pop","Diabetes","inc","Middle",1.5
+"pop","Diabetes","inc","Upper-middle",1
+"pop","Diabetes","inc","Rich",1
+"pop","Diabetes","edu","No Formal Schooling",2.4
+"pop","Diabetes","edu","Primary Education (Elementary School)",1.6
+"pop","Diabetes","edu","Secondary Education (High School)",1.4
+"pop","Diabetes","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Diabetes","edu","Master's degree",1
+"pop","Diabetes","edu","Doctoral degree",1
+"pop","Diabetes","hsd","0",1.35
+"pop","Diabetes","hsd","1",1.3
+"pop","Diabetes","hsd","2",1.25
+"pop","Diabetes","hsd","3",1.2
+"pop","Diabetes","hsd","4",1.15
+"pop","Diabetes","hsd","5",1.1
+"pop","Diabetes","hsd","6",1.05
+"pop","Diabetes","hsd","7",1
+"pop","Diabetes","hsd","8",1.07
+"pop","Diabetes","hsd","9",1.14
+"pop","Diabetes","hsd","10",1.21
+"pop","Diabetes","hsd","11",1.28
+"pop","Diabetes","hsd","12",1.35
+"pop","Diabetes","hsd","13",1.42
+"pop","Diabetes","hsd","14",1.49
+"pop","Diabetes","hsd","15",1.56
+"pop","Diabetes","hsd","16",1.63
+"pop","Diabetes","hsd","17",1.63
+"pop","Diabetes","hsd","18",1.63
+"pop","Diabetes","hsd","19",1.63
+"pop","Diabetes","hsd","20",1.63
+"pop","Diabetes","hsd","21",1.63
+"pop","Diabetes","hsd","22",1.63
+"pop","Diabetes","hsd","23",1.63
+"pop","Diabetes","hsd","24",1.63
+"pop","Diabetes","sys","Normal (SBP <120 mmHG)",1
+"pop","Diabetes","sys","Elevated (SBP 120-129 mmHG)",1.24
+"pop","Diabetes","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.58
+"pop","Diabetes","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.82
+"pop","Diabetes","bmi","Underweight (<18.5)",1.5
+"pop","Diabetes","bmi","Normal Weight (18.5-24.9)",1
+"pop","Diabetes","bmi","Overweight (25-29.9)",1
+"pop","Diabetes","bmi","Obese (>30)",1
+"pop","Diabetes","hbp","Yes",1
+"pop","Diabetes","hbp","No",1
+"pop","Diabetes","hbc","Yes",1.1
+"pop","Diabetes","hbc","No",1
+"pop","Diabetes","cvd","Yes",3
+"pop","Diabetes","cvd","No",1
+"pop","Diabetes","copd","Yes",2.04
+"pop","Diabetes","copd","No",1
+"pop","Diabetes","dia","Yes",1
+"pop","Diabetes","dia","No",1
+"pop","Diabetes","dep","Yes",1
+"pop","Diabetes","dep","No",1
+"pop","Diabetes","can","Yes",1.77
+"pop","Diabetes","can","No",1
+"pop","Diabetes","alz","Yes",1
+"pop","Diabetes","alz","No",1
+"pop","Diabetes","fcvd","Yes",1
+"pop","Diabetes","fcvd","No",1
+"pop","Diabetes","fcopd","Yes",1
+"pop","Diabetes","fcopd","No",1
+"pop","Diabetes","fdia","Yes",5
+"pop","Diabetes","fdia","No",1
+"pop","Diabetes","fdep","Yes",1
+"pop","Diabetes","fdep","No",1
+"pop","Diabetes","fcan","Yes",1
+"pop","Diabetes","fcan","No",1
+"pop","Diabetes","falz","Yes",1
+"pop","Diabetes","falz","No",1
+"pop","Drug Overdose","sex","Male",1.426
+"pop","Drug Overdose","sex","Female",0.578
+"pop","Drug Overdose","race","White",1.058
+"pop","Drug Overdose","race","Black",1.236
+"pop","Drug Overdose","race","Asian",0.155
+"pop","Drug Overdose","race","Native American",0.946
+"pop","Drug Overdose","race","Other",1
+"pop","Drug Overdose","wbr","East Asia & Pacific",0.211
+"pop","Drug Overdose","wbr","Europe & Central Asia",0.635
+"pop","Drug Overdose","wbr","Latin America & Caribbean",0.135
+"pop","Drug Overdose","wbr","Middle East & North Africa",0.402
+"pop","Drug Overdose","wbr","North America",5.392
+"pop","Drug Overdose","wbr","South Asia",0.159
+"pop","Drug Overdose","wbr","Sub-Saharan Africa",0.067
+"pop","Drug Overdose","inc","Poor",1.6
+"pop","Drug Overdose","inc","Lower-middle",1.375
+"pop","Drug Overdose","inc","Middle",1
+"pop","Drug Overdose","inc","Upper-middle",0.925
+"pop","Drug Overdose","inc","Rich",0.7
+"pop","Drug Overdose","edu","No Formal Schooling",1.2
+"pop","Drug Overdose","edu","Primary Education (Elementary School)",1.1
+"pop","Drug Overdose","edu","Secondary Education (High School)",1
+"pop","Drug Overdose","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Drug Overdose","edu","Master's degree",0.9
+"pop","Drug Overdose","edu","Doctoral degree",0.8
+"pop","Drug Overdose","hsd","0",1.42
+"pop","Drug Overdose","hsd","1",1.36
+"pop","Drug Overdose","hsd","2",1.3
+"pop","Drug Overdose","hsd","3",1.24
+"pop","Drug Overdose","hsd","4",1.18
+"pop","Drug Overdose","hsd","5",1.12
+"pop","Drug Overdose","hsd","6",1.06
+"pop","Drug Overdose","hsd","7",1
+"pop","Drug Overdose","hsd","8",1.1
+"pop","Drug Overdose","hsd","9",1.3
+"pop","Drug Overdose","hsd","10",1.5
+"pop","Drug Overdose","hsd","11",1.7
+"pop","Drug Overdose","hsd","12",1.9
+"pop","Drug Overdose","hsd","13",2.1
+"pop","Drug Overdose","hsd","14",2.3
+"pop","Drug Overdose","hsd","15",2.5
+"pop","Drug Overdose","hsd","16",2.7
+"pop","Drug Overdose","hsd","17",2.7
+"pop","Drug Overdose","hsd","18",2.7
+"pop","Drug Overdose","hsd","19",2.7
+"pop","Drug Overdose","hsd","20",2.7
+"pop","Drug Overdose","hsd","21",2.7
+"pop","Drug Overdose","hsd","22",2.7
+"pop","Drug Overdose","hsd","23",2.7
+"pop","Drug Overdose","hsd","24",2.7
+"pop","Drug Overdose","sys","Normal (SBP <120 mmHG)",1
+"pop","Drug Overdose","sys","Elevated (SBP 120-129 mmHG)",1
+"pop","Drug Overdose","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"pop","Drug Overdose","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"pop","Drug Overdose","bmi","Underweight (<18.5)",1
+"pop","Drug Overdose","bmi","Normal Weight (18.5-24.9)",1
+"pop","Drug Overdose","bmi","Overweight (25-29.9)",1.24
+"pop","Drug Overdose","bmi","Obese (>30)",2
+"pop","Drug Overdose","hbp","Yes",1
+"pop","Drug Overdose","hbp","No",1
+"pop","Drug Overdose","hbc","Yes",1
+"pop","Drug Overdose","hbc","No",1
+"pop","Drug Overdose","cvd","Yes",1
+"pop","Drug Overdose","cvd","No",1
+"pop","Drug Overdose","copd","Yes",1
+"pop","Drug Overdose","copd","No",1
+"pop","Drug Overdose","dia","Yes",1
+"pop","Drug Overdose","dia","No",1
+"pop","Drug Overdose","dep","Yes",1
+"pop","Drug Overdose","dep","No",1
+"pop","Drug Overdose","can","Yes",1.66
+"pop","Drug Overdose","can","No",1
+"pop","Drug Overdose","alz","Yes",1
+"pop","Drug Overdose","alz","No",1
+"pop","Drug Overdose","fcvd","Yes",1
+"pop","Drug Overdose","fcvd","No",1
+"pop","Drug Overdose","fcopd","Yes",1
+"pop","Drug Overdose","fcopd","No",1
+"pop","Drug Overdose","fdia","Yes",1
+"pop","Drug Overdose","fdia","No",1
+"pop","Drug Overdose","fdep","Yes",1
+"pop","Drug Overdose","fdep","No",1
+"pop","Drug Overdose","fcan","Yes",1
+"pop","Drug Overdose","fcan","No",1
+"pop","Drug Overdose","falz","Yes",1
+"pop","Drug Overdose","falz","No",1
+"pop","Motor Vehicle Accident","sex","Male",1.481
+"pop","Motor Vehicle Accident","sex","Female",0.534
+"pop","Motor Vehicle Accident","race","White",0.992
+"pop","Motor Vehicle Accident","race","Black",1.397
+"pop","Motor Vehicle Accident","race","Asian",0.313
+"pop","Motor Vehicle Accident","race","Native American",1.344
+"pop","Motor Vehicle Accident","race","Other",1
+"pop","Motor Vehicle Accident","wbr","East Asia & Pacific",1.035
+"pop","Motor Vehicle Accident","wbr","Europe & Central Asia",0.575
+"pop","Motor Vehicle Accident","wbr","Latin America & Caribbean",1.114
+"pop","Motor Vehicle Accident","wbr","Middle East & North Africa",1.664
+"pop","Motor Vehicle Accident","wbr","North America",0.747
+"pop","Motor Vehicle Accident","wbr","South Asia",0.852
+"pop","Motor Vehicle Accident","wbr","Sub-Saharan Africa",1.012
+"pop","Motor Vehicle Accident","inc","Poor",2
+"pop","Motor Vehicle Accident","inc","Lower-middle",1.5
+"pop","Motor Vehicle Accident","inc","Middle",1
+"pop","Motor Vehicle Accident","inc","Upper-middle",0.9
+"pop","Motor Vehicle Accident","inc","Rich",0.8
+"pop","Motor Vehicle Accident","edu","No Formal Schooling",2.5
+"pop","Motor Vehicle Accident","edu","Primary Education (Elementary School)",2
+"pop","Motor Vehicle Accident","edu","Secondary Education (High School)",1.5
+"pop","Motor Vehicle Accident","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Motor Vehicle Accident","edu","Master's degree",0.8
+"pop","Motor Vehicle Accident","edu","Doctoral degree",0.6
+"pop","Motor Vehicle Accident","hsd","0",2.16
+"pop","Motor Vehicle Accident","hsd","1",1.99
+"pop","Motor Vehicle Accident","hsd","2",1.83
+"pop","Motor Vehicle Accident","hsd","3",1.66
+"pop","Motor Vehicle Accident","hsd","4",1.5
+"pop","Motor Vehicle Accident","hsd","5",1.33
+"pop","Motor Vehicle Accident","hsd","6",1.17
+"pop","Motor Vehicle Accident","hsd","7",1
+"pop","Motor Vehicle Accident","hsd","8",1
+"pop","Motor Vehicle Accident","hsd","9",1
+"pop","Motor Vehicle Accident","hsd","10",1
+"pop","Motor Vehicle Accident","hsd","11",1
+"pop","Motor Vehicle Accident","hsd","12",1
+"pop","Motor Vehicle Accident","hsd","13",1
+"pop","Motor Vehicle Accident","hsd","14",1
+"pop","Motor Vehicle Accident","hsd","15",1
+"pop","Motor Vehicle Accident","hsd","16",1
+"pop","Motor Vehicle Accident","hsd","17",1
+"pop","Motor Vehicle Accident","hsd","18",1
+"pop","Motor Vehicle Accident","hsd","19",1
+"pop","Motor Vehicle Accident","hsd","20",1
+"pop","Motor Vehicle Accident","hsd","21",1
+"pop","Motor Vehicle Accident","hsd","22",1
+"pop","Motor Vehicle Accident","hsd","23",1
+"pop","Motor Vehicle Accident","hsd","24",1
+"pop","Motor Vehicle Accident","sys","Normal (SBP <120 mmHG)",1
+"pop","Motor Vehicle Accident","sys","Elevated (SBP 120-129 mmHG)",1
+"pop","Motor Vehicle Accident","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"pop","Motor Vehicle Accident","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"pop","Motor Vehicle Accident","bmi","Underweight (<18.5)",2
+"pop","Motor Vehicle Accident","bmi","Normal Weight (18.5-24.9)",1.5
+"pop","Motor Vehicle Accident","bmi","Overweight (25-29.9)",1
+"pop","Motor Vehicle Accident","bmi","Obese (>30)",2
+"pop","Motor Vehicle Accident","hbp","Yes",1
+"pop","Motor Vehicle Accident","hbp","No",1
+"pop","Motor Vehicle Accident","hbc","Yes",1
+"pop","Motor Vehicle Accident","hbc","No",1
+"pop","Motor Vehicle Accident","cvd","Yes",1
+"pop","Motor Vehicle Accident","cvd","No",1
+"pop","Motor Vehicle Accident","copd","Yes",1
+"pop","Motor Vehicle Accident","copd","No",1
+"pop","Motor Vehicle Accident","dia","Yes",1
+"pop","Motor Vehicle Accident","dia","No",1
+"pop","Motor Vehicle Accident","dep","Yes",1
+"pop","Motor Vehicle Accident","dep","No",1
+"pop","Motor Vehicle Accident","can","Yes",1.66
+"pop","Motor Vehicle Accident","can","No",1
+"pop","Motor Vehicle Accident","alz","Yes",1
+"pop","Motor Vehicle Accident","alz","No",1
+"pop","Motor Vehicle Accident","fcvd","Yes",1
+"pop","Motor Vehicle Accident","fcvd","No",1
+"pop","Motor Vehicle Accident","fcopd","Yes",1
+"pop","Motor Vehicle Accident","fcopd","No",1
+"pop","Motor Vehicle Accident","fdia","Yes",1
+"pop","Motor Vehicle Accident","fdia","No",1
+"pop","Motor Vehicle Accident","fdep","Yes",1
+"pop","Motor Vehicle Accident","fdep","No",1
+"pop","Motor Vehicle Accident","fcan","Yes",1
+"pop","Motor Vehicle Accident","fcan","No",1
+"pop","Motor Vehicle Accident","falz","Yes",1
+"pop","Motor Vehicle Accident","falz","No",1
+"pop","Fall","sex","Male",1.214
+"pop","Fall","sex","Female",0.816
+"pop","Fall","race","White",1.087
+"pop","Fall","race","Black",0.495
+"pop","Fall","race","Asian",0.524
+"pop","Fall","race","Native American",0.796
+"pop","Fall","race","Other",1
+"pop","Fall","wbr","East Asia & Pacific",1
+"pop","Fall","wbr","Europe & Central Asia",1
+"pop","Fall","wbr","Latin America & Caribbean",1
+"pop","Fall","wbr","Middle East & North Africa",1
+"pop","Fall","wbr","North America",1
+"pop","Fall","wbr","South Asia",1
+"pop","Fall","wbr","Sub-Saharan Africa",1
+"pop","Fall","inc","Poor",2
+"pop","Fall","inc","Lower-middle",1.5
+"pop","Fall","inc","Middle",1
+"pop","Fall","inc","Upper-middle",1
+"pop","Fall","inc","Rich",1
+"pop","Fall","edu","No Formal Schooling",2
+"pop","Fall","edu","Primary Education (Elementary School)",2
+"pop","Fall","edu","Secondary Education (High School)",1
+"pop","Fall","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Fall","edu","Master's degree",0.5
+"pop","Fall","edu","Doctoral degree",0.5
+"pop","Fall","hsd","0",0.65
+"pop","Fall","hsd","1",1.78
+"pop","Fall","hsd","2",1.65
+"pop","Fall","hsd","3",1.52
+"pop","Fall","hsd","4",1.39
+"pop","Fall","hsd","5",1.26
+"pop","Fall","hsd","6",1.13
+"pop","Fall","hsd","7",1
+"pop","Fall","hsd","8",1.06
+"pop","Fall","hsd","9",1.12
+"pop","Fall","hsd","10",1.18
+"pop","Fall","hsd","11",1.24
+"pop","Fall","hsd","12",1.3
+"pop","Fall","hsd","13",1.36
+"pop","Fall","hsd","14",1.42
+"pop","Fall","hsd","15",1.48
+"pop","Fall","hsd","16",1.54
+"pop","Fall","hsd","17",1.54
+"pop","Fall","hsd","18",1.54
+"pop","Fall","hsd","19",1.54
+"pop","Fall","hsd","20",1.54
+"pop","Fall","hsd","21",1.54
+"pop","Fall","hsd","22",1.54
+"pop","Fall","hsd","23",1.54
+"pop","Fall","hsd","24",1.54
+"pop","Fall","sys","Normal (SBP <120 mmHG)",1
+"pop","Fall","sys","Elevated (SBP 120-129 mmHG)",1.5
+"pop","Fall","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",2
+"pop","Fall","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",2.5
+"pop","Fall","bmi","Underweight (<18.5)",1.8
+"pop","Fall","bmi","Normal Weight (18.5-24.9)",1
+"pop","Fall","bmi","Overweight (25-29.9)",1.15
+"pop","Fall","bmi","Obese (>30)",1.31
+"pop","Fall","hbp","Yes",1
+"pop","Fall","hbp","No",1
+"pop","Fall","hbc","Yes",1
+"pop","Fall","hbc","No",1
+"pop","Fall","cvd","Yes",1
+"pop","Fall","cvd","No",1
+"pop","Fall","copd","Yes",1
+"pop","Fall","copd","No",1
+"pop","Fall","dia","Yes",1
+"pop","Fall","dia","No",1
+"pop","Fall","dep","Yes",1
+"pop","Fall","dep","No",1
+"pop","Fall","can","Yes",1.66
+"pop","Fall","can","No",1
+"pop","Fall","alz","Yes",1
+"pop","Fall","alz","No",1
+"pop","Fall","fcvd","Yes",1
+"pop","Fall","fcvd","No",1
+"pop","Fall","fcopd","Yes",1
+"pop","Fall","fcopd","No",1
+"pop","Fall","fdia","Yes",1
+"pop","Fall","fdia","No",1
+"pop","Fall","fdep","Yes",1
+"pop","Fall","fdep","No",1
+"pop","Fall","fcan","Yes",1
+"pop","Fall","fcan","No",1
+"pop","Fall","falz","Yes",1
+"pop","Fall","falz","No",1
+"pop","Influenza and Pneumonia","sex","Male",1.215
+"pop","Influenza and Pneumonia","sex","Female",0.846
+"pop","Influenza and Pneumonia","race","White",0.985
+"pop","Influenza and Pneumonia","race","Black",1.292
+"pop","Influenza and Pneumonia","race","Asian",0.792
+"pop","Influenza and Pneumonia","race","Native American",1.077
+"pop","Influenza and Pneumonia","race","Other",1
+"pop","Influenza and Pneumonia","wbr","East Asia & Pacific",0.768
+"pop","Influenza and Pneumonia","wbr","Europe & Central Asia",0.932
+"pop","Influenza and Pneumonia","wbr","Latin America & Caribbean",1.144
+"pop","Influenza and Pneumonia","wbr","Middle East & North Africa",0.465
+"pop","Influenza and Pneumonia","wbr","North America",0.788
+"pop","Influenza and Pneumonia","wbr","South Asia",0.972
+"pop","Influenza and Pneumonia","wbr","Sub-Saharan Africa",1.931
+"pop","Influenza and Pneumonia","inc","Poor",1.4
+"pop","Influenza and Pneumonia","inc","Lower-middle",1.2
+"pop","Influenza and Pneumonia","inc","Middle",1
+"pop","Influenza and Pneumonia","inc","Upper-middle",0.8
+"pop","Influenza and Pneumonia","inc","Rich",0.6
+"pop","Influenza and Pneumonia","edu","No Formal Schooling",1.6
+"pop","Influenza and Pneumonia","edu","Primary Education (Elementary School)",1.4
+"pop","Influenza and Pneumonia","edu","Secondary Education (High School)",1.2
+"pop","Influenza and Pneumonia","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",1
+"pop","Influenza and Pneumonia","edu","Master's degree",0.8
+"pop","Influenza and Pneumonia","edu","Doctoral degree",0.6
+"pop","Influenza and Pneumonia","hsd","0",1.35
+"pop","Influenza and Pneumonia","hsd","1",3.3
+"pop","Influenza and Pneumonia","hsd","2",2.9
+"pop","Influenza and Pneumonia","hsd","3",2.5
+"pop","Influenza and Pneumonia","hsd","4",2.1
+"pop","Influenza and Pneumonia","hsd","5",1.7
+"pop","Influenza and Pneumonia","hsd","6",1.3
+"pop","Influenza and Pneumonia","hsd","7",1
+"pop","Influenza and Pneumonia","hsd","8",1.2
+"pop","Influenza and Pneumonia","hsd","9",1.5
+"pop","Influenza and Pneumonia","hsd","10",1.8
+"pop","Influenza and Pneumonia","hsd","11",2.1
+"pop","Influenza and Pneumonia","hsd","12",2.4
+"pop","Influenza and Pneumonia","hsd","13",2.7
+"pop","Influenza and Pneumonia","hsd","14",3
+"pop","Influenza and Pneumonia","hsd","15",3.3
+"pop","Influenza and Pneumonia","hsd","16",3.6
+"pop","Influenza and Pneumonia","hsd","17",3.6
+"pop","Influenza and Pneumonia","hsd","18",3.6
+"pop","Influenza and Pneumonia","hsd","19",3.6
+"pop","Influenza and Pneumonia","hsd","20",3.6
+"pop","Influenza and Pneumonia","hsd","21",3.6
+"pop","Influenza and Pneumonia","hsd","22",3.6
+"pop","Influenza and Pneumonia","hsd","23",3.6
+"pop","Influenza and Pneumonia","hsd","24",3.6
+"pop","Influenza and Pneumonia","sys","Normal (SBP <120 mmHG)",1
+"pop","Influenza and Pneumonia","sys","Elevated (SBP 120-129 mmHG)",1.1
+"pop","Influenza and Pneumonia","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.2
+"pop","Influenza and Pneumonia","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.36
+"pop","Influenza and Pneumonia","bmi","Underweight (<18.5)",2
+"pop","Influenza and Pneumonia","bmi","Normal Weight (18.5-24.9)",1
+"pop","Influenza and Pneumonia","bmi","Overweight (25-29.9)",1.5
+"pop","Influenza and Pneumonia","bmi","Obese (>30)",2
+"pop","Influenza and Pneumonia","hbp","Yes",1
+"pop","Influenza and Pneumonia","hbp","No",1
+"pop","Influenza and Pneumonia","hbc","Yes",1
+"pop","Influenza and Pneumonia","hbc","No",1
+"pop","Influenza and Pneumonia","cvd","Yes",1
+"pop","Influenza and Pneumonia","cvd","No",1
+"pop","Influenza and Pneumonia","copd","Yes",1.77
+"pop","Influenza and Pneumonia","copd","No",1
+"pop","Influenza and Pneumonia","dia","Yes",1
+"pop","Influenza and Pneumonia","dia","No",1
+"pop","Influenza and Pneumonia","dep","Yes",1
+"pop","Influenza and Pneumonia","dep","No",1
+"pop","Influenza and Pneumonia","can","Yes",2.55
+"pop","Influenza and Pneumonia","can","No",1
+"pop","Influenza and Pneumonia","alz","Yes",2.15
+"pop","Influenza and Pneumonia","alz","No",1
+"pop","Influenza and Pneumonia","fcvd","Yes",1
+"pop","Influenza and Pneumonia","fcvd","No",1
+"pop","Influenza and Pneumonia","fcopd","Yes",1
+"pop","Influenza and Pneumonia","fcopd","No",1
+"pop","Influenza and Pneumonia","fdia","Yes",1
+"pop","Influenza and Pneumonia","fdia","No",1
+"pop","Influenza and Pneumonia","fdep","Yes",1
+"pop","Influenza and Pneumonia","fdep","No",1
+"pop","Influenza and Pneumonia","fcan","Yes",1
+"pop","Influenza and Pneumonia","fcan","No",1
+"pop","Influenza and Pneumonia","falz","Yes",1
+"pop","Influenza and Pneumonia","falz","No",1
+"pop","Kidney Diseases","sex","Male",1.213
+"pop","Kidney Diseases","sex","Female",0.843
+"pop","Kidney Diseases","race","White",0.898
+"pop","Kidney Diseases","race","Black",2.024
+"pop","Kidney Diseases","race","Asian",0.638
+"pop","Kidney Diseases","race","Native American",0.882
+"pop","Kidney Diseases","race","Other",1
+"pop","Kidney Diseases","wbr","East Asia & Pacific",0.852
+"pop","Kidney Diseases","wbr","Europe & Central Asia",0.924
+"pop","Kidney Diseases","wbr","Latin America & Caribbean",1.557
+"pop","Kidney Diseases","wbr","Middle East & North Africa",0.864
+"pop","Kidney Diseases","wbr","North America",1.502
+"pop","Kidney Diseases","wbr","South Asia",0.765
+"pop","Kidney Diseases","wbr","Sub-Saharan Africa",0.538
+"pop","Kidney Diseases","inc","Poor",1.2
+"pop","Kidney Diseases","inc","Lower-middle",1.1
+"pop","Kidney Diseases","inc","Middle",1
+"pop","Kidney Diseases","inc","Upper-middle",0.9
+"pop","Kidney Diseases","inc","Rich",0.8
+"pop","Kidney Diseases","edu","No Formal Schooling",1.2
+"pop","Kidney Diseases","edu","Primary Education (Elementary School)",1.1
+"pop","Kidney Diseases","edu","Secondary Education (High School)",1
+"pop","Kidney Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"pop","Kidney Diseases","edu","Master's degree",0.8
+"pop","Kidney Diseases","edu","Doctoral degree",0.7
+"pop","Kidney Diseases","hsd","0",1.42
+"pop","Kidney Diseases","hsd","1",1.36
+"pop","Kidney Diseases","hsd","2",1.3
+"pop","Kidney Diseases","hsd","3",1.24
+"pop","Kidney Diseases","hsd","4",1.18
+"pop","Kidney Diseases","hsd","5",1.12
+"pop","Kidney Diseases","hsd","6",1.06
+"pop","Kidney Diseases","hsd","7",1
+"pop","Kidney Diseases","hsd","8",1.1
+"pop","Kidney Diseases","hsd","9",1.3
+"pop","Kidney Diseases","hsd","10",1.5
+"pop","Kidney Diseases","hsd","11",1.7
+"pop","Kidney Diseases","hsd","12",1.9
+"pop","Kidney Diseases","hsd","13",2.1
+"pop","Kidney Diseases","hsd","14",2.3
+"pop","Kidney Diseases","hsd","15",2.5
+"pop","Kidney Diseases","hsd","16",2.7
+"pop","Kidney Diseases","hsd","17",2.7
+"pop","Kidney Diseases","hsd","18",2.7
+"pop","Kidney Diseases","hsd","19",2.7
+"pop","Kidney Diseases","hsd","20",2.7
+"pop","Kidney Diseases","hsd","21",2.7
+"pop","Kidney Diseases","hsd","22",2.7
+"pop","Kidney Diseases","hsd","23",2.7
+"pop","Kidney Diseases","hsd","24",2.7
+"pop","Kidney Diseases","sys","Normal (SBP <120 mmHG)",1
+"pop","Kidney Diseases","sys","Elevated (SBP 120-129 mmHG)",1.16
+"pop","Kidney Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1.34
+"pop","Kidney Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1.56
+"pop","Kidney Diseases","bmi","Underweight (<18.5)",1.3
+"pop","Kidney Diseases","bmi","Normal Weight (18.5-24.9)",1
+"pop","Kidney Diseases","bmi","Overweight (25-29.9)",1.34
+"pop","Kidney Diseases","bmi","Obese (>30)",1.94
+"pop","Kidney Diseases","hbp","Yes",1
+"pop","Kidney Diseases","hbp","No",1
+"pop","Kidney Diseases","hbc","Yes",1.1
+"pop","Kidney Diseases","hbc","No",1
+"pop","Kidney Diseases","cvd","Yes",1.64
+"pop","Kidney Diseases","cvd","No",1
+"pop","Kidney Diseases","copd","Yes",1.22
+"pop","Kidney Diseases","copd","No",1
+"pop","Kidney Diseases","dia","Yes",1.75
+"pop","Kidney Diseases","dia","No",1
+"pop","Kidney Diseases","dep","Yes",1
+"pop","Kidney Diseases","dep","No",1
+"pop","Kidney Diseases","can","Yes",2.29
+"pop","Kidney Diseases","can","No",1
+"pop","Kidney Diseases","alz","Yes",1
+"pop","Kidney Diseases","alz","No",1
+"pop","Kidney Diseases","fcvd","Yes",1
+"pop","Kidney Diseases","fcvd","No",1
+"pop","Kidney Diseases","fcopd","Yes",1
+"pop","Kidney Diseases","fcopd","No",1
+"pop","Kidney Diseases","fdia","Yes",1
+"pop","Kidney Diseases","fdia","No",1
+"pop","Kidney Diseases","fdep","Yes",1
+"pop","Kidney Diseases","fdep","No",1
+"pop","Kidney Diseases","fcan","Yes",1
+"pop","Kidney Diseases","fcan","No",1
+"pop","Kidney Diseases","falz","Yes",1
+"pop","Kidney Diseases","falz","No",1
+"pop","Suicide","sex","Male",1.63
+"pop","Suicide","sex","Female",0.407
+"pop","Suicide","race","White",1.126
+"pop","Suicide","race","Black",0.556
+"pop","Suicide","race","Asian",0.474
+"pop","Suicide","race","Native American",1.244
+"pop","Suicide","race","Other",1
+"pop","Suicide","wbr","East Asia & Pacific",0.91
+"pop","Suicide","wbr","Europe & Central Asia",1.544
+"pop","Suicide","wbr","Latin America & Caribbean",0.727
+"pop","Suicide","wbr","Middle East & North Africa",0.445
+"pop","Suicide","wbr","North America",1.425
+"pop","Suicide","wbr","South Asia",1.288
+"pop","Suicide","wbr","Sub-Saharan Africa",0.662
+"pop","Suicide","inc","Poor",1.2
+"pop","Suicide","inc","Lower-middle",1.1
+"pop","Suicide","inc","Middle",1
+"pop","Suicide","inc","Upper-middle",0.9
+"pop","Suicide","inc","Rich",0.8
+"pop","Suicide","edu","No Formal Schooling",1.2
+"pop","Suicide","edu","Primary Education (Elementary School)",1.1
+"pop","Suicide","edu","Secondary Education (High School)",1
+"pop","Suicide","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"pop","Suicide","edu","Master's degree",0.8
+"pop","Suicide","edu","Doctoral degree",0.7
+"pop","Suicide","hsd","0",1.42
+"pop","Suicide","hsd","1",1.36
+"pop","Suicide","hsd","2",1.3
+"pop","Suicide","hsd","3",1.24
+"pop","Suicide","hsd","4",1.18
+"pop","Suicide","hsd","5",1.12
+"pop","Suicide","hsd","6",1.06
+"pop","Suicide","hsd","7",1
+"pop","Suicide","hsd","8",1.1
+"pop","Suicide","hsd","9",1.3
+"pop","Suicide","hsd","10",1.5
+"pop","Suicide","hsd","11",1.7
+"pop","Suicide","hsd","12",1.9
+"pop","Suicide","hsd","13",2.1
+"pop","Suicide","hsd","14",2.3
+"pop","Suicide","hsd","15",2.5
+"pop","Suicide","hsd","16",2.7
+"pop","Suicide","hsd","17",2.7
+"pop","Suicide","hsd","18",2.7
+"pop","Suicide","hsd","19",2.7
+"pop","Suicide","hsd","20",2.7
+"pop","Suicide","hsd","21",2.7
+"pop","Suicide","hsd","22",2.7
+"pop","Suicide","hsd","23",2.7
+"pop","Suicide","hsd","24",2.7
+"pop","Suicide","sys","Normal (SBP <120 mmHG)",1
+"pop","Suicide","sys","Elevated (SBP 120-129 mmHG)",1
+"pop","Suicide","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"pop","Suicide","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"pop","Suicide","bmi","Underweight (<18.5)",2
+"pop","Suicide","bmi","Normal Weight (18.5-24.9)",1
+"pop","Suicide","bmi","Overweight (25-29.9)",1
+"pop","Suicide","bmi","Obese (>30)",1
+"pop","Suicide","hbp","Yes",1
+"pop","Suicide","hbp","No",1
+"pop","Suicide","hbc","Yes",1.5
+"pop","Suicide","hbc","No",1
+"pop","Suicide","cvd","Yes",1
+"pop","Suicide","cvd","No",1
+"pop","Suicide","copd","Yes",1
+"pop","Suicide","copd","No",1
+"pop","Suicide","dia","Yes",1
+"pop","Suicide","dia","No",1
+"pop","Suicide","dep","Yes",1
+"pop","Suicide","dep","No",1
+"pop","Suicide","can","Yes",2.85
+"pop","Suicide","can","No",1
+"pop","Suicide","alz","Yes",1
+"pop","Suicide","alz","No",1
+"pop","Suicide","fcvd","Yes",1
+"pop","Suicide","fcvd","No",1
+"pop","Suicide","fcopd","Yes",1
+"pop","Suicide","fcopd","No",1
+"pop","Suicide","fdia","Yes",1
+"pop","Suicide","fdia","No",1
+"pop","Suicide","fdep","Yes",2.58
+"pop","Suicide","fdep","No",1
+"pop","Suicide","fcan","Yes",1
+"pop","Suicide","fcan","No",1
+"pop","Suicide","falz","Yes",1
+"pop","Suicide","falz","No",1
+"pop","Liver Diseases","sex","Male",1.316
+"pop","Liver Diseases","sex","Female",0.707
+"pop","Liver Diseases","race","White",1.083
+"pop","Liver Diseases","race","Black",0.662
+"pop","Liver Diseases","race","Asian",0.308
+"pop","Liver Diseases","race","Native American",2.85
+"pop","Liver Diseases","race","Other",1
+"pop","Liver Diseases","wbr","East Asia & Pacific",0.829
+"pop","Liver Diseases","wbr","Europe & Central Asia",1.212
+"pop","Liver Diseases","wbr","Latin America & Caribbean",1.124
+"pop","Liver Diseases","wbr","Middle East & North Africa",1.013
+"pop","Liver Diseases","wbr","North America",0.999
+"pop","Liver Diseases","wbr","South Asia",0.963
+"pop","Liver Diseases","wbr","Sub-Saharan Africa",0.86
+"pop","Liver Diseases","inc","Poor",1.2
+"pop","Liver Diseases","inc","Lower-middle",1.1
+"pop","Liver Diseases","inc","Middle",1
+"pop","Liver Diseases","inc","Upper-middle",0.9
+"pop","Liver Diseases","inc","Rich",0.8
+"pop","Liver Diseases","edu","No Formal Schooling",1.2
+"pop","Liver Diseases","edu","Primary Education (Elementary School)",1.1
+"pop","Liver Diseases","edu","Secondary Education (High School)",1
+"pop","Liver Diseases","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",0.9
+"pop","Liver Diseases","edu","Master's degree",0.8
+"pop","Liver Diseases","edu","Doctoral degree",0.7
+"pop","Liver Diseases","hsd","0",1.42
+"pop","Liver Diseases","hsd","1",1.36
+"pop","Liver Diseases","hsd","2",1.3
+"pop","Liver Diseases","hsd","3",1.24
+"pop","Liver Diseases","hsd","4",1.18
+"pop","Liver Diseases","hsd","5",1.12
+"pop","Liver Diseases","hsd","6",1.06
+"pop","Liver Diseases","hsd","7",1
+"pop","Liver Diseases","hsd","8",1.1
+"pop","Liver Diseases","hsd","9",1.3
+"pop","Liver Diseases","hsd","10",1.5
+"pop","Liver Diseases","hsd","11",1.7
+"pop","Liver Diseases","hsd","12",1.9
+"pop","Liver Diseases","hsd","13",2.1
+"pop","Liver Diseases","hsd","14",2.3
+"pop","Liver Diseases","hsd","15",2.5
+"pop","Liver Diseases","hsd","16",2.7
+"pop","Liver Diseases","hsd","17",2.7
+"pop","Liver Diseases","hsd","18",2.7
+"pop","Liver Diseases","hsd","19",2.7
+"pop","Liver Diseases","hsd","20",2.7
+"pop","Liver Diseases","hsd","21",2.7
+"pop","Liver Diseases","hsd","22",2.7
+"pop","Liver Diseases","hsd","23",2.7
+"pop","Liver Diseases","hsd","24",2.7
+"pop","Liver Diseases","sys","Normal (SBP <120 mmHG)",1
+"pop","Liver Diseases","sys","Elevated (SBP 120-129 mmHG)",1.56
+"pop","Liver Diseases","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",2.13
+"pop","Liver Diseases","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",2.69
+"pop","Liver Diseases","bmi","Underweight (<18.5)",1
+"pop","Liver Diseases","bmi","Normal Weight (18.5-24.9)",1
+"pop","Liver Diseases","bmi","Overweight (25-29.9)",1.16
+"pop","Liver Diseases","bmi","Obese (>30)",1.69
+"pop","Liver Diseases","hbp","Yes",1
+"pop","Liver Diseases","hbp","No",1
+"pop","Liver Diseases","hbc","Yes",1.1
+"pop","Liver Diseases","hbc","No",1
+"pop","Liver Diseases","cvd","Yes",1
+"pop","Liver Diseases","cvd","No",1
+"pop","Liver Diseases","copd","Yes",1
+"pop","Liver Diseases","copd","No",1
+"pop","Liver Diseases","dia","Yes",1
+"pop","Liver Diseases","dia","No",1
+"pop","Liver Diseases","dep","Yes",1
+"pop","Liver Diseases","dep","No",1
+"pop","Liver Diseases","can","Yes",4.7
+"pop","Liver Diseases","can","No",1
+"pop","Liver Diseases","alz","Yes",1
+"pop","Liver Diseases","alz","No",1
+"pop","Liver Diseases","fcvd","Yes",1
+"pop","Liver Diseases","fcvd","No",1
+"pop","Liver Diseases","fcopd","Yes",1
+"pop","Liver Diseases","fcopd","No",1
+"pop","Liver Diseases","fdia","Yes",1
+"pop","Liver Diseases","fdia","No",1
+"pop","Liver Diseases","fdep","Yes",1
+"pop","Liver Diseases","fdep","No",1
+"pop","Liver Diseases","fcan","Yes",1
+"pop","Liver Diseases","fcan","No",1
+"pop","Liver Diseases","falz","Yes",1
+"pop","Liver Diseases","falz","No",1
+"pop","Septicemia","sex","Male",1.113
+"pop","Septicemia","sex","Female",0.918
+"pop","Septicemia","race","White",0.959
+"pop","Septicemia","race","Black",1.68
+"pop","Septicemia","race","Asian",0.464
+"pop","Septicemia","race","Native American",0.948
+"pop","Septicemia","race","Other",1
+"pop","Septicemia","wbr","East Asia & Pacific",1.5
+"pop","Septicemia","wbr","Europe & Central Asia",1.5
+"pop","Septicemia","wbr","Latin America & Caribbean",2
+"pop","Septicemia","wbr","Middle East & North Africa",2
+"pop","Septicemia","wbr","North America",1
+"pop","Septicemia","wbr","South Asia",4
+"pop","Septicemia","wbr","Sub-Saharan Africa",6
+"pop","Septicemia","inc","Poor",2
+"pop","Septicemia","inc","Lower-middle",1.5
+"pop","Septicemia","inc","Middle",1
+"pop","Septicemia","inc","Upper-middle",1
+"pop","Septicemia","inc","Rich",1
+"pop","Septicemia","edu","No Formal Schooling",2
+"pop","Septicemia","edu","Primary Education (Elementary School)",2
+"pop","Septicemia","edu","Secondary Education (High School)",1
+"pop","Septicemia","edu","Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program",2
+"pop","Septicemia","edu","Master's degree",0.5
+"pop","Septicemia","edu","Doctoral degree",0.5
+"pop","Septicemia","hsd","0",1.42
+"pop","Septicemia","hsd","1",1.36
+"pop","Septicemia","hsd","2",1.3
+"pop","Septicemia","hsd","3",1.24
+"pop","Septicemia","hsd","4",1.18
+"pop","Septicemia","hsd","5",1.12
+"pop","Septicemia","hsd","6",1.06
+"pop","Septicemia","hsd","7",1
+"pop","Septicemia","hsd","8",1.1
+"pop","Septicemia","hsd","9",1.3
+"pop","Septicemia","hsd","10",1.5
+"pop","Septicemia","hsd","11",1.7
+"pop","Septicemia","hsd","12",1.9
+"pop","Septicemia","hsd","13",2.1
+"pop","Septicemia","hsd","14",2.3
+"pop","Septicemia","hsd","15",2.5
+"pop","Septicemia","hsd","16",2.7
+"pop","Septicemia","hsd","17",2.7
+"pop","Septicemia","hsd","18",2.7
+"pop","Septicemia","hsd","19",2.7
+"pop","Septicemia","hsd","20",2.7
+"pop","Septicemia","hsd","21",2.7
+"pop","Septicemia","hsd","22",2.7
+"pop","Septicemia","hsd","23",2.7
+"pop","Septicemia","hsd","24",2.7
+"pop","Septicemia","sys","Normal (SBP <120 mmHG)",1
+"pop","Septicemia","sys","Elevated (SBP 120-129 mmHG)",1
+"pop","Septicemia","sys","High Blood Pressure Stage 1 (SBP 130-140 mmHG)",1
+"pop","Septicemia","sys","High Blood Pressure Stage 2 (SBP >140 mmHG)",1
+"pop","Septicemia","bmi","Underweight (<18.5)",1.56
+"pop","Septicemia","bmi","Normal Weight (18.5-24.9)",1
+"pop","Septicemia","bmi","Overweight (25-29.9)",1
+"pop","Septicemia","bmi","Obese (>30)",1
+"pop","Septicemia","hbp","Yes",1
+"pop","Septicemia","hbp","No",1
+"pop","Septicemia","hbc","Yes",1
+"pop","Septicemia","hbc","No",1
+"pop","Septicemia","cvd","Yes",1.4
+"pop","Septicemia","cvd","No",1
+"pop","Septicemia","copd","Yes",1.4
+"pop","Septicemia","copd","No",1
+"pop","Septicemia","dia","Yes",2.2
+"pop","Septicemia","dia","No",1
+"pop","Septicemia","dep","Yes",1.3
+"pop","Septicemia","dep","No",1
+"pop","Septicemia","can","Yes",1.5
+"pop","Septicemia","can","No",1
+"pop","Septicemia","alz","Yes",1.5
+"pop","Septicemia","alz","No",1
+"pop","Septicemia","fcvd","Yes",1
+"pop","Septicemia","fcvd","No",1
+"pop","Septicemia","fcopd","Yes",1
+"pop","Septicemia","fcopd","No",1
+"pop","Septicemia","fdia","Yes",1
+"pop","Septicemia","fdia","No",1
+"pop","Septicemia","fdep","Yes",1
+"pop","Septicemia","fdep","No",1
+"pop","Septicemia","fcan","Yes",1
+"pop","Septicemia","fcan","No",1
+"pop","Septicemia","falz","Yes",1
+"pop","Septicemia","falz","No",1

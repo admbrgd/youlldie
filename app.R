@@ -40,6 +40,7 @@ library(ggrepel)
 library(plotly)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 
 # UI ---------------------------------------------------------------------------
 # the following section is to build a ui object that lays out a webpage (html) for the app (it converts R -> html)
@@ -510,14 +511,80 @@ cod <- data.frame(
           40050) #Septicemia
 )
 
+factors <- readr::read_csv("factors.csv")
+factors_cont <- readr::read_csv("factors_cont.csv")
+
+# Given user input, take a copy of the factors.csv data and keep only the
+# rows that match user input
+filter_df_by_inputs <- function(df, input) {
+  selected <- logical(nrow(df))
+  for (name in unique(df[["var"]])) {
+    if (!is.null(input[[name]])) {
+      selected <- selected | (df$var == name & df$value == as.character(input[[name]]))
+    }
+  }
+  df[selected,]
+}
+
+# Given user input, take a copy of the factors_cont.csv data and multiply
+# each factor by the user input
+multiply_by_inputs <- function(df, input) {
+  vars <- unique(df[["var"]])
+  values <- vapply(vars, \(v) {
+    if (is.null(input[[v]])) {
+      NA
+    } else {
+      input[[v]]
+    }
+  }, numeric(1))
+  df %>%
+    left_join(data.frame(var=vars, value=values), by="var") %>%
+    mutate(multiplier = 1+(value*multiplier)) %>%
+    select(-value) %>%
+    group_by(category, cause) %>%
+    summarise(multiplier = prod(multiplier), .groups="drop")
+}
+
+
 # SERVER -----------------------------------------------------------------------
 # The Section below serve to define the "server" function for the server to create/use the R components for the app.
 
 server <- function(input, output){
   
   #converting the cause of death dataframe (cod) into a reactive function / dataframe that changes according to inputs.  
+  observe({
+    print(cod_react())
+  })
+  cod_react<-reactive({
+    current_factors <- filter_df_by_inputs(factors, input) %>%
+      group_by(category, cause) %>%
+      summarise(multiplier = prod(multiplier), .groups = "drop") %>%
+      pivot_wider(names_from=category, values_from=multiplier, names_prefix="f_")
+
+    current_factors_cont <- multiply_by_inputs(factors_cont, input) |>
+      pivot_wider(names_from=category, values_from=multiplier, names_prefix="f_")
+
+    # The cod2 data frame should result in the same values as cod3 (the original) below.
+    # For now, calculate both so we can see if they do indeed match.
+    cod2 <- cod %>%
+      left_join(current_factors, by = "cause") %>%
+      mutate(
+        age = age * f_age,
+        pop = pop * f_pop,
+        risk = risk * f_risk
+      ) %>%
+      select(-f_age, -f_pop, -f_risk) %>%
+      left_join(current_factors_cont, by = "cause") %>%
+      mutate(
+        age = age * f_age,
+        pop = pop * f_pop,
+        risk = risk * f_risk
+      ) %>%
+      select(-f_age, -f_pop, -f_risk) %>%
+      mutate(age = (ifelse(age-5<=input$cage,input$cage+5,age)))
   
-  cod_react<-reactive({cod %>%
+    
+    cod3 <- cod %>%
       
       # AGE OF DEATH -----------------------------------------------------------------
     # Setting the impact of Risk Factors on the baseline AGE OF DEATH for different causes of death  
@@ -8969,7 +9036,17 @@ server <- function(input, output){
       
     )
     
-    ) %>%
+    )
+
+    # Use all.equal to check if the new implementation is close enough
+    # to the old implementation. (They're not identical because of floating
+    # point differences)
+    if (!all.equal(cod2, cod3)) {
+      browser()
+      stop("results differ")
+    }
+
+    cod3 %>%
       
       #///////////////////////////////////////////////////////////////////////////////       
       # Use "mutate()" to set values for ggplot
@@ -9074,7 +9151,6 @@ server <- function(input, output){
     })
     
   })
-  
 }      
 
 #this knits together the ui and the server function.

@@ -1,0 +1,193 @@
+"category","cause","var","multiplier"
+"age","Cardiovascular Diseases","drk",-0.00157
+"age","Cardiovascular Diseases","smk",-0.00109
+"age","Cardiovascular Diseases","mpa",0.000219
+"age","Cardiovascular Diseases","hpa",0.000438
+"age","Coronary Heart Diseases","drk",-0.00157
+"age","Coronary Heart Diseases","smk",-0.00109
+"age","Coronary Heart Diseases","mpa",0.000219
+"age","Coronary Heart Diseases","hpa",0.000438
+"age","Stroke","drk",-0.00157
+"age","Stroke","smk",-0.000894
+"age","Stroke","mpa",0.000168
+"age","Stroke","hpa",0.000336
+"age","Cancer","drk",-0.00437
+"age","Cancer","smk",-0.00149
+"age","Cancer","mpa",0.000164
+"age","Cancer","hpa",0.000328
+"age","COVID-19","drk",-0.00875
+"age","COVID-19","smk",-0.00242
+"age","COVID-19","mpa",0.00032
+"age","COVID-19","hpa",0.00064
+"age","Alzheimer’s Disease","drk",0
+"age","Alzheimer’s Disease","smk",-0.000602
+"age","Alzheimer’s Disease","mpa",0.000105
+"age","Alzheimer’s Disease","hpa",0.00021
+"age","Chronic Lower Respiratory Diseases","drk",-0.00109
+"age","Chronic Lower Respiratory Diseases","smk",-0.00109
+"age","Chronic Lower Respiratory Diseases","mpa",0.000223
+"age","Chronic Lower Respiratory Diseases","hpa",0.000446
+"age","Diabetes","drk",0
+"age","Diabetes","smk",-0.000613
+"age","Diabetes","mpa",0.000261
+"age","Diabetes","hpa",0.000522
+"age","Drug Overdose","drk",-0.00175
+"age","Drug Overdose","smk",-0.00053
+"age","Drug Overdose","mpa",0.000211
+"age","Drug Overdose","hpa",0.000422
+"age","Motor Vehicle Accident","drk",-0.01137
+"age","Motor Vehicle Accident","smk",-0.000609
+"age","Motor Vehicle Accident","mpa",0
+"age","Motor Vehicle Accident","hpa",0
+"age","Fall","drk",-0.00122
+"age","Fall","smk",-0.000677
+"age","Fall","mpa",0.000177
+"age","Fall","hpa",0.000354
+"age","Influenza and Pneumonia","drk",-0.00875
+"age","Influenza and Pneumonia","smk",-0.00162
+"age","Influenza and Pneumonia","mpa",0.000109
+"age","Influenza and Pneumonia","hpa",0.000218
+"age","Kidney Diseases","drk",0
+"age","Kidney Diseases","smk",-0.000435
+"age","Kidney Diseases","mpa",8.42e-05
+"age","Kidney Diseases","hpa",0.000168
+"age","Suicide","drk",-0.0175
+"age","Suicide","smk",-0.000724
+"age","Suicide","mpa",0.000303
+"age","Suicide","hpa",0.000606
+"age","Liver Diseases","drk",-0.0175
+"age","Liver Diseases","smk",-0.000538
+"age","Liver Diseases","mpa",0.000253
+"age","Liver Diseases","hpa",0.000506
+"age","Septicemia","drk",-0.00131
+"age","Septicemia","smk",-0.000922
+"age","Septicemia","mpa",0.000223
+"age","Septicemia","hpa",0.000446
+"risk","Cardiovascular Diseases","drk",0.04
+"risk","Cardiovascular Diseases","smk",0.0175
+"risk","Cardiovascular Diseases","mpa",-0.0016
+"risk","Cardiovascular Diseases","hpa",-0.0032
+"risk","Coronary Heart Diseases","drk",0.04
+"risk","Coronary Heart Diseases","smk",0.0175
+"risk","Coronary Heart Diseases","mpa",-0.0016
+"risk","Coronary Heart Diseases","hpa",-0.0032
+"risk","Stroke","drk",0.04
+"risk","Stroke","smk",0.0126
+"risk","Stroke","mpa",-0.00133
+"risk","Stroke","hpa",-0.00266
+"risk","Cancer","drk",0.2
+"risk","Cancer","smk",0.06523
+"risk","Cancer","mpa",-6e-04
+"risk","Cancer","hpa",-0.0012
+"risk","COVID-19","drk",0.045
+"risk","COVID-19","smk",0.0511
+"risk","COVID-19","mpa",-0.00253
+"risk","COVID-19","hpa",-0.00507
+"risk","Alzheimer’s Disease","drk",0
+"risk","Alzheimer’s Disease","smk",0.0052
+"risk","Alzheimer’s Disease","mpa",-0.000833
+"risk","Alzheimer’s Disease","hpa",-0.00166
+"risk","Chronic Lower Respiratory Diseases","drk",0.0125
+"risk","Chronic Lower Respiratory Diseases","smk",0.115
+"risk","Chronic Lower Respiratory Diseases","mpa",-0.00156
+"risk","Chronic Lower Respiratory Diseases","hpa",-0.00313
+"risk","Diabetes","drk",0
+"risk","Diabetes","smk",0.0055
+"risk","Diabetes","mpa",-0.00126
+"risk","Diabetes","hpa",-0.00253
+"risk","Drug Overdose","drk",0.05
+"risk","Drug Overdose","smk",0.00342
+"risk","Drug Overdose","mpa",-0.00166
+"risk","Drug Overdose","hpa",-0.00333
+"risk","Motor Vehicle Accident","drk",0.6
+"risk","Motor Vehicle Accident","smk",0.0054
+"risk","Motor Vehicle Accident","mpa",0
+"risk","Motor Vehicle Accident","hpa",0
+"risk","Fall","drk",0.02
+"risk","Fall","smk",0.0071
+"risk","Fall","mpa",-0.0014
+"risk","Fall","hpa",-0.0028
+"risk","Influenza and Pneumonia","drk",0.45
+"risk","Influenza and Pneumonia","smk",0.0311
+"risk","Influenza and Pneumonia","mpa",-0.000866
+"risk","Influenza and Pneumonia","hpa",-0.00493
+"risk","Kidney Diseases","drk",0
+"risk","Kidney Diseases","smk",0.001
+"risk","Kidney Diseases","mpa",-0.000666
+"risk","Kidney Diseases","hpa",-0.00133
+"risk","Suicide","drk",1
+"risk","Suicide","smk",0.0083
+"risk","Suicide","mpa",-0.0024
+"risk","Suicide","hpa",-0.0048
+"risk","Liver Diseases","drk",1
+"risk","Liver Diseases","smk",0.0036
+"risk","Liver Diseases","mpa",-0.00133
+"risk","Liver Diseases","hpa",-0.00266
+"risk","Septicemia","drk",0.025
+"risk","Septicemia","smk",0.0133
+"risk","Septicemia","mpa",-0.00156
+"risk","Septicemia","hpa",-0.00313
+"pop","Cardiovascular Diseases","drk",0.04
+"pop","Cardiovascular Diseases","smk",0.0175
+"pop","Cardiovascular Diseases","mpa",-0.0016
+"pop","Cardiovascular Diseases","hpa",-0.0032
+"pop","Coronary Heart Diseases","drk",0.04
+"pop","Coronary Heart Diseases","smk",0.0175
+"pop","Coronary Heart Diseases","mpa",-0.0016
+"pop","Coronary Heart Diseases","hpa",-0.0032
+"pop","Stroke","drk",0.04
+"pop","Stroke","smk",0.0126
+"pop","Stroke","mpa",-0.00133
+"pop","Stroke","hpa",-0.00266
+"pop","Cancer","drk",0.2
+"pop","Cancer","smk",0.06523
+"pop","Cancer","mpa",-6e-04
+"pop","Cancer","hpa",-0.0012
+"pop","COVID-19","drk",0.045
+"pop","COVID-19","smk",0.0511
+"pop","COVID-19","mpa",-0.00253
+"pop","COVID-19","hpa",-0.00507
+"pop","Alzheimer’s Disease","drk",0
+"pop","Alzheimer’s Disease","smk",0.0052
+"pop","Alzheimer’s Disease","mpa",-0.000833
+"pop","Alzheimer’s Disease","hpa",-0.00166
+"pop","Chronic Lower Respiratory Diseases","drk",0.0125
+"pop","Chronic Lower Respiratory Diseases","smk",0.115
+"pop","Chronic Lower Respiratory Diseases","mpa",-0.00156
+"pop","Chronic Lower Respiratory Diseases","hpa",-0.00313
+"pop","Diabetes","drk",0
+"pop","Diabetes","smk",0.0055
+"pop","Diabetes","mpa",-0.00126
+"pop","Diabetes","hpa",-0.00253
+"pop","Drug Overdose","drk",0.05
+"pop","Drug Overdose","smk",0.00342
+"pop","Drug Overdose","mpa",-0.00166
+"pop","Drug Overdose","hpa",-0.00333
+"pop","Motor Vehicle Accident","drk",0.6
+"pop","Motor Vehicle Accident","smk",0.0054
+"pop","Motor Vehicle Accident","mpa",0
+"pop","Motor Vehicle Accident","hpa",0
+"pop","Fall","drk",0.02
+"pop","Fall","smk",0.0071
+"pop","Fall","mpa",-0.0014
+"pop","Fall","hpa",-0.0028
+"pop","Influenza and Pneumonia","drk",0.45
+"pop","Influenza and Pneumonia","smk",0.0311
+"pop","Influenza and Pneumonia","mpa",-0.000866
+"pop","Influenza and Pneumonia","hpa",-0.00493
+"pop","Kidney Diseases","drk",0
+"pop","Kidney Diseases","smk",0.001
+"pop","Kidney Diseases","mpa",-0.000666
+"pop","Kidney Diseases","hpa",-0.00133
+"pop","Suicide","drk",1
+"pop","Suicide","smk",0.0083
+"pop","Suicide","mpa",-0.0024
+"pop","Suicide","hpa",-0.0048
+"pop","Liver Diseases","drk",1
+"pop","Liver Diseases","smk",0.0036
+"pop","Liver Diseases","mpa",-0.00133
+"pop","Liver Diseases","hpa",-0.00266
+"pop","Septicemia","drk",0.025
+"pop","Septicemia","smk",0.0133
+"pop","Septicemia","mpa",-0.00156
+"pop","Septicemia","hpa",-0.00313
