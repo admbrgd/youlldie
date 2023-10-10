@@ -41,6 +41,10 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
+# run this to perform rsconnect update
+# install.packages('rsconnect')
+# library(rsconnect)
+
 # UI ---------------------------------------------------------------------------
 # the following section is to build a ui object that lays out a webpage (html) for the app (it converts R -> html)
 
@@ -280,7 +284,7 @@ ui <- fluidPage(
     fluidRow(
       tags$h4("FAMILY HISTORY")),
     fluidRow(
-      tags$p("Has someone in your family (Father, Mother, Brother, Sister experienced the following conditions?")),
+      tags$p("Has someone in your family (father, mother, brother or sister) experienced the following conditions?")),
     
     #### Family History of Cardiovascular Disease (CVD) ----
     
@@ -532,45 +536,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.955}
-        else if(input$sex=="Female"){1.045})
+        else switch(input$sex,
+                    "Male"=0.955,
+                    "Female"=1.045))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -611,91 +620,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.984,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.967,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.934))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.942}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.975}
-        else if(input$bmi=="Obese (>30)"){0.949})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.942,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.975,
+                    "Obese (>30)"=0.949))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,                 
       
@@ -707,45 +732,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.974}
-        else if(input$sex=="Female"){1.026})
+        else switch(input$sex,
+                    "Male"=0.974,
+                    "Female"=1.026))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -785,91 +815,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.984,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.967,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.934))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.942}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.975}
-        else if(input$bmi=="Obese (>30)"){0.949})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.942,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.975,
+                    "Obese (>30)"=0.949))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -881,45 +927,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.965}
-        else if(input$sex=="Female"){1.035})
+        else switch(input$sex,
+                    "Male"=0.965,
+                    "Female"=1.035))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -959,92 +1010,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.982}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.958}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.907})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.982,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.958,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.907))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.942}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.978}
-        else if(input$bmi=="Obese (>30)"){0.931})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.942,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.978,
+                    "Obese (>30)"=0.931))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
-      
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -1056,45 +1122,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.923}
-        else if(input$sex=="Female"){1.077})
+        else switch(input$sex,
+                    "Male"=0.923,
+                    "Female"=1.077))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -1134,92 +1205,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.944})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.985,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.970,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.944))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.937}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.978}
-        else if(input$bmi=="Obese (>30)"){0.960})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.937,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.978,
+                    "Obese (>30)"=0.960))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
-      
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -1231,45 +1317,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.997}
-        else if(input$sex=="Female"){1.038})
+        else switch(input$sex,
+                    "Male"=0.997,
+                    "Female"=1.038))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){1}
-        else if(input$race=="Asian"){1}
-        else if(input$race=="Native American"){1}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=1,
+                    "Asian"=1,
+                    "Native American"=1,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -1309,92 +1400,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.985,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.970,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.942))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.926}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.977}
-        else if(input$bmi=="Obese (>30)"){0.953})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.926,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.977,
+                    "Obese (>30)"=0.953))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
-      
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -1406,45 +1512,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.974}
-        else if(input$sex=="Female"){1.026})
+        else switch(input$sex,
+                    "Male"=0.974,
+                    "Female"=1.026))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -1484,91 +1595,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -1581,45 +1708,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -1659,91 +1791,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.985,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.970,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.942))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.931}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.014}
-        else if(input$bmi=="Obese (>30)"){1.020})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.931,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.014,
+                    "Obese (>30)"=1.020))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -1755,45 +1903,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -1833,91 +1986,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.983}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.961}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.923})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.983,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.961,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.923))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.926}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.926,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -1929,45 +2098,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.950}
-        else if(input$sex=="Female"){1.025})
+        else switch(input$sex,
+                    "Male"=0.950,
+                    "Female"=1.025))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -2007,91 +2181,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.979}
-        else if(input$bmi=="Obese (>30)"){0.949})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.979,
+                    "Obese (>30)"=0.949))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -2103,45 +2293,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -2183,91 +2378,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -2279,45 +2490,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -2357,91 +2573,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.979}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.951}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.894})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.979,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.951,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.894))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.912}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.980}
-        else if(input$bmi=="Obese (>30)"){0.967})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.912,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.980,
+                    "Obese (>30)"=0.967))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -2453,45 +2685,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){1}
-        else if(input$race=="Asian"){1}
-        else if(input$race=="Native American"){1}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=1,
+                    "Asian"=1,
+                    "Native American"=1,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -2531,91 +2768,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.985}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.970}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.942})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.985,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.970,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.942))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.902}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.974}
-        else if(input$bmi=="Obese (>30)"){0.949})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.902,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.974,
+                    "Obese (>30)"=0.949))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -2627,45 +2880,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -2705,91 +2963,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.984}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.967}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.934})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.984,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.967,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.934))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.936}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.977}
-        else if(input$bmi=="Obese (>30)"){0.951})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.936,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.977,
+                    "Obese (>30)"=0.951))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -2801,45 +3075,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -2879,91 +3158,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -2975,45 +3270,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -3053,91 +3353,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.978}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.948}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.886})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.978,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.948,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.886))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.980}
-        else if(input$bmi=="Obese (>30)"){0.957})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.980,
+                    "Obese (>30)"=0.957))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -3149,45 +3465,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1}
-        else if(input$sex=="Female"){1})
+        else switch(input$sex,
+                    "Male"=1,
+                    "Female"=1))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1}
-        else if(input$race=="Black"){0.93}
-        else if(input$race=="Asian"){1.1}
-        else if(input$race=="Native American"){0.85}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1,
+                    "Black"=0.93,
+                    "Asian"=1.1,
+                    "Native American"=0.85,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){1.065}
-        else if(input$wbr=="Latin America & Caribbean"){1.022}
-        else if(input$wbr=="Middle East & North Africa"){1.007}
-        else if(input$wbr=="North America"){1.078}
-        else if(input$wbr=="South Asia"){0.960}
-        else if(input$wbr=="Sub-Saharan Africa"){0.834})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=1.065,
+                    "Latin America & Caribbean"=1.022,
+                    "Middle East & North Africa"=1.007,
+                    "North America"=1.078,
+                    "South Asia"=0.960,
+                    "Sub-Saharan Africa"=0.834))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){0.975}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=0.975,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){0.964}
-        else if(input$edu=="Primary Education (Elementary School)"){0.982}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1.018}
-        else if(input$edu=="Master's degree"){1.036}
-        else if(input$edu=="Doctoral degree"){1.054})
+        else switch(input$edu,
+                    "No Formal Schooling"=0.964,
+                    "Primary Education (Elementary School)"=0.982,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1.018,
+                    "Master's degree"=1.036,
+                    "Doctoral degree"=1.054))
       
       ### LIFESTYLE ===
       
@@ -3227,91 +3548,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){0.978}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){0.948}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){0.886})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=0.978,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=0.948,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=0.886))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){0.923}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=0.923,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
     )
     
@@ -3336,45 +3673,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.219}
-        else if(input$sex=="Female"){0.816})
+        else switch(input$sex,
+                    "Male"=1.219,
+                    "Female"=0.816))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.980}
-        else if(input$race=="Black"){1.389}
-        else if(input$race=="Asian"){0.582}
-        else if(input$race=="Native American"){0.672}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.980,
+                    "Black"=1.389,
+                    "Asian"=0.582,
+                    "Native American"=0.672,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.189}
-        else if(input$wbr=="Europe & Central Asia"){1.888}
-        else if(input$wbr=="Latin America & Caribbean"){0.708}
-        else if(input$wbr=="Middle East & North Africa"){0.876}
-        else if(input$wbr=="North America"){1.181}
-        else if(input$wbr=="South Asia"){0.758}
-        else if(input$wbr=="Sub-Saharan Africa"){0.400})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.189,
+                    "Europe & Central Asia"=1.888,
+                    "Latin America & Caribbean"=0.708,
+                    "Middle East & North Africa"=0.876,
+                    "North America"=1.181,
+                    "South Asia"=0.758,
+                    "Sub-Saharan Africa"=0.400))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.42}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.42,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.42}
-        else if(input$edu=="Primary Education (Elementary School)"){1.42}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.42,
+                    "Primary Education (Elementary School)"=1.42,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -3415,91 +3757,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.16,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.34,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.56))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.18}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.26}
-        else if(input$bmi=="Obese (>30)"){1.76})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.18,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.26,
+                    "Obese (>30)"=1.76))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.06}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.06,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){2.57}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=2.57,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){4.98}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=4.98,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2.00}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.00,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.02}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.02,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){2.5}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=2.5,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -3509,49 +3867,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.375}
-        else if(input$sex=="Female"){0.698})
+        else switch(input$sex,
+                    "Male"=1.375,
+                    "Female"=0.698))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.001}
-        else if(input$race=="Black"){1.233}
-        else if(input$race=="Asian"){0.596}
-        else if(input$race=="Native American"){0.941}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.001,
+                    "Black"=1.233,
+                    "Asian"=0.596,
+                    "Native American"=0.941,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.189}
-        else if(input$wbr=="Europe & Central Asia"){1.888}
-        else if(input$wbr=="Latin America & Caribbean"){0.708}
-        else if(input$wbr=="Middle East & North Africa"){0.876}
-        else if(input$wbr=="North America"){1.181}
-        else if(input$wbr=="South Asia"){0.758}
-        else if(input$wbr=="Sub-Saharan Africa"){0.400})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.189,
+                    "Europe & Central Asia"=1.888,
+                    "Latin America & Caribbean"=0.708,
+                    "Middle East & North Africa"=0.876,
+                    "North America"=1.181,
+                    "South Asia"=0.758,
+                    "Sub-Saharan Africa"=0.400))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.42}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.42,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.42}
-        else if(input$edu=="Primary Education (Elementary School)"){1.42}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.42,
+                    "Primary Education (Elementary School)"=1.42,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -3591,91 +3952,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.16,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.34,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.56))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.18}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.26}
-        else if(input$bmi=="Obese (>30)"){1.76})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.18,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.26,
+                    "Obese (>30)"=1.76))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.06}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.06,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){2.57}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=2.57,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){4.98}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=4.98,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.00,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.02}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.02,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){2.5}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=2.5,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -3685,50 +4062,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.026}
-        else if(input$sex=="Female"){0.964})
+        else switch(input$sex,
+                    "Male"=1.026,
+                    "Female"=0.964))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.964}
-        else if(input$race=="Black"){1.441}
-        else if(input$race=="Asian"){0.809}
-        else if(input$race=="Native American"){0.670}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.964,
+                    "Black"=1.441,
+                    "Asian"=0.809,
+                    "Native American"=0.670,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.189}
-        else if(input$wbr=="Europe & Central Asia"){1.888}
-        else if(input$wbr=="Latin America & Caribbean"){0.708}
-        else if(input$wbr=="Middle East & North Africa"){0.876}
-        else if(input$wbr=="North America"){1.181}
-        else if(input$wbr=="South Asia"){0.758}
-        else if(input$wbr=="Sub-Saharan Africa"){0.400})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.189,
+                    "Europe & Central Asia"=1.888,
+                    "Latin America & Caribbean"=0.708,
+                    "Middle East & North Africa"=0.876,
+                    "North America"=1.181,
+                    "South Asia"=0.758,
+                    "Sub-Saharan Africa"=0.400))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.42}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.42,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.42}
-        else if(input$edu=="Primary Education (Elementary School)"){1.42}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.42,
+                    "Primary Education (Elementary School)"=1.42,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -3768,91 +4147,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.3}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.7}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.21})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.3,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.7,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=2.21))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.18}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.5}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.18,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.5,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.08}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.08,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){2.44}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=2.44,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){3.34}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=3.34,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.00,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.83}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.83,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){2.5}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=2.5,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -3864,45 +4259,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.184}
-        else if(input$sex=="Female"){0.863})
+        else switch(input$sex,
+                    "Male"=1.184,
+                    "Female"=0.863))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.016}
-        else if(input$race=="Black"){1.134}
-        else if(input$race=="Asian"){0.614}
-        else if(input$race=="Native American"){0.636}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.016,
+                    "Black"=1.134,
+                    "Asian"=0.614,
+                    "Native American"=0.636,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.280}
-        else if(input$wbr=="Europe & Central Asia"){1.790}
-        else if(input$wbr=="Latin America & Caribbean"){0.870}
-        else if(input$wbr=="Middle East & North Africa"){0.457}
-        else if(input$wbr=="North America"){1.745}
-        else if(input$wbr=="South Asia"){0.507}
-        else if(input$wbr=="Sub-Saharan Africa"){0.351})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.280,
+                    "Europe & Central Asia"=1.790,
+                    "Latin America & Caribbean"=0.870,
+                    "Middle East & North Africa"=0.457,
+                    "North America"=1.745,
+                    "South Asia"=0.507,
+                    "Sub-Saharan Africa"=0.351))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.58}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.58,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.58}
-        else if(input$edu=="Primary Education (Elementary School)"){1.58}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.58,
+                    "Primary Education (Elementary School)"=1.58,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -3942,91 +4342,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.21}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.33})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.21,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.33))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.29}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.285}
-        else if(input$bmi=="Obese (>30)"){1.57})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.29,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.285,
+                    "Obese (>30)"=1.57))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=3.34,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){4.38}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=4.38,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){2.88}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=2.88,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -4036,50 +4452,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.267}
-        else if(input$sex=="Female"){0.784})
+        else switch(input$sex,
+                    "Male"=1.267,
+                    "Female"=0.784))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.934}
-        else if(input$race=="Black"){1.645}
-        else if(input$race=="Asian"){0.741}
-        else if(input$race=="Native American"){1.518}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.934,
+                    "Black"=1.645,
+                    "Asian"=0.741,
+                    "Native American"=1.518,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.141}
-        else if(input$wbr=="Europe & Central Asia"){1.816}
-        else if(input$wbr=="Latin America & Caribbean"){1.636}
-        else if(input$wbr=="Middle East & North Africa"){0.512}
-        else if(input$wbr=="North America"){2.457}
-        else if(input$wbr=="South Asia"){0.258}
-        else if(input$wbr=="Sub-Saharan Africa"){0.181})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.141,
+                    "Europe & Central Asia"=1.816,
+                    "Latin America & Caribbean"=1.636,
+                    "Middle East & North Africa"=0.512,
+                    "North America"=2.457,
+                    "South Asia"=0.258,
+                    "Sub-Saharan Africa"=0.181))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.38}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.38,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.58}
-        else if(input$edu=="Primary Education (Elementary School)"){1.58}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.58,
+                    "Primary Education (Elementary School)"=1.58,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -4119,91 +4537,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.2,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.36))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.5}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.34}
-        else if(input$bmi=="Obese (>30)"){1.85})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.5,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.34,
+                    "Obese (>30)"=1.85))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.77}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.77,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.55}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.55,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -4213,50 +4647,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.781}
-        else if(input$sex=="Female"){1.142})
+        else switch(input$sex,
+                    "Male"=0.781,
+                    "Female"=1.142))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.043}
-        else if(input$race=="Black"){0.951}
-        else if(input$race=="Asian"){0.540}
-        else if(input$race=="Native American"){0.485}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.043,
+                    "Black"=0.951,
+                    "Asian"=0.540,
+                    "Native American"=0.485,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.135}
-        else if(input$wbr=="Europe & Central Asia"){1.928}
-        else if(input$wbr=="Latin America & Caribbean"){0.980}
-        else if(input$wbr=="Middle East & North Africa"){0.446}
-        else if(input$wbr=="North America"){1.888}
-        else if(input$wbr=="South Asia"){0.378}
-        else if(input$wbr=="Sub-Saharan Africa"){0.246})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.135,
+                    "Europe & Central Asia"=1.928,
+                    "Latin America & Caribbean"=0.980,
+                    "Middle East & North Africa"=0.446,
+                    "North America"=1.888,
+                    "South Asia"=0.378,
+                    "Sub-Saharan Africa"=0.246))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -4296,91 +4732,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1.7,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1.7}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1.7,
+                    "No"=1))
       
       ,
       
@@ -4390,50 +4842,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.104}
-        else if(input$sex=="Female"){0.923})
+        else switch(input$sex,
+                    "Male"=1.104,
+                    "Female"=0.923))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.069}
-        else if(input$race=="Black"){0.816}
-        else if(input$race=="Asian"){0.280}
-        else if(input$race=="Native American"){0.657}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.069,
+                    "Black"=0.816,
+                    "Asian"=0.280,
+                    "Native American"=0.657,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.403}
-        else if(input$wbr=="Europe & Central Asia"){0.962}
-        else if(input$wbr=="Latin America & Caribbean"){0.721}
-        else if(input$wbr=="Middle East & North Africa"){0.395}
-        else if(input$wbr=="North America"){1.489}
-        else if(input$wbr=="South Asia"){1.665}
-        else if(input$wbr=="Sub-Saharan Africa"){0.365})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.403,
+                    "Europe & Central Asia"=0.962,
+                    "Latin America & Caribbean"=0.721,
+                    "Middle East & North Africa"=0.395,
+                    "North America"=1.489,
+                    "South Asia"=1.665,
+                    "Sub-Saharan Africa"=0.365))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -4473,91 +4927,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.4})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.2,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.4))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.4}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.8}
-        else if(input$bmi=="Obese (>30)"){0.77})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.4,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.8,
+                    "Obese (>30)"=0.77))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){3.42}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=3.42,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.59}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.59,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1.57}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1.57,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -4567,50 +5037,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.258}
-        else if(input$sex=="Female"){0.786})
+        else switch(input$sex,
+                    "Male"=1.258,
+                    "Female"=0.786))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.903}
-        else if(input$race=="Black"){1.859}
-        else if(input$race=="Asian"){0.750}
-        else if(input$race=="Native American"){1.512}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.903,
+                    "Black"=1.859,
+                    "Asian"=0.750,
+                    "Native American"=1.512,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.883}
-        else if(input$wbr=="Europe & Central Asia"){0.938}
-        else if(input$wbr=="Latin America & Caribbean"){1.627}
-        else if(input$wbr=="Middle East & North Africa"){0.767}
-        else if(input$wbr=="North America"){1.105}
-        else if(input$wbr=="South Asia"){0.958}
-        else if(input$wbr=="Sub-Saharan Africa"){0.723})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.883,
+                    "Europe & Central Asia"=0.938,
+                    "Latin America & Caribbean"=1.627,
+                    "Middle East & North Africa"=0.767,
+                    "North America"=1.105,
+                    "South Asia"=0.958,
+                    "Sub-Saharan Africa"=0.723))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.7}
-        else if(input$inc=="Middle"){1.5}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.7,
+                    "Middle"=1.5,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2.4}
-        else if(input$edu=="Primary Education (Elementary School)"){1.6}
-        else if(input$edu=="Secondary Education (High School)"){1.4}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=2.4,
+                    "Primary Education (Elementary School)"=1.6,
+                    "Secondary Education (High School)"=1.4,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -4650,91 +5122,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.24}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.58}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.82})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.24,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.58,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.82))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.5}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.5,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){3.0}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=3.0,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){2.04}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=2.04,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.77}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.77,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){5}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=5,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -4744,50 +5232,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.426}
-        else if(input$sex=="Female"){0.578})
+        else switch(input$sex,
+                    "Male"=1.426,
+                    "Female"=0.578))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.058}
-        else if(input$race=="Black"){1.236}
-        else if(input$race=="Asian"){0.155}
-        else if(input$race=="Native American"){0.946}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.058,
+                    "Black"=1.236,
+                    "Asian"=0.155,
+                    "Native American"=0.946,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.211}
-        else if(input$wbr=="Europe & Central Asia"){0.635}
-        else if(input$wbr=="Latin America & Caribbean"){0.135}
-        else if(input$wbr=="Middle East & North Africa"){0.402}
-        else if(input$wbr=="North America"){5.392}
-        else if(input$wbr=="South Asia"){0.159}
-        else if(input$wbr=="Sub-Saharan Africa"){0.067})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.211,
+                    "Europe & Central Asia"=0.635,
+                    "Latin America & Caribbean"=0.135,
+                    "Middle East & North Africa"=0.402,
+                    "North America"=5.392,
+                    "South Asia"=0.159,
+                    "Sub-Saharan Africa"=0.067))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.6}
-        else if(input$inc=="Lower-middle"){1.375}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.925}
-        else if(input$inc=="Rich"){0.7})
+        else switch(input$inc,
+                    "Poor"=1.6,
+                    "Lower-middle"=1.375,
+                    "Middle"=1,
+                    "Upper-middle"=0.925,
+                    "Rich"=0.7))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.9}
-        else if(input$edu=="Doctoral degree"){0.8})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.9,
+                    "Doctoral degree"=0.8))
       
       ### LIFESTYLE ===
       
@@ -4827,91 +5317,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.24}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.24,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.66}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -4921,50 +5427,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.481}
-        else if(input$sex=="Female"){0.534})
+        else switch(input$sex,
+                    "Male"=1.481,
+                    "Female"=0.534))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.992}
-        else if(input$race=="Black"){1.397}
-        else if(input$race=="Asian"){0.313}
-        else if(input$race=="Native American"){1.344}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.992,
+                    "Black"=1.397,
+                    "Asian"=0.313,
+                    "Native American"=1.344,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){0.575}
-        else if(input$wbr=="Latin America & Caribbean"){1.114}
-        else if(input$wbr=="Middle East & North Africa"){1.664}
-        else if(input$wbr=="North America"){0.747}
-        else if(input$wbr=="South Asia"){0.852}
-        else if(input$wbr=="Sub-Saharan Africa"){1.012})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=0.575,
+                    "Latin America & Caribbean"=1.114,
+                    "Middle East & North Africa"=1.664,
+                    "North America"=0.747,
+                    "South Asia"=0.852,
+                    "Sub-Saharan Africa"=1.012))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.5}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.5,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2.5}
-        else if(input$edu=="Primary Education (Elementary School)"){2.0}
-        else if(input$edu=="Secondary Education (High School)"){1.5}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.6})
+        else switch(input$edu,
+                    "No Formal Schooling"=2.5,
+                    "Primary Education (Elementary School)"=2.0,
+                    "Secondary Education (High School)"=1.5,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.6))
       
       ### LIFESTYLE ===
       
@@ -5004,91 +5512,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){2}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1.5}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=2,
+                    "Normal Weight (18.5-24.9)"=1.5,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.66}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.66,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -5098,50 +5622,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.214}
-        else if(input$sex=="Female"){0.816})
+        else switch(input$sex,
+                    "Male"=1.214,
+                    "Female"=0.816))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.087}
-        else if(input$race=="Black"){0.495}
-        else if(input$race=="Asian"){0.524}
-        else if(input$race=="Native American"){0.796}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.087,
+                    "Black"=0.495,
+                    "Asian"=0.524,
+                    "Native American"=0.796,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1,
+                    "Europe & Central Asia"=1,
+                    "Latin America & Caribbean"=1,
+                    "Middle East & North Africa"=1,
+                    "North America"=1,
+                    "South Asia"=1,
+                    "Sub-Saharan Africa"=1))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.5}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.5,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2}
-        else if(input$edu=="Primary Education (Elementary School)"){2}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.5}
-        else if(input$edu=="Doctoral degree"){0.5})
+        else switch(input$edu,
+                    "No Formal Schooling"=2,
+                    "Primary Education (Elementary School)"=2,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.5,
+                    "Doctoral degree"=0.5))
       
       ### LIFESTYLE ===
       
@@ -5181,91 +5707,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.5}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.0}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.5})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.5,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=2.0,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=2.5))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.8}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.15}
-        else if(input$bmi=="Obese (>30)"){1.31})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.8,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.15,
+                    "Obese (>30)"=1.31))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.66}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.66,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -5277,45 +5819,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.215}
-        else if(input$sex=="Female"){0.846})
+        else switch(input$sex,
+                    "Male"=1.215,
+                    "Female"=0.846))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.985}
-        else if(input$race=="Black"){1.292}
-        else if(input$race=="Asian"){0.792}
-        else if(input$race=="Native American"){1.077}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.985,
+                    "Black"=1.292,
+                    "Asian"=0.792,
+                    "Native American"=1.077,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.768}
-        else if(input$wbr=="Europe & Central Asia"){0.932}
-        else if(input$wbr=="Latin America & Caribbean"){1.144}
-        else if(input$wbr=="Middle East & North Africa"){0.465}
-        else if(input$wbr=="North America"){0.788}
-        else if(input$wbr=="South Asia"){0.972}
-        else if(input$wbr=="Sub-Saharan Africa"){1.931})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.768,
+                    "Europe & Central Asia"=0.932,
+                    "Latin America & Caribbean"=1.144,
+                    "Middle East & North Africa"=0.465,
+                    "North America"=0.788,
+                    "South Asia"=0.972,
+                    "Sub-Saharan Africa"=1.931))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.4}
-        else if(input$inc=="Lower-middle"){1.2}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.8}
-        else if(input$inc=="Rich"){0.6})
+        else switch(input$inc,
+                    "Poor"=1.4,
+                    "Lower-middle"=1.2,
+                    "Middle"=1,
+                    "Upper-middle"=0.8,
+                    "Rich"=0.6))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.6}
-        else if(input$edu=="Primary Education (Elementary School)"){1.4}
-        else if(input$edu=="Secondary Education (High School)"){1.2}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.6})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.6,
+                    "Primary Education (Elementary School)"=1.4,
+                    "Secondary Education (High School)"=1.2,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.6))
       
       ### LIFESTYLE ===
       
@@ -5355,91 +5902,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.2,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.36))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){2}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.5}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=2,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.5,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.77}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.77,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.55}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.55,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){2.15}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=2.15,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -5451,45 +6014,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.213}
-        else if(input$sex=="Female"){0.843})
+        else switch(input$sex,
+                    "Male"=1.213,
+                    "Female"=0.843))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.898}
-        else if(input$race=="Black"){2.024}
-        else if(input$race=="Asian"){0.638}
-        else if(input$race=="Native American"){0.882}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.898,
+                    "Black"=2.024,
+                    "Asian"=0.638,
+                    "Native American"=0.882,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.852}
-        else if(input$wbr=="Europe & Central Asia"){0.924}
-        else if(input$wbr=="Latin America & Caribbean"){1.557}
-        else if(input$wbr=="Middle East & North Africa"){0.864}
-        else if(input$wbr=="North America"){1.502}
-        else if(input$wbr=="South Asia"){0.765}
-        else if(input$wbr=="Sub-Saharan Africa"){0.538})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.852,
+                    "Europe & Central Asia"=0.924,
+                    "Latin America & Caribbean"=1.557,
+                    "Middle East & North Africa"=0.864,
+                    "North America"=1.502,
+                    "South Asia"=0.765,
+                    "Sub-Saharan Africa"=0.538))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -5529,91 +6097,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.16,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.34,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.56))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.3}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.34}
-        else if(input$bmi=="Obese (>30)"){1.94})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.3,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.34,
+                    "Obese (>30)"=1.94))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1.64}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1.64,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.22}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.22,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1.75}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1.75,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.29}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.29,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -5623,50 +6207,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.630}
-        else if(input$sex=="Female"){0.407})
+        else switch(input$sex,
+                    "Male"=1.630,
+                    "Female"=0.407))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.126}
-        else if(input$race=="Black"){0.556}
-        else if(input$race=="Asian"){0.474}
-        else if(input$race=="Native American"){1.244}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.126,
+                    "Black"=0.556,
+                    "Asian"=0.474,
+                    "Native American"=1.244,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.910}
-        else if(input$wbr=="Europe & Central Asia"){1.544}
-        else if(input$wbr=="Latin America & Caribbean"){0.727}
-        else if(input$wbr=="Middle East & North Africa"){0.445}
-        else if(input$wbr=="North America"){1.425}
-        else if(input$wbr=="South Asia"){1.288}
-        else if(input$wbr=="Sub-Saharan Africa"){0.662})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.910,
+                    "Europe & Central Asia"=1.544,
+                    "Latin America & Caribbean"=0.727,
+                    "Middle East & North Africa"=0.445,
+                    "North America"=1.425,
+                    "South Asia"=1.288,
+                    "Sub-Saharan Africa"=0.662))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -5706,91 +6292,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){2}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=2,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.5}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.5,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.85}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.85,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){2.58}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=2.58,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -5802,45 +6404,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.316}
-        else if(input$sex=="Female"){0.707})
+        else switch(input$sex,
+                    "Male"=1.316,
+                    "Female"=0.707))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.083}
-        else if(input$race=="Black"){0.662}
-        else if(input$race=="Asian"){0.308}
-        else if(input$race=="Native American"){2.850}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.083,
+                    "Black"=0.663,
+                    "Asian"=0.308,
+                    "Native American"=2.850,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.829}
-        else if(input$wbr=="Europe & Central Asia"){1.212}
-        else if(input$wbr=="Latin America & Caribbean"){1.124}
-        else if(input$wbr=="Middle East & North Africa"){1.013}
-        else if(input$wbr=="North America"){0.999}
-        else if(input$wbr=="South Asia"){0.963}
-        else if(input$wbr=="Sub-Saharan Africa"){0.860})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.829,
+                    "Europe & Central Asia"=1.212,
+                    "Latin America & Caribbean"=1.124,
+                    "Middle East & North Africa"=1.013,
+                    "North America"=0.999,
+                    "South Asia"=0.963,
+                    "Sub-Saharan Africa"=0.860))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -5880,91 +6487,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.56}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.13}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.69})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.56,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=2.13,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=2.69))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.16}
-        else if(input$bmi=="Obese (>30)"){1.69})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.16,
+                    "Obese (>30)"=1.69))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){4.7}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=4.7,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -5974,50 +6597,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.113}
-        else if(input$sex=="Female"){0.918})
+        else switch(input$sex,
+                    "Male"=1.113,
+                    "Female"=0.918))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.959}
-        else if(input$race=="Black"){1.680}
-        else if(input$race=="Asian"){0.464}
-        else if(input$race=="Native American"){0.948}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.959,
+                    "Black"=1.680,
+                    "Asian"=0.464,
+                    "Native American"=0.948,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.5}
-        else if(input$wbr=="Europe & Central Asia"){1.5}
-        else if(input$wbr=="Latin America & Caribbean"){2}
-        else if(input$wbr=="Middle East & North Africa"){2}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){4}
-        else if(input$wbr=="Sub-Saharan Africa"){6})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.5,
+                    "Europe & Central Asia"=1.5,
+                    "Latin America & Caribbean"=2,
+                    "Middle East & North Africa"=2,
+                    "North America"=1,
+                    "South Asia"=4,
+                    "Sub-Saharan Africa"=6))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.5}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.5,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2}
-        else if(input$edu=="Primary Education (Elementary School)"){2}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){2}
-        else if(input$edu=="Master's degree"){0.5}
-        else if(input$edu=="Doctoral degree"){0.5})
+        else switch(input$edu,
+                    "No Formal Schooling"=2,
+                    "Primary Education (Elementary School)"=2,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.5,
+                    "Doctoral degree"=0.5))
       
       ### LIFESTYLE ===
       
@@ -6057,91 +6682,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.56}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.56,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1.4}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1.4,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.4}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.4,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2.2}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.2,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1.3}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1.3,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.5}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.5,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1.5}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1.5,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
     )
     
@@ -6161,45 +6802,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.219}
-        else if(input$sex=="Female"){0.816})
+        else switch(input$sex,
+                    "Male"=1.219,
+                    "Female"=0.816))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.980}
-        else if(input$race=="Black"){1.389}
-        else if(input$race=="Asian"){0.582}
-        else if(input$race=="Native American"){0.672}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.980,
+                    "Black"=1.389,
+                    "Asian"=0.582,
+                    "Native American"=0.672,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.189}
-        else if(input$wbr=="Europe & Central Asia"){1.888}
-        else if(input$wbr=="Latin America & Caribbean"){0.708}
-        else if(input$wbr=="Middle East & North Africa"){0.876}
-        else if(input$wbr=="North America"){1.181}
-        else if(input$wbr=="South Asia"){0.758}
-        else if(input$wbr=="Sub-Saharan Africa"){0.400})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.189,
+                    "Europe & Central Asia"=1.888,
+                    "Latin America & Caribbean"=0.708,
+                    "Middle East & North Africa"=0.876,
+                    "North America"=1.181,
+                    "South Asia"=0.758,
+                    "Sub-Saharan Africa"=0.400))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.42}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.42,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.42}
-        else if(input$edu=="Primary Education (Elementary School)"){1.42}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.42,
+                    "Primary Education (Elementary School)"=1.42,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -6233,97 +6879,114 @@ server <- function(input, output){
         else if(input$hsd==14){3.80}
         else if(input$hsd==15){4.20}
         else if(input$hsd>=16){4.60}
-      ) 
+      )  
+      
       
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.16,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.34,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.56))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.18}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.26}
-        else if(input$bmi=="Obese (>30)"){1.76})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.18,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.26,
+                    "Obese (>30)"=1.76))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.06}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.06,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){2.57}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=2.57,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){4.98}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=4.98,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2.00}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.00,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.02}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.02,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){2.5}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=2.5,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -6333,49 +6996,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.375}
-        else if(input$sex=="Female"){0.698})
+        else switch(input$sex,
+                    "Male"=1.375,
+                    "Female"=0.698))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.001}
-        else if(input$race=="Black"){1.233}
-        else if(input$race=="Asian"){0.596}
-        else if(input$race=="Native American"){0.941}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.001,
+                    "Black"=1.233,
+                    "Asian"=0.596,
+                    "Native American"=0.941,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.189}
-        else if(input$wbr=="Europe & Central Asia"){1.888}
-        else if(input$wbr=="Latin America & Caribbean"){0.708}
-        else if(input$wbr=="Middle East & North Africa"){0.876}
-        else if(input$wbr=="North America"){1.181}
-        else if(input$wbr=="South Asia"){0.758}
-        else if(input$wbr=="Sub-Saharan Africa"){0.400})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.189,
+                    "Europe & Central Asia"=1.888,
+                    "Latin America & Caribbean"=0.708,
+                    "Middle East & North Africa"=0.876,
+                    "North America"=1.181,
+                    "South Asia"=0.758,
+                    "Sub-Saharan Africa"=0.400))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.42}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.42,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.42}
-        else if(input$edu=="Primary Education (Elementary School)"){1.42}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.42,
+                    "Primary Education (Elementary School)"=1.42,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -6415,91 +7081,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.16,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.34,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.56))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.18}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.26}
-        else if(input$bmi=="Obese (>30)"){1.76})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.18,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.26,
+                    "Obese (>30)"=1.76))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.06}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.06,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){2.57}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=2.57,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){4.98}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=4.98,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.00,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.02}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.02,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){2.5}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=2.5,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -6509,50 +7191,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.026}
-        else if(input$sex=="Female"){0.964})
+        else switch(input$sex,
+                    "Male"=1.026,
+                    "Female"=0.964))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.964}
-        else if(input$race=="Black"){1.441}
-        else if(input$race=="Asian"){0.809}
-        else if(input$race=="Native American"){0.670}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.964,
+                    "Black"=1.441,
+                    "Asian"=0.809,
+                    "Native American"=0.670,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.189}
-        else if(input$wbr=="Europe & Central Asia"){1.888}
-        else if(input$wbr=="Latin America & Caribbean"){0.708}
-        else if(input$wbr=="Middle East & North Africa"){0.876}
-        else if(input$wbr=="North America"){1.181}
-        else if(input$wbr=="South Asia"){0.758}
-        else if(input$wbr=="Sub-Saharan Africa"){0.400})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.189,
+                    "Europe & Central Asia"=1.888,
+                    "Latin America & Caribbean"=0.708,
+                    "Middle East & North Africa"=0.876,
+                    "North America"=1.181,
+                    "South Asia"=0.758,
+                    "Sub-Saharan Africa"=0.400))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.42}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.42,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.42}
-        else if(input$edu=="Primary Education (Elementary School)"){1.42}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.42,
+                    "Primary Education (Elementary School)"=1.42,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -6586,97 +7270,113 @@ server <- function(input, output){
         else if(input$hsd==14){1.49}
         else if(input$hsd==15){1.56}
         else if(input$hsd>=16){1.63}
-      )
+      ) 
       
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.3}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.7}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.21})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.3,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.7,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=2.21))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.18}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.5}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.18,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.5,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.08}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.08,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){2.44}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=2.44,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){3.34}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=3.34,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.00,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.83}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.83,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){2.5}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=2.5,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -6688,45 +7388,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.184}
-        else if(input$sex=="Female"){0.863})
+        else switch(input$sex,
+                    "Male"=1.184,
+                    "Female"=0.863))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.016}
-        else if(input$race=="Black"){1.134}
-        else if(input$race=="Asian"){0.614}
-        else if(input$race=="Native American"){0.636}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.016,
+                    "Black"=1.134,
+                    "Asian"=0.614,
+                    "Native American"=0.636,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.280}
-        else if(input$wbr=="Europe & Central Asia"){1.790}
-        else if(input$wbr=="Latin America & Caribbean"){0.870}
-        else if(input$wbr=="Middle East & North Africa"){0.457}
-        else if(input$wbr=="North America"){1.745}
-        else if(input$wbr=="South Asia"){0.507}
-        else if(input$wbr=="Sub-Saharan Africa"){0.351})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.280,
+                    "Europe & Central Asia"=1.790,
+                    "Latin America & Caribbean"=0.870,
+                    "Middle East & North Africa"=0.457,
+                    "North America"=1.745,
+                    "South Asia"=0.507,
+                    "Sub-Saharan Africa"=0.351))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.58}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.58,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.58}
-        else if(input$edu=="Primary Education (Elementary School)"){1.58}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.58,
+                    "Primary Education (Elementary School)"=1.58,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -6766,91 +7471,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.21}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.33})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.21,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.33))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.29}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.285}
-        else if(input$bmi=="Obese (>30)"){1.57})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.29,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.285,
+                    "Obese (>30)"=1.57))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=3.34,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){4.38}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=4.38,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){2.88}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=2.88,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -6860,50 +7581,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.267}
-        else if(input$sex=="Female"){0.784})
+        else switch(input$sex,
+                    "Male"=1.267,
+                    "Female"=0.784))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.934}
-        else if(input$race=="Black"){1.645}
-        else if(input$race=="Asian"){0.741}
-        else if(input$race=="Native American"){1.518}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.934,
+                    "Black"=1.645,
+                    "Asian"=0.741,
+                    "Native American"=1.518,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.141}
-        else if(input$wbr=="Europe & Central Asia"){1.816}
-        else if(input$wbr=="Latin America & Caribbean"){1.636}
-        else if(input$wbr=="Middle East & North Africa"){0.512}
-        else if(input$wbr=="North America"){2.457}
-        else if(input$wbr=="South Asia"){0.258}
-        else if(input$wbr=="Sub-Saharan Africa"){0.181})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.141,
+                    "Europe & Central Asia"=1.816,
+                    "Latin America & Caribbean"=1.636,
+                    "Middle East & North Africa"=0.512,
+                    "North America"=2.457,
+                    "South Asia"=0.258,
+                    "Sub-Saharan Africa"=0.181))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.38}
-        else if(input$inc=="Lower-middle"){1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=1.38,
+                    "Lower-middle"=1,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.58}
-        else if(input$edu=="Primary Education (Elementary School)"){1.58}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.58,
+                    "Primary Education (Elementary School)"=1.58,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -6943,91 +7666,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.2,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.36))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.5}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.34}
-        else if(input$bmi=="Obese (>30)"){1.85})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.5,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.34,
+                    "Obese (>30)"=1.85))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.77}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.77,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.55}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.55,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -7037,50 +7776,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){0.781}
-        else if(input$sex=="Female"){1.142})
+        else switch(input$sex,
+                    "Male"=0.781,
+                    "Female"=1.142))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.043}
-        else if(input$race=="Black"){0.951}
-        else if(input$race=="Asian"){0.540}
-        else if(input$race=="Native American"){0.485}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.043,
+                    "Black"=0.951,
+                    "Asian"=0.540,
+                    "Native American"=0.485,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.135}
-        else if(input$wbr=="Europe & Central Asia"){1.928}
-        else if(input$wbr=="Latin America & Caribbean"){0.980}
-        else if(input$wbr=="Middle East & North Africa"){0.446}
-        else if(input$wbr=="North America"){1.888}
-        else if(input$wbr=="South Asia"){0.378}
-        else if(input$wbr=="Sub-Saharan Africa"){0.246})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.135,
+                    "Europe & Central Asia"=1.928,
+                    "Latin America & Caribbean"=0.980,
+                    "Middle East & North Africa"=0.446,
+                    "North America"=1.888,
+                    "South Asia"=0.378,
+                    "Sub-Saharan Africa"=0.246))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -7120,91 +7861,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1.7,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1.7}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1.7,
+                    "No"=1))
       
       ,
       
@@ -7214,50 +7971,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.104}
-        else if(input$sex=="Female"){0.923})
+        else switch(input$sex,
+                    "Male"=1.104,
+                    "Female"=0.923))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.069}
-        else if(input$race=="Black"){0.816}
-        else if(input$race=="Asian"){0.280}
-        else if(input$race=="Native American"){0.657}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.069,
+                    "Black"=0.816,
+                    "Asian"=0.280,
+                    "Native American"=0.657,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.403}
-        else if(input$wbr=="Europe & Central Asia"){0.962}
-        else if(input$wbr=="Latin America & Caribbean"){0.721}
-        else if(input$wbr=="Middle East & North Africa"){0.395}
-        else if(input$wbr=="North America"){1.489}
-        else if(input$wbr=="South Asia"){1.665}
-        else if(input$wbr=="Sub-Saharan Africa"){0.365})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.403,
+                    "Europe & Central Asia"=0.962,
+                    "Latin America & Caribbean"=0.721,
+                    "Middle East & North Africa"=0.395,
+                    "North America"=1.489,
+                    "South Asia"=1.665,
+                    "Sub-Saharan Africa"=0.365))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -7297,91 +8056,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.4})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.2,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.4))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.4}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){0.8}
-        else if(input$bmi=="Obese (>30)"){0.77})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.4,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=0.8,
+                    "Obese (>30)"=0.77))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){3.42}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=3.42,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.59}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.59,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1.57}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1.57,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -7391,50 +8166,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.258}
-        else if(input$sex=="Female"){0.786})
+        else switch(input$sex,
+                    "Male"=1.258,
+                    "Female"=0.786))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.903}
-        else if(input$race=="Black"){1.859}
-        else if(input$race=="Asian"){0.750}
-        else if(input$race=="Native American"){1.512}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.903,
+                    "Black"=1.859,
+                    "Asian"=0.750,
+                    "Native American"=1.512,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.883}
-        else if(input$wbr=="Europe & Central Asia"){0.938}
-        else if(input$wbr=="Latin America & Caribbean"){1.627}
-        else if(input$wbr=="Middle East & North Africa"){0.767}
-        else if(input$wbr=="North America"){1.105}
-        else if(input$wbr=="South Asia"){0.958}
-        else if(input$wbr=="Sub-Saharan Africa"){0.723})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.883,
+                    "Europe & Central Asia"=0.938,
+                    "Latin America & Caribbean"=1.627,
+                    "Middle East & North Africa"=0.767,
+                    "North America"=1.105,
+                    "South Asia"=0.958,
+                    "Sub-Saharan Africa"=0.723))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.7}
-        else if(input$inc=="Middle"){1.5}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.7,
+                    "Middle"=1.5,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2.4}
-        else if(input$edu=="Primary Education (Elementary School)"){1.6}
-        else if(input$edu=="Secondary Education (High School)"){1.4}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){1}
-        else if(input$edu=="Doctoral degree"){1})
+        else switch(input$edu,
+                    "No Formal Schooling"=2.4,
+                    "Primary Education (Elementary School)"=1.6,
+                    "Secondary Education (High School)"=1.4,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=1,
+                    "Doctoral degree"=1))
       
       ### LIFESTYLE ===
       
@@ -7474,91 +8251,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.24}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.58}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.82})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.24,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.58,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.82))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.5}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.5,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){3.0}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=3.0,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){2.04}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=2.04,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.77}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.77,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){5}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=5,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -7568,50 +8361,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.426}
-        else if(input$sex=="Female"){0.578})
+        else switch(input$sex,
+                    "Male"=1.426,
+                    "Female"=0.578))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.058}
-        else if(input$race=="Black"){1.236}
-        else if(input$race=="Asian"){0.155}
-        else if(input$race=="Native American"){0.946}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.058,
+                    "Black"=1.236,
+                    "Asian"=0.155,
+                    "Native American"=0.946,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.211}
-        else if(input$wbr=="Europe & Central Asia"){0.635}
-        else if(input$wbr=="Latin America & Caribbean"){0.135}
-        else if(input$wbr=="Middle East & North Africa"){0.402}
-        else if(input$wbr=="North America"){5.392}
-        else if(input$wbr=="South Asia"){0.159}
-        else if(input$wbr=="Sub-Saharan Africa"){0.067})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.211,
+                    "Europe & Central Asia"=0.635,
+                    "Latin America & Caribbean"=0.135,
+                    "Middle East & North Africa"=0.402,
+                    "North America"=5.392,
+                    "South Asia"=0.159,
+                    "Sub-Saharan Africa"=0.067))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.6}
-        else if(input$inc=="Lower-middle"){1.375}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.925}
-        else if(input$inc=="Rich"){0.7})
+        else switch(input$inc,
+                    "Poor"=1.6,
+                    "Lower-middle"=1.375,
+                    "Middle"=1,
+                    "Upper-middle"=0.925,
+                    "Rich"=0.7))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.9}
-        else if(input$edu=="Doctoral degree"){0.8})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.9,
+                    "Doctoral degree"=0.8))
       
       ### LIFESTYLE ===
       
@@ -7645,97 +8440,113 @@ server <- function(input, output){
         else if(input$hsd==14){2.30}
         else if(input$hsd==15){2.50}
         else if(input$hsd>=16){2.70}
-      )
+      ) 
       
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.24}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.24,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.66}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -7745,50 +8556,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.481}
-        else if(input$sex=="Female"){0.534})
+        else switch(input$sex,
+                    "Male"=1.481,
+                    "Female"=0.534))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.992}
-        else if(input$race=="Black"){1.397}
-        else if(input$race=="Asian"){0.313}
-        else if(input$race=="Native American"){1.344}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.992,
+                    "Black"=1.397,
+                    "Asian"=0.313,
+                    "Native American"=1.344,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.035}
-        else if(input$wbr=="Europe & Central Asia"){0.575}
-        else if(input$wbr=="Latin America & Caribbean"){1.114}
-        else if(input$wbr=="Middle East & North Africa"){1.664}
-        else if(input$wbr=="North America"){0.747}
-        else if(input$wbr=="South Asia"){0.852}
-        else if(input$wbr=="Sub-Saharan Africa"){1.012})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.035,
+                    "Europe & Central Asia"=0.575,
+                    "Latin America & Caribbean"=1.114,
+                    "Middle East & North Africa"=1.664,
+                    "North America"=0.747,
+                    "South Asia"=0.852,
+                    "Sub-Saharan Africa"=1.012))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.5}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.5,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2.5}
-        else if(input$edu=="Primary Education (Elementary School)"){2.0}
-        else if(input$edu=="Secondary Education (High School)"){1.5}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.6})
+        else switch(input$edu,
+                    "No Formal Schooling"=2.5,
+                    "Primary Education (Elementary School)"=2.0,
+                    "Secondary Education (High School)"=1.5,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.6))
       
       ### LIFESTYLE ===
       
@@ -7822,97 +8635,113 @@ server <- function(input, output){
         else if(input$hsd==14){1}
         else if(input$hsd==15){1}
         else if(input$hsd>=16){1}
-      ) 
+      )   
       
       ### VITALS ===
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){2}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1.5}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=2,
+                    "Normal Weight (18.5-24.9)"=1.5,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.66}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.66,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -7922,50 +8751,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.214}
-        else if(input$sex=="Female"){0.816})
+        else switch(input$sex,
+                    "Male"=1.214,
+                    "Female"=0.816))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.087}
-        else if(input$race=="Black"){0.495}
-        else if(input$race=="Asian"){0.524}
-        else if(input$race=="Native American"){0.796}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.087,
+                    "Black"=0.495,
+                    "Asian"=0.524,
+                    "Native American"=0.796,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1}
-        else if(input$wbr=="Europe & Central Asia"){1}
-        else if(input$wbr=="Latin America & Caribbean"){1}
-        else if(input$wbr=="Middle East & North Africa"){1}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){1}
-        else if(input$wbr=="Sub-Saharan Africa"){1})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1,
+                    "Europe & Central Asia"=1,
+                    "Latin America & Caribbean"=1,
+                    "Middle East & North Africa"=1,
+                    "North America"=1,
+                    "South Asia"=1,
+                    "Sub-Saharan Africa"=1))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.5}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.5,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2}
-        else if(input$edu=="Primary Education (Elementary School)"){2}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.5}
-        else if(input$edu=="Doctoral degree"){0.5})
+        else switch(input$edu,
+                    "No Formal Schooling"=2,
+                    "Primary Education (Elementary School)"=2,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.5,
+                    "Doctoral degree"=0.5))
       
       ### LIFESTYLE ===
       
@@ -8005,91 +8836,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.5}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.0}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.5})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.5,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=2.0,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=2.5))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.8}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.15}
-        else if(input$bmi=="Obese (>30)"){1.31})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.8,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.15,
+                    "Obese (>30)"=1.31))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.66}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.66,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -8101,45 +8948,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.215}
-        else if(input$sex=="Female"){0.846})
+        else switch(input$sex,
+                    "Male"=1.215,
+                    "Female"=0.846))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.985}
-        else if(input$race=="Black"){1.292}
-        else if(input$race=="Asian"){0.792}
-        else if(input$race=="Native American"){1.077}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.985,
+                    "Black"=1.292,
+                    "Asian"=0.792,
+                    "Native American"=1.077,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.768}
-        else if(input$wbr=="Europe & Central Asia"){0.932}
-        else if(input$wbr=="Latin America & Caribbean"){1.144}
-        else if(input$wbr=="Middle East & North Africa"){0.465}
-        else if(input$wbr=="North America"){0.788}
-        else if(input$wbr=="South Asia"){0.972}
-        else if(input$wbr=="Sub-Saharan Africa"){1.931})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.768,
+                    "Europe & Central Asia"=0.932,
+                    "Latin America & Caribbean"=1.144,
+                    "Middle East & North Africa"=0.465,
+                    "North America"=0.788,
+                    "South Asia"=0.972,
+                    "Sub-Saharan Africa"=1.931))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.4}
-        else if(input$inc=="Lower-middle"){1.2}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.8}
-        else if(input$inc=="Rich"){0.6})
+        else switch(input$inc,
+                    "Poor"=1.4,
+                    "Lower-middle"=1.2,
+                    "Middle"=1,
+                    "Upper-middle"=0.8,
+                    "Rich"=0.6))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.6}
-        else if(input$edu=="Primary Education (Elementary School)"){1.4}
-        else if(input$edu=="Secondary Education (High School)"){1.2}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){1}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.6})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.6,
+                    "Primary Education (Elementary School)"=1.4,
+                    "Secondary Education (High School)"=1.2,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.6))
       
       ### LIFESTYLE ===
       
@@ -8179,91 +9031,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.2}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.36})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.2,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.36))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){2}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.5}
-        else if(input$bmi=="Obese (>30)"){2})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=2,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.5,
+                    "Obese (>30)"=2))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.77}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.77,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.55}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.55,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){2.15}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=2.15,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -8275,45 +9143,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.213}
-        else if(input$sex=="Female"){0.843})
+        else switch(input$sex,
+                    "Male"=1.213,
+                    "Female"=0.843))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.898}
-        else if(input$race=="Black"){2.024}
-        else if(input$race=="Asian"){0.638}
-        else if(input$race=="Native American"){0.882}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.898,
+                    "Black"=2.024,
+                    "Asian"=0.638,
+                    "Native American"=0.882,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.852}
-        else if(input$wbr=="Europe & Central Asia"){0.924}
-        else if(input$wbr=="Latin America & Caribbean"){1.557}
-        else if(input$wbr=="Middle East & North Africa"){0.864}
-        else if(input$wbr=="North America"){1.502}
-        else if(input$wbr=="South Asia"){0.765}
-        else if(input$wbr=="Sub-Saharan Africa"){0.538})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.852,
+                    "Europe & Central Asia"=0.924,
+                    "Latin America & Caribbean"=1.557,
+                    "Middle East & North Africa"=0.864,
+                    "North America"=1.502,
+                    "South Asia"=0.765,
+                    "Sub-Saharan Africa"=0.538))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -8353,91 +9226,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.16}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1.34}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1.56})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.16,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1.34,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1.56))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.3}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.34}
-        else if(input$bmi=="Obese (>30)"){1.94})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.3,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.34,
+                    "Obese (>30)"=1.94))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1.64}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1.64,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.22}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.22,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1.75}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1.75,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.29}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.29,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -8447,50 +9336,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.630}
-        else if(input$sex=="Female"){0.407})
+        else switch(input$sex,
+                    "Male"=1.630,
+                    "Female"=0.407))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.126}
-        else if(input$race=="Black"){0.556}
-        else if(input$race=="Asian"){0.474}
-        else if(input$race=="Native American"){1.244}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.126,
+                    "Black"=0.556,
+                    "Asian"=0.474,
+                    "Native American"=1.244,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.910}
-        else if(input$wbr=="Europe & Central Asia"){1.544}
-        else if(input$wbr=="Latin America & Caribbean"){0.727}
-        else if(input$wbr=="Middle East & North Africa"){0.445}
-        else if(input$wbr=="North America"){1.425}
-        else if(input$wbr=="South Asia"){1.288}
-        else if(input$wbr=="Sub-Saharan Africa"){0.662})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.910,
+                    "Europe & Central Asia"=1.544,
+                    "Latin America & Caribbean"=0.727,
+                    "Middle East & North Africa"=0.445,
+                    "North America"=1.425,
+                    "South Asia"=1.288,
+                    "Sub-Saharan Africa"=0.662))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -8530,91 +9421,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){2}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=2,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.5}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.5,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){2.85}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=2.85,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){2.58}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=2.58,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -8626,45 +9533,50 @@ server <- function(input, output){
       
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.316}
-        else if(input$sex=="Female"){0.707})
+        else switch(input$sex,
+                    "Male"=1.316,
+                    "Female"=0.707))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){1.083}
-        else if(input$race=="Black"){0.662}
-        else if(input$race=="Asian"){0.308}
-        else if(input$race=="Native American"){2.850}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=1.083,
+                    "Black"=0.663,
+                    "Asian"=0.308,
+                    "Native American"=2.850,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){0.829}
-        else if(input$wbr=="Europe & Central Asia"){1.212}
-        else if(input$wbr=="Latin America & Caribbean"){1.124}
-        else if(input$wbr=="Middle East & North Africa"){1.013}
-        else if(input$wbr=="North America"){0.999}
-        else if(input$wbr=="South Asia"){0.963}
-        else if(input$wbr=="Sub-Saharan Africa"){0.860})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=0.829,
+                    "Europe & Central Asia"=1.212,
+                    "Latin America & Caribbean"=1.124,
+                    "Middle East & North Africa"=1.013,
+                    "North America"=0.999,
+                    "South Asia"=0.963,
+                    "Sub-Saharan Africa"=0.860))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){1.2}
-        else if(input$inc=="Lower-middle"){1.1}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){0.9}
-        else if(input$inc=="Rich"){0.8})
+        else switch(input$inc,
+                    "Poor"=1.2,
+                    "Lower-middle"=1.1,
+                    "Middle"=1,
+                    "Upper-middle"=0.9,
+                    "Rich"=0.8))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){1.2}
-        else if(input$edu=="Primary Education (Elementary School)"){1.1}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){0.9}
-        else if(input$edu=="Master's degree"){0.8}
-        else if(input$edu=="Doctoral degree"){0.7})
+        else switch(input$edu,
+                    "No Formal Schooling"=1.2,
+                    "Primary Education (Elementary School)"=1.1,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=0.9,
+                    "Master's degree"=0.8,
+                    "Doctoral degree"=0.7))
       
       ### LIFESTYLE ===
       
@@ -8704,91 +9616,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1.56}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){2.13}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){2.69})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1.56,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=2.13,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=2.69))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1.16}
-        else if(input$bmi=="Obese (>30)"){1.69})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1.16,
+                    "Obese (>30)"=1.69))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1.1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){1}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){4.7}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=4.7,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
       ,
       
@@ -8798,50 +9726,52 @@ server <- function(input, output){
       
       ### DEMOGRAPHICS ===
       
-      #Risk Factor: Current Age: cage
-      #+(input$cage/2)  
-      
       #### Sex ---
       *(if(is.null(input$sex)){1}
-        else if(input$sex=="Male"){1.113}
-        else if(input$sex=="Female"){0.918})
+        else switch(input$sex,
+                    "Male"=1.113,
+                    "Female"=0.918))
       
       #### Race ---
       *(if(is.null(input$race)){1}
-        else if(input$race=="White"){0.959}
-        else if(input$race=="Black"){1.680}
-        else if(input$race=="Asian"){0.464}
-        else if(input$race=="Native American"){0.948}
-        else if(input$race=="Other"){1})
+        else switch(input$race,
+                    "White"=0.959,
+                    "Black"=1.680,
+                    "Asian"=0.464,
+                    "Native American"=0.948,
+                    "Other"=1))
       
       #### World Region ---
       *(if(is.null(input$wbr)){1}
-        else if(input$wbr=="East Asia & Pacific"){1.5}
-        else if(input$wbr=="Europe & Central Asia"){1.5}
-        else if(input$wbr=="Latin America & Caribbean"){2}
-        else if(input$wbr=="Middle East & North Africa"){2}
-        else if(input$wbr=="North America"){1}
-        else if(input$wbr=="South Asia"){4}
-        else if(input$wbr=="Sub-Saharan Africa"){6})
+        else switch(input$wbr,
+                    "East Asia & Pacific"=1.5,
+                    "Europe & Central Asia"=1.5,
+                    "Latin America & Caribbean"=2,
+                    "Middle East & North Africa"=2,
+                    "North America"=1,
+                    "South Asia"=4,
+                    "Sub-Saharan Africa"=6))
       
       ### SOCIAL STATUS ===
       
       #### Income Group ---
       *(if(is.null(input$inc)){1}
-        else if(input$inc=="Poor"){2}
-        else if(input$inc=="Lower-middle"){1.5}
-        else if(input$inc=="Middle"){1}
-        else if(input$inc=="Upper-middle"){1}
-        else if(input$inc=="Rich"){1})
+        else switch(input$inc,
+                    "Poor"=2,
+                    "Lower-middle"=1.5,
+                    "Middle"=1,
+                    "Upper-middle"=1,
+                    "Rich"=1))
       
       #### Education ---
       *(if(is.null(input$edu)){1}
-        else if(input$edu=="No Formal Schooling"){2}
-        else if(input$edu=="Primary Education (Elementary School)"){2}
-        else if(input$edu=="Secondary Education (High School)"){1}
-        else if(input$edu=="Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"){2}
-        else if(input$edu=="Master's degree"){0.5}
-        else if(input$edu=="Doctoral degree"){0.5})
+        else switch(input$edu,
+                    "No Formal Schooling"=2,
+                    "Primary Education (Elementary School)"=2,
+                    "Secondary Education (High School)"=1,
+                    "Tertiary Education (Bachelor's degree, Professional, Occupational, Technical or Vocational program"=1,
+                    "Master's degree"=0.5,
+                    "Doctoral degree"=0.5))
       
       ### LIFESTYLE ===
       
@@ -8881,91 +9811,107 @@ server <- function(input, output){
       
       #### Systolic Blood Pressure ---
       *(if(is.null(input$sys)){1}
-        else if(input$sys=="Normal (SBP <120 mmHG)"){1}
-        else if(input$sys=="Elevated (SBP 120-129 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 1 (SBP 130-140 mmHG)"){1}
-        else if(input$sys=="High Blood Pressure Stage 2 (SBP >140 mmHG)"){1})
+        else switch(input$sys,
+                    "Normal (SBP <120 mmHG)"=1,
+                    "Elevated (SBP 120-129 mmHG)"=1,
+                    "High Blood Pressure Stage 1 (SBP 130-140 mmHG)"=1,
+                    "High Blood Pressure Stage 2 (SBP >140 mmHG)"=1))
       
       #### Body Mass Index ---
       *(if(is.null(input$bmi)){1}
-        else if(input$bmi=="Underweight (<18.5)"){1.56}
-        else if(input$bmi=="Normal Weight (18.5-24.9)"){1}
-        else if(input$bmi=="Overweight (25-29.9)"){1}
-        else if(input$bmi=="Obese (>30)"){1})
+        else switch(input$bmi,
+                    "Underweight (<18.5)"=1.56,
+                    "Normal Weight (18.5-24.9)"=1,
+                    "Overweight (25-29.9)"=1,
+                    "Obese (>30)"=1))
       
       ### MEDICAL HISTORY ===
       
       #### High Blood Pressure ---
       *(if(is.null(input$hbp)){1}
-        else if(input$hbp=="Yes"){1}
-        else if(input$hbp=="No"){1})
+        else switch(input$hbp,
+                    "Yes"=1,
+                    "No"=1))
       
       #### High Blood Cholesterol ---
       *(if(is.null(input$hbc)){1}
-        else if(input$hbc=="Yes"){1}
-        else if(input$hbc=="No"){1})
+        else switch(input$hbc,
+                    "Yes"=1.1,
+                    "No"=1))
       
       #### Cardiovascular Disease ---
       *(if(is.null(input$cvd)){1}
-        else if(input$cvd=="Yes"){1.4}
-        else if(input$cvd=="No"){1})
+        else switch(input$cvd,
+                    "Yes"=1.4,
+                    "No"=1))
       
       #### Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$copd)){1}
-        else if(input$copd=="Yes"){1.4}
-        else if(input$copd=="No"){1})
+        else switch(input$copd,
+                    "Yes"=1.4,
+                    "No"=1))
       
       #### Diabetes ---
       *(if(is.null(input$dia)){1}
-        else if(input$dia=="Yes"){2.2}
-        else if(input$dia=="No"){1})
+        else switch(input$dia,
+                    "Yes"=2.2,
+                    "No"=1))
       
       #### Depression ---
       *(if(is.null(input$dep)){1}
-        else if(input$dep=="Yes"){1.3}
-        else if(input$dep=="No"){1})
+        else switch(input$dep,
+                    "Yes"=1.3,
+                    "No"=1))
       
       #### Cancer ---
       *(if(is.null(input$can)){1}
-        else if(input$can=="Yes"){1.5}
-        else if(input$can=="No"){1})
+        else switch(input$can,
+                    "Yes"=1.5,
+                    "No"=1))
       
       #### Alzheimer ---
       *(if(is.null(input$alz)){1}
-        else if(input$alz=="Yes"){1.5}
-        else if(input$alz=="No"){1})
+        else switch(input$alz,
+                    "Yes"=1.5,
+                    "No"=1))
       
       ### FAMILY HISTORY ===
       
       #### Family History of Cardiovascular Disease ---
       *(if(is.null(input$fcvd)){1}
-        else if(input$fcvd=="Yes"){1}
-        else if(input$fcvd=="No"){1})
+        else switch(input$fcvd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Chronic Obstructive Pulmonary Disease ---
       *(if(is.null(input$fcopd)){1}
-        else if(input$fcopd=="Yes"){1}
-        else if(input$fcopd=="No"){1})
+        else switch(input$fcopd,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Diabetes ---
       *(if(is.null(input$fdia)){1}
-        else if(input$fdia=="Yes"){1}
-        else if(input$fdia=="No"){1})
+        else switch(input$fdia,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Depression ---
       *(if(is.null(input$fdep)){1}
-        else if(input$fdep=="Yes"){1}
-        else if(input$fdep=="No"){1})
+        else switch(input$fdep,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Cancer ---
       *(if(is.null(input$fcan)){1}
-        else if(input$fcan=="Yes"){1}
-        else if(input$fcan=="No"){1})
+        else switch(input$fcan,
+                    "Yes"=1,
+                    "No"=1))
       
       #### Family History of Alzheimer ---
       *(if(is.null(input$falz)){1}
-        else if(input$falz=="Yes"){1}
-        else if(input$falz=="No"){1})
+        else switch(input$falz,
+                    "Yes"=1,
+                    "No"=1))
       
     )
     
