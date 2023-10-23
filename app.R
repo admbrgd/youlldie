@@ -43,6 +43,10 @@ library(dplyr)
 library(tidyr)
 library(bslib)
 
+# run this to perform rsconnect update
+# install.packages('rsconnect')
+# library(rsconnect)
+
 # UI ---------------------------------------------------------------------------
 # the following section is to build a ui object that lays out a webpage (html) for the app (it converts R -> html)
 
@@ -52,6 +56,7 @@ ui <- page_sidebar(
   # The following section is to add input functions corresponding to Risk Factors (e.g.: Sex, Race, # of drinks/week, etc.) 
   # Individual Risk Factors are grouped by Domain (e.g.: DEMOGRAPHICS, SOCIAL STATUS, etc.)
   
+
   sidebar = sidebar(width = 400, open = "open",
     accordion(style = "--bs-accordion-bg: unset;", multiple = FALSE,
       ### DEMOGRAPHICS ---------------------------------------------------------------
@@ -285,6 +290,7 @@ ui <- page_sidebar(
           selected=character(0))
       )
     )
+
   ),
   
   ## Main Panel -------------------------------------------------------------------
@@ -436,6 +442,7 @@ multiply_by_inputs <- function(df, input) {
 server <- function(input, output){
   
   #converting the cause of death dataframe (cod) into a reactive function / dataframe that changes according to inputs.  
+
   observe({
     print(cod_react())
   })
@@ -464,6 +471,7 @@ server <- function(input, output){
       ) %>%
       select(-f_age, -f_pop, -f_risk) %>%
       mutate(age = (ifelse(age-5<=input$cage,input$cage+5,age))) %>%
+
       
       #///////////////////////////////////////////////////////////////////////////////       
       # Use "mutate()" to set values for ggplot
@@ -512,6 +520,7 @@ server <- function(input, output){
           theme(legend.position="none"), 
         tooltip="text"
       )
+
       #        ,
       #        tooltip="text")
       #the code below is related to legend display.
