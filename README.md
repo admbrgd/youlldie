@@ -1,11 +1,63 @@
 # youlldie
 
-youlldie is a web app that statistically predicts your life expectancy. Namely, it determines when and from what you'll die based on your inherited risk factors and lifestyle choices. The algorithm behind youlldie leverages information gathered from peer-reviewed literature and public databases. This project aims to 
-1. Develop an accurate life expectancy model
-2. Provide a realistic perspective of death
-3. Incite users to adopt healthy lifestyles
+youlldie is a web app that statistically predicts your life expectancy. Specifically, it determines when and from what you'll die based on your inherited risk factors, environment and lifestyle choices. The algorithm behind youlldie leverages information gathered from peer-reviewed literature and public databases.
 
 The app is currently available at https://youlldie.com
+
+## Vision for the project
+
+This project aims to 
+1. Develop an accurate life expectancy model
+2. Provide a realistic perspective of death to users and health workers
+3. Incite users to adopt healthy lifestyles
+
+**Practically**, the goal of this project is to develop a statistically accurate tool to predict life expectancy and provide a visual of individual's age and cause of death, based on one's inherited risk factors, environment and lifestyle choices. This tool aims to provide a realistic perspective of death to the general public and the medical profession. It also aims to incite users to adopt healthy lifestyles.
+
+## Roadmap
+
+### Health Authorities Endorsement
+
+In order to reach its full potential, the app should gain endorsement by the world health authorities. Moreover, agreements with the private sector, which provides electronic health systems to public health systems, must be executed to acquire data that can be used as input for the youlldie app.
+
+### HL7 compliant data driven
+
+Making the app data-driven is one of the main goal of this project. Eventually, if the app could use HL7-compliant datasets pulled from the world's healthcare systems as input files, the app's output would be very interesting. This notion was kept in mind when drafting the app and should continue to guide continuous improvement.
+
+This standard format would include the variables listed below. Gathering data in this format will allow to train the model so that it can become a reliable, accurate tool.
+
+* Death ID
+* Primary cause of death
+* Gender
+* Race
+* Age of Death
+* World Bank Region
+* Financial Status
+* Highest level of Schooling
+* Number of Drinks per week
+* Number of smokes per week
+* Number of moderate-intensity physical activity minutes per week
+* Number of vigorous-intensity physical activity minutes per week
+* Number of hours of sleep per day
+* Systolic Blood Pressure
+* Body Mass Index	
+* High Blood Cholesterol (Yes/No)
+* Cardiovascular Disease (Yes/No)
+* Chronic Obstructive Pulmunary Disease (Yes/No)
+* Diabetes (Yes/No)
+* Depression (Yes/No)
+* Cancer (Yes/No)
+* Alzeimer (Yes/No)
+* Family History of Cardiovascular Disease (Yes/No)
+* Family History of Family History of Chronic Obstructive
+* Pulmunary (Yes/No)
+* Family History of Diabetes (Yes/No)
+* Family History of Depression (Yes/No)
+* Family History of Cancer (Yes/No)
+* Family History of Alzeimer (Yes/No)
+
+**Technically**, the contribution from the open-source community helps making this app a statistically accurate tool. The algorythm behind the app represents model of human longevity which can in turn be used to measure the impact of external factors on human health and ultimately improve the human condition. 
+
+**Phylosophically**, the purpose of the app is to make people contemplate their position in the stream of life. To borrow some words form Alan Watts, everybody should, sometime in their lifetime, consider death. Observe skulls and skeletons and wonder what it will be like to go to sleep and never wake up.Never! That is a very gloomy thing for contemplation. But it’s just like manure. Just as manure fertilizes the plants and so on, so the contemplation of death and the acceptance of death is very highly generative of creating life. You’ll get wonderful things out of that. Death is important to think about. It must not be swept under the carpet. Thinking about and accepting death brings a trust in life. It incites one to let go. Stop clinging to constantly changing things that cannot be clung to. Recognize oneself as an unstable particle in the constantly changing flux of eternal life. Acknowledge the union and inseparability from everything else that there is. The contemplation of death allows one to change point of view and to find oneself. It awakens the senses. Thinking about death gives the opportunity to understand what life is all about and see what this universe is for. It is conducive to liberation. Understanding that everything is in the right place is the opportunity presented by the contemplation of death.
 
 ## The Code
 
