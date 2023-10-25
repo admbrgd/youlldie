@@ -11,19 +11,19 @@ This project aims to
 2. Provide a realistic perspective of death to users and health workers
 3. Incite users to adopt healthy lifestyles
 
-**Practically**, the goal of this project is to develop a tool that calculates the risk of death from different causes and the average age of death from each causes, in near real time, using input files from global healthcare databases. It also aims to predict individual's life expectancy and provide a visual of individual's likely cause and age of death, based on inherited risk factors, environment and lifestyle choices. This tool will provide a statisitcally acurate and realistic perspective of death to the general public and the medical profession. It will also incite users to adopt healthy lifestyles.
+**Practically**, the goal of this project is to develop a tool that calculates the risk of death from different causes and the average age of death from each causes for a given population characterized by certain risk factors. The risk factors are entered into the apps by user. Specifically, without any inputs, it provide the life expectancy of the world's population. Every input refines the life expectancy prediction to more specific populations. With and can be. to the individual if one is interested  risk of death   the population level and can be It aims to predict individual's life expectancy and provide a visual of individual's likely cause and age of death, based on inherited risk factors, environment and lifestyle choices. This tool will provide a statisitcally acurate and realistic perspective of death to the general public and the medical profession. It will also incite users to adopt healthy lifestyles.
 
 ## Roadmap
 
-### Health Authorities Endorsement
+### Global Healthcare Database Driven
 
-In order to reach its full potential, the app should gain endorsement by the world health authorities. Moreover, agreements with the private sector, which provides electronic health systems to public health systems, must be executed to acquire data that can be used as input for the youlldie app.
+Currently, the determination of the basal risk of death from the different causes, the average age of death from each causes and the multipliers associated with each risk factors is based on an extensive review of the litterature and public databases. The references are documented here: https://youlldie.com/references/. To have a more accurate predictions, those parameters could be determined in near real time from data provided from healthcare systems. Specifically, if the app could use HL7-compliant datasets pulled from the world's healthcare systems as input files, the app's output would be very interesting. Aligning with this vision, the app is currently designed to be data-driven. Namely, it is able to make use of external files (see repo files: factor.csv and factor_cont.csv file).
 
-### HL7 compliant data driven
+As such, one of the current challenges is the dissemination of the app and the acquisition of endorsement from the world health authorities and their health system vendors.
 
-Making the app data-driven is one of the main goal of this project. Eventually, if the app could use HL7-compliant datasets pulled from the world's healthcare systems as input files, the app's output would be very interesting. This notion was kept in mind when drafting the app and should continue to guide continuous improvement.
+### Data Transfer Specifications
 
-This standard format would include the variables listed below. Gathering data in this format will allow to train the model so that it can become a reliable, accurate tool.
+A standar format of acquiring global health data needs to be determined. The variables required are listed below:
 
 * Death ID
 * Primary cause of death
