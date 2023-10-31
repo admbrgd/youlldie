@@ -11,7 +11,7 @@ This project aims to
 2. Provide a realistic perspective of death to users and health workers
 3. Incite users to adopt healthy lifestyles
 
-**Practically**, the goal of this project is to develop a tool that calculates the risk of death from different causes and the average age of death from each causes for a given population characterized by certain risk factors. The risk factors are entered into the apps by users. Specifically, without any input, it provide the life expectancy of the world's population. Every input refines the life expectancy prediction to a more specific population. As such, this tool aims to provide a statisitcally acurate and realistic perspective of death to the general public and the medical profession. It also aims to incite users to adopt healthy lifestyles.
+**Practically**, the goal of this project is to develop a tool that calculates and displays the life expectancy of a given population characterized by certain risk factors. This tool aims to provide a statistically accurate and realistic perspective of death to the general public and the medical profession. It also aims to incite users to adopt healthy lifestyles. The risk factors are entered into the apps by users. Specifically, without any input, it provide the life expectancy of the world's population. Every input refines the life expectancy prediction to a more specific population. As such, this tool aims to provide a statistically accurate and realistic perspective of death to the general public and the medical profession. It also aims to incite users to adopt healthy lifestyles.
 
 ## Roadmap
 
