@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-youlldie is an open-source, data-driven, AI-powered app that statistically predicts life expectancy. Specifically, it determines the risk of death from different causes based on inherited risk factors, environment and lifestyle choices. The app enables efficient decision-making and solves several immediate problems in the healthcare, life insurance, financial planning and wealth management industries. The app also aims to incite users to adopt healthy lifestyles. This project makes the app’s source code fully transparent and aims to gather input from the open-source community to improve the algorithm's accuracy. This project also aims to build a data lakehouse comprising mortality data acquired from global healthcare systems to make the app totally data-driven, accurate, and relevant to the world's population.
+youlldie is an open-source, data-driven, AI-powered app that statistically predicts life expectancy. Specifically, it determines the risk of death from different causes based on inherited risk factors, environment and lifestyle choices. The app enables efficient decision-making and solves several immediate problems in the healthcare, life insurance, financial planning and wealth management industries. The app also aims to incite users to adopt healthy lifestyles. This project makes the app’s source code fully transparent and aims to gather input from the open-source community to improve the algorithm's accuracy. This project also aims to build a data lakehouse comprising mortality data from global healthcare systems to make the app totally data-driven, accurate, and relevant to the world's population.
  
 ## How the app works
 
