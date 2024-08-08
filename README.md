@@ -45,6 +45,7 @@ Knowing a patient's potential life expectancy can help healthcare professionals 
 
 Moreover, a life expectancy prediction tool can optimize the implementation of public health programs. Specifically, it can improve the effectiveness of resource allocation and ensure that individuals with potentially shorter life expectancies receive appropriate care. 
 Finally, accurate life expectancy predictions can sensibilize the population to health risks and reduce early death and associated costs. As such, a life expectancy prediction tool can improve healthcare systems' efficiency.
+
 ### Health Research
 
 For health and socio-economic researchers, a data lakehouse comprising global mortality data represents a valuable source of information for guiding research. Moreover, a life expectancy prediction tool can help researchers better understand population health trends, disparities and factors influencing longevity.
@@ -104,9 +105,13 @@ Moreover, healthcare institutions adhere to ethical standards and internal polic
 
 The app's development must be transparent to avoid public scorn. That is why the algorithm behind the app is shared with the public as an open-source project, which ensures complete transparency. Using this approach, the app is always open for discussion and can be modified in a controlled manner by anyone with a valid argument.
 
+## Mortality Data Lakehouse
+
+Contributors to the mortality data lakehouse are asked to share what they want to share. Contributors are asked to provide discreet mortality datasets through a secure File Transfer Protocol (sFTP) server. 
+
 ### Data Transfer Specifications
 
-The global mortality records used for the app’s training should include the following variables:
+The lakehouse variables are listed below. A Data Transfer Specification (DTS) should be executed to document how the data provided by a contributor maps to the lakehouse variables. The lakehouse mapping step specifically aims to standardize the data provided by contributors and drop personal identifier information like names. If contributors wish to exclude certain data from the lakehouse, it may be specified on the DTS. 
 
 * Death ID
 * Primary cause of death
@@ -116,7 +121,7 @@ The global mortality records used for the app’s training should include the fo
 * World Bank Region
 * Financial Status
 * Highest level of Schooling
-* Number of Drinks per week
+* Number of drinks per week
 * Number of smokes per week
 * Number of moderate-intensity physical activity minutes per week
 * Number of vigorous-intensity physical activity minutes per week
